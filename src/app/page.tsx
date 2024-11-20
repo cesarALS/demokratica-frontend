@@ -13,6 +13,12 @@ export default function Home() {
           height={38}
           priority
         />
+        <h1>
+          Demokratica Frontend
+        </h1>
+        <h2>
+          Ingeniería de Software II
+        </h2>
         <ol>
           <li>
             Get started by editing <code>src/app/page.tsx</code>.

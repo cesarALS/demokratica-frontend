@@ -14,10 +14,12 @@ const InformativeLayout = ({
     children: React.ReactNode;
 }>) => {
     return (
-        <div className="bg-ThirdGray">
-            <Header/>
-            {children}
-            <Footer/>
+        <div className="bg-ThirdGray min-h-screen flex flex-col">
+            <Header />
+            <main className="flex-1 mt-[10vh]">
+                {children}
+            </main>
+            <Footer />
         </div>
     )
 };

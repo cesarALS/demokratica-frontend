@@ -31,6 +31,10 @@ export default {
         AccentCreamCan: "#f2b600",
         AccentCasablanca: "#f2b750",
       },
+      // Escalas, sobre todo para las animaciones de tamaño
+      scale: {
+        115: '1.15',
+      },
     },
   },
   plugins: [],

@@ -14,11 +14,11 @@ const InformativeLayout = ({
     children: React.ReactNode;
 }>) => {
     return (
-        <>
+        <div className="bg-ThirdGray">
             <Header/>
             {children}
             <Footer/>
-        </>
+        </div>
     )
 };
 

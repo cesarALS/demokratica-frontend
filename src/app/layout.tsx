@@ -35,7 +35,6 @@ export default function RootLayout({
   return (
     <html 
     lang="es"
-    // Estas son las fuentes por defecto, pero cuando se necesiten otras, se especifican en las clases de tw
     // Al final se especifica la variable que se usará por defecto en el proyecto, con font-<fuente>
     className={`${ptSans.variable} ${sourceSans3.variable} font-sourcesans3`}
     >

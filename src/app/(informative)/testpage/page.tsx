@@ -13,13 +13,9 @@ export default function Home() {
             Descubre el poder del Consenso
           </h1>
           <p>Esta poderosa herramienta potenciará la productividad de tu equipo</p>
-          <div className="w-[50%] grid place-items-center border-[0.1em] bg-AccentYellow gap-1 p-1">
-            <p className="font-funneldisplay">Test usando Funnel Display. <span className="font-semibold">Así se ve la letra</span></p>
-            <p className="font-funnelsans">Test usando Funnel Sans. <span className="font-semibold">Así se ve la letra</span></p>        
+          <div className="w-[50%] grid place-items-center border-[0.1em] bg-AccentYellow gap-1 p-1">     
+            <p className="font-sourcesans3">Test usando Source Sans 3.<span className="font-semibold">Así se ve la letra</span></p>
             <p className="font-ptsans">Test usando PT Sans. <span className="font-semibold">Así se ve la letra</span></p>
-            <p className="font-ptserif">Test usando PT Serif. <span className="font-semibold">Así se ve la letra</span></p>
-            <p className="font-encodesans">Test usando Encode Sans. <span className="font-semibold">Así se ve la letra</span></p>
-            <p className="font-faustina">Test usando Faustina. <span className="font-semibold">Así se ve la letra</span></p>
           </div>
         </div>      
       </>

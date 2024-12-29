@@ -14,22 +14,22 @@ export default {
         // Aquí especificamos las fuentes que deseamos. Usar font-<nombre_variable> Ej. font-ptsans
         // Las fuentes deben estar importadas en el layout.tsx principal
         ptsans: ["var(--font-ptsans)", ],
-        ptserif: ["var(--font-ptserif)", ],
-        funnelsans: ["var(--font-funnelsans)"],        
-        funneldisplay: ["var(--font-funneldisplay)"],
-        encodesans: ["var(--font-encodesans)"],
-        faustina: ["var(--font-faustina)"]
+        sourcesans3: ["var(--font-sourcesans3)", ],
       },
       colors: {
         // Esta es nuestra paleta de Colores! Se puede usar con libertad en el proyecto
+        PrimBlack: "#717171",
+        SecBlack: "#8d8d8d",
         PrimBlue: "#519ff2",
         SecBlue: "#a1c8fe",
         AccentBlue: "#1988ff",
         PrimGray: "#b1b2b5",
         SecGray: "#cecfd2",
         ThirdGray: "#ebecf0",
-        AccentRed: "#f57260",
-        AccentYellow: "#ffe79f",
+        PrimCreamCan: "#f2ca50",
+        SecCreamCan: "#f2dfa2",
+        AccentCreamCan: "#f2b600",
+        AccentCasablanca: "#f2b750",
       },
     },
   },

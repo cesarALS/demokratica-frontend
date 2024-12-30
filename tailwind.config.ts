@@ -7,6 +7,7 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    // Con esta propiedad, creamos nuevas clases de tw, que podemos usar en el código
     extend: {
       // Es bueno poner las nuevas clases aquí, en extend. Si se ponen fuera, hacen que se 
       // deshabiliten clases nativas de tw
@@ -35,6 +36,10 @@ export default {
       scale: {
         115: '1.15',
       },
+      // La propiedad del tamaño de los bordes
+      borderWidth: {
+        '1.5': '1.5px'
+      }
     },
   },
   plugins: [],

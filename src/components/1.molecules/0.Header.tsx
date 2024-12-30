@@ -2,8 +2,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const Header = () => {
+
     return (
-        <header className="bg-SecBlue flex items-center justify-center h-[10vh] fixed top-0 z-50">
+        
+        // La etiqueta que devuelve este componente es nav, simplememente porque nav es un contenedor que contiene muchos links, y claramente nuestro header es ese tipo de contenedor.
+        
+        <nav className={`bg-SecBlue flex items-center justify-center h-header-size w-full fixed top-0 z-50`}>
             <div className="flex justify-center items-center w-[15%] h-full">
                 <div className="flex items-center justify-center w-[80%] h-[90%]"   >
                     <Link href={'/'} passHref>
@@ -32,7 +36,7 @@ const Header = () => {
                     </button>
                 </Link>
             </div>
-        </header>
+        </nav>
     );
 };
 

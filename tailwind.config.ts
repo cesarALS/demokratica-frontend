@@ -39,6 +39,10 @@ export default {
       // La propiedad del tamaño de los bordes
       borderWidth: {
         '1.5': '1.5px'
+      },
+      // El tamaño del header de las páginas informativas
+      spacing: {
+        'header-size': '4em'
       }
     },
   },

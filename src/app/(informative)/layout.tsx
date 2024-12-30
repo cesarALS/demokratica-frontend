@@ -13,15 +13,16 @@ const InformativeLayout = ({
 }: Readonly<{
     children: React.ReactNode;
 }>) => {
+    
     return (
         <div className="bg-ThirdGray min-h-screen flex flex-col">
             <Header />
-            <main className="flex-1 mt-[10vh]">
+            <main className={`flex-1 mt-header-size`}>
                 {children}
             </main>
             <Footer />
         </div>
-    )
+    );  
 };
 
 export default InformativeLayout;

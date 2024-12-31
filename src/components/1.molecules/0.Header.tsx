@@ -24,15 +24,15 @@ const Header = () => {
             </div>
             <div className="flex items-center justify-center gap-10 w-[70%] h-full ">
                 <HeaderLink link='/' name="Casos de Uso"></HeaderLink>
-                <HeaderLink link='/conocenos' name="Conócenos"></HeaderLink>
-                <HeaderLink link='/' name="Precios"></HeaderLink>
+                <HeaderLink link='/conozcanos' name="Conózcanos"></HeaderLink>
+                <HeaderLink link='/precios' name="Precios"></HeaderLink>
                 <HeaderLink link='/ayuda' name="Ayuda"></HeaderLink>
                 <HeaderLink link='/FAQs' name="Preguntas Frecuentes"></HeaderLink>
             </div>
             <div className="flex justify-center items-center w-[15%] h-full">
-                <Link href={'/'} passHref>
+                <Link href={'/ingrese'} passHref>
                     <button className="bg-PrimCreamCan rounded-md px-8 border-[0.15em] border-black transition-transform transform duration-200 hover:scale-110">
-                        Ingresa
+                        Ingrese
                     </button>
                 </Link>
             </div>

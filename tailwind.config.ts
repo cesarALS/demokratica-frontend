@@ -1,6 +1,10 @@
 import type { Config } from "tailwindcss";
 
 export default {
+  // Aquí toca poner las clases de hover:scale, sumado a las que se pongan en scale: dentro de extend, cuando no estén predeterminadas por tailwind
+  safelist: [
+    'hover:scale-115', // Asegura que estas clases siempre se incluyan
+  ],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",

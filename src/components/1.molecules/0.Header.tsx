@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { hoverScale } from '@/utils/tailwindUtils';
 import demokraticaRoutes from '@/utils/routeUtils';

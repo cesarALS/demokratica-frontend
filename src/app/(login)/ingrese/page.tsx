@@ -1,7 +1,10 @@
 import LogoAlHomepage from "@/components/1.molecules/2.LogoAlHomepage";
 import Link from "next/link";
-// Página de Loguearse
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
 
+// Página de Loguearse
 export default function Login() {
   return (
     // container de la pagina completa
@@ -10,14 +13,14 @@ export default function Login() {
       <div className="w-[33%] h-full mt-[5%] ">
         {/* Logo linkeado al homepage */}
         <LogoAlHomepage />
-        {/* Contenedor del formulario */}
-        <div className="flex flex-col bg-ThirdGray rounded-lg p-4">
+        {/* Contenedor con el titulo y ambas partes del formulario*/}
+        <div className="flex flex-col bg-ThirdGray rounded-lg pt-4 px-6 pb-6 mt-4">
           {/* Titulo formulario */}
           <h1 className="font-semimbold text-lg my-2"> Ingresa: </h1>
-          {/* Formulario */}
-          <div className="flex">
+          {/* Contenedor parte izquierda, derecha y separador */}
+          <div className="flex flex-row items-center justify-between">
             {/* Parte izquierda formulario login */}
-            <div className="flex w-[40%] justify-start">
+            <div className="flex w-[45%] justify-start">
               <form className="flex w-full flex-col justify-start gap-y-4">
                 {/* Campo de correo */}
                 <div>
@@ -53,9 +56,12 @@ export default function Login() {
                     />
                     <button
                       type="button"
-                      className="absolute inset-y-0 right-0 flex items-center px-2"
+                      className="absolute inset-y-0 h-full right-0 flex items-center pr-2"
                     >
-                      {/* TODO Icono de ojo */}
+                      <FontAwesomeIcon
+                        icon={faEye}
+                        className="h-4 text-PrimBlack"
+                      />
                     </button>
                   </div>
                 </div>
@@ -81,8 +87,32 @@ export default function Login() {
                 ></input>
               </form>
             </div>
+            {/* Separador */}
+            <div className="border-2 border-SecGray h-40 rounded-lg"></div>
             {/* Parte derecha formulario login */}
-            <div></div>
+            <div className="flex w-[45%] justify-start flex-col self-start gap-y-6">
+              {/* Ingresa con */}
+              <div className="text-sm">O ingresa con:</div>
+              {/* Botones de google y facebook */}
+              <div className="flex justify-around text-PrimGray">
+                <button className="flex justify-center items-center h-24 w-24 rounded-lg bg-SecGray hover:text-ThirdGray">
+                  <FontAwesomeIcon icon={faGoogle} className="h-16" />
+                </button>
+                <button className="flex justify-center items-center h-24 w-24 rounded-lg bg-SecGray hover:text-PrimBlue">
+                  <FontAwesomeIcon icon={faFacebook} className="h-16" />
+                </button>
+              </div>
+              {/* Aún no tienes una cuenta? Registrate*/}
+              <div className="text-xs text-PrimBlack">
+                ¿Aún no tienes una cuenta?
+                <Link
+                  href="/"
+                  className="underline hover:text-black text-AccentBlue pl-1"
+                >
+                  Regístrate
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -28,7 +28,7 @@ export default function IconLogo({
           cy="256"
           fill={bgFill}
           fillOpacity="0.999"
-          fill-rule="evenodd"
+          fillRule="evenodd"
           id="Background"
           r="245.33701"
         />

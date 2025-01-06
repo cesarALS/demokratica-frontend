@@ -23,10 +23,10 @@ export default function TitleLogo({
         <defs id="defs12" />
         <g
           fill={baseFill}
-          stroke-width="1.08"
+          strokeWidth="1.08"
           aria-label="Dem kratica"
-          font-family="FontAwesome"
-          font-size="207.435"
+          fontFamily="FontAwesome"
+          fontSize="207.435"
           style={{ lineHeight: "1.25" }}
           id="g6"
         >

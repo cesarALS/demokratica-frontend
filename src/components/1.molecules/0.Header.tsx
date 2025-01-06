@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { hoverScale } from '@/utils/tailwindUtils';
 import demokraticaRoutes from '@/utils/routeUtils';
+import TitleLogo from '../0.atoms/1.TitleLogo';
 
 const headerRoutes: (keyof typeof demokraticaRoutes)[] = [
     "ayuda", "casosDeUso", "conozcanos", "precios", "faqs"
@@ -15,18 +16,11 @@ const Header = () => {
         
         <nav className={`bg-SecBlue flex items-center justify-center h-header-size w-full fixed top-0 z-50`}>
             <div className="flex justify-center items-center w-[15%] h-full">
-                <div className="flex items-center justify-center w-[80%] h-[90%]"   >
-                    <Link href={'/'} passHref title='Demokratica'>
-                        <Image 
-                            src="demokratica_general/logo_titulo.svg" 
-                            alt="Demokratica" 
-                            width={100} 
-                            height={100}
-                            layout="responsive"
-                            className={`object-cover ${hoverScale(110,100)}`}
-                        />
-                    </Link>
-                </div>
+                    <div className="flex items-center justify-center w-[80%] h-[90%]"   >
+                        <Link href={'/'} passHref title='Demokratica'>
+                            <TitleLogo baseFill="#000000" classNameGeneral={`w-[80%] ${hoverScale(110,100)}`}/>                     
+                        </Link>
+                    </div>
             </div>
             <div className="flex items-center justify-center gap-10 w-[70%] h-full ">
                 {headerRoutes.map(route =>{

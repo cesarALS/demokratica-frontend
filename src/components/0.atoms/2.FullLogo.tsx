@@ -25,8 +25,8 @@ export default function FullLogo({
           fill={baseFill}
           strokeWidth="1.08"
           aria-label="Dem kratica"
-          font-family="FontAwesome"
-          font-size="207.435"
+          fontFamily="FontAwesome"
+          fontSize="207.435"
           style={{ lineHeight: "1.25" }}
           id="g6"
         >

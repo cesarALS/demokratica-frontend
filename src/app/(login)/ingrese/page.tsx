@@ -1,15 +1,19 @@
-import FullLogo from "@/components/0.atoms/2.FullLogo";
-import TitleLogo from "@/components/0.atoms/1.TitleLogo";
-import IconLogo from "@/components/0.atoms/0.IconLogo";
-// Página de Loguearse
+import LogoAlHomepage from "@/components/0.atoms/0.LogoFullAlHomepage";
+import LogInBox from "@/components/3.templates/0.LogInBox";
 
+// Página de Loguearse
+// TODO: Hacer responsive, terminar de refactorizar y TODOs de los componentes
 export default function Login() {
   return (
+    // container de la pagina completa
     <div className="flex flex-col items-center justify-center h-screen bg-SecBlue">
-      <FullLogo baseFill="#000000" />
-      <TitleLogo classNameGeneral="w-64" baseFill="#000000" />
-      <IconLogo classNameGeneral="w-32" bgFill="#000000" />
-      <h1>Y mi logo?</h1>
+      {/* Contenidos de la columna */}
+      <div className="w-[33%] h-full mt-[5%] ">
+        {/* Logo linkeado al homepage */}
+        <LogoAlHomepage />
+        {/* Contenedor con el titulo y ambas partes del formulario*/}
+        <LogInBox />
+      </div>
     </div>
   );
 }

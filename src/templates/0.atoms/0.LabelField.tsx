@@ -57,12 +57,12 @@ export default function LabelField({
             className="flex-auto items-center h-full items-center justify-center w-[20%] "
           >
             {showPassword ? (
+              <FontAwesomeIcon icon={faEye} className="w-4 text-PrimBlack" />
+            ) : (
               <FontAwesomeIcon
                 icon={faEyeSlash}
                 className="w-4 text-PrimBlack"
               />
-            ) : (
-              <FontAwesomeIcon icon={faEye} className="w-4 text-PrimBlack" />
             )}
           </button>
         )}

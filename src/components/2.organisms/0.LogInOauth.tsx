@@ -3,10 +3,9 @@ import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
 import demokraticaRoutes from "@/utils/routeUtils";
 
-// TODO: Refactorizar los botones de facebook y google como un mismo componente con diferentes props
 export default function LogInOauth() {
   return (
-    <div className="flex w-[45%] justify-start flex-col self-start gap-y-6">
+    <div className="flex w-full sm:w-[45%] justify-start flex-col self-start gap-y-6">
       {/* Ingresa con */}
       <div className="text-sm">O ingresa con:</div>
       {/* Botones de google y facebook */}

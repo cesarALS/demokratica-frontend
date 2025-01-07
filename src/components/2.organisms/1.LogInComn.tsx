@@ -1,58 +1,36 @@
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import LabelField from "@/templates/0.atoms/0.LabelField";
 
-// TODO Implementar tipo de texto con el ojo del input y refactorizar parejas input label y boton subrayado
 export default function LogInOauth() {
   return (
-    <div className="flex w-[45%] justify-start">
+    <div className="flex w-full sm:w-[45%] justify-start self-start">
       <form className="flex w-full flex-col justify-start gap-y-4">
         {/* Campo de correo */}
-        <div>
-          <div>
-            <label htmlFor="email" className="text-sm">
-              Correo:
-            </label>
-          </div>
-          <input
-            className="bg-SecGray w-full p-1 text-PrimBlack text-sm"
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Tu correo"
-          />
-        </div>
+        <LabelField
+          label="Correo:"
+          type="email"
+          placeholder="Tu correo"
+          id="email"
+          name="email"
+        />
         {/* Campo de contraseña */}
-        <div>
-          <div>
-            <label htmlFor="password" className="text-sm">
-              Contraseña:
-            </label>
-          </div>
-
-          {/* Boton de mostrar contraseña con icono de ojo */}
-          <div className="relative">
-            <input
-              className="bg-SecGray w-full p-1 text-PrimBlack text-sm"
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Tu contraseña"
-            />
-            <button
-              type="button"
-              className="absolute inset-y-0 h-full right-0 flex items-center pr-2"
-            >
-              <FontAwesomeIcon icon={faEye} className="h-4 text-PrimBlack" />
-            </button>
-          </div>
-        </div>
+        <LabelField
+          label="Contraseña:"
+          type="password"
+          placeholder="Tu contraseña"
+          id="password"
+          name="password"
+          showEye={true}
+        />
         {/* Recuerdame y olvidaste tu contraseña */}
         <div className="flex justify-between text-xs text-PrimBlack">
-          <input className="bg-SecGray" type="checkbox" id="rememberMe" />
-          <label htmlFor="rememberMe" className="hover:text-black">
-            Recuérdame
-          </label>
+          <div>
+            <input className="bg-SecGray" type="checkbox" id="rememberMe" />
+
+            <label htmlFor="rememberMe" className="pl-1 hover:text-black">
+              Recuérdame
+            </label>
+          </div>
           <Link href="/" className="underline hover:text-black">
             ¿Olvidaste tu contraseña?
           </Link>

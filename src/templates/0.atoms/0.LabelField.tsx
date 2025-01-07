@@ -40,30 +40,32 @@ export default function LabelField({
         </label>
       </div>
 
-      {/* Boton de mostrar contraseña con icono de ojo */}
-      <div className="relative">
+      <div className="flex-1 bg-SecGray flex items-center">
         <input
-          className="bg-SecGray w-full p-1 text-PrimBlack text-sm"
+          className="flex-1 w-[80%] flex-row bg-SecGray p-1 text-PrimBlack text-sm"
           type={!showEye || showPassword ? type : "password"}
           id={id}
           name={name}
           placeholder={placeholder}
         />
-        <button
-          type="button"
-          onClick={toggleShowPassword}
-          className="absolute inset-y-0 h-full right-0 flex items-center pr-2"
-        >
-          {showEye &&
-            (showPassword ? (
+
+        {/* Boton de mostrar contraseña con icono de ojo */}
+        {showEye && (
+          <button
+            type="button"
+            onClick={toggleShowPassword}
+            className="flex-auto items-center h-full items-center justify-center w-[20%] "
+          >
+            {showPassword ? (
               <FontAwesomeIcon
                 icon={faEyeSlash}
-                className="h-4 text-PrimBlack"
+                className="w-4 text-PrimBlack"
               />
             ) : (
-              <FontAwesomeIcon icon={faEye} className="h-4 text-PrimBlack" />
-            ))}
-        </button>
+              <FontAwesomeIcon icon={faEye} className="w-4 text-PrimBlack" />
+            )}
+          </button>
+        )}
       </div>
     </div>
   );

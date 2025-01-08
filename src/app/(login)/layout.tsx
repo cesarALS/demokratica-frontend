@@ -8,12 +8,7 @@ const LoginRegisterLayout = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  return (
-    <div className="bg-ThirdGray min-h-screen flex flex-col">
-      <main>{children}</main>
-      {/* <Footer></Footer> */}
-    </div>
-  );
+  return <main className="min-h-screen flex flex-col"> {children}</main>;
 };
 
 export default LoginRegisterLayout;

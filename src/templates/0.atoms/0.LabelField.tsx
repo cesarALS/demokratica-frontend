@@ -42,7 +42,7 @@ export default function LabelField({
 
       <div className="flex-1 bg-SecGray flex items-center">
         <input
-          className="flex-1 w-[80%] flex-row bg-SecGray p-1 text-PrimBlack text-sm"
+          className="flex-auto w-[80%] flex-row bg-SecGray p-1 text-PrimBlack text-sm"
           type={!showEye || showPassword ? type : "password"}
           id={id}
           name={name}
@@ -54,7 +54,7 @@ export default function LabelField({
           <button
             type="button"
             onClick={toggleShowPassword}
-            className="flex-auto items-center h-full items-center justify-center w-[20%] "
+            className="flex-1 items-center h-full items-center justify-center w-[20%] "
           >
             {showPassword ? (
               <FontAwesomeIcon icon={faEye} className="w-4 text-PrimBlack" />

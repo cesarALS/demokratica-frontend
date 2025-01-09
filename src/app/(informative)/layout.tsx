@@ -1,4 +1,3 @@
-
 /*
     Este es el Layout para todas las páginas informativas
     Landing Page, About, Pitch de Talento, Q&A, etc.
@@ -6,23 +5,23 @@
 */
 
 import Header from "@/components/1.molecules/0.Header";
-import Footer from "@/components/1.molecules/1.Footer";
+// import Footer from "@/components/1.molecules/1.Footer";
 
 const InformativeLayout = ({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) => {
-    
-    return (
-        <div className="bg-ThirdGray min-h-screen flex flex-col">
-            <Header />
-            <main className={`flex-1 mt-header-size`}>
-                {children}
-            </main>
-            <Footer />
-        </div>
-    );  
+  return (
+    <div className="grid grid-rows-[1fr,11fr] h-screen">
+      <div>
+        <Header />
+      </div>
+      <div className={`flex-1 flex-col items-center overflow-y-auto`}>
+        <main>{children}</main>
+      </div>
+    </div>
+  );
 };
 
 export default InformativeLayout;

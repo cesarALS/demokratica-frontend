@@ -4,10 +4,8 @@
 
 const demokraticaRoutes = {
     ayuda: {name: "Ayuda", link: "/ayuda"},
-    casosDeUso: {name: "Casos de Uso", link: "/"},
     conozcanos: {name: "Conózcanos", link: "/conozcanos"},
     precios: {name: "Precios", link: "/precios"},
-    faqs: {name: "Preguntas Frecuentes", link: "/FAQs"},
     login: {name: "Ingrese", link: "/ingrese"},
     register: {name: "Únase", link: "/unase"},
 };

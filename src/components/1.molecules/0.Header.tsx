@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import { hoverScale } from "@/utils/tailwindUtils";
 import demokraticaRoutes from "@/utils/routeUtils";
-import TitleLogo from "../0.atoms/1.TitleLogo";
+import TitleLogo from "../../templates/0.atoms/1.TitleLogo";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -48,12 +48,12 @@ const Header = () => {
       <div className="block md:hidden relative w-[15%] flex items-center justify-center h-full">
         <button
           onClick={toggleDropdown}
-          className={`p-2 rounded-md ${hoverScale(
-            110,
-            100
-          )}`}
+          className={`p-2 rounded-md ${hoverScale(110, 100)}`}
         >
-          <FontAwesomeIcon icon={faBars} className="h-5 w-5 flex items-center" />
+          <FontAwesomeIcon
+            icon={faBars}
+            className="h-5 w-5 flex items-center"
+          />
         </button>
 
         {/* Dropdown */}
@@ -83,7 +83,7 @@ const Header = () => {
       <LogoDiv width="w-[50%]" sm={false} />
 
       {/* Navegación completa para pantallas grandes, y botón de login */}
-      
+
       <div className="hidden md:flex items-center justify-center h-full w-[50%]">
         <nav className="hidden md:flex items-center justify-end pr-3 gap-10 w-[75%] h-full">
           {headerRoutes.map((route) => (
@@ -96,11 +96,11 @@ const Header = () => {
         </nav>
 
         {/* Botón de login */}
-        <LoginButton width="w-[25%]" sm={false}/>
+        <LoginButton width="w-[25%]" sm={false} />
       </div>
 
       {/* Botón de login */}
-      <LoginButton width={"w-[15%]"} sm={true}/>
+      <LoginButton width={"w-[15%]"} sm={true} />
     </header>
   );
 };
@@ -112,10 +112,7 @@ interface HeaderLinkProps {
 
 const HeaderLink = ({ name, link }: HeaderLinkProps) => {
   return (
-    <Link
-      href={link}
-      className={`text-[1.1em] ${hoverScale(115, 100)}`}
-    >
+    <Link href={link} className={`text-[1.1em] ${hoverScale(115, 100)}`}>
       {name}
     </Link>
   );
@@ -123,18 +120,24 @@ const HeaderLink = ({ name, link }: HeaderLinkProps) => {
 
 interface LogoDivProps {
   width: string;
-  sm: boolean
+  sm: boolean;
 }
 
 const LogoDiv = ({ width, sm }: LogoDivProps) => {
   return (
-    <div 
-      className={`${sm ? "block md:hidden" : "hidden md:block"} flex md:flex items-center ${sm ? "justify-center" : "justify-start"} ${width} `}
+    <div
+      className={`${
+        sm ? "block md:hidden" : "hidden md:block"
+      } flex md:flex items-center ${
+        sm ? "justify-center" : "justify-start"
+      } ${width} `}
     >
       <Link href={"/"} passHref title="Demokratica">
         <TitleLogo
           baseFill="#000000"
-          classNameGeneral={` ${sm ? "w-[60%] mx-auto" : "pl-5 w-[65%] "} ${hoverScale(110, 100)}`}
+          classNameGeneral={` ${
+            sm ? "w-[60%] mx-auto" : "pl-5 w-[65%] "
+          } ${hoverScale(110, 100)}`}
         />
       </Link>
     </div>
@@ -146,23 +149,26 @@ interface LoginButtonProps {
   sm: boolean;
 }
 
-const LoginButton = ( { width, sm }: LoginButtonProps) => {
+const LoginButton = ({ width, sm }: LoginButtonProps) => {
   return (
-    <div className={`${sm ? "block md:hidden" : "hidden md:block"} flex md:flex items-center justify-center ${width} h-full`}>
-    <Link
-      href={demokraticaRoutes.login.link}
-      passHref
-      title="Loguearse"
-      className={`flex items-center justify-center bg-PrimCreamCan rounded-md border-[0.15em] border-black px-[10%] py-2 text-[0.8em] md:text-[1.2em] md:px-[15%] md:py-1 ${hoverScale(
-        110,
-        100
-      )}`}
+    <div
+      className={`${
+        sm ? "block md:hidden" : "hidden md:block"
+      } flex md:flex items-center justify-center ${width} h-full`}
     >
-      {demokraticaRoutes.login.name}
-    </Link>
-  </div>    
-  )
+      <Link
+        href={demokraticaRoutes.login.link}
+        passHref
+        title="Loguearse"
+        className={`flex items-center justify-center bg-PrimCreamCan rounded-md border-[0.15em] border-black px-[10%] py-2 text-[0.8em] md:text-[1.2em] md:px-[15%] md:py-1 ${hoverScale(
+          110,
+          100
+        )}`}
+      >
+        {demokraticaRoutes.login.name}
+      </Link>
+    </div>
+  );
 };
-
 
 export default Header;

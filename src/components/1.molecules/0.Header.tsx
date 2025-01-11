@@ -43,7 +43,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="bg-SecBlue w-full h-16 flex items-center justify-between relative">
+    <header className="bg-SecBlue w-full h-full flex items-center justify-between relative">
       {/* Menú para pantallas pequeñas */}
       <div className="block md:hidden relative w-[15%] flex items-center justify-center h-full">
         <button

@@ -5,29 +5,31 @@ export default function Home() {
 
   return (
     <>
-      {/* Contenedor parte inicial homepage */}
+      {/* Contenedor gradiente parte inicial homepage */}
       {/* 11/12*100 = 91.667, es el height restante del viewport quitando el header y teniendo en cuenta las proporciones */}
       <div
-        className="flex flex-col flex-initial items-center
-      justify-between w-full h-[91.667vh]"
+        className="flex flex-col flex-initial
+       pt-10 pb-16 w-full h-[91.667vh] bg-gradient-to-b from-SecBlue to-white px-20 items-center"
       >
-        {/* Frase grande */}
-        <div>
-          Las decisiones
-          <br />
-          grupales son la
-          <br />
-          <span>base</span> del <br />
-          <span>progreso</span>
+        {/* Contenedor para centrar todo */}
+        <div className="h-full justify-between grid sm:grid-cols-2 sm:items-center lg:w-[60%] lg:justify-center lg:pb-20">
+          {/* Frase grande */}
+          <div className="text-3xl font-semibold italic">
+            Las decisiones
+            <br />
+            grupales son la
+            <br />
+            <span className="text-PrimBlack">base</span> del <br />
+            <span className="text-AccentBlue">progreso</span>
+          </div>
+          {/* Asset Central */}
+          <AssetCentrHmpg classNameGeneral="w-full" />
+          {/* Frase de seguimiento */}
+          <div className="text-2xl font-semibold italic self-end sm:self-start">
+            Deseas <span className="text-AccentCreamCan">facilitar</span> <br />
+            las tuyas?
+          </div>
         </div>
-        {/* Asset Central */}
-        <AssetCentrHmpg />
-        {/* Frase de seguimiento */}
-        <div>
-          Deseas <span>facilitar</span> <br />
-          las tuyas?
-        </div>
-        {/* Boton de ingreso solo en modo pequeño */}
       </div>
     </>
   );

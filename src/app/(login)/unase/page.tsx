@@ -63,6 +63,7 @@ const Join = () => {
                   value="Regístrese"
                 ></input>
               </form>
+
               <div className="sm:py-6">
                 <div className="border-2 border-SecGray rounded-lg mt-6 w-full h-0 sm:h-40 sm:w-0">
                   {" "}

@@ -10,7 +10,7 @@ import demokraticaRoutes from "@/utils/routeUtils";
 const Join = () => {
   return (
     <div className="flex items-center justify-center">
-      <div className="w-[33%] h-full">
+      <div className="w-[80%] sm:w-[80%] md:w-[70%] lg:w-[50%] xl:w-[40%] 2xl:w-[33%] h-full mt-10 mb-10">
         <Link href="/" passHref>
           <FullLogo
             baseFill="#000000"
@@ -23,8 +23,8 @@ const Join = () => {
         <div className="bg-white rounded-lg p-4 mt-4 h-full w-full border-black border-2">
           <div className="flex flex-col h-full w-full justify-start p-2 gap-2">
             <h1 className="font-semimbold text-[1.1em]"> Regístrate: </h1>
-            <div className="flex flex-row justify-between">
-              <form className="w-[45%]">
+            <div className="flex flex-col sm:flex-row justify-between">
+              <form className="w-full sm:w-[45%]">
                 <CustomInput
                   labelString="Correo:"
                   inputType="email"
@@ -63,12 +63,15 @@ const Join = () => {
                   value="Regístrese"
                 ></input>
               </form>
-              <div className="flex flex-row h-full py-12">
-                <div className="border-2 border-SecGray rounded-lg h-40"> </div>
+
+              <div className="sm:py-6">
+                <div className="border-2 border-SecGray rounded-lg mt-6 w-full h-0 sm:h-40 sm:w-0">
+                  {" "}
+                </div>
               </div>
-              <div className="w-[45%] flex flex-col justify-start py-10 gap-y-6">
+              <div className="w-full sm:w-[45%] flex flex-col justify-start pt-6 pb-2 gap-y-4 sm:py-10 sm:gap-y-6">
                 <h2 className="text-sm"> O registrate con: </h2>
-                <div className="flex flex-row justify-between gap-x-4">
+                <div className="flex flex-row justify-between gap-x-10 px-10 sm:px-0 sm:gap-x-4">
                   <Link
                     href="/"
                     className="p-2 rounded-lg bg-SecGray w-full hover:text-white"

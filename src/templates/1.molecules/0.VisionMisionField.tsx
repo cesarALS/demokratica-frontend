@@ -12,17 +12,19 @@ export function VisionMisionField({
   imgURL,
 }: VisionMisionFieldProps) {
   let fieldStyle: string =
-    "flex items-center justify-around w-[80%] bg-white gap-5 rounded-3xl p-6" +
-    (title === "Visión" ? " flex-col" : " flex-col");
+    "flex items-center justify-around w-[80%] bg-white gap-5 rounded-3xl p-6 text-lg xl:w-[65%] 2xl:w-[55%] flex-col" +
+    (title === "Visión" ? " lg:flex-row" : " lg:flex-row-reverse");
 
   return (
     <div className={fieldStyle}>
-      <span className="flex flex-row text-2xl">
-        <span className="font-bold">Nuestra</span>
-        <span className="text-AccentBlue font-bold ml-1">{title}</span>
-      </span>
+      <div className="justify-items-center lg:max-w-[50%]">
+        <span className="flex flex-row text-2xl mb-3">
+          <span className="font-bold">Nuestra</span>
+          <span className="text-AccentBlue font-bold ml-1">{title}</span>
+        </span>
 
-      <span>{highlightWord(content, "Demokratica")}</span>
+        <span>{highlightWord(content, "Demokratica")}</span>
+      </div>
 
       <div className="rounded-3xl bg-ThirdGray p-5">
         <Image

@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import { highlightWord } from "@/utils/highlightWord";
 interface VisionMisionFieldProps {
   title: string;
   content: string;
@@ -14,14 +14,16 @@ export function VisionMisionField({
   let fieldStyle: string =
     "flex items-center justify-around w-[80%] bg-white gap-5 rounded-3xl p-6" +
     (title === "Visión" ? " flex-col" : " flex-col");
+
   return (
     <div className={fieldStyle}>
       <span className="flex flex-row text-2xl">
-        <span className="font-bold">Nuestra</span>        
+        <span className="font-bold">Nuestra</span>
         <span className="text-AccentBlue font-bold ml-1">{title}</span>
       </span>
-      
-      <span>{content}</span>
+
+      <span>{highlightWord(content, "Demokratica")}</span>
+
       <div className="rounded-3xl bg-ThirdGray p-5">
         <Image
           src={imgURL}

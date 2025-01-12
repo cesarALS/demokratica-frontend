@@ -1,10 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { FieldInputProps } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
+//ANDRÉS: Modificada la clase para que acepte dos props extra, field y form, que nos los pasa Formik
 interface LabelFieldProps {
+  //ANDRÉS: Machetazo en esos dos primeros props de Formik porque no sé cómo averiguar de qué tipo son
+  field: FieldInputProps<string>;
   label: string;
   type: string;
   placeholder: string;
@@ -13,7 +17,9 @@ interface LabelFieldProps {
   showEye?: boolean;
 }
 
+//ANDRÉS: dos props extra para conectar este componente con Formik
 export default function LabelField({
+  field,
   label,
   type,
   placeholder,
@@ -27,10 +33,8 @@ export default function LabelField({
     setShowPassword(!showPassword);
   };
 
-  // Si showEye es true, se cambia el tipo de input a text, se asume que si se quiere mostrar el ojo es porque el input por default es password
-  if (showEye) {
-    type = "text";
-  }
+  // Si el tipo es "password" y showEye es true, cambiamos el tipo a "text"
+  const inputType = type === "password" && showEye ? (showPassword ? "text" : "password") : type;
 
   return (
     <div>
@@ -42,15 +46,19 @@ export default function LabelField({
 
       <div className="flex-1 bg-SecGray flex items-center">
         <input
+          //ANDRÉS: Formik nos pasa ciertos props en field (value, onChange, onBlur) y los 
+          // expandimos aquí en el input
+          {...field}
+
           className="flex-auto w-[80%] flex-row bg-SecGray p-1 text-PrimBlack text-sm"
-          type={!showEye || showPassword ? type : "password"}
+          type={inputType}
           id={id}
           name={name}
           placeholder={placeholder}
         />
 
         {/* Boton de mostrar contraseña con icono de ojo */}
-        {showEye && (
+        {showEye && type === "password" && (
           <button
             type="button"
             onClick={toggleShowPassword}
@@ -66,7 +74,10 @@ export default function LabelField({
             )}
           </button>
         )}
+
       </div>
+
     </div>
   );
 }
+

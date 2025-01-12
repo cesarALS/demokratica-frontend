@@ -5,7 +5,7 @@ import VisionMisionField from "@/templates/1.molecules/0.VisionMisionField";
 const Who = () => {
   return (
     /*Contenedor principal de toda la página, contiene la imagen del header de la página y los recuadros con la información*/
-    <div className="flex flex-col h-full w-full justify-between ">
+    <div className="flex flex-col h-full w-full">
       {/*Contenedor de la imagen del header y la frasemt-52 lg:mt-80*/}
       <div className="min-h-80 lg:min-h-96 bg-[url('/img/imgHeaderConocenos.jpg')] bg-cover bg-[center_bottom_35%] flex flex-col justify-end items-end">
         <div className="bg-white/70 px-4 py-2 mb-5 rounded-md mr-5 lg:mr-20">

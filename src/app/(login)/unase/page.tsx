@@ -9,7 +9,7 @@ import demokraticaRoutes from "@/utils/routeUtils";
 
 const Join = () => {
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center bg-gradient-to-b from-SecBlue to-white">
       <div className="w-[80%] sm:w-[80%] md:w-[70%] lg:w-[50%] xl:w-[40%] 2xl:w-[33%] h-full mt-10 mb-10">
         <Link href="/" passHref>
           <FullLogo

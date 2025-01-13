@@ -34,10 +34,15 @@ export default function LabelField({
   };
 
   // Si el tipo es "password" y showEye es true, cambiamos el tipo a "text"
-  const inputType = type === "password" && showEye ? (showPassword ? "text" : "password") : type;
+  const inputType =
+    type === "password" && showEye
+      ? showPassword
+        ? "text"
+        : "password"
+      : type;
 
   return (
-    <div>
+    <>
       <div>
         <label htmlFor="password" className="text-sm">
           {label}
@@ -46,10 +51,9 @@ export default function LabelField({
 
       <div className="flex-1 bg-SecGray flex items-center">
         <input
-          //ANDRÉS: Formik nos pasa ciertos props en field (value, onChange, onBlur) y los 
+          //ANDRÉS: Formik nos pasa ciertos props en field (value, onChange, onBlur) y los
           // expandimos aquí en el input
           {...field}
-
           className="flex-auto w-[80%] flex-row bg-SecGray p-1 text-PrimBlack text-sm"
           type={inputType}
           id={id}
@@ -74,10 +78,7 @@ export default function LabelField({
             )}
           </button>
         )}
-
       </div>
-
-    </div>
+    </>
   );
 }
-

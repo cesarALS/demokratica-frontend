@@ -5,10 +5,10 @@ export const highlightWord = (text: string, word: string) => {
   let result: (string | JSX.Element)[] = [];
   parts.forEach((part, index) => {
     if (part === "" && index !== parts.length - 1) {
-      result.push(<span className="text-AccentBlue font-bold">Demokratica</span>);
+      result.push(<span className="text-AccentBlue font-bold">{word}</span>);
     } else if (part !== "" && index !== parts.length - 1) {
       result.push(part);
-      result.push(<span className="text-AccentBlue font-bold">Demokratica</span>);
+      result.push(<span className="text-AccentBlue font-bold">{word}</span>);
     } else {
       result.push(part);
     }

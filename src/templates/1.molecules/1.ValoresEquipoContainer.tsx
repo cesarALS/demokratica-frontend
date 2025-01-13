@@ -9,8 +9,8 @@ interface ValoresEquipoContainerProps{
 export function ValoresEquipoContainer({title, type, children}:ValoresEquipoContainerProps){
     return(
         <div className="flex items-center justify-around w-[80%] bg-white gap-5 rounded-3xl p-6 text-lg xl:w-[75%] 2xl:w-[65%] flex-col">
-            <h1 className="font-bold text-2xl" key="0">{highlightWord(title,type)}</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-ThirdGray justify-items-center rounded-3xl p-5 gap-5">
+            <h1 className="font-bold text-2xl">{highlightWord(title,type)}</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 bg-ThirdGray justify-items-center rounded-3xl p-5 gap-5">
                 {children}
             </div>
 

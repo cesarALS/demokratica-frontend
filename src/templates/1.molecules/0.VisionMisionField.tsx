@@ -23,7 +23,7 @@ export function VisionMisionField({
           <span className="text-AccentBlue font-bold ml-1">{title}</span>
         </span>
 
-        <span key="1">{highlightWord(content, "Demokratica")}</span>
+        <span>{highlightWord(content, "Demokratica")}</span>
       </div>
 
       <div className="rounded-3xl bg-ThirdGray p-5">

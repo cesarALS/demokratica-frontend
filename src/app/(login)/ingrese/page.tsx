@@ -2,7 +2,7 @@ import LogoAlHomepage from "@/components/1.molecules/2.LogoFullAlHomepage";
 import LogInBox from "@/components/3.templates/0.LogInBox";
 
 // Página de Loguearse
-export default function Login() {
+export default function LogIn() {
   return (
     // Contenedor de la pagina completa
     <div className="flex flex-1 flex-col items-center bg-gradient-to-b from-SecBlue to-white w-full">

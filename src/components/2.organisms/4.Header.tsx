@@ -67,7 +67,7 @@ export default function Header() {
           classNameLogo="flex items-center justify-center w-full"
         />
 
-        {/* Nav Links */}
+        {/* Nav Links Desktop*/}
         <nav className="hidden sm:flex sm:col-start-4 sm:col-span-2 md:col-start-9 md:col-span-3 justify-between">
           {headerItems.map((item, index) => (
             <Link href={item.link} key={index} className="hover:scale-110">
@@ -91,7 +91,7 @@ export default function Header() {
       {/* Mobile Menu */}
       {isOpen && (
         <nav
-          className="md:hidden bg-SecBlue border-b border-1s border-black"
+          className="sm:hidden bg-SecBlue border-b border-1s border-black"
           ref={dropdownRef}
         >
           {headerItems.map((item, index) => (

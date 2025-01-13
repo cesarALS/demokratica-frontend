@@ -4,7 +4,7 @@
     Aquí van todas las cosas que comparten estas páginas
 */
 
-import Header from "@/components/1.molecules/0.Header";
+import Header from "@/components/2.organisms/4.Header";
 // import Footer from "@/components/1.molecules/1.Footer";
 
 const InformativeLayout = ({

@@ -41,7 +41,7 @@ export function ValoresCard() {
   return valoresData.map((valor, index) => {
     return (
       <div
-        className="flex flex-col items-center w-full bg-PrimBlue gap-5 rounded-3xl p-4 text-lg "
+        className="flex flex-col items-center bg-PrimBlue gap-5 rounded-3xl p-4 text-lg w-full max-w-[250px] sm:max-w-[275px]"
         key={index}
       >
         <div className="bg-PrimCreamCan w-32 p-5 rounded-full mt-5">

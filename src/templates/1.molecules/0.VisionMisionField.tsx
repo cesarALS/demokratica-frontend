@@ -12,7 +12,8 @@ export function VisionMisionField({
   imgURL,
 }: VisionMisionFieldProps) {
   let fieldStyle: string =
-    "flex items-center justify-around w-[80%] bg-white gap-5 rounded-3xl p-6 text-lg xl:w-[65%] 2xl:w-[55%] flex-col" +
+  /* w-[80%] xl:w-[65%] 2xl:w-[55%] */
+    "flex items-center justify-around bg-white gap-5 rounded-3xl p-6 text-lg w-full max-w-[390px] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[780px] xl:max-w-[950px] flex-col" +
     (title === "Visión" ? " lg:flex-row" : " lg:flex-row-reverse");
 
   return (

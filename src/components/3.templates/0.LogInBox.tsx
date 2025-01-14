@@ -1,5 +1,6 @@
-import LogInOauth from "@/components/2.organisms/0.LogInOauth";
-import LogInComn from "@/components/2.organisms/1.LogInComn";
+import LogInComn from "@/components/2.organisms/0.LogInComn";
+import Oauth from "../2.organisms/2.Oauth";
+import demokraticaRoutes from "@/utils/routeUtils";
 
 export default function LogInBox() {
   return (
@@ -13,7 +14,12 @@ export default function LogInBox() {
         {/* Separador */}
         <div className="border-2 border-SecGray w-40 my-6 rounded-lg sm:h-40 sm:w-0 "></div>
         {/* Parte derecha formulario login */}
-        <LogInOauth />
+        <Oauth 
+          title="O ingresa con:" 
+          question="¿Aún no tienes una cuenta?" 
+          link="Regístrate"
+          route={demokraticaRoutes.register.link}
+        />
       </div>
     </div>
   );

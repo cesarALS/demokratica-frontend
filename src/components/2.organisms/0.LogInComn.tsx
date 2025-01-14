@@ -1,11 +1,12 @@
 "use client"
 
 import Link from "next/link";
-import LabelField from "@/templates/0.atoms/0.LabelField";
+import { linkStyles } from "@/utils/tailwindUtils";
 
 import React from "react";
-import { Field, Formik, Form, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import LoginRegFormInput from "@/templates/1.molecules/0.LoginRegFormInput";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Correo inválido").required("Se requiere correo"),
@@ -27,41 +28,19 @@ export default function LogInComn() {
     >
       {({ handleSubmit }) => (
         <Form className="flex w-full sm:w-[45%] flex-col justify-start self-start gap-y-4" onSubmit={handleSubmit}>      
-          {/* Campo de correo */}
-          <div className="flex flex-col gap-y-1">
-            <Field
-              component={LabelField}
-              label="Correo:"
-              type="email"
-              placeholder="Tu correo"
-              id="email"
-              name="email"
-            />
-            <ErrorMessage name="email" component="div" className="text-red-500 text-sm" />
-          </div>
 
-          {/* Campo de contraseña */}
-          <div className="flex flex-col gap-y-1">
-            <Field
-              component={LabelField}
-              label="Contraseña:"
-              type="password"
-              placeholder="Tu contraseña"
-              id="password"
-              name="password"
-              showEye={true}
-            />
-            <ErrorMessage name="password" component="div" className="text-red-500 text-sm" />
-          </div>
+          <LoginRegFormInput name="email" label="Correo:" type="email" placeholder="Tu correo"/>
+          <LoginRegFormInput name="password" label="Contraseña:" type="password" placeholder="Tu contraseña"/>
+
           {/* Recuérdame y olvidaste tu contraseña */}
-          <div className="flex justify-between text-xs text-PrimBlack">
+          <div className="flex items-center justify-between text-xs text-PrimBlack">
             <div>
               <input className="bg-SecGray" type="checkbox" id="rememberMe" />
               <label htmlFor="rememberMe" className="pl-1 hover:text-black">
                 Recuérdame
               </label>
             </div>
-            <Link href="/" className="underline hover:text-black">
+            <Link href="/" className={`${linkStyles()}`}>
               ¿Olvidaste tu contraseña?
             </Link>
           </div>

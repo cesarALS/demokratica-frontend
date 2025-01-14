@@ -1,4 +1,4 @@
-import TitleLogo from "@/templates/0.atoms/1.TitleLogo";
+import TitleLogo from "@/templates/0.atoms/0.TitleLogo";
 import Link from "next/link";
 import { hoverScale } from "@/utils/tailwindUtils";
 

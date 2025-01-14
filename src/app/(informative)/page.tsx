@@ -1,4 +1,4 @@
-import AssetCentrHmpg from "@/templates/0.atoms/5.AssetCentrHmpg";
+import AssetCentrHmpg from "@/templates/0.atoms/3.AssetCentrHmpg";
 
 export default function Home() {
   // A react fragment, cause we don't need a wrapping element

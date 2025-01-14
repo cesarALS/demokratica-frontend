@@ -4,14 +4,14 @@
     Aquí van todas las cosas que comparten estas páginas
 */
 
-import Header from "@/components/2.organisms/4.Header";
-// import Footer from "@/components/1.molecules/1.Footer";
+import Header from "@/components/2.organisms/3.Header";
+import Footer from "@/components/2.organisms/4.Footer";
 
-const InformativeLayout = ({
+export default function InformativeLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) => {
+}>) {
   return (
     // Este div es el contenedor principal de la página, un grid con dos filas, una pal header, otra pal contenido
     <div className="grid grid-rows-[1fr,11fr] h-screen">
@@ -25,10 +25,8 @@ const InformativeLayout = ({
         <main className={`flex-1 flex-col items-center h-full w-full`}>
           {children}
         </main>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </div>
   );
-};
-
-export default InformativeLayout;
+}

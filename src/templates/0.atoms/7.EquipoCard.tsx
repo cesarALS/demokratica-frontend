@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { ReactElement } from "react";
 
 interface EquipoDataTypes {
@@ -9,7 +9,7 @@ interface EquipoDataTypes {
 }
 
 export function EquipoCard() {
-  const fotoStyle = "h-full w-full rounded-full";
+  const fotoStyle = "h-[175px] w-[175px] rounded-full";
   const valoresData: EquipoDataTypes[] = [
     {
       foto: (
@@ -29,7 +29,7 @@ export function EquipoCard() {
     },
     {
       foto: (
-        <Image src="/img/fotoCesar.jpg" alt="Foto1" height={300} width={300} className={fotoStyle}/>
+        <Image src="/img/fotoDavid.PNG" alt="Foto1" height={300} width={300} className={fotoStyle}/>
       ),
       nombres: "David Felipe",
       apellidos: "Marín Rosas",
@@ -37,7 +37,7 @@ export function EquipoCard() {
     },
     {
       foto: (
-        <Image src="/img/fotoCesar.jpg" alt="Foto1" height={300} width={300} className={fotoStyle}/>
+        <Image src="/img/fotoJulian.PNG" alt="Foto1" height={300} width={300} className={fotoStyle}/>
       ),
       nombres: "Julián David",
       apellidos: "Huertas Domínguez",
@@ -51,7 +51,7 @@ export function EquipoCard() {
         className="flex flex-col items-center w-full bg-SecBlue gap-5 rounded-3xl p-4 text-lg "
         key={index}
       >
-        <div className="w-full rounded-full mt-5 max-w-[175px]">
+        <div className="w-full rounded-full mt-5 max-w-[175px] justify-items-center">
           {valor.foto}
         </div>
         {/*  bg-white p-1 w-full rounded-2xl*/ }

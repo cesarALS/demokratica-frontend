@@ -61,7 +61,7 @@ export function EquipoCard() {
         </div>
         
 
-        <p className="text-center text-lg font-bold  text-white bg-PrimCreamCan p-1 w-full rounded-2xl">
+        <p className="text-center text-lg font-bold  text-black bg-ThirdGray p-1 w-full rounded-2xl">
           {valor.rol.map((role, idx) => (
             <span key={idx}>
               {role}

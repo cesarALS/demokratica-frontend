@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import LogoTitleAlHomepage from "../1.molecules/3.LogoTitleAlHomepage";
+import LogoTitleAlHomepage from "../1.molecules/2.LogoTitleAlHomepage";
 import Link from "next/link";
 import demokraticaRoutes from "@/utils/routeUtils";
 
@@ -44,7 +44,7 @@ export default function Header() {
 
   return (
     // Header con todo y la navbar mobile
-    <header className="bg-SecBlue h-[calc(1/12*100vh)] z-10">
+    <header className="bg-SecBlue h-[calc(1/12*100vh)] z-50">
       {/* Header sin la navbar mobile */}
       <div className="flex h-[calc(1/12*100vh)] w-full grid grid-cols-3 sm:grid-cols-6 md:grid-cols-12 items-center py-2 px-4">
         {/* Mobile Menu Button */}
@@ -70,7 +70,11 @@ export default function Header() {
         {/* Nav Links Desktop*/}
         <nav className="hidden sm:flex sm:col-start-4 sm:col-span-2 md:col-start-9 md:col-span-3 justify-between">
           {headerItems.map((item, index) => (
-            <Link href={item.link} key={index} className="hover:scale-110">
+            <Link
+              href={item.link}
+              key={index}
+              className="hover:scale-110 lg:text-base xl:text-lg 2xl:text-xl"
+            >
               {item.name}
             </Link>
           ))}
@@ -81,7 +85,7 @@ export default function Header() {
           <Link
             href={demokraticaRoutes.login.link}
             type="submit"
-            className="px-1 flex text-center bg-PrimCreamCan border-2 border-black rounded-md text-sm hover:scale-110"
+            className="px-1 flex text-center bg-PrimCreamCan border-2 border-black rounded-md text-sm lg:text-base xl:text-lg 2xl:text-xl hover:scale-110 2xl:border-3 2xl:px-2 xl:px-2 lg:px-2"
           >
             Ingresa
           </Link>

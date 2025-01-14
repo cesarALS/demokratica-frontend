@@ -5,9 +5,8 @@ import { FieldInputProps } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-//ANDRÉS: Modificada la clase para que acepte dos props extra, field y form, que nos los pasa Formik
+//ANDRÉS: Modificada la clase para que acepte el prop "field", que no lo pasa Formik
 interface LabelFieldProps {
-  //ANDRÉS: Machetazo en esos dos primeros props de Formik porque no sé cómo averiguar de qué tipo son
   field: FieldInputProps<string>;
   label: string;
   type: string;
@@ -17,7 +16,7 @@ interface LabelFieldProps {
   showEye?: boolean;
 }
 
-//ANDRÉS: dos props extra para conectar este componente con Formik
+//ANDRÉS: un prop extra para conectar este componente con Formik
 export default function LabelField({
   field,
   label,

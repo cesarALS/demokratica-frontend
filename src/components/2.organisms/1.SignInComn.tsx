@@ -97,12 +97,11 @@ export default function SignInComn() {
 
             {/* Botón de submit */}
             <button
-            type="submit"
-            className="w-full text-center bg-PrimCreamCan border-2 border-black rounded-md text-sm hover:scale-110"
-            
-          >
-            Únete
-          </button>       
+              type="submit"
+              className="w-full text-center bg-PrimCreamCan border-2 border-black rounded-md text-sm hover:scale-110"
+            >
+              Regístrate
+            </button>
           </Form>
         )}
       </Formik>

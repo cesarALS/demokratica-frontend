@@ -13,7 +13,7 @@ export function EquipoCard() {
   const valoresData: EquipoDataTypes[] = [
     {
       foto: (
-        <Image src="/img/fotoCesar.jpg" alt="Foto1" height={300} width={300} className={fotoStyle}/>
+        <Image src="/img/fotoAndres.PNG" alt="Foto1" height={300} width={300} className={fotoStyle}/>
       ),
       nombres: "Andrés Felipe",
       apellidos: "Rojas Aguilar",

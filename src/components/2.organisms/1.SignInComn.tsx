@@ -9,6 +9,10 @@ import React from "react";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
+import { createUser } from "@/utils/apiUtils";
+import Cookies from "js-cookie"
+import { useRouter } from "next/navigation"
+
 const validationSchema = Yup.object({
   email: Yup.string().email("Correo inválido").required("Se requiere correo"),
   username: Yup.string().required("Debes establecer un nombre de usuario"),
@@ -26,7 +30,10 @@ export default function SignInComn() {
   const openModal = () => {setModalOpen(true)};
   const closeModal = () => {setModalOpen(false)};
   
+  const router = useRouter();
+
   return (
+    
     <>
       <Formik
         initialValues={{
@@ -37,12 +44,17 @@ export default function SignInComn() {
           termsAccepted: false,        
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          // ANDRÉS: Aquí debe ir la API para comunicarse con el backend
-          console.log(values);
+        onSubmit={async (values) => {        
+          const response = await createUser(values.email, values.username, values.password);
+          
+          if (response.status === 201 && response.userInfo?.username) {
+            Cookies.set("user", response.userInfo?.username, { expires: 7 });
+            router.push("/");
+          }
+          
         }}
       >
-        {({ handleSubmit }) => (
+        {({ handleSubmit, setFieldValue, values }) => (
           <Form
             className="flex w-full sm:w-[45%] flex-col justify-start self-start gap-y-4"
             onSubmit={handleSubmit}
@@ -60,6 +72,10 @@ export default function SignInComn() {
                     className="bg-SecGray cursor-pointer"
                     type="checkbox"
                     id="dataProccessing"
+                    checked={values.termsAccepted}
+                    onChange={(e) =>
+                      setFieldValue("termsAccepted", e.target.checked)
+                    }                    
                   />
                 </div>
                 <p className="text-center">

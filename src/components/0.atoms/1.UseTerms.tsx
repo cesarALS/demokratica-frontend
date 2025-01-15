@@ -1,4 +1,3 @@
-import { hoverScale } from "@/utils/tailwindUtils"
 import ReactMarkdown from "react-markdown"
 import { useEffect, useState } from "react";
 import { linkStyles } from "@/utils/tailwindUtils";
@@ -57,7 +56,7 @@ const UseTerms = ({ closeModalAction }: UseTermsProps) => {
                                 </ReactMarkdown>                            
                             </div>
                             <button
-                                className={`flex items-center justify-center bg-PrimCreamCan px-2 py-1 rounded-md border-2 border-black ${hoverScale(110, 100)}`}
+                                className={`flex items-center justify-center bg-PrimCreamCan px-2 py-1 rounded-md border-2 border-black hover:scale-110`}
                                 onClick={closeModalAction}
                             >
                                 Entendido

@@ -25,6 +25,10 @@ Esto instala todos los paquetes.
 Para correr rápidamente el proyecto local, simplemente se debe usar:
     npm run dev
 
+Una vez se ha ejecutado npm run dev localmente, abrir:
+    http://localhost:3000
+**Es importante usar explícitamente el http://, para las comunicaciones con el backend. Esto previene errores CORS**
+
 Para correr el proyecto local como si fuera el deploy, usar
     npm run build
 

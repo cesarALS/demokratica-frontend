@@ -1,6 +1,5 @@
 import TitleLogo from "@/templates/0.atoms/0.TitleLogo";
 import Link from "next/link";
-import { hoverScale } from "@/utils/tailwindUtils";
 
 interface LogoAlHomepageProps {
   classNameLogo?: string;
@@ -16,10 +15,7 @@ export default function LogoTitleAlHomepage({
     <Link href="/" passHref className={classNameLink}>
       <TitleLogo
         baseFill="#000000"
-        classNameGeneral={`flex items-center justify-center ${hoverScale(
-          110,
-          200
-        )} ${classNameLogo}`}
+        classNameGeneral={`flex items-center justify-center hover:scale-110 ${classNameLogo}`}
       />
     </Link>
   );

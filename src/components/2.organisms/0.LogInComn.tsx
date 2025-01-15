@@ -8,12 +8,19 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import LoginRegFormInput from "@/templates/1.molecules/0.LoginRegFormInput";
 
+import { login } from "@/utils/apiUtils";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+
 const validationSchema = Yup.object({
   email: Yup.string().email("Correo inválido").required("Se requiere correo"),
   password: Yup.string().required("Se requiere contraseña"),
 });
 
 export default function LogInComn() {
+  
+  const router = useRouter();
+  
   return (
     <Formik
       initialValues={{
@@ -21,9 +28,15 @@ export default function LogInComn() {
         password: "",
       }}
       validationSchema={validationSchema}
-      onSubmit={(values) => {
-        // ANDRÉS: Aquí debe ir la API para comunicarse con el backend
-        console.log(values);
+      onSubmit={async (values) => {
+        const response = await login(values.email, values.password);
+        if (response.status === 200 && response.userInfo?.username) {
+          Cookies.set("user", response.userInfo?.username, { expires: 7 });
+          router.push("/");
+        }
+        else if (response.status === 401){
+          console.log("Credenciales no válidas")
+        }
       }}
     >
       {({ handleSubmit }) => (
@@ -45,13 +58,14 @@ export default function LogInComn() {
             </Link>
           </div>
 
-          {/* Botón de submit */}
           <button
             type="submit"
             className="w-full text-center bg-PrimCreamCan border-2 border-black rounded-md text-sm hover:scale-110"
+            
           >
             Ingresa
-          </button>
+          </button>          
+
         </Form>
       )}
     </Formik>

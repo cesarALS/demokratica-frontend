@@ -1,7 +1,7 @@
-import VisionMisionField from "@/templates/1.molecules/0.VisionMisionField";
-import ValoresEquipoContainer from "@/templates/1.molecules/1.ValoresEquipoContainer";
-import ValoresCard from "@/templates/0.atoms/6.ValoresCard";
-import EquipoCard from "@/templates/0.atoms/7.EquipoCard";
+import VisionMisionField from "@/templates/1.molecules/2.VisionMisionField";
+import ValoresEquipoContainer from "@/templates/1.molecules/3.ValoresEquipoContainer";
+import ValoresCard from "@/templates/0.atoms/4.ValoresCard";
+import EquipoCard from "@/templates/0.atoms/5.EquipoCard";
 
 // Página de Quiénes Somos
 

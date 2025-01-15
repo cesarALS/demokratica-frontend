@@ -1,13 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
-import demokraticaRoutes from "@/utils/routeUtils";
+import { linkStyles } from "@/utils/tailwindUtils";
 
-export default function LogInOauth() {
+interface OauthProps {
+    title: string;
+    question: string;
+    link: string;
+    route: string; //No sé cómo definir mejor este tipo
+}
+
+export default function Oauth( { title, question, link, route }: OauthProps ) {
   return (
     <div className="flex w-full sm:w-[45%] justify-start flex-col self-start gap-y-6">
-      {/* Ingresa con */}
-      <div className="text-sm">O ingresa con:</div>
+      {/* Registrate con */}
+      <div className="text-sm">{title}</div>
       {/* Botones de google y facebook */}
       <div className="flex justify-around text-PrimGray">
         <Link
@@ -24,13 +31,13 @@ export default function LogInOauth() {
         </Link>
       </div>
       {/* Aún no tienes una cuenta? Registrate*/}
-      <div className="text-xs text-PrimBlack">
-        ¿Aún no tienes una cuenta?
+      <div className="text-xs text-PrimBlack text-center">
+        {question}
         <Link
-          href={demokraticaRoutes.register.link}
-          className="underline hover:text-black text-AccentBlue pl-1"
+          href={route}
+          className={`${linkStyles()} pl-1`}
         >
-          Regístrate
+          {link}
         </Link>
       </div>
     </div>

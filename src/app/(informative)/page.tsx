@@ -1,4 +1,4 @@
-import AssetCentrHmpg from "@/templates/0.atoms/5.AssetCentrHmpg";
+import AssetCentrHmpg from "@/templates/0.atoms/3.AssetCentrHmpg";
 
 export default function Home() {
   // A react fragment, cause we don't need a wrapping element
@@ -8,7 +8,7 @@ export default function Home() {
       {/* Contenedor gradiente parte inicial homepage */}
       {/* 11/12*100 = 91.667, es el height restante del viewport quitando el header y teniendo en cuenta las proporciones */}
       <div
-        className="flex flex-col flex-initial
+        className="flex flex-1 flex-col flex-initial
        pt-10 pb-16 w-full h-[91.667vh] bg-gradient-to-b from-SecBlue to-white px-20 items-center"
       >
         {/* Contenedor para centrar todo */}

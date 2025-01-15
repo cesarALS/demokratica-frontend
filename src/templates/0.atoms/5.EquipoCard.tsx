@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 interface EquipoDataTypes {
   foto: ReactElement;
   nombres: string;
-  apellidos: String;
+  apellidos: string;
   rol: string[];
 }
 

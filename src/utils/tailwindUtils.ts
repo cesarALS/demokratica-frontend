@@ -12,4 +12,12 @@ const hoverScale = (scale: number, duration: number) =>
         `transition-transform transform duration-${duration} hover:scale-${scale}`
     );
 
-export { hoverScale }
+/*
+Esta función simplemente devuelve los estilos de links genéricos
+*/
+const linkStyles = () => 
+    clsx (
+        `underline hover:text-black text-AccentBlue cursor-pointer`
+    );
+
+export { hoverScale, linkStyles }

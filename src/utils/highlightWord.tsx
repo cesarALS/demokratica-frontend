@@ -1,0 +1,18 @@
+import { JSX } from "react";
+/* Función para resaltar la palabra que se envia como parámetro dentro de un String */
+export const highlightWord = (text: string, word: string) => {
+  const parts = text.split(word); 
+  const result: (string | JSX.Element)[] = [];
+  parts.forEach((part, index) => {
+    if (part === "" && index !== parts.length - 1) {
+      result.push(<span key={index} className="text-AccentBlue font-bold">{word}</span>);
+    } else if (part !== "" && index !== parts.length - 1) {
+      result.push(part);
+      result.push(<span key={index} className="text-AccentBlue font-bold">{word}</span>);
+    } else {
+      result.push(part);
+    }
+  });
+
+  return result; 
+};

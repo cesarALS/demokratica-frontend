@@ -1,9 +1,3 @@
-/*
-    Este es el Layout para todas las páginas informativas
-    Landing Page, About, Pitch de Talento, Q&A, etc.
-    Aquí van todas las cosas que comparten estas páginas
-*/
-
 import Header from "@/components/2.organisms/3.Header";
 import Footer from "@/components/2.organisms/4.Footer";
 
@@ -13,20 +7,20 @@ export default function InformativeLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // Este div es el contenedor principal de la página, un grid con dos filas, una pal header, otra pal contenido
-    <div className="grid grid-rows-[1fr,11fr] h-screen">
-      {/* Fila del header */}
+    // Contenedor principal como un flexbox con altura mínima de pantalla
+    <div className="flex flex-col min-h-screen">
+      {/* Header siempre visible en la parte superior */}
       <Header />
-      {/* Fila del contenido */}
-      {/* Este div es el contenedor del contenido, un flexbox que se puede scrollear */}
-      {/* El contenido de la página va dentro de este div */}
-      {/* El footer va al final de este div */}
-      <div className={`flex-1 flex-col items-center overflow-y-auto`}>
-        <main className={`flex-1 flex-col items-center h-full w-full`}>
+
+      {/* Contenido principal que ocupa al menos 100vh, pero puede crecer */}
+      <div className="flex-grow overflow-y-auto">
+        <main className="flex flex-col items-center h-full w-full">
           {children}
         </main>
-        <Footer />
       </div>
+
+      {/* Footer al final de la página o contenido */}
+      <Footer />
     </div>
   );
 }

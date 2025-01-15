@@ -26,7 +26,7 @@ export default function Home() {
           <AssetCentrHmpg classNameGeneral="w-full" />
           {/* Frase de seguimiento */}
           <div className="text-2xl font-semibold italic self-end sm:self-start">
-            Deseas <span className="text-AccentCreamCan">facilitar</span> <br />
+            ¿Deseas <span className="text-AccentCreamCan">facilitar</span> <br />
             las tuyas?
           </div>
         </div>

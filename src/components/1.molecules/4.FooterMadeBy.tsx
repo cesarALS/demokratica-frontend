@@ -4,19 +4,19 @@ import { siteMapItem } from "@/types/siteMap";
 export default function FooterMadeBy() {
   const madeBy: siteMapItem[] = [
     {
-      name: "David Marin",
+      name: "David Marín",
       link: "https://www.linkedin.com/in/david-felipe-marin-rosas-5a567b197/",
     },
     {
-      name: "Cesar Lemos",
+      name: "César Lemos",
       link: "https://www.linkedin.com/in/c%C3%A9sar-lemos-b9990a150/",
     },
     {
-      name: "Andres Rojas",
+      name: "Andrés Rojas",
       link: "/",
     },
     {
-      name: "Julian Huertas",
+      name: "Julián Huertas",
       link: "/",
     },
   ];

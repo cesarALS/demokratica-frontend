@@ -84,7 +84,7 @@ export default function SignInComn() {
               type="submit"
               className="w-full text-center bg-PrimCreamCan border-2 border-black rounded-md text-sm hover:scale-110"
             >
-              Registrate
+              Regístrate
             </button>
           </Form>
         )}

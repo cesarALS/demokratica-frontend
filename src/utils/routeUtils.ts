@@ -5,14 +5,14 @@
 const demokraticaRoutes = {
   // Informativos
   ayuda: { name: "Ayuda", link: "/ayuda" },
-  conocenos: { name: "Conocenos", link: "/conocenos" },
+  conocenos: { name: "Conócenos", link: "/conocenos" },
   planes: { name: "Planes", link: "/planes" },
   // Registro
   login: { name: "Ingresa", link: "/ingresa" },
-  register: { name: "Unete", link: "/unete" },
+  register: { name: "Únete", link: "/unete" },
   // TODO Importantes para el usuario
   cookies: { name: "Cookies", link: "/cookies" },
-  userTerms: { name: "Terminos de uso", link: "/terminos-de-uso" },
+  userTerms: { name: "Términos de uso", link: "/terminos-de-uso" },
 };
 
 export default demokraticaRoutes;

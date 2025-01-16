@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { linkStyles } from "@/utils/tailwindUtils";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import LoginRegFormInput from "@/templates/1.molecules/0.LoginRegFormInput";
@@ -20,6 +20,14 @@ const validationSchema = Yup.object({
 export default function LogInComn() {
   
   const router = useRouter();
+
+  useEffect(() => {
+    // Verificar la cookie solo después de que el componente se haya montado
+    const us = Cookies.get("user");
+    if (us) {
+      router.push("/"); // Redirigir a la página de inicio si la cookie existe
+    }
+  }, [router]); 
   
   return (
     <Formik
@@ -34,8 +42,10 @@ export default function LogInComn() {
           Cookies.set("user", response.userInfo?.username, { expires: 7 });
           router.push("/");
         }
-        else if (response.status === 401){
-          console.log("Credenciales no válidas")
+        else if (response.status === 403){
+          alert("Credenciales no válidas")
+        } else {
+          alert("Error en el servidor")
         }
       }}
     >
@@ -71,3 +81,4 @@ export default function LogInComn() {
     </Formik>
   );
 }
+

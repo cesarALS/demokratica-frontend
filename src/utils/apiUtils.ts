@@ -50,7 +50,7 @@ async function createUser(email: string, username: string, password: string): Pr
 }
 
 interface ApiLoginReturns extends ApiReturns {
-  userInfo: {email: string, username: string} | null //Aquí iba yo, xd
+  userInfo: {email: string, username: string} | null
 }
 
 async function login(email: string, password: string): Promise<ApiLoginReturns> {
@@ -66,6 +66,7 @@ async function login(email: string, password: string): Promise<ApiLoginReturns> 
       });
           
       if (!res.ok){
+        console.log("Aquí")
         return {
           status: res.status,
           userInfo: null

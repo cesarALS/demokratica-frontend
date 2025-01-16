@@ -5,11 +5,17 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import LogoTitleAlHomepage from "../1.molecules/2.LogoTitleAlHomepage";
 import Link from "next/link";
 import demokraticaRoutes from "@/utils/routeUtils";
+import Cookies from "js-cookie"
+import { UserCircleIcon } from '@heroicons/react/24/solid'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLElement>(null);
   const dropdownButtonRef = useRef<HTMLButtonElement>(null);
+  
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [showLogoutMessage, setShowLogoutMessage] = useState(false);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -30,6 +36,18 @@ export default function Header() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    const user = Cookies.get("user");
+    setIsLoggedIn(!!user);
+  }, [])
+
+  const handleLogout = () => {
+    Cookies.remove("user");
+
+    // Recargar la página
+    window.location.reload();    
+  }
 
   interface headerItem {
     name: string;
@@ -80,16 +98,37 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Botón de ingreso */}
+        {/* Botón de ingreso o de usuario */}
+
         <div className="justify-self-end sm:justify-self-end">
-          <Link
-            href={demokraticaRoutes.login.link}
-            type="submit"
-            className="px-1 flex text-center bg-PrimCreamCan border-2 border-black rounded-md text-sm lg:text-base xl:text-lg 2xl:text-xl hover:scale-110 2xl:border-3 2xl:px-2 xl:px-2 lg:px-2"
-          >
-            Ingresa
-          </Link>
+          {isLoggedIn?           
+              <div className="w-full h-full flex items-center justify-center relative">
+                <button 
+                  type="button" 
+                  className="flex justify-center bg-PrimCreamCan border-2 border-black rounded-md text-sm lg:text-base xl:text-lg 2xl:text-xl hover:scale-110 2xl:border-3 2xl:px-2 xl:px-2 lg:px-2"              
+                  onMouseEnter={() => setShowLogoutMessage(true)}
+                  onMouseLeave={() => setShowLogoutMessage(false)}
+                  onClick={handleLogout}
+                >
+                  <UserCircleIcon className="text-black w-6 h-8 flex justify-center"/> 
+                </button>
+                {showLogoutMessage && (
+                  <div className="absolute top-full mt-2 px-2 py-2 bg-gray-100 text-black rounded-md border border-gray-400 shadow-lg text-center text-sm">
+                    {`Cerrar sesión de ${Cookies.get("user")}`}
+                  </div>                  
+                )}
+              </div>
+            : 
+              <Link
+              href={demokraticaRoutes.login.link}
+              type="submit"
+              className="px-1 flex text-center bg-PrimCreamCan border-2 border-black rounded-md text-sm lg:text-base xl:text-lg 2xl:text-xl hover:scale-110 2xl:border-3 2xl:px-2 xl:px-2 lg:px-2"
+              >
+                Ingresa
+              </Link>            
+          }
         </div>
+
       </div>
 
       {/* Mobile Menu */}
@@ -108,7 +147,8 @@ export default function Header() {
             </Link>
           ))}
         </nav>
-      )}
+      )}    
+
     </header>
   );
 }

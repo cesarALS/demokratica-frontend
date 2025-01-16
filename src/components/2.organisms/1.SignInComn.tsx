@@ -3,7 +3,7 @@
 import LoginRegFormInput from "@/templates/1.molecules/0.LoginRegFormInput";
 
 import UseTerms from "../0.atoms/1.UseTerms";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import React from "react";
 import { Formik, Form, ErrorMessage } from "formik";
@@ -32,6 +32,14 @@ export default function SignInComn() {
   
   const router = useRouter();
 
+  useEffect(() => {
+    // Verificar la cookie solo después de que el componente se haya montado
+    const us = Cookies.get("user");
+    if (us) {
+      router.push("/"); // Redirigir a la página de inicio si la cookie existe
+    }
+  }, [router]); 
+
   return (
     
     <>
@@ -50,6 +58,11 @@ export default function SignInComn() {
           if (response.status === 201 && response.userInfo?.username) {
             Cookies.set("user", response.userInfo?.username, { expires: 7 });
             router.push("/");
+          } else if (response.status === 409){
+            alert("Correo ya asociado a otra cuenta");
+          } else {
+             alert("Error en el servidor");
+             console.log(response.error)
           }
           
         }}

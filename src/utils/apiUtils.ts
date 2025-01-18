@@ -1,7 +1,8 @@
 // No sé qué tan importante sea que esto esté acá o en environment variables.
 // Otro detalle: eventualemnte, el dominio del back y del front será el mismo
 // Y otro detalle: si de pronto el backend está corriendo en local, esta dirección habría que cambiarla por la dirección donde está corriendo el back en local
-const backendAddress = "https://demokraticabackend.onrender.com";
+//const backendAddress = "https://demokraticabackend.onrender.com";
+const backendAddress = "http://localhost:8080"
 
 interface ApiReturns {
   status: number,
@@ -50,23 +51,41 @@ async function createUser(email: string, username: string, password: string): Pr
 }
 
 interface ApiLoginReturns extends ApiReturns {
-  userInfo: {email: string, username: string} | null
+  userInfo: {email: string, username: string} | null //Aquí iba yo, xd
+}
+
+interface LoginBody {
+  bodyEmail: string,
+  bodyPassword: string,
 }
 
 async function login(email: string, password: string): Promise<ApiLoginReturns> {
     
     // Nota: Están muy expuestas las contraseñas. Deberían ir en el body. La solicitud debería ser GET
-  const url = `${backendAddress}/ingrese?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
+  const url = `${backendAddress}/ingrese`;
 
   console.log(url);
   
+  const requestBody : LoginBody = {
+      bodyEmail: email,
+      bodyPassword: password
+  }
+
   try {
-      const res = await fetch(url, {
-          method: "POST"
-      });
+      const httpRequest = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(requestBody)
+      }
+      console.log(JSON.stringify(httpRequest, null, 2));
+
+      const res = await fetch(url, httpRequest);
+
+      console.log(res);
           
       if (!res.ok){
-        console.log("Aquí")
         return {
           status: res.status,
           userInfo: null

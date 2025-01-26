@@ -13,7 +13,7 @@ export default function afterLogInContent({
       {/* Contenido principal que ocupa el resto del vh, que tiene el background fijo y que tiene un overflow que permite scrollear el contenido hacía abajo*/}
       <div className="flex h-[91.667vh] w-full flex-initial flex-col items-center overflow-y-auto bg-gradient-to-b from-SecBlue to-white">
         {/* Contenido de la página */}
-        <main className="flex items-start grow flex-shrink-0 h-[91.667vh] w-full">
+        <main className="flex min-h-[91.667vh] w-full flex-shrink-0 grow items-start">
           {children}
         </main>
         {/* Footer al final de la página o contenido */}

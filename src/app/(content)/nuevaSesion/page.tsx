@@ -1,5 +1,7 @@
 import EditableTitle from "@/components/0.atoms/3.EditableTitle";
 import PlanShow from "@/components/0.atoms/4.PlanShow";
+import FechasConfigSesion from "@/components/1.molecules/5.FechasConfigSesion";
+import ConfDescription from "@/components/0.atoms/5.ConfDescription";
 import { sessionConfig } from "@/types/sessionConfig";
 
 interface NuevaSesionProps {
@@ -30,23 +32,19 @@ export default function NuevaSesion({ config }: NuevaSesionProps) {
             {/* Plan actual */}
             <PlanShow plan={config.plan} />
             {/* Fechas */}
-            <div className="flex w-full flex-col items-start justify-start gap-y-4 text-lg">
-              <div className="text-xl">Fechas:</div>
-              <div className="flex w-full items-center justify-between gap-x-4">
-                <label htmlFor="startDate">Inicio:</label>
-                <input
-                  type="date"
-                  id="startDate"
-                  className="rounded-lg border bg-ThirdGray p-1 focus:outline-none focus:ring-1 focus:ring-PrimBlack"
-                />
-              </div>
-              <div className="flex w-full items-center justify-between gap-x-4">
-                <label htmlFor="endDate">Fin:</label>
-                <input
-                  type="date"
-                  id="endDate"
-                  className="rounded-lg border bg-ThirdGray p-1 focus:outline-none focus:ring-1 focus:ring-PrimBlack"
-                />
+            <FechasConfigSesion />
+            {/* Descripción */}
+            <ConfDescription />
+            {/* Tags */}
+            <div className="flex flex-col gap-y-4">
+              <div className="text-xl">Tags:</div>
+              <div className="flex w-full flex-wrap items-center justify-center gap-2">
+                <div className="rounded-lg bg-PrimGray p-1 text-white">
+                  Sistemas de información
+                </div>
+                <div className="rounded-lg bg-PrimGray p-1 text-white">
+                  Sisinfo
+                </div>
               </div>
             </div>
           </div>

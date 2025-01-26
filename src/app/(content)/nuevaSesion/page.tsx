@@ -5,6 +5,7 @@ export default function NuevaSesion() {
     <div className="flex w-full flex-col p-8">
       {/* Ingresar titulo */}
       <EditableTitle title="Ingresa tu titulo" />
+      {/* Configuraciones */}
     </div>
   );
 }

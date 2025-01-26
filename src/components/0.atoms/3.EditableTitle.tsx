@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faFloppyDisk } from "@fortawesome/free-regular-svg-icons";
@@ -20,23 +20,33 @@ export default function EditableTitle({
   // Estado para saber si se está editando el título y el titulo como estado
   const [isEditing, setIsEditing] = useState(false);
   const [currentTitle, setCurrentTitle] = useState(title);
+  const inputRef = useRef<HTMLInputElement>(null);
 
+  // Cambia el modo del componente cuando se presiona el botón de editar/guardar
   const toggleEditing = () => {
     setIsEditing(!isEditing);
-    if (!isEditing && onChange) {
+    if (isEditing && onChange) {
       onChange(currentTitle);
     }
   };
+
+  // Cuando se actualiza el componente y se está editando se enfoca el input
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isEditing]);
 
   return (
     <div className="flex items-center justify-between rounded-lg border border-2 border-black bg-white px-4 py-2">
       {/* Si se esta editanto se cambia el label por un input */}
       {isEditing ? (
         <input
+          ref={inputRef}
           type="text"
           value={currentTitle}
           onChange={(e) => setCurrentTitle(e.target.value)}
-          className="text-xl"
+          className="rounded-lg border text-xl focus:outline-none focus:ring-1 focus:ring-PrimBlack"
         />
       ) : (
         <span className="text-xl">{currentTitle}</span>

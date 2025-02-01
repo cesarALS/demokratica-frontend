@@ -2,7 +2,9 @@ import EditableTitle from "@/components/0.atoms/3.EditableTitle";
 import PlanShow from "@/components/0.atoms/4.PlanShow";
 import FechasConfigSesion from "@/components/1.molecules/5.FechasConfigSesion";
 import ConfDescription from "@/components/0.atoms/5.ConfDescription";
+import TagInput from "@/templates/1.molecules/5.TagInput";
 import { sessionConfig } from "@/types/sessionConfig";
+import ParticipantsBox from "@/components/3.templates/2.ParticipantsBox";
 
 interface NuevaSesionProps {
   config?: sessionConfig;
@@ -26,7 +28,7 @@ export default function NuevaSesion({ config }: NuevaSesionProps) {
       {/* Configuraciones */}
       <div className="flex flex-col rounded-lg border border-2 border-black bg-white p-6">
         {/* Grid para acomodar todo en responsive */}
-        <div className="grid grid-rows-2">
+        <div className="grid grid-rows-2 gap-y-6">
           {/* Configuraciones izquierda */}
           <div className="flex flex-col gap-y-6">
             {/* Plan actual */}
@@ -36,20 +38,11 @@ export default function NuevaSesion({ config }: NuevaSesionProps) {
             {/* Descripción */}
             <ConfDescription />
             {/* Tags */}
-            <div className="flex flex-col gap-y-4">
-              <div className="text-xl">Tags:</div>
-              <div className="flex w-full flex-wrap items-center justify-center gap-2">
-                <div className="rounded-lg bg-PrimGray p-1 text-white">
-                  Sistemas de información
-                </div>
-                <div className="rounded-lg bg-PrimGray p-1 text-white">
-                  Sisinfo
-                </div>
-              </div>
-            </div>
+            <TagInput />
           </div>
           {/* Configuraciones derecha */}
-          <div>{/* Participantes */}</div>
+          {/* Participantes */}
+          <ParticipantsBox />
         </div>
       </div>
     </div>

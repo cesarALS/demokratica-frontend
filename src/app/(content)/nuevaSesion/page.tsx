@@ -6,20 +6,14 @@ import TagInput from "@/templates/1.molecules/5.TagInput";
 import { sessionConfig } from "@/types/sessionConfig";
 import ParticipantsBox from "@/components/3.templates/2.ParticipantsBox";
 
-interface NuevaSesionProps {
-  config?: sessionConfig;
-}
-
-export default function NuevaSesion({ config }: NuevaSesionProps) {
+export default function NuevaSesion() {
   // Prop de ejemplo
   const defaultConfig: sessionConfig = {
     title: "Ingresa tu titulo",
     plan: 0,
   };
 
-  if (!config) {
-    config = defaultConfig;
-  }
+  const config = defaultConfig;
 
   return (
     <div className="flex w-full flex-col gap-y-8 p-8">

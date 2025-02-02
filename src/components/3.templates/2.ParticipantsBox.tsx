@@ -1,4 +1,5 @@
 import ParticipantsSearch from "../0.atoms/6.ParticipantsSearch";
+import ParticipantsFilter from "@/components/1.molecules/6.ParticipantsFilter";
 
 export default function ParticipantsBox() {
   return (
@@ -7,7 +8,7 @@ export default function ParticipantsBox() {
       {/* Busqueda de participantes */}
       <ParticipantsSearch />
       {/* Filtros */}
-
+      <ParticipantsFilter />
       {/* Vistas */}
       {/* Resultados */}
     </div>

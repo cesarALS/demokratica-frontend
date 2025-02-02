@@ -1,21 +1,20 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import { useAuthContext } from "@/utils/AuthProvider";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { UserCircleIcon } from '@heroicons/react/24/solid';
+
 import LogoTitleAlHomepage from "../1.molecules/2.LogoTitleAlHomepage";
+
 import Link from "next/link";
 import demokraticaRoutes from "@/utils/routeUtils";
-import Cookies from "js-cookie"
-import { UserCircleIcon } from '@heroicons/react/24/solid'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLElement>(null);
   const dropdownButtonRef = useRef<HTMLButtonElement>(null);
-  
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const [showLogoutMessage, setShowLogoutMessage] = useState(false);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -37,18 +36,6 @@ export default function Header() {
     };
   }, []);
 
-  useEffect(() => {
-    const user = Cookies.get("user");
-    setIsLoggedIn(!!user);
-  }, [])
-
-  const handleLogout = () => {
-    Cookies.remove("user");
-
-    // Recargar la página
-    window.location.reload();    
-  }
-
   interface headerItem {
     name: string;
     link: string;
@@ -58,7 +45,10 @@ export default function Header() {
     demokraticaRoutes.ayuda,
     demokraticaRoutes.conocenos,
     demokraticaRoutes.planes,
-  ];
+  ];  
+
+  const [showLogoutMessage, setShowLogoutMessage] = useState(false);
+  const { user, handleLogin, handleLogout } = useAuthContext(); 
 
   return (
     // Header con todo y la navbar mobile
@@ -101,7 +91,7 @@ export default function Header() {
         {/* Botón de ingreso o de usuario */}
 
         <div className="justify-self-end sm:justify-self-end">
-          {isLoggedIn?           
+          {user?           
               <div className="w-full h-full flex items-center justify-center relative">
                 <button 
                   type="button" 
@@ -114,7 +104,7 @@ export default function Header() {
                 </button>
                 {showLogoutMessage && (
                   <div className="absolute top-full mt-2 px-2 py-2 bg-gray-100 text-black rounded-md border border-gray-400 shadow-lg text-center text-sm">
-                    {`Cerrar sesión de ${Cookies.get("user")}`}
+                    {`Cerrar sesión de ${user}`}
                   </div>                  
                 )}
               </div>

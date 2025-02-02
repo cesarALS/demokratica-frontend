@@ -3,15 +3,15 @@
 import LoginRegFormInput from "@/templates/1.molecules/0.LoginRegFormInput";
 
 import UseTerms from "../0.atoms/1.UseTerms";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import React from "react";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import { createUser } from "@/utils/apiUtils";
-import Cookies from "js-cookie"
 import { useRouter } from "next/navigation"
+import { useAuthContext } from "@/utils/AuthProvider";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Correo inválido").required("Se requiere correo"),
@@ -31,14 +31,7 @@ export default function SignInComn() {
   const closeModal = () => {setModalOpen(false)};
   
   const router = useRouter();
-
-  useEffect(() => {
-    // Verificar la cookie solo después de que el componente se haya montado
-    const us = Cookies.get("user");
-    if (us) {
-      router.push("/"); // Redirigir a la página de inicio si la cookie existe
-    }
-  }, [router]); 
+  const {handleLogin} = useAuthContext();
 
   return (
     
@@ -56,7 +49,7 @@ export default function SignInComn() {
           const response = await createUser(values.email, values.username, values.password);
           
           if (response.status === 201 && response.userInfo?.username) {
-            Cookies.set("user", response.userInfo?.username, { expires: 7 });
+            handleLogin(response.userInfo?.username);
             router.push("/");
           } else if (response.status === 409){
             alert("Correo ya asociado a otra cuenta");

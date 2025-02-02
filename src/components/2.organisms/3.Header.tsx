@@ -137,7 +137,7 @@ export default function Header() {
         animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         ref={dropdownRef}
-        className="border-1s border-b border-black bg-SecBlue sm:hidden"
+        className="border-1s overflow-hidden border-b border-black bg-SecBlue sm:hidden"
       >
         {headerItems.map((item, index) => (
           <Link

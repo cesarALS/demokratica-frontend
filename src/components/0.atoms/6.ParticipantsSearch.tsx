@@ -6,7 +6,7 @@ export default function ParticipantsSearch() {
     <div className="flex-no-wrap flex w-full items-center justify-between overflow-hidden rounded-2xl border border-2 border-AccentBlue bg-white">
       <input
         type="text"
-        className="flex w-full border-none bg-transparent text-center text-lg italic text-PrimBlack placeholder-PrimBlack outline-none"
+        className="flex w-full border-none bg-transparent text-center text-lg italic text-PrimBlack placeholder-PrimBlack outline-none hover:text-black hover:placeholder-black"
         placeholder="Busqueda"
       ></input>
       <button className="flex items-center justify-center border-l-2 border-AccentBlue bg-PrimBlue px-4 py-2 hover:bg-SecBlue">

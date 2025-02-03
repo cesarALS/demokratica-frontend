@@ -9,6 +9,7 @@ import { UserCircleIcon } from '@heroicons/react/24/solid';
 import LogoTitleAlHomepage from "../1.molecules/2.LogoTitleAlHomepage";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import demokraticaRoutes from "@/utils/routeUtils";
 
 export default function Header() {
@@ -35,7 +36,7 @@ export default function Header() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
+      
   interface headerItem {
     name: string;
     link: string;
@@ -52,19 +53,19 @@ export default function Header() {
 
   return (
     // Header con todo y la navbar mobile
-    <header className="bg-SecBlue h-[calc(1/12*100vh)] z-50">
+    <header className="z-50 h-[calc(1/12*100vh)] bg-SecBlue">
       {/* Header sin la navbar mobile */}
-      <div className="flex h-[calc(1/12*100vh)] w-full grid grid-cols-3 sm:grid-cols-6 md:grid-cols-12 items-center py-2 px-4">
+      <div className="flex grid h-[calc(1/12*100vh)] w-full grid-cols-3 items-center px-4 py-2 sm:grid-cols-6 md:grid-cols-12">
         {/* Mobile Menu Button */}
         <div className="sm:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex border-2 border-black p-1 flex-none items-center justify-center rounded-md bg-PrimBlue hover:scale-110"
+            className="flex flex-none items-center justify-center rounded-md border-2 border-black bg-PrimBlue p-1 hover:scale-110"
             ref={dropdownButtonRef}
           >
             <FontAwesomeIcon
               icon={faBars}
-              className="h-5 flex items-center text-black"
+              className="flex h-5 items-center text-black"
             />
           </button>
         </div>
@@ -76,7 +77,7 @@ export default function Header() {
         />
 
         {/* Nav Links Desktop*/}
-        <nav className="hidden sm:flex sm:col-start-4 sm:col-span-2 md:col-start-9 md:col-span-3 justify-between">
+        <nav className="hidden justify-between sm:col-span-2 sm:col-start-4 sm:flex md:col-span-3 md:col-start-9">
           {headerItems.map((item, index) => (
             <Link
               href={item.link}
@@ -112,33 +113,32 @@ export default function Header() {
               <Link
               href={demokraticaRoutes.login.link}
               type="submit"
-              className="px-1 flex text-center bg-PrimCreamCan border-2 border-black rounded-md text-sm lg:text-base xl:text-lg 2xl:text-xl hover:scale-110 2xl:border-3 2xl:px-2 xl:px-2 lg:px-2"
-              >
-                Ingresa
-              </Link>            
-          }
+              className="2xl:border-3 flex rounded-md border-2 border-black bg-PrimCreamCan px-1 text-center text-sm hover:scale-110 lg:px-2 lg:text-base xl:px-2 xl:text-lg 2xl:px-2 2xl:text-xl"
+            >
+              Ingresa
+            </Link>
+          )}
         </div>
-
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <nav
-          className="sm:hidden bg-SecBlue border-b border-1s border-black"
-          ref={dropdownRef}
-        >
-          {headerItems.map((item, index) => (
-            <Link
-              href={item.link}
-              key={index}
-              className="block px-4 py-2 hover:border-black hover:border-2"
-            >
-              {item.name}
-            </Link>
-          ))}
-        </nav>
-      )}    
-
+      <motion.nav
+        initial={false}
+        animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        ref={dropdownRef}
+        className="border-1s overflow-hidden border-b border-black bg-SecBlue sm:hidden"
+      >
+        {headerItems.map((item, index) => (
+          <Link
+            href={item.link}
+            key={index}
+            className="block px-4 py-2 hover:border-2 hover:border-black"
+          >
+            {item.name}
+          </Link>
+        ))}
+      </motion.nav>
     </header>
   );
 }

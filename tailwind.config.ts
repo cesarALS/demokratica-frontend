@@ -34,7 +34,7 @@ export default {
         PrimCreamCan: "#f2ca50",
         SecCreamCan: "#f2dfa2",
         AccentCreamCan: "#f2b600",
-        AccentCasablanca: "#f2b750",
+        PrimCasablanca: "#f2ac33",
       },
       // Escalas, sobre todo para las animaciones de tamaño
       scale: {

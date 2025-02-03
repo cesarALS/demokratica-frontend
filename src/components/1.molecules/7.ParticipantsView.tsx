@@ -2,7 +2,7 @@ import ButtonDropdownSelector from "@/templates/0.atoms/8.ButtonDropdownSelector
 
 export default function ParticipantsView() {
   const orderOptions = ["A-Z", "Z-A"];
-  const numberResults = ["10", "20", "50", "100"];
+  const numberResults = ["10", "20", "30", "40"];
 
   return (
     <div className="flex-no-wrap flex w-full items-center justify-between">

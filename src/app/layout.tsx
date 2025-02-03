@@ -7,6 +7,8 @@ import type { Metadata } from "next";
 import { PT_Sans, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 
+import { AuthProvider } from "@/utils/AuthProvider";
+
 // Fuentes para la App. Las importamos de Google fonts, haciendo uso de next/font para optimizaciones
 
 const ptSans = PT_Sans({
@@ -39,7 +41,9 @@ export default function RootLayout({
     className={`${ptSans.variable} ${sourceSans3.variable} font-sourcesans3`}
     >
       <body>
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

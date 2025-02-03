@@ -6,17 +6,13 @@ import LogoTitleAlHomepage from "../1.molecules/2.LogoTitleAlHomepage";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import demokraticaRoutes from "@/utils/routeUtils";
-import Cookies from "js-cookie";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
+import { useAuthContext } from "@/utils/AuthProvider";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLElement>(null);
   const dropdownButtonRef = useRef<HTMLButtonElement>(null);
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const [showLogoutMessage, setShowLogoutMessage] = useState(false);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -38,18 +34,6 @@ export default function Header() {
     };
   }, []);
 
-  useEffect(() => {
-    const user = Cookies.get("user");
-    setIsLoggedIn(!!user);
-  }, []);
-
-  const handleLogout = () => {
-    Cookies.remove("user");
-
-    // Recargar la página
-    window.location.reload();
-  };
-
   interface headerItem {
     name: string;
     link: string;
@@ -60,6 +44,9 @@ export default function Header() {
     demokraticaRoutes.conocenos,
     demokraticaRoutes.planes,
   ];
+
+  const [showLogoutMessage, setShowLogoutMessage] = useState(false);
+  const { user, handleLogout } = useAuthContext();   
 
   return (
     // Header con todo y la navbar mobile
@@ -102,7 +89,7 @@ export default function Header() {
         {/* Botón de ingreso o de usuario */}
 
         <div className="justify-self-end sm:justify-self-end">
-          {isLoggedIn ? (
+          {user ? (
             <div className="relative flex h-full w-full items-center justify-center">
               <button
                 type="button"
@@ -115,7 +102,7 @@ export default function Header() {
               </button>
               {showLogoutMessage && (
                 <div className="absolute top-full mt-2 rounded-md border border-gray-400 bg-gray-100 px-2 py-2 text-center text-sm text-black shadow-lg">
-                  {`Cerrar sesión de ${Cookies.get("user")}`}
+                  {`Cerrar sesión de ${user.username},\n ${user.email},\n plan: ${user.plan}\n`}
                 </div>
               )}
             </div>

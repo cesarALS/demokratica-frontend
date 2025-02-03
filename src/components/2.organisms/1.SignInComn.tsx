@@ -48,8 +48,8 @@ export default function SignInComn() {
         onSubmit={async (values) => {        
           const response = await createUser(values.email, values.username, values.password);
           
-          if (response.status === 201 && response.userInfo?.username) {
-            handleLogin(response.userInfo?.username);
+          if (response.status === 201 && response.jwtToken && response.user) {
+            handleLogin(response.jwtToken, response.user);
             router.push("/");
           } else if (response.status === 409){
             alert("Correo ya asociado a otra cuenta");

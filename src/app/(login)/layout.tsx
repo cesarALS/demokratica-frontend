@@ -15,15 +15,14 @@ const LoginRegisterLayout = ({
 }>) => {
 
   const router = useRouter();
-    const {user} = useAuthContext(); 
+  const {user} = useAuthContext(); 
 
   useEffect(() => {
     // Verificar la cookie solo después de que el componente se haya montado
-   
     if (user) {
       router.push("/"); // Redirigir a la página de inicio si la cookie existe
     }
-  }, [router]);  
+  }, [user, router]);  
 
   return (
     <main className="flex flex-1 flex-col overflow-y-auto w-full">

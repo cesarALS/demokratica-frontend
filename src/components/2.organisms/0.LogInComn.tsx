@@ -31,8 +31,8 @@ export default function LogInComn() {
       validationSchema={validationSchema}
       onSubmit={async (values) => {
         const response = await login(values.email, values.password);
-        if (response.status === 200 && response.userInfo?.username) {
-          handleLogin(response.userInfo?.username);
+        if (response.status === 200 && response.jwtToken && response.user) {
+          handleLogin(response.jwtToken, response.user);
           router.push("/");
         }
         else if (response.status === 403){

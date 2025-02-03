@@ -1,23 +1,21 @@
+"use client"
+
 import EditableTitle from "@/components/0.atoms/3.EditableTitle";
 import PlanShow from "@/components/0.atoms/4.PlanShow";
 import FechasConfigSesion from "@/components/1.molecules/5.FechasConfigSesion";
 import ConfDescription from "@/components/0.atoms/5.ConfDescription";
 import { sessionConfig } from "@/types/sessionConfig";
+import { useAuthContext } from "@/utils/AuthProvider";
 
-interface NuevaSesionProps {
-  config?: sessionConfig;
-}
-
-export default function NuevaSesion({ config }: NuevaSesionProps) {
-  // Prop de ejemplo
-  const defaultConfig: sessionConfig = {
+export default function NuevaSesion() {
+  
+  // Necesariamente debe haber un usuario para que se cargue esta página, por reglas del layout
+  const {user} = useAuthContext();
+  
+  const config: sessionConfig = {
     title: "Ingresa tu titulo",
-    plan: 0,
-  };
-
-  if (!config) {
-    config = defaultConfig;
-  }
+    plan: user?.plan || 0,    
+  } 
 
   return (
     <div className="flex w-full flex-col gap-y-8 p-8">

@@ -2,14 +2,16 @@
 
 import { createContext, useContext, useEffect, useState } from "react"
 import Cookies from "js-cookie";
+import { DemokraticaUser } from "@/types/auth";
+import { getUser } from "./apiUtils";
 
 interface AuthContextType {
-    user: string | null;
-    handleLogin: (user: string) => void;
+    user: DemokraticaUser | null;
+    handleLogin: (jwtToken: string, user: DemokraticaUser) => void;
     handleLogout: () => void;
 }
 
-const USER_COOKIE = "user"
+const TOKEN_COOKIE = "token"
 const AuthContext = createContext<AuthContextType | null>(null);
 
 // Hook que deben importar los componentes
@@ -20,40 +22,38 @@ export function useAuthContext(){
 }
 
 export function AuthProvider({ children }: {children: React.ReactNode}){
-    const [user, setUser] = useState<string | null >(null);
-
-    // Escucha cambios en la cookie con un intervalo
-    useEffect(() => {
-        const checkCookie = () => {
-        const newUser = Cookies.get(USER_COOKIE) || null;
-        if (newUser !== user) {
-            setUser(newUser);
-        }
-        };
-
-        const interval = setInterval(checkCookie, 2000); // Revisa cada 2 segundos
-        return () => clearInterval(interval);
-    }, [user]);
+    const [user, setUser] = useState<DemokraticaUser | null >(null);
     
-    // Escucha cambios en otra pestaña
-    useEffect(() => {
-        const handleStorageChange = () => {
-        setUser(Cookies.get(USER_COOKIE) || null);
-        };
+    useEffect(() => {        
+        const fetchData = async () => {
+            const authCookie = Cookies.get(TOKEN_COOKIE);      
+            if (authCookie){
+                const response = await getUser(authCookie);
+                if(response.status===200 && response.user){
+                    setUser(response.user);
+                }
+                else if(response.status===403){
+                    setUser(null);
+                    Cookies.remove(TOKEN_COOKIE);
+                }
+                else{
+                    console.log(response.error);
+                }
+            }
+        }
 
-        window.addEventListener("storage", handleStorageChange);
-        return () => window.removeEventListener("storage", handleStorageChange);
-    }, []);    
+        fetchData();
+    }, []);  
 
     // Función exportable para hacer Login
-    const handleLogin = (user: string) => {
-        Cookies.set(USER_COOKIE, user, { expires: 7 });
+    const handleLogin = (jwtToken: string, user: DemokraticaUser) => {
+        Cookies.set(TOKEN_COOKIE, jwtToken, { expires: 7 });
         setUser(user);
       };
     
     // Función exportable para hacer logout
     const handleLogout = () => {
-        Cookies.remove(USER_COOKIE);
+        Cookies.remove(TOKEN_COOKIE);
         setUser(null);
       };    
 

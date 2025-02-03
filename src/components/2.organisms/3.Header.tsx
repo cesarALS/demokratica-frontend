@@ -48,7 +48,7 @@ export default function Header() {
   ];  
 
   const [showLogoutMessage, setShowLogoutMessage] = useState(false);
-  const { user, handleLogin, handleLogout } = useAuthContext(); 
+  const { user, handleLogout } = useAuthContext(); 
 
   return (
     // Header con todo y la navbar mobile
@@ -104,7 +104,7 @@ export default function Header() {
                 </button>
                 {showLogoutMessage && (
                   <div className="absolute top-full mt-2 px-2 py-2 bg-gray-100 text-black rounded-md border border-gray-400 shadow-lg text-center text-sm">
-                    {`Cerrar sesión de ${user}`}
+                    {`Cerrar sesión de ${user.username},\n ${user.email},\n plan: ${user.plan}\n`}
                   </div>                  
                 )}
               </div>

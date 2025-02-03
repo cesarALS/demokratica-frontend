@@ -9,7 +9,7 @@ export default function FooterMadeBy() {
     },
     {
       name: "César Lemos",
-      link: "https://www.linkedin.com/in/c%C3%A9sar-lemos-b9990a150/",
+      link: "https://www.linkedin.com/in/césar-arthuro-lemos-b9990a150",
     },
     {
       name: "Andrés Rojas",

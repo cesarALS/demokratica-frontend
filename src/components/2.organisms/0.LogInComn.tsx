@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { linkStyles } from "@/utils/tailwindUtils";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import LoginRegFormInput from "@/templates/1.molecules/0.LoginRegFormInput";
 
 import { login } from "@/utils/apiUtils";
-import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useAuthContext } from "@/utils/AuthProvider";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Correo inválido").required("Se requiere correo"),
@@ -20,14 +20,7 @@ const validationSchema = Yup.object({
 export default function LogInComn() {
   
   const router = useRouter();
-
-  useEffect(() => {
-    // Verificar la cookie solo después de que el componente se haya montado
-    const us = Cookies.get("user");
-    if (us) {
-      router.push("/"); // Redirigir a la página de inicio si la cookie existe
-    }
-  }, [router]); 
+  const {handleLogin} = useAuthContext();
   
   return (
     <Formik
@@ -38,8 +31,8 @@ export default function LogInComn() {
       validationSchema={validationSchema}
       onSubmit={async (values) => {
         const response = await login(values.email, values.password);
-        if (response.status === 200 && response.userInfo?.username) {
-          Cookies.set("user", response.userInfo?.username, { expires: 7 });
+        if (response.status === 200 && response.jwtToken && response.user) {
+          handleLogin(response.jwtToken, response.user);
           router.push("/");
         }
         else if (response.status === 403){

@@ -1,96 +1,103 @@
+
+import { DemokraticaUser } from "@/types/auth";
+
 // No sé qué tan importante sea que esto esté acá o en environment variables.
 // Otro detalle: eventualemnte, el dominio del back y del front será el mismo
 // Y otro detalle: si de pronto el backend está corriendo en local, esta dirección habría que cambiarla por la dirección donde está corriendo el back en local
 const backendAddress = "https://demokraticabackend.onrender.com";
+
+const apis = {
+  createUser: '/unase',
+  login: '/ingrese',
+  getUser: '/token-info'
+}
 
 interface ApiReturns {
   status: number,
   error?: string,
 }
 
-interface ApiCreateUserReturns extends ApiReturns {
-  userInfo: {username: string, email: string} | null
+interface ApiUserReturns extends ApiReturns {
+  user: DemokraticaUser | null,
+  jwtToken?: string
 }
 
-async function createUser(email: string, username: string, password: string): Promise<ApiCreateUserReturns> {
+async function createUser(email: string, username: string, password: string): Promise<ApiUserReturns> {
     
-    // Nota: Están muy expuestas las contraseñas. Deberían ir en el body
-    const url = `${backendAddress}/unase?email=${encodeURIComponent(email)}&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+  // Nota: Están muy expuestas las contraseñas. Deberían ir en el body
+  const url = `${backendAddress}${apis.createUser}`
     
-    try {
-        const res = await fetch(url, {
-            method: "POST"
-        });
-            
-        if (!res.ok){
-          return {
-            status: res.status,
-            userInfo: null
-          }
-        }
-        
-        const params = await res.json();
-        
-        return {
-          status: res.status,
-          userInfo: {
-            username: params.username,
-            email: params.email
-          }
-        };
+  const body = {
+    email: email,
+    username: username,
+    password: password
+  }
 
-    } catch (error) {
-      if (error instanceof Error){        
-        return {status: 500, error: error.message, userInfo: null};
-      } else {
-        console.error(error);
-        return {status: 500, error: "Raro error en el servidor", userInfo: null};        
-      }
-    }    
+  const headers = {
+    "Content-Type": "application/json"    
+  }
+
+  return fetchAuth(url, "POST", body, headers);
+
 }
 
-interface ApiLoginReturns extends ApiReturns {
-  userInfo: {email: string, username: string} | null
+async function login(email: string, password: string): Promise<ApiUserReturns> {
+    
+  // Nota: Están muy expuestas las contraseñas. Deberían ir en el body. La solicitud debería ser GET
+  const url = `${backendAddress}${apis.login}?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;  
+  
+  return fetchAuth(url, "POST");
+
 }
 
-async function login(email: string, password: string): Promise<ApiLoginReturns> {
-    
-    // Nota: Están muy expuestas las contraseñas. Deberían ir en el body. La solicitud debería ser GET
-  const url = `${backendAddress}/ingrese?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
+async function getUser(jwtToken: string){
 
-  console.log(url);
+  const url = `${backendAddress}${apis.getUser}`
+  const headers = {
+    "Authorization": `Bearer ${jwtToken}`
+  }
+
+  return fetchAuth(url, "GET", undefined, headers);
+
+}
+
+async function fetchAuth(url: string, method: string, body?: object, headers?: object){    
   
   try {
-      const res = await fetch(url, {
-          method: "POST"
-      });
-          
-      if (!res.ok){
-        console.log("Aquí")
-        return {
-          status: res.status,
-          userInfo: null
-        }
-      } 
-      
-      const params = await res.json();
-
+    const res = await fetch(url, {
+        method: method,
+        body: body ? JSON.stringify(body) : undefined,
+        headers: headers ? (headers as HeadersInit) : undefined
+    });
+        
+    if (!res.ok){
       return {
         status: res.status,
-        userInfo: {
-          username: params.username,
-          email: params.email,
-        }
-      };
+        error: res.statusText,
+        user: null,        
+      }
+    } 
+    
+    const params = await res.json();
+
+    return {
+      status: res.status,
+      user: {
+        username: params.username,
+        email: params.email,
+        plan: 0, //Esto se debe cambiar cuando se actualice la BD        
+      },
+      jwtToken: params.jwtToken || null,
+    };
 
   } catch (error) {
     if (error instanceof Error){        
-      return {status: 500, error: error.message, userInfo: null};
+      return {status: 500, error: error.message, user: null};
     } else {
       console.error(error);
-      return {status: 500, error: "Raro error en el servidor", userInfo: null};        
+      return {status: 500, error: "Raro error en el servidor", user: null};        
     }
   }    
-}
+};
 
-export { createUser, login };
+export { createUser, login, getUser };

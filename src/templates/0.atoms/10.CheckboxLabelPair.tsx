@@ -8,7 +8,7 @@ export default function CheckboxLabelPair({
   id,
 }: CheckboxLabelPairProps) {
   return (
-    <div className="flex items-center justify-center gap-x-2">
+    <div className="flex items-center justify-center gap-x-1">
       <input type="checkbox" className="h-4 w-4" id={id}></input>
       <label
         htmlFor={id}

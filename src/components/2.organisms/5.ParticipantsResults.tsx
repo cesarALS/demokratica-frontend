@@ -1,5 +1,6 @@
 import ParticipantsResultsInteractions from "./6.ParticipantsResultsInteractions";
 import ParticipantsResultsSelector from "@/components/1.molecules/8.ParticipantsResultsSelector";
+import ParticipantsResultsBox from "@/components/2.organisms/7.ParticipantsResultsBox";
 
 export default function ParticipantsResults() {
   return (
@@ -8,7 +9,10 @@ export default function ParticipantsResults() {
       <ParticipantsResultsInteractions />
       {/* Selectores */}
       <ParticipantsResultsSelector />
-      {/*  */}
+      {/* UsersResultsBox */}
+      <ParticipantsResultsBox />
+      {/* PageNavBar */}
+      <div></div>
     </div>
   );
 }

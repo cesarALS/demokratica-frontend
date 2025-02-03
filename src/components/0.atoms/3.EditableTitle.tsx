@@ -38,7 +38,7 @@ export default function EditableTitle({
   }, [isEditing]);
 
   return (
-    <div className="flex items-center justify-between gap-x-4 rounded-lg border border-2 border-black bg-white px-6 py-2">
+    <div className="flex items-center justify-between gap-x-4 rounded-lg border border-2 border-black bg-white px-6 py-2 sm:max-w-[50%]">
       {/* Si se esta editanto se cambia el label por un input */}
       {isEditing ? (
         <input

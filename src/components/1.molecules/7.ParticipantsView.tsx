@@ -10,6 +10,8 @@ export default function ParticipantsView() {
         buttonClassName="border-y-2 border-AccentBlue border-l-2 rounded-tl-2xl"
         listClassName="border-x-2 border-PrimBlack border-b-2 rounded-b-2xl"
         checklistItems={orderOptions}
+        property="orderOptions"
+        stateToParent={()=>{}}
       />
       {/* separator */}
       <div className="h-full border-r-2 border-AccentBlue bg-AccentBlue"></div>
@@ -17,6 +19,8 @@ export default function ParticipantsView() {
         buttonClassName="border-y-2 border-AccentBlue border-r-2 rounded-tr-2xl"
         listClassName="border-x-2 border-PrimBlack border-b-2 rounded-b-2xl"
         checklistItems={numberResults}
+        property="numberResults"        
+        stateToParent={()=>{}}        
       />
     </div>
   );

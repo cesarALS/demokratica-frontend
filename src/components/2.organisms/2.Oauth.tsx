@@ -14,7 +14,7 @@ export default function Oauth( { title, question, link, route }: OauthProps ) {
   return (
     <div className="flex w-full sm:w-[45%] justify-start flex-col self-start gap-y-6">
       {/* Registrate con */}
-      <div className="text-sm">{title}</div>
+      <div className="flex items-center justify-center text-sm">{title}</div>
       {/* Botones de google y facebook */}
       <div className="flex justify-around text-PrimGray">
         <Link
@@ -22,12 +22,6 @@ export default function Oauth( { title, question, link, route }: OauthProps ) {
           className="flex justify-center items-center h-24 w-24 rounded-lg bg-SecGray hover:text-white"
         >
           <FontAwesomeIcon icon={faGoogle} className="h-16" />
-        </Link>
-        <Link
-          href="/"
-          className="flex justify-center items-center h-24 w-24 rounded-lg bg-SecGray hover:text-AccentBlue"
-        >
-          <FontAwesomeIcon icon={faFacebook} className="h-16" />
         </Link>
       </div>
       {/* Aún no tienes una cuenta? Registrate*/}

@@ -12,6 +12,8 @@ interface ButtonDropdownSelectorProps {
   listClassName?: string;
   checklistItems?: string[];
   initialSelectedItem?: number;
+  property: string;
+  stateToParent: (property: string, value: string) => void;
 }
 
 export default function ButtonDropdownSelector({
@@ -19,6 +21,8 @@ export default function ButtonDropdownSelector({
   listClassName,
   checklistItems,
   initialSelectedItem = 0,
+  property,
+  stateToParent
 }: ButtonDropdownSelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(initialSelectedItem);
@@ -29,9 +33,10 @@ export default function ButtonDropdownSelector({
     checklistItems = ["Item 1", "Item 2", "Item 3"];
   }
 
-  const handleSelection = (index: number) => {
+  const handleSelection = (index: number, item: string) => {
     setSelectedItem(index);
     setIsOpen(false);
+    stateToParent(property, item); // Pasar el estado al padre
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -85,7 +90,7 @@ export default function ButtonDropdownSelector({
             <li
               key={index}
               className="flex items-center gap-2 p-2 text-PrimBlack hover:bg-SecGray hover:text-black"
-              onClick={() => handleSelection(index)}
+              onClick={() => {handleSelection(index, item)}}
             >
               {item}
             </li>

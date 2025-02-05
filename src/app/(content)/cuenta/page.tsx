@@ -2,6 +2,9 @@
 
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { useAuthContext } from "@/utils/AuthProvider";
+import { deleteAccount  } from "@/utils/apiUtils";
+
+import Cookies from "js-cookie";
 
 export default function Cuenta() {
     const {user} = useAuthContext();
@@ -16,7 +19,7 @@ export default function Cuenta() {
                     <UserCircleIcon className="h-32 w-32 text-PrimGray" />
                 </div>
                 <div className = "flex flex-col gap-y-6 px-4">
-                    <AccountButton text = {!!user ? user?.username : "error"}/>
+                    <AccountButton text = {!!user ? user?.username : "error"} />
                     <AccountButton text = {"Cambiar contraseña"}/>
                     <AccountButton text = {"Eliminar cuenta"}/>
                 </div>
@@ -26,13 +29,21 @@ export default function Cuenta() {
 }
 
 interface AccountButtonProps {
-    text: string
+    text: string,
+    function?: () => void
 }
 
 const AccountButton = ({text}: AccountButtonProps) => {
+    const { user, handleLogout } = useAuthContext(); 
+
+    const testButtonClick = () => {
+        deleteAccount(user.email, "123", Cookies.get("token"));
+        handleLogout()
+    }
+
     return (
-        <div className = "flex w-full justify-center text-2xl py-3 font-bold italic border-1.5 border-PrimBlack bg-ThirdGray rounded-lg">
+        <button className = "flex w-full justify-center text-2xl py-3 font-bold italic border-1.5 border-PrimBlack bg-ThirdGray rounded-lg hover:scale-110" onClick = {testButtonClick}>
             {text}
-        </div>
+        </button>
     );
 }

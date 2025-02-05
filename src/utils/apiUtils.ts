@@ -11,7 +11,8 @@ const apis = {
   createUser: '/unase',
   login: '/ingrese',
   getUser: '/token-info',
-  deleteAccount: '/users'
+  deleteAccount: '/users',
+  changeUsername: '/users'
 }
 
 interface ApiReturns {
@@ -83,9 +84,9 @@ async function getUser(jwtToken: string){
 
 }
 
-async function deleteAccount(password: string, jwtToken: string) {
+async function deleteAccount(email: string, password: string, jwtToken: string) {
   
-  const url = `${backendAddress}${apis.deleteAccount}/{email}`
+  const url = `${backendAddress}${apis.deleteAccount}/${email}`
   const headers = {
     "Authorization": `Bearer ${jwtToken}`,
     "Content-Type": "application/json"
@@ -100,6 +101,26 @@ async function deleteAccount(password: string, jwtToken: string) {
   }
   
   return generalFetch(url, "DELETE", data, body, headers);
+
+}
+
+async function changeUsername(email: string, jwtToken: string, newUsername: string, password: string) {
+
+  const url = `${backendAddress}${apis.changeUsername}/${email}`
+  const headers = {
+    "Authorization": `Bearer ${jwtToken}`,
+    "Content-Type": "application/json"
+  }
+  const body = {
+    newUsername: newUsername,
+    password: password
+  }
+
+  const data = (res: any) => {
+    return res.statusText
+  }
+  
+  return generalFetch(url, "PUT", data, body, headers);
 
 }
 
@@ -131,4 +152,4 @@ async function generalFetch<T>(
   }
 }
 
-export { createUser, login, getUser, deleteAccount };
+export { createUser, login, getUser, deleteAccount, changeUsername };

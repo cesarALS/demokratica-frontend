@@ -3,8 +3,13 @@
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { useAuthContext } from "@/utils/AuthProvider";
 import { deleteAccount  } from "@/utils/apiUtils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faFloppyDisk } from "@fortawesome/free-regular-svg-icons";
 
 import Cookies from "js-cookie";
+import { useEffect, useRef, useState } from "react";
+import EditableTitle from "@/components/0.atoms/3.EditableTitle";
 
 export default function Cuenta() {
     const {user} = useAuthContext();
@@ -22,7 +27,7 @@ export default function Cuenta() {
                     {!!user ? user.email : "error"}
                 </div>
                 <div className = "flex flex-col gap-y-6 px-4">
-                    <AccountButton text = {!!user ? user?.username : "error"} />
+                    <UsernameField/> 
                     <AccountButton text = {"Cambiar contraseña"}/>
                     <AccountButton text = {"Eliminar cuenta"}/>
                 </div>
@@ -30,6 +35,67 @@ export default function Cuenta() {
         </div>
     )
 }
+
+
+
+
+const UsernameField = () => {
+    const { user } = useAuthContext();
+    const [isEditing, setIsEditing] = useState(false)
+    const [currentUsername, setCurrentUsername] = useState(!!user ? user.username : "error")
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (isEditing && inputRef.current) {
+          inputRef.current.focus();
+        }
+      }, [isEditing]);
+    
+    const toogleEditing = () => {
+        //Si estaba editando antes de llamar a esta función significa que presionó guardar y hay que llamar a la API
+        //para cambiar el nombre de usuario
+        if (isEditing) {
+            //TODO: llamar a la API para cambiar el nombre de usuario aquí
+        }
+        setIsEditing(!isEditing)
+    }
+
+        return(
+            <div className = "flex flex-row w-full justify-between text-2xl py-3 px-2 font-bold italic border-1.5 border-PrimBlack bg-ThirdGray rounded-lg">
+                
+                {isEditing ? (
+                        <input
+                        ref={inputRef}
+                        type="text"
+                        value={currentUsername}
+                        onChange={(e) => setCurrentUsername(e.target.value)}
+                        className="w-full rounded-lg border text-2xl focus:outline-none focus:ring-1 focus:ring-PrimBlack"
+                        />
+                    ) : (
+                        <span className="text-2xl">{currentUsername}</span>
+                )}
+
+                <button className = "flex items-center justify-center rounded-full border-2 border-PrimBlue bg-PrimBlue p-2 hover:bg-SecBlue" onClick = {toogleEditing}>
+                    {isEditing ? (
+                            
+                            <FontAwesomeIcon
+                                className="size-6 text-white"
+                                icon={faFloppyDisk}
+                            />
+
+                        ) : (
+                            
+                            <FontAwesomeIcon className="size-6 text-white" icon={faPen} />
+
+                    )}
+                </button>
+
+            </div>
+        )
+}
+
+
+
 
 interface AccountButtonProps {
     text: string,

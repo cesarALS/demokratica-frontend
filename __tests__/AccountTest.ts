@@ -1,4 +1,4 @@
-import {deleteAccount, createUser, getUser} from "../src/utils/apiUtils"
+import {deleteAccount, createUser, getUser, changeUsername } from "../src/utils/apiUtils"
 /*
     Este conjunto de pruebas crea un usuario de prueba en la BD (la real),
     lee el contenido de su JWT consultando al backend y luego lo elimina
@@ -11,9 +11,11 @@ import {deleteAccount, createUser, getUser} from "../src/utils/apiUtils"
     bien hechas y funcionales
 */
 
-let jwtToken: string = "";
+let jwtToken: string = ""
+let updatedJwtToken: string = ""
 const testEmail = "test@outlook.com"
-const testUsername = "test"
+const testUsername = "testName"
+const newTestUsername = "newTestName"
 const testPassword = "test"
 
 test("Crear usuario de prueba", async () => {
@@ -24,6 +26,7 @@ test("Crear usuario de prueba", async () => {
     const res = await createUser(email, username, password)
     expect(res.status).toBe(201)
 
+    //Vamos a necesitar el JWT para las demás pruebas de la suite, que interactúan con APIs protegias
     jwtToken = (res.data?.jwtToken === undefined) ? "error" : res.data.jwtToken
 })
 
@@ -37,8 +40,33 @@ test("Leer el JWT del usuario de prueba", async () => {
     expect(user?.email).toBe(testEmail)
 })
 
-test("Borrar el usuario de prueba", async () => {
-    const res = await deleteAccount(testEmail, testUsername, jwtToken)
+test("Cambiar el nombre del usuario de prueba", async () => {
+    const res = await changeUsername(testEmail, jwtToken, newTestUsername, testPassword)
+
+    expect(res.status).toBe(200)
+
+    //TODO: inicalizar el valor del nuevo JWT con lo que devuelve changeUsername
+})
+
+test("Enviar JWT anterior al cambio de nombre de usuario", async() => {
+    const res = await getUser(jwtToken)
+
+    //El servidor no debería considerar el token válido por no corresponderse con el username asociado al correo
+    //y por lo tanto no debería permitir el acceso
+    expect(res.status).toBe(403)
+})
+
+test("Enviar JWT actualizado de cambio de nombre de usuario", async () => {
+    const res = await getUser(updatedJwtToken)
+
+    expect(res.status).toBe(200)
+
+    const user = res.data?.user
+    expect(user?.username).toBe(newTestUsername)
+})
+
+test("Borrar el usuario de prueba con nuevo nombre", async () => {
+    const res = await deleteAccount(testEmail, testPassword, updatedJwtToken)
 
     expect(res.status).toBe(200)
 })

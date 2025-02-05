@@ -29,8 +29,8 @@ export function AuthProvider({ children }: {children: React.ReactNode}){
             const authCookie = Cookies.get(TOKEN_COOKIE);      
             if (authCookie){
                 const response = await getUser(authCookie);
-                if(response.status===200 && response.user){
-                    setUser(response.user);
+                if(response.status===200 && response.data?.user){
+                    setUser(response.data.user);
                 }
                 else if(response.status===403){
                     setUser(null);

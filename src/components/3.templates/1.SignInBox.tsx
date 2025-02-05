@@ -15,7 +15,7 @@ export default function SignInBox() {
         <div className="border-2 border-SecGray w-40 my-6 rounded-lg sm:h-40 sm:w-0 "></div>
         {/* Parte derecha formulario login */}
         <Oauth
-          title="O regístrate con:"
+          title="O regístrate con Google:"
           question="¿Ya tienes una cuenta?"
           link="Inicia sesión"
           route={demokraticaRoutes.login.link}

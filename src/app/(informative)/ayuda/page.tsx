@@ -2,9 +2,9 @@
 
 const Manual = () => {
     return (
-        <>
-            <h1>Manual Page</h1>
-        </>
+        <div className="flex items-center justify-center w-full p-2 gap-3">
+            <h1 className="font-bold text-xl">Cómo usar nuestro servicio</h1>
+        </div>
     )
 }
 

@@ -10,9 +10,13 @@ import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { useAuthContext } from "@/utils/AuthProvider";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);    
+
+  const [ isOpenAccountInfo, setOpenAccountInfo ] = useState(false);
+  const { user, handleLogout } = useAuthContext(); 
+  
   const dropdownRef = useRef<HTMLElement>(null);
-  const dropdownButtonRef = useRef<HTMLButtonElement>(null);
+  const dropdownButtonRef = useRef<HTMLButtonElement>(null);  
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -24,6 +28,7 @@ export default function Header() {
       )
     ) {
       setIsOpen(false);
+      setOpenAccountInfo(false);
     }
   };
 
@@ -32,7 +37,7 @@ export default function Header() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, []);    
 
   interface headerItem {
     name: string;
@@ -45,9 +50,6 @@ export default function Header() {
     demokraticaRoutes.planes,
   ];
 
-  const [showLogoutMessage, setShowLogoutMessage] = useState(false);
-  const { user, handleLogout } = useAuthContext();   
-
   return (
     // Header con todo y la navbar mobile
     <header className="z-50 h-[calc(1/12*100vh)] bg-SecBlue">
@@ -58,7 +60,7 @@ export default function Header() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="flex flex-none items-center justify-center rounded-md border-2 border-black bg-PrimBlue p-1 hover:scale-110"
-            ref={dropdownButtonRef}
+            ref = {dropdownButtonRef}
           >
             <FontAwesomeIcon
               icon={faBars}
@@ -94,16 +96,43 @@ export default function Header() {
               <button
                 type="button"
                 className="2xl:border-3 flex justify-center rounded-md border-2 border-black bg-PrimCreamCan text-sm hover:scale-110 lg:px-2 lg:text-base xl:px-2 xl:text-lg 2xl:px-2 2xl:text-xl"
-                onMouseEnter={() => setShowLogoutMessage(true)}
-                onMouseLeave={() => setShowLogoutMessage(false)}
-                onClick={handleLogout}
+                onClick={() => { setOpenAccountInfo(!isOpenAccountInfo) }}
+                ref={dropdownButtonRef}
               >
                 <UserCircleIcon className="flex h-8 w-6 justify-center text-black" />
               </button>
-              {showLogoutMessage && (
-                <div className="absolute top-full mt-2 rounded-md border border-gray-400 bg-gray-100 px-2 py-2 text-center text-sm text-black shadow-lg">
-                  {`Cerrar sesión de ${user.username},\n ${user.email},\n plan: ${user.plan}\n`}
-                </div>
+              {isOpenAccountInfo && (
+                <motion.nav
+                  initial={false}
+                  animate={{ height: isOpenAccountInfo ? "auto" : 0, opacity: isOpenAccountInfo ? 1 : 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}                    
+                  className="absolute top-full right-0 flex flex-col min-w-[60vw] md:min-w-[25vw] text-black bg-PrimGray mt-2 p-2 rounded-2xl border-2 border-black"
+                  ref = {dropdownRef}
+                >
+                  <div className="flex w-full text-end bg-PrimGray w-fullrounded-xl">
+                    <p className="w-full p-2 text-ls font-bold">{`Hola, ${user.username}`}</p>
+                  </div>
+                  <div className="rounded-xl">                    
+                    <Link 
+                      href={demokraticaRoutes.cuenta.link}
+                      className="flex w-full items-center justify-end p-2 rounded-t-xl text-ls bg-ThirdGray hover:bg-SecGray hover:cursor"                                             
+                    >
+                      Gestionar Cuenta
+                    </Link>                     
+                    <Link 
+                      href={demokraticaRoutes.centroUsuario.link}
+                      className="flex w-full items-center justify-end p-2 text-ls bg-ThirdGray hover:bg-SecGray hover:cursor"                                             
+                    >
+                      Mirar Sesiones
+                    </Link>                                                            
+                    <button                        
+                      onClick={handleLogout}
+                      className="flex w-full items-center justify-end p-2 rounded-b-xl text-ls bg-ThirdGray hover:bg-SecGray hover:cursor"
+                    >
+                      Cerrar Sesión
+                    </button>
+                  </div>                              
+                </motion.nav>
               )}
             </div>
           ) : (
@@ -122,9 +151,9 @@ export default function Header() {
       <motion.nav
         initial={false}
         animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        ref={dropdownRef}
+        transition={{ duration: 0.3, ease: "easeInOut" }}        
         className="border-1s overflow-hidden border-b border-black bg-SecBlue sm:hidden"
+        ref={dropdownRef}
       >
         {headerItems.map((item, index) => (
           <Link

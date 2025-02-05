@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { DemokraticaUser } from "@/types/auth";
 
@@ -18,43 +19,24 @@ interface ApiReturns {
   error?: string,
 }
 
-interface ApiUserReturns extends ApiReturns {
+interface ApiUser {  
   user: DemokraticaUser | null,
   jwtToken?: string
 }
 
-async function deleteAccount(email: string, password: string, jwtToken: string) {
-  
-  const url = `${backendAddress}${apis.deleteAccount}/{email}`
-  const headers = {
-    "Authorization": `Bearer ${jwtToken}`,
-    "Content-Type": "application/json"
-  }
+interface ApiUserReturns extends ApiReturns {  
+  data?: ApiUser
+}
 
-  const body = {
-    password: password
-  }
-
-  try {
-    const res = await fetch(url, {
-      method: 'DELETE',
-      headers: headers,
-      body: JSON.stringify(body)
-    });
-
-    return {
-      status: res.status,
-      error: res.statusText
-    }
-    
-  } catch (error) {
-    if (error instanceof Error){        
-      return {status: 500, error: error.message, user: null};
-    } else {
-      console.error(error);
-      return {status: 500, error: "Raro error en el servidor", user: null};        
-    }
-  }
+const userReturn = (resParams: any) => {
+  return {
+    user: {
+      username: resParams.username,
+      email: resParams.email,
+      plan: 0, //Esto se debe cambiar cuando se actualice la BD        
+    },
+    jwtToken: resParams.jwtToken || null,      
+  }  
 }
 
 async function createUser(email: string, username: string, password: string): Promise<ApiUserReturns> {
@@ -71,7 +53,7 @@ async function createUser(email: string, username: string, password: string): Pr
     "Content-Type": "application/json"    
   }
 
-  return fetchAuth(url, "POST", body, headers);
+  return generalFetch(url, "POST", userReturn, body, headers);
 
 }
 
@@ -86,7 +68,7 @@ async function login(email: string, password: string): Promise<ApiUserReturns> {
     "Content-Type": "application/json"
   }
 
-  return fetchAuth(url, "POST", body, headers);
+  return generalFetch(url, "POST", userReturn, body, headers);
 
 }
 
@@ -96,48 +78,57 @@ async function getUser(jwtToken: string){
   const headers = {
     "Authorization": `Bearer ${jwtToken}`
   }
-
-  return fetchAuth(url, "GET", undefined, headers);
+  
+  return generalFetch(url, "GET", userReturn, undefined, headers);
 
 }
 
-async function fetchAuth(url: string, method: string, body?: object, headers?: object){    
+async function deleteAccount(password: string, jwtToken: string) {
   
+  const url = `${backendAddress}${apis.deleteAccount}/{email}`
+  const headers = {
+    "Authorization": `Bearer ${jwtToken}`,
+    "Content-Type": "application/json"
+  }
+
+  const body = {
+    password: password
+  }
+
+  const data = (res: any) => {
+    return res.statusText
+  }
+  
+  return generalFetch(url, "DELETE", data, body, headers);
+
+}
+
+async function generalFetch<T>(
+  url: string, 
+  method: string, 
+  transformData: (res: any) => T, 
+  body?: object, 
+  headers?: HeadersInit
+): Promise<{ status: number; data?: T; error?: string }> {
   try {
     const res = await fetch(url, {
-        method: method,
-        body: body ? JSON.stringify(body) : undefined,
-        headers: headers ? (headers as HeadersInit) : undefined
+      method: method,
+      body: body ? JSON.stringify(body) : undefined,
+      headers: headers ? headers: undefined
     });
-        
-    if (!res.ok){
-      return {
-        status: res.status,
-        error: res.statusText,
-        user: null,        
-      }
-    } 
-    
-    const params = await res.json();
 
-    return {
-      status: res.status,
-      user: {
-        username: params.username,
-        email: params.email,
-        plan: 0, //Esto se debe cambiar cuando se actualice la BD        
-      },
-      jwtToken: params.jwtToken || null,
-    };
+    if (!res.ok) {
+      return { status: res.status, error: res.statusText };
+    }
+
+    const params = await res.json();
+    const returnData = transformData(params);
+
+    return { status: res.status, data: returnData };
 
   } catch (error) {
-    if (error instanceof Error){        
-      return {status: 500, error: error.message, user: null};
-    } else {
-      console.error(error);
-      return {status: 500, error: "Raro error en el servidor", user: null};        
-    }
-  }    
-};
+    return { status: 500, error: error instanceof Error ? error.message : "Error inesperado" };
+  }
+}
 
 export { createUser, login, getUser, deleteAccount };

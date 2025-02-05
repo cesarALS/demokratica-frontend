@@ -13,6 +13,10 @@ const demokraticaRoutes = {
   // TODO Importantes para el usuario
   cookies: { name: "Cookies", link: "/cookies" },
   userTerms: { name: "Términos de uso", link: "/terminos-de-uso" },
+  //Contenido
+  centroUsuario: {name: "Centro de Usuario", link: "/centroUsuario"},
+  cuenta: {name: "Gestión de cuenta", link: "/cuenta"},
+  nuevaSesion: {name: "Crear Sesiones", link: "/nuevaSesion"},
 };
 
 export default demokraticaRoutes;

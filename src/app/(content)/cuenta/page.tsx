@@ -11,12 +11,15 @@ export default function Cuenta() {
 
     return (
         <div className="flex justify-center w-full text-center mt-6">
-            <div className="flex flex-col gap-y-8 w-[80%] sm:w-[20%] p-4 pb-10 mt-10 bg-white border-2 border-PrimBlack rounded-lg">
+            <div className="flex flex-col gap-y-8 w-[55%] sm:w-[45%] lg:w-[35%] xl:w-[25%] p-4 pb-10 mt-10 bg-white border-2 border-PrimBlack rounded-lg">
                 <div className = "text-3xl pt-4">
                     Gestiona tu cuenta
                 </div>
                 <div className = "flex justify-center">
                     <UserCircleIcon className="h-32 w-32 text-PrimGray" />
+                </div>
+                <div className = "">
+                    {!!user ? user.email : "error"}
                 </div>
                 <div className = "flex flex-col gap-y-6 px-4">
                     <AccountButton text = {!!user ? user?.username : "error"} />
@@ -42,7 +45,7 @@ const AccountButton = ({text}: AccountButtonProps) => {
     }
 
     return (
-        <button className = "flex w-full justify-center text-2xl py-3 font-bold italic border-1.5 border-PrimBlack bg-ThirdGray rounded-lg hover:scale-110" onClick = {testButtonClick}>
+        <button className = "flex w-full justify-center text-2xl py-3 px-2 font-bold italic border-1.5 border-PrimBlack bg-ThirdGray rounded-lg hover:scale-110" onClick = {testButtonClick}>
             {text}
         </button>
     );

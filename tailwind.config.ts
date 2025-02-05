@@ -1,10 +1,6 @@
 import type { Config } from "tailwindcss";
 
 export default {
-  // Aquí toca poner las clases de hover:scale, sumado a las que se pongan en scale: dentro de extend, cuando no estén predeterminadas por tailwind
-  safelist: [
-    "hover:scale-115", // Asegura que estas clases siempre se incluyan
-  ],
   content: [
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/templates/**/*.{js,ts,jsx,tsx,mdx}",
@@ -18,7 +14,6 @@ export default {
       fontFamily: {
         // Aquí especificamos las fuentes que deseamos. Usar font-<nombre_variable> Ej. font-ptsans
         // Las fuentes deben estar importadas en el layout.tsx principal
-        ptsans: ["var(--font-ptsans)"],
         sourcesans3: ["var(--font-sourcesans3)"],
       },
       colors: {
@@ -35,10 +30,6 @@ export default {
         SecCreamCan: "#f2dfa2",
         AccentCreamCan: "#f2b600",
         PrimCasablanca: "#f2ac33",
-      },
-      // Escalas, sobre todo para las animaciones de tamaño
-      scale: {
-        115: "1.15",
       },
       // La propiedad del tamaño de los bordes
       borderWidth: {

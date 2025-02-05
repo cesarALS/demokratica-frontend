@@ -4,19 +4,14 @@ aparecerá en todas las páginas de la app.
 */ 
 
 import type { Metadata } from "next";
-import { PT_Sans, Source_Sans_3 } from "next/font/google";
+import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 
 import { AuthProvider } from "@/utils/AuthProvider";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 // Fuentes para la App. Las importamos de Google fonts, haciendo uso de next/font para optimizaciones
-
-const ptSans = PT_Sans({
-  variable: "--font-ptsans",
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap"
-});
 
 const sourceSans3 = Source_Sans_3({
   variable: "--font-sourcesans3",
@@ -26,7 +21,7 @@ const sourceSans3 = Source_Sans_3({
 
 export const metadata: Metadata = {
   title: "Demokratica",
-  description: "App para decisiones grupales",
+  description: "Demokratica facilita la toma de decisiones grupales",
 };
 
 export default function RootLayout({
@@ -35,16 +30,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html 
-    lang="es"
-    // Al final se especifica la variable que se usará por defecto en el proyecto, con font-<fuente>
-    className={`${ptSans.variable} ${sourceSans3.variable} font-sourcesans3`}
-    >
-      <body>
-        <AuthProvider>
-          {children}
-        </AuthProvider>
-      </body>
-    </html>
+    <AuthProvider>
+      <html 
+        lang="es"      
+        className={`${sourceSans3.variable} font-sourcesans3`}
+      >
+        <body>            
+          <Suspense fallback={ <Loading />}>
+            {children}
+          </Suspense>                        
+        </body>
+      </html>
+    </AuthProvider>   
   );
 }

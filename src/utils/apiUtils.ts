@@ -9,7 +9,8 @@ const backendAddress = "https://demokraticabackend.onrender.com";
 const apis = {
   createUser: '/unase',
   login: '/ingrese',
-  getUser: '/token-info'
+  getUser: '/token-info',
+  deleteAccount: '/users'
 }
 
 interface ApiReturns {
@@ -22,9 +23,42 @@ interface ApiUserReturns extends ApiReturns {
   jwtToken?: string
 }
 
+async function deleteAccount(email: string, password: string, jwtToken: string) {
+  
+  const url = `${backendAddress}${apis.deleteAccount}/{email}`
+  const headers = {
+    "Authorization": `Bearer ${jwtToken}`,
+    "Content-Type": "application/json"
+  }
+
+  const body = {
+    password: password
+  }
+
+  try {
+    const res = await fetch(url, {
+      method: 'DELETE',
+      headers: headers,
+      body: JSON.stringify(body)
+    });
+
+    return {
+      status: res.status,
+      error: res.statusText
+    }
+    
+  } catch (error) {
+    if (error instanceof Error){        
+      return {status: 500, error: error.message, user: null};
+    } else {
+      console.error(error);
+      return {status: 500, error: "Raro error en el servidor", user: null};        
+    }
+  }
+}
+
 async function createUser(email: string, username: string, password: string): Promise<ApiUserReturns> {
     
-  // Nota: Están muy expuestas las contraseñas. Deberían ir en el body
   const url = `${backendAddress}${apis.createUser}`
     
   const body = {
@@ -43,10 +77,16 @@ async function createUser(email: string, username: string, password: string): Pr
 
 async function login(email: string, password: string): Promise<ApiUserReturns> {
     
-  // Nota: Están muy expuestas las contraseñas. Deberían ir en el body. La solicitud debería ser GET
-  const url = `${backendAddress}${apis.login}?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;  
-  
-  return fetchAuth(url, "POST");
+  const url = `${backendAddress}${apis.login}`;
+  const body = {
+    email: email,
+    password: password
+  }
+  const headers = {
+    "Content-Type": "application/json"
+  }
+
+  return fetchAuth(url, "POST", body, headers);
 
 }
 
@@ -100,4 +140,4 @@ async function fetchAuth(url: string, method: string, body?: object, headers?: o
   }    
 };
 
-export { createUser, login, getUser };
+export { createUser, login, getUser, deleteAccount };

@@ -41,11 +41,11 @@ test("Leer el JWT del usuario de prueba", async () => {
 })
 
 test("Cambiar el nombre del usuario de prueba", async () => {
-    const res = await changeUsername(testEmail, jwtToken, newTestUsername, testPassword)
+    const res = await changeUsername(testEmail, jwtToken, newTestUsername)
 
     expect(res.status).toBe(200)
 
-    //TODO: inicalizar el valor del nuevo JWT con lo que devuelve changeUsername
+    updatedJwtToken = (res.jwtToken === undefined) ? "error" : res.jwtToken
 })
 
 test("Enviar JWT anterior al cambio de nombre de usuario", async() => {

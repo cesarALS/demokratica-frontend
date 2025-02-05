@@ -29,6 +29,10 @@ interface ApiUserReturns extends ApiReturns {
   data?: ApiUser
 }
 
+interface changeUsernameReturns extends ApiReturns {
+  jwtToken?: string
+}
+
 const userReturn = (resParams: any) => {
   return {
     user: {
@@ -104,7 +108,7 @@ async function deleteAccount(email: string, password: string, jwtToken: string) 
 
 }
 
-async function changeUsername(email: string, jwtToken: string, newUsername: string, password: string) {
+async function changeUsername(email: string, jwtToken: string, newUsername: string): Promise<changeUsernameReturns> {
 
   const url = `${backendAddress}${apis.changeUsername}/${email}`
   const headers = {
@@ -113,7 +117,6 @@ async function changeUsername(email: string, jwtToken: string, newUsername: stri
   }
   const body = {
     newUsername: newUsername,
-    password: password
   }
 
   const data = (res: any) => {

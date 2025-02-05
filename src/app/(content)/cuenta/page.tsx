@@ -2,7 +2,7 @@
 
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { useAuthContext } from "@/utils/AuthProvider";
-import { deleteAccount  } from "@/utils/apiUtils";
+import { changeUsername, deleteAccount  } from "@/utils/apiUtils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faFloppyDisk } from "@fortawesome/free-regular-svg-icons";
@@ -40,7 +40,7 @@ export default function Cuenta() {
 
 
 const UsernameField = () => {
-    const { user } = useAuthContext();
+    const { handleLogin, handleLogout, user } = useAuthContext();
     const [isEditing, setIsEditing] = useState(false)
     const [currentUsername, setCurrentUsername] = useState(!!user ? user.username : "error")
     const inputRef = useRef<HTMLInputElement>(null);
@@ -51,11 +51,18 @@ const UsernameField = () => {
         }
       }, [isEditing]);
     
-    const toogleEditing = () => {
+    const toogleEditing = async () => {
         //Si estaba editando antes de llamar a esta función significa que presionó guardar y hay que llamar a la API
         //para cambiar el nombre de usuario
         if (isEditing) {
-            //TODO: llamar a la API para cambiar el nombre de usuario aquí
+            const email = !!user ? user.email : "error"
+            const jwtToken = !!Cookies.get("token") ? Cookies.get("token") : "error"
+            const res = await changeUsername(email, jwtToken, {currentUsername})
+
+            if(res.status === 200) {
+                handleLogout()
+                handleLogin(res.jwtToken, user)
+            }
         }
         setIsEditing(!isEditing)
     }

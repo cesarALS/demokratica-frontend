@@ -11,6 +11,7 @@ const CheckoutButton = ({ planId }: { planId: string }) => {
       return;
     }
     setLoading(true);
+    console.log(loading) //Usando loading, mientras nos ayudamos de alternativas
     try {
       const response = await fetch(
         "https://demokraticabackend.onrender.com/api/payments/create",

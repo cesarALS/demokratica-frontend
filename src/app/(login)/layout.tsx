@@ -17,10 +17,9 @@ const LoginRegisterLayout = ({
   const router = useRouter();
   const {user} = useAuthContext(); 
 
-  useEffect(() => {
-    // Verificar la cookie solo después de que el componente se haya montado
+  useEffect(() => {    
     if (user) {
-      router.push("/"); // Redirigir a la página de inicio si la cookie existe
+      router.push("/"); 
     }
   }, [user, router]);  
 

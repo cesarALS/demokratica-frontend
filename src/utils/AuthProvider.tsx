@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 import Cookies from "js-cookie";
 import { DemokraticaUser } from "@/types/auth";
 import { changeUsername, deleteAccount, getUser } from "./apiUtils";
+import LoadingScreen from "@/templates/3.templates/0.LoadingScreen";
 
 interface AuthContextType {
     user: DemokraticaUser | null;
@@ -25,6 +26,7 @@ export function useAuthContext(){
 
 export function AuthProvider({ children }: {children: React.ReactNode}){
     const [user, setUser] = useState<DemokraticaUser | null >(null);    
+    const [loading, setLoading] = useState(true); // Estado de carga
     
     const fetchUser = async () => {
         console.log("Aquí estamos")
@@ -42,6 +44,7 @@ export function AuthProvider({ children }: {children: React.ReactNode}){
                 console.log(response.error);
             }
         }        
+        setLoading(false); 
     }
 
     useEffect(() => {
@@ -109,6 +112,7 @@ export function AuthProvider({ children }: {children: React.ReactNode}){
         return await deleteAcc();        
     }
     
+    if(loading) return <LoadingScreen/>
 
     return (
         <AuthContext.Provider value={{user, handleLogin, handleLogout, handleUsernameChange, handleAccountDeletion}}>

@@ -31,19 +31,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <AuthProvider>
-      <MessageProvider>
-        <html 
-          lang="es"      
-          className={`${sourceSans3.variable} font-sourcesans3`}
-        >
-          <body>            
-            <Suspense fallback={ <Loading />}>
-              {children}
-            </Suspense>                        
-          </body>
-        </html>
-      </MessageProvider>
-    </AuthProvider>   
+    <html 
+      lang="es"      
+      className={`${sourceSans3.variable} font-sourcesans3`}
+    > 
+      <body> 
+        <Suspense fallback={ <Loading />}>
+          <AuthProvider>
+            <MessageProvider>           
+              {children}                       
+            </MessageProvider>
+          </AuthProvider>
+        </Suspense> 
+      </body>
+    </html>       
   );
 }

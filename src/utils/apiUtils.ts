@@ -30,7 +30,9 @@ interface ApiUserReturns extends ApiReturns {
 }
 
 interface changeUsernameReturns extends ApiReturns {
-  jwtToken?: string
+  data?: {
+    jwtToken: string
+  }
 }
 
 const userReturn = (resParams: any) => {
@@ -98,7 +100,7 @@ async function deleteAccount(email: string, password: string, jwtToken: string) 
 
   const body = {
     password: password
-  }
+  }  
 
   const data = (res: any) => {
     return res.statusText
@@ -115,12 +117,15 @@ async function changeUsername(email: string, jwtToken: string, newUsername: stri
     "Authorization": `Bearer ${jwtToken}`,
     "Content-Type": "application/json"
   }
+  
   const body = {
     newUsername: newUsername,
   }
 
   const data = (res: any) => {
-    return res.statusText
+    return {
+      jwtToken: res.jwtToken
+    }
   }
   
   return generalFetch(url, "PUT", data, body, headers);

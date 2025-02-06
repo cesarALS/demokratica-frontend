@@ -2,14 +2,13 @@
 
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { useAuthContext } from "@/utils/AuthProvider";
-import { changeUsername, deleteAccount  } from "@/utils/apiUtils";
+import { deleteAccount  } from "@/utils/apiUtils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faFloppyDisk } from "@fortawesome/free-regular-svg-icons";
 
 import Cookies from "js-cookie";
 import { useEffect, useRef, useState } from "react";
-import EditableTitle from "@/components/0.atoms/3.EditableTitle";
 
 export default function Cuenta() {
     const {user} = useAuthContext();
@@ -36,11 +35,8 @@ export default function Cuenta() {
     )
 }
 
-
-
-
 const UsernameField = () => {
-    const { handleLogin, handleLogout, user } = useAuthContext();
+    const { handleUsernameChange, user } = useAuthContext();
     const [isEditing, setIsEditing] = useState(false)
     const [currentUsername, setCurrentUsername] = useState(!!user ? user.username : "error")
     const inputRef = useRef<HTMLInputElement>(null);
@@ -55,14 +51,7 @@ const UsernameField = () => {
         //Si estaba editando antes de llamar a esta función significa que presionó guardar y hay que llamar a la API
         //para cambiar el nombre de usuario
         if (isEditing) {
-            const email = !!user ? user.email : "error"
-            const jwtToken = !!Cookies.get("token") ? Cookies.get("token") : "error"
-            const res = await changeUsername(email, jwtToken, {currentUsername})
-
-            if(res.status === 200) {
-                handleLogout()
-                handleLogin(res.jwtToken, user)
-            }
+            handleUsernameChange(currentUsername);
         }
         setIsEditing(!isEditing)
     }
@@ -100,9 +89,6 @@ const UsernameField = () => {
             </div>
         )
 }
-
-
-
 
 interface AccountButtonProps {
     text: string,

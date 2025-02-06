@@ -3,12 +3,13 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import Cookies from "js-cookie";
 import { DemokraticaUser } from "@/types/auth";
-import { getUser } from "./apiUtils";
+import { changeUsername, deleteAccount, getUser } from "./apiUtils";
 
 interface AuthContextType {
     user: DemokraticaUser | null;
     handleLogin: (jwtToken: string, user: DemokraticaUser) => void;
     handleLogout: () => void;
+    handleUsernameChange: (newUsername: string) => void
 }
 
 const TOKEN_COOKIE = "token"
@@ -22,43 +23,83 @@ export function useAuthContext(){
 }
 
 export function AuthProvider({ children }: {children: React.ReactNode}){
-    const [user, setUser] = useState<DemokraticaUser | null >(null);
+    const [user, setUser] = useState<DemokraticaUser | null >(null);    
     
-    useEffect(() => {        
-        const fetchData = async () => {
-            const authCookie = Cookies.get(TOKEN_COOKIE);      
-            if (authCookie){
-                const response = await getUser(authCookie);
-                if(response.status===200 && response.data?.user){
-                    setUser(response.data.user);
-                }
-                else if(response.status===403){
-                    setUser(null);
-                    Cookies.remove(TOKEN_COOKIE);
-                }
-                else{
-                    console.log(response.error);
-                }
+    const fetchUser = async () => {
+        console.log("Aquí estamos")
+        const authCookie = Cookies.get(TOKEN_COOKIE);      
+        if (authCookie){
+            const response = await getUser(authCookie);
+            if(response.status===200 && response.data?.user){
+                setUser(response.data.user);
             }
-        }
+            else if(response.status===403){
+                setUser(null);
+                Cookies.remove(TOKEN_COOKIE);
+            }
+            else{
+                console.log(response.error);
+            }
+        }        
+    }
 
-        fetchData();
-    }, []);  
+    useEffect(() => {
+        fetchUser()
+    }, [])
 
     // Función exportable para hacer Login
     const handleLogin = (jwtToken: string, user: DemokraticaUser) => {
         Cookies.set(TOKEN_COOKIE, jwtToken, { expires: 7 });
         setUser(user);
-      };
+    };
     
     // Función exportable para hacer logout
     const handleLogout = () => {
         Cookies.remove(TOKEN_COOKIE);
         setUser(null);
-      };    
+    };    
+
+    const handleUsernameChange = (newUsername: string) => {
+        async function sendNewUsername() {
+            
+            // Falta manejar el error acá
+            if(user){                
+                const cookie = Cookies.get(TOKEN_COOKIE)
+
+                if(cookie){
+                    const res = await changeUsername(user.email, cookie, newUsername);
+                    if(res.status === 200) {                    
+                        if (res.data){
+                            user.username = newUsername;                        
+                            Cookies.set(TOKEN_COOKIE, res.data.jwtToken, {expires: 7})
+                        }                    
+                    }
+                } 
+            }            
+
+        }
+
+        sendNewUsername();
+    };
+
+    /*
+    const handleAccountDeletion = () => {
+        async function deleteAcc(){
+            if(user){
+                
+                const cookie = Cookies.get(TOKEN_COOKIE)
+                if(Cookies.get(TOKEN_COOKIE)){
+                    const res = await deleteAccount(user.email, cookie)
+                }
+            }
+        }
+
+        deleteAcc();
+    }
+    */
 
     return (
-        <AuthContext.Provider value={{user, handleLogin, handleLogout}}>
+        <AuthContext.Provider value={{user, handleLogin, handleLogout, handleUsernameChange}}>
             {children}
         </AuthContext.Provider>
     );

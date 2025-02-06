@@ -9,7 +9,7 @@ interface AuthContextType {
     user: DemokraticaUser | null;
     handleLogin: (jwtToken: string, user: DemokraticaUser) => void;
     handleLogout: () => void;
-    handleUsernameChange: (newUsername: string) => void
+    handleUsernameChange: (newUsername: string) => Promise<boolean>
 }
 
 const TOKEN_COOKIE = "token"
@@ -59,8 +59,10 @@ export function AuthProvider({ children }: {children: React.ReactNode}){
         setUser(null);
     };    
 
-    const handleUsernameChange = (newUsername: string) => {
+    const handleUsernameChange = async (newUsername: string) => {
         async function sendNewUsername() {
+            
+            let success = false;
             
             // Falta manejar el error acá
             if(user){                
@@ -72,14 +74,19 @@ export function AuthProvider({ children }: {children: React.ReactNode}){
                         if (res.data){
                             user.username = newUsername;                        
                             Cookies.set(TOKEN_COOKIE, res.data.jwtToken, {expires: 7})
+                            success = true;
                         }                    
                     }
                 } 
-            }            
+            } 
+            
+            return success;
 
         }
 
-        sendNewUsername();
+        const succ = await sendNewUsername();
+        console.log(succ);
+        return succ;
     };
 
     /*

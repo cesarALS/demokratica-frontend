@@ -3,7 +3,7 @@ import UserCenterDropdownsBox from "../1.molecules/10.UserCenterDropdownsBox";
 
 const UserCenterFiltersBox = () => {
     return (
-      <div className="flex flex-col items-center justify-center bg-ThirdGray w-[95%] rounded-2xl gap-2">
+      <div className="flex flex-col items-center justify-center bg-ThirdGray w-[95%] rounded-2xl gap-2 py-3">
         <div className="flex border-AccentBlue w-full pt-2">
           <h1 className="italic ml-[7%]">Filtros</h1>
         </div>

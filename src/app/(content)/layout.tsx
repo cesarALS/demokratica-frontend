@@ -6,7 +6,7 @@ import { useAuthContext } from "@/utils/AuthProvider";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function afterLogInContent({
+export default function AfterLogInContent({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   

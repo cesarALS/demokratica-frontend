@@ -45,7 +45,7 @@ test("Cambiar el nombre del usuario de prueba", async () => {
 
     expect(res.status).toBe(200)
 
-    updatedJwtToken = (res.jwtToken === undefined) ? "error" : res.jwtToken
+    updatedJwtToken = (res.data?.jwtToken === undefined) ? "error" : res.data.jwtToken
 })
 
 test("Enviar JWT anterior al cambio de nombre de usuario", async() => {

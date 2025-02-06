@@ -10,6 +10,7 @@ import "./globals.css";
 import { AuthProvider } from "@/utils/AuthProvider";
 import { Suspense } from "react";
 import Loading from "./loading";
+import { MessageProvider } from "@/utils/MessageProvider";
 
 // Fuentes para la App. Las importamos de Google fonts, haciendo uso de next/font para optimizaciones
 
@@ -31,16 +32,18 @@ export default function RootLayout({
 }>) {
   return (
     <AuthProvider>
-      <html 
-        lang="es"      
-        className={`${sourceSans3.variable} font-sourcesans3`}
-      >
-        <body>            
-          <Suspense fallback={ <Loading />}>
-            {children}
-          </Suspense>                        
-        </body>
-      </html>
+      <MessageProvider>
+        <html 
+          lang="es"      
+          className={`${sourceSans3.variable} font-sourcesans3`}
+        >
+          <body>            
+            <Suspense fallback={ <Loading />}>
+              {children}
+            </Suspense>                        
+          </body>
+        </html>
+      </MessageProvider>
     </AuthProvider>   
   );
 }

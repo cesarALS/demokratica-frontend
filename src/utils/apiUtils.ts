@@ -102,9 +102,7 @@ async function deleteAccount(email: string, password: string, jwtToken: string) 
     password: password
   }  
 
-  const data = (res: any) => {
-    return res.statusText
-  }
+  const data = () => {}
   
   return generalFetch(url, "DELETE", data, body, headers);
 

@@ -10,6 +10,7 @@ interface AuthContextType {
     handleLogin: (jwtToken: string, user: DemokraticaUser) => void;
     handleLogout: () => void;
     handleUsernameChange: (newUsername: string) => Promise<boolean>
+    handleAccountDeletion: (ps: string) => Promise<boolean>
 }
 
 const TOKEN_COOKIE = "token"
@@ -84,29 +85,33 @@ export function AuthProvider({ children }: {children: React.ReactNode}){
 
         }
 
-        const succ = await sendNewUsername();
-        console.log(succ);
-        return succ;
+        return await sendNewUsername();        
     };
 
-    /*
-    const handleAccountDeletion = () => {
+    
+    const handleAccountDeletion = async (ps: string) => {
         async function deleteAcc(){
-            if(user){
-                
+            
+            let success = false;
+            
+            if(user){                
                 const cookie = Cookies.get(TOKEN_COOKIE)
-                if(Cookies.get(TOKEN_COOKIE)){
-                    const res = await deleteAccount(user.email, cookie)
+                if(cookie){
+                    const res = await deleteAccount(user.email, ps, cookie);
+                    console.log(res.status)
+                    if(res.status === 200) success = true;
                 }
             }
+
+            return success;
         }
 
-        deleteAcc();
+        return await deleteAcc();        
     }
-    */
+    
 
     return (
-        <AuthContext.Provider value={{user, handleLogin, handleLogout, handleUsernameChange}}>
+        <AuthContext.Provider value={{user, handleLogin, handleLogout, handleUsernameChange, handleAccountDeletion}}>
             {children}
         </AuthContext.Provider>
     );

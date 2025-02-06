@@ -1,7 +1,7 @@
 const prices = {
     gratuito: 0,
-    plus: 2000,
-    premium: 10000,
-    profesional: 20000,
+    plus: 15000,
+    premium: 50000,
+    profesional: 120000,
 };
 export default prices;

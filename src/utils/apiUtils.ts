@@ -154,7 +154,7 @@ async function generalFetch<T>(
     return { status: res.status, data: returnData };
 
   } catch (error) {
-    return { status: 500, error: error instanceof Error ? error.message : "Error inesperado" };
+    return { status: 400, error: error instanceof Error ? error.message : "Error inesperado" };
   }
 }
 

@@ -1,4 +1,5 @@
 import precios from "@/utils/priceUtils"
+import CheckoutButton from "@/components/0.atoms/9.MercadoPagoButton";
 
 interface PreciosCardData {
   nombrePlan: string;
@@ -42,16 +43,18 @@ export function PreciosCard() {
             <div className="flex flex-row items-end italic">
                 <h1 className="text-3xl">${formattedPrice}</h1>
                 <span className="text-md">COP</span>
-                <span className="text-lg ml-1">/sesión</span>
+                <span className="text-lg ml-1">/mes</span>
             </div>
             <hr className="border-t-2 border-gray-300 "/>
             <ul className="list-disc flex flex-col gap-1 ml-5 text-md mb-7">
                 <li>Invita hasta {plan.contenido[0]} participantes.</li>
                 <li>Realiza hasta {plan.contenido[1]} actividades.</li>
             </ul>
-            <button className="bg-AccentCreamCan hover:bg-PrimCreamCan text-white rounded-lg p-2 mt-auto">
+            {/* <button className="bg-AccentCreamCan hover:bg-PrimCreamCan text-white rounded-lg p-2 mt-auto">
                 {plan.textoBoton}
-            </button>
+            </button> */}
+            <CheckoutButton planId={plan.nombrePlan} />
+
         </div> 
     )
   });

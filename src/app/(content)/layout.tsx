@@ -1,9 +1,24 @@
+"use client"
+
 import Header from "@/components/2.organisms/3.Header";
 import Footer from "@/components/2.organisms/4.Footer";
+import { useAuthContext } from "@/utils/AuthProvider";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-export default function afterLogInContent({
+export default function AfterLogInContent({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  
+    const router = useRouter();
+    const {user} = useAuthContext(); 
+  
+    useEffect(() => {    
+      if (!user) {
+        router.push("/"); 
+      }
+    }, [user, router]);
+  
   return (
     // Contenedor principal como un flexbox con altura mínima de pantalla
     <div className="flex min-h-screen flex-col">

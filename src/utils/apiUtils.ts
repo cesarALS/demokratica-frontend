@@ -137,8 +137,9 @@ async function generalFetch<T>(
   body?: object, 
   headers?: HeadersInit
 ): Promise<{ status: number; data?: T; error?: string }> {
+  let res;
   try {
-    const res = await fetch(url, {
+    res = await fetch(url, {
       method: method,
       body: body ? JSON.stringify(body) : undefined,
       headers: headers ? headers: undefined
@@ -148,14 +149,19 @@ async function generalFetch<T>(
       return { status: res.status, error: res.statusText };
     }
 
-    const params = await res.json();
-    const returnData = transformData(params);
-
-    return { status: res.status, data: returnData };
-
   } catch (error) {
-    return { status: 400, error: error instanceof Error ? error.message : "Error inesperado" };
+    return { status: 500, error: error instanceof Error ? error.message : "Error inesperado" };
   }
+
+  let params = {}
+  try {
+    params = await res.json();
+  } catch (error) {
+    console.log("No JSON body or error parsing:", error);
+  }
+
+  const returnData = transformData(params);
+  return { status: res.status, data: returnData };
 }
 
 export { createUser, login, getUser, deleteAccount, changeUsername };

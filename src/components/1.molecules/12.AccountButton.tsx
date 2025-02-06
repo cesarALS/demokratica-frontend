@@ -20,6 +20,7 @@ const AccountButton = ({text}: AccountButtonProps) => {
     }
 
     const handleSend = async (ps: string) => {
+
         showModal(false);
         const success = await handleAccountDeletion(ps);
 
@@ -27,14 +28,14 @@ const AccountButton = ({text}: AccountButtonProps) => {
         let news = 3;
 
         if(success){
-            message = "Usuario eliminado. Vuelve pronto";
+            message = "Usuario eliminado";
             news = 1;
         }
 
         setMessage({
             message: message,
             news: news,
-            time: 5000
+            time: 3000
         })
     }
 
@@ -58,6 +59,6 @@ const AccountButton = ({text}: AccountButtonProps) => {
             )}
         </>
     );
-}
+}   
 
 export default AccountButton;

@@ -5,7 +5,7 @@
 
 import Footer from "@/components/2.organisms/4.Footer";
 import { useRouter } from "next/navigation";
-import { useAuthContext } from "@/utils/AuthProvider";
+import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import { useEffect } from "react";
 
 const LoginRegisterLayout = ({

@@ -1,4 +1,4 @@
-import { useMessageContext } from "@/utils/MessageProvider";
+import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
 
 const MessageBox = () => {
     

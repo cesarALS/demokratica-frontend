@@ -7,7 +7,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import demokraticaRoutes from "@/utils/routeUtils";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
-import { useAuthContext } from "@/utils/AuthProvider";
+import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);    

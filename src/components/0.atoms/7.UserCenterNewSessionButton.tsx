@@ -4,7 +4,7 @@ import demokraticaRoutes from "@/utils/routeUtils";
 const UserCenterNewSessionButton = () => {
     return (
       <Link 
-        className="flex items-center justify-center bg-AccentBlue p-2 rounded-2xl text-white w-[45%] md:w-[20%] lg:w-[12%] hover:scale-110"
+        className="flex items-center justify-center bg-AccentBlue p-2 rounded-2xl text-white w-[48%] md:w-[20%] lg:w-[14%] hover:scale-110"
         href={demokraticaRoutes.nuevaSesion.link}
       >
         <div className="w-[20%] flex items-center justify-end">

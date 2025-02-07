@@ -8,9 +8,9 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import LoginRegFormInput from "@/templates/1.molecules/0.LoginRegFormInput";
 
-import { login } from "@/utils/apiUtils";
+import { login } from "@/utils/apiUtils/apiAuthUtils";
 import { useRouter } from "next/navigation";
-import { useAuthContext } from "@/utils/AuthProvider";
+import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Correo inválido").required("Se requiere correo"),

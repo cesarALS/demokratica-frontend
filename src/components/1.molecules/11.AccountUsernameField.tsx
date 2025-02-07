@@ -1,5 +1,5 @@
-import { useAuthContext } from "@/utils/AuthProvider";
-import { useMessageContext } from "@/utils/MessageProvider";
+import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
+import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
 import { faFloppyDisk, faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useRef, useEffect } from "react";

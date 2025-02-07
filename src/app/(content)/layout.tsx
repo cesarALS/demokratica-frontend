@@ -2,7 +2,7 @@
 
 import Header from "@/components/2.organisms/3.Header";
 import Footer from "@/components/2.organisms/4.Footer";
-import { useAuthContext } from "@/utils/AuthProvider";
+import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 

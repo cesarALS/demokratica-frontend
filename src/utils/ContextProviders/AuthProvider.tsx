@@ -3,15 +3,16 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import Cookies from "js-cookie";
 import { DemokraticaUser } from "@/types/auth";
-import { changeUsername, deleteAccount, getUser } from "./apiUtils";
+import { changeUsername, deleteAccount, getUser } from "../apiUtils/apiAuthUtils";
 import LoadingScreen from "@/templates/3.templates/0.LoadingScreen";
 
 interface AuthContextType {
     user: DemokraticaUser | null;
     handleLogin: (jwtToken: string, user: DemokraticaUser) => void;
     handleLogout: () => void;
-    handleUsernameChange: (newUsername: string) => Promise<boolean>
-    handleAccountDeletion: (ps: string) => Promise<boolean>
+    handleUsernameChange: (newUsername: string) => Promise<boolean>;
+    handleAccountDeletion: (ps: string) => Promise<boolean>;
+    getCookie: () => string | undefined;
 }
 
 const TOKEN_COOKIE = "token"
@@ -28,8 +29,11 @@ export function AuthProvider({ children }: {children: React.ReactNode}){
     const [user, setUser] = useState<DemokraticaUser | null >(null);    
     const [loading, setLoading] = useState(true); // Estado de carga
     
+    const getCookie = () => {
+        return Cookies.get(TOKEN_COOKIE);
+    }    
+    
     const fetchUser = async () => {
-        console.log("Aquí estamos")
         const authCookie = Cookies.get(TOKEN_COOKIE);      
         if (authCookie){
             const response = await getUser(authCookie);
@@ -115,7 +119,7 @@ export function AuthProvider({ children }: {children: React.ReactNode}){
     if(loading) return <LoadingScreen/>
 
     return (
-        <AuthContext.Provider value={{user, handleLogin, handleLogout, handleUsernameChange, handleAccountDeletion}}>
+        <AuthContext.Provider value={{user, handleLogin, handleLogout, handleUsernameChange, handleAccountDeletion, getCookie}}>
             {children}
         </AuthContext.Provider>
     );

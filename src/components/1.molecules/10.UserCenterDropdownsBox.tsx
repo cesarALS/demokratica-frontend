@@ -1,7 +1,7 @@
 "use client"
 
 import ButtonDropdownSelector from "@/templates/0.atoms/8.ButtonDropdownSelector";
-import { useUserCenterContext } from "@/utils/UserCenterProvider";
+import { useUserCenterContext } from "@/utils/ContextProviders/UserCenterProvider";
 
 const UserCenterDropdownsBox = () => {
     
@@ -12,16 +12,10 @@ const UserCenterDropdownsBox = () => {
     }    
 
     const changeFilter = (property: string, value: string) => {
-        context.setUserCenterState((prevState) => ({
-            ...prevState,
-            filters: {
-              ...prevState.filters,
-              [property]: {
-                ...prevState.filters[property],
-                current: value
-              }
-            }
-        }));             
+        context.dispatch({type: "filter", payload: {
+            property: property,
+            value: value,
+        }})        
     }
   
     return (
@@ -29,7 +23,7 @@ const UserCenterDropdownsBox = () => {
         <div className="flex items-center justify-start w-full">
             <p className="italic ml-[7%]">Ordenar por</p>
         </div>
-        {Object.entries(context.userCenterState.filters).map(([key, values]) => {
+        {Object.entries(context.state.filters).map(([key, values]) => {
             return (
             <div className="w-[40%]" key={key}>
                 <ButtonDropdownSelector

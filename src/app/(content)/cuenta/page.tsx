@@ -1,7 +1,7 @@
 "use client"
 
 import { UserCircleIcon } from "@heroicons/react/24/solid";
-import { useAuthContext } from "@/utils/AuthProvider";
+import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 
 import AccountUsernameField from "@/components/1.molecules/11.AccountUsernameField";
 import AccountButton from "@/components/1.molecules/12.AccountButton";

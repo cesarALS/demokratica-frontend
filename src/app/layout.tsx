@@ -7,10 +7,10 @@ import type { Metadata } from "next";
 import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 
-import { AuthProvider } from "@/utils/AuthProvider";
+import { AuthProvider } from "@/utils/ContextProviders/AuthProvider";
 import { Suspense } from "react";
 import Loading from "./loading";
-import { MessageProvider } from "@/utils/MessageProvider";
+import { MessageProvider } from "@/utils/ContextProviders/MessageProvider";
 
 // Fuentes para la App. Las importamos de Google fonts, haciendo uso de next/font para optimizaciones
 

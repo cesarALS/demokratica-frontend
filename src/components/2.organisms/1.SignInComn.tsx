@@ -9,9 +9,9 @@ import React from "react";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-import { createUser } from "@/utils/apiUtils";
+import { createUser } from "@/utils/apiUtils/apiAuthUtils";
 import { useRouter } from "next/navigation"
-import { useAuthContext } from "@/utils/AuthProvider";
+import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Correo inválido").required("Se requiere correo"),

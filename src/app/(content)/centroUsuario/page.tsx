@@ -1,6 +1,6 @@
 import UserCenterNewSessionButton from "@/components/0.atoms/7.UserCenterNewSessionButton";
 import UserCenterFetchBox from "@/components/3.templates/4.UserCenterFetchBox";
-import { UserCenterContextProvider } from "@/utils/UserCenterProvider";
+import { UserCenterContextProvider } from "@/utils/ContextProviders/UserCenterProvider";
 
 const CentroUsuario = () => {    
   

@@ -1,20 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { DemokraticaUser } from "@/types/auth";
+import { DemokraticaUser } from "@/types/auth"
+import { backendAddress, generalFetch } from "./apiUtils"
 
-// No sé qué tan importante sea que esto esté acá o en environment variables.
-// Otro detalle: eventualemnte, el dominio del back y del front será el mismo
-// Y otro detalle: si de pronto el backend está corriendo en local, esta dirección habría que cambiarla por la dirección donde está corriendo el back en local
-const backendAddress = "https://demokraticabackend.onrender.com";
-
-const apis = {
-  createUser: '/unase',
-  login: '/ingrese',
-  getUser: '/token-info',
-  deleteAccount: '/users',
-  changeUsername: '/users'
+const authApis = {
+    createUser: '/unase',
+    login: '/ingrese',
+    getUser: '/token-info',
+    deleteAccount: '/users',
+    changeUsername: '/users'
 }
-
+  
 interface ApiReturns {
   status: number,
   error?: string,
@@ -28,13 +24,13 @@ interface ApiUser {
 interface ApiUserReturns extends ApiReturns {  
   data?: ApiUser
 }
-
+  
 interface changeUsernameReturns extends ApiReturns {
   data?: {
     jwtToken: string
   }
 }
-
+ 
 const userReturn = (resParams: any) => {
   return {
     user: {
@@ -45,10 +41,10 @@ const userReturn = (resParams: any) => {
     jwtToken: resParams.jwtToken || null,      
   }  
 }
-
+  
 async function createUser(email: string, username: string, password: string): Promise<ApiUserReturns> {
     
-  const url = `${backendAddress}${apis.createUser}`
+  const url = `${backendAddress}${authApis.createUser}`
     
   const body = {
     email: email,
@@ -63,10 +59,10 @@ async function createUser(email: string, username: string, password: string): Pr
   return generalFetch(url, "POST", userReturn, body, headers);
 
 }
-
+  
 async function login(email: string, password: string): Promise<ApiUserReturns> {
     
-  const url = `${backendAddress}${apis.login}`;
+  const url = `${backendAddress}${authApis.login}`;
   const body = {
     email: email,
     password: password
@@ -78,10 +74,10 @@ async function login(email: string, password: string): Promise<ApiUserReturns> {
   return generalFetch(url, "POST", userReturn, body, headers);
 
 }
-
+  
 async function getUser(jwtToken: string){
 
-  const url = `${backendAddress}${apis.getUser}`
+  const url = `${backendAddress}${authApis.getUser}`
   const headers = {
     "Authorization": `Bearer ${jwtToken}`
   }
@@ -89,10 +85,10 @@ async function getUser(jwtToken: string){
   return generalFetch(url, "GET", userReturn, undefined, headers);
 
 }
-
+  
 async function deleteAccount(email: string, password: string, jwtToken: string) {
   
-  const url = `${backendAddress}${apis.deleteAccount}/${email}`
+  const url = `${backendAddress}${authApis.deleteAccount}/${email}`
   const headers = {
     "Authorization": `Bearer ${jwtToken}`,
     "Content-Type": "application/json"
@@ -107,10 +103,10 @@ async function deleteAccount(email: string, password: string, jwtToken: string) 
   return generalFetch(url, "DELETE", data, body, headers);
 
 }
-
+  
 async function changeUsername(email: string, jwtToken: string, newUsername: string): Promise<changeUsernameReturns> {
-
-  const url = `${backendAddress}${apis.changeUsername}/${email}`
+  
+  const url = `${backendAddress}${authApis.changeUsername}/${email}`
   const headers = {
     "Authorization": `Bearer ${jwtToken}`,
     "Content-Type": "application/json"
@@ -128,40 +124,6 @@ async function changeUsername(email: string, jwtToken: string, newUsername: stri
   
   return generalFetch(url, "PUT", data, body, headers);
 
-}
-
-async function generalFetch<T>(
-  url: string, 
-  method: string, 
-  transformData: (res: any) => T, 
-  body?: object, 
-  headers?: HeadersInit
-): Promise<{ status: number; data?: T; error?: string }> {
-  let res;
-  try {
-    res = await fetch(url, {
-      method: method,
-      body: body ? JSON.stringify(body) : undefined,
-      headers: headers ? headers: undefined
-    });
-
-    if (!res.ok) {
-      return { status: res.status, error: res.statusText };
-    }
-
-  } catch (error) {
-    return { status: 500, error: error instanceof Error ? error.message : "Error inesperado" };
-  }
-
-  let params = {}
-  try {
-    params = await res.json();
-  } catch (error) {
-    console.log("No JSON body or error parsing:", error);
-  }
-
-  const returnData = transformData(params);
-  return { status: res.status, data: returnData };
 }
 
 export { createUser, login, getUser, deleteAccount, changeUsername };

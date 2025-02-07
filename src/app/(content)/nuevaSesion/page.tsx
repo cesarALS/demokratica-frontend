@@ -5,7 +5,7 @@ import { sessionConfig } from "@/types/sessionConfig";
 import ParticipantsBox from "@/components/3.templates/2.ParticipantsBox";
 import LeftSettingsNewSession from "@/components/3.templates/3.LeftSettingsNewSession";
 import FormDecision from "@/components/1.molecules/9.FormDecision";
-import { useAuthContext } from "@/utils/AuthProvider";
+import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
   
 export default function NuevaSesion() {
 

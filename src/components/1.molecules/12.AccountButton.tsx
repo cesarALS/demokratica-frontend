@@ -1,9 +1,9 @@
 "use client"
 
-import { useAuthContext } from "@/utils/AuthProvider";
+import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import { useState } from "react";
 import ModalGetInput from "../0.atoms/9.ModalGetInput";
-import { useMessageContext } from "@/utils/MessageProvider";
+import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
 
 interface AccountButtonProps {
     text: string,

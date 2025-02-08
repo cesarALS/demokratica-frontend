@@ -90,7 +90,7 @@ export default function Header() {
 
         {/* Botón de ingreso o de usuario */}
 
-        <div className="justify-self-end sm:justify-self-end">
+        <div className="justify-self-end">
           {user ? (
             <div className="relative flex h-full w-full items-center justify-center">
               <button
@@ -99,13 +99,13 @@ export default function Header() {
                 onClick={() => { setOpenAccountInfo(!isOpenAccountInfo) }}
                 ref={dropdownButtonRef}
               >
-                <UserCircleIcon className="flex h-8 w-6 justify-center text-black" />
+                <UserCircleIcon className="flex h-8 w-9 lg:w-8 justify-center text-black" />
               </button>
               {isOpenAccountInfo && (
                 <motion.nav
                   initial={false}
                   animate={{ height: isOpenAccountInfo ? "auto" : 0, opacity: isOpenAccountInfo ? 1 : 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}                    
+                  transition={{ duration: 0.8, ease: "easeInOut" }}                    
                   className="absolute top-full right-0 flex flex-col min-w-[60vw] md:min-w-[25vw] text-black bg-PrimGray mt-2 p-2 rounded-2xl border-2 border-black"
                   ref = {dropdownRef}
                 >

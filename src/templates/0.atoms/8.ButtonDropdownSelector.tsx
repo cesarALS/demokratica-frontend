@@ -65,7 +65,7 @@ export default function ButtonDropdownSelector({
       <button
         ref={dropdownButtonRef}
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex w-full items-center justify-center gap-x-4 bg-SecBlue px-4 py-2 hover:bg-PrimBlue ${buttonClassName}`}
+        className={`${buttonClassName} flex w-full items-center justify-center bg-SecBlue py-2 hover:bg-PrimBlue`}
       >
         <span className="text-lg font-extrabold text-white">
           {checklistItems[selectedItem]}

@@ -1,4 +1,4 @@
-import {deleteAccount, createUser, getUser, changeUsername } from "../src/utils/apiUtils/apiUtils"
+import {deleteAccount, createUser, getUser, changeUsername } from "../src/utils/apiUtils/apiAuthUtils"
 /*
     Este conjunto de pruebas crea un usuario de prueba en la BD (la real),
     lee el contenido de su JWT consultando al backend y luego lo elimina

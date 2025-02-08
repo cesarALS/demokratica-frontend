@@ -5,7 +5,6 @@ import { FieldInputProps } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-//ANDRÉS: Modificada la clase para que acepte el prop "field", que no lo pasa Formik
 interface LabelFieldProps {
   field: FieldInputProps<string>;
   label: string;
@@ -16,7 +15,6 @@ interface LabelFieldProps {
   showEye?: boolean;
 }
 
-//ANDRÉS: un prop extra para conectar este componente con Formik
 export default function LabelField({
   field,
   label,
@@ -50,8 +48,6 @@ export default function LabelField({
 
       <div className="flex-1 bg-SecGray flex items-center">
         <input
-          //ANDRÉS: Formik nos pasa ciertos props en field (value, onChange, onBlur) y los
-          // expandimos aquí en el input
           {...field}
           className="flex-auto w-[80%] flex-row bg-SecGray p-1 text-PrimBlack text-sm"
           type={inputType}

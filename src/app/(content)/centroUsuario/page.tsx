@@ -1,5 +1,5 @@
 import UserCenterNewSessionButton from "@/components/0.atoms/7.UserCenterNewSessionButton";
-import UserCenterFetchBox from "@/components/3.templates/4.UserCenterFetchBox";
+import UserCenterSessionsBox from "@/components/3.templates/4.UserCenterSessionsBox";
 import { UserCenterContextProvider } from "@/utils/ContextProviders/UserCenterProvider";
 
 const CentroUsuario = () => {    
@@ -10,7 +10,7 @@ const CentroUsuario = () => {
         {/* Botón de Nueva Sesión*/ }
         <UserCenterNewSessionButton/>
         {/* Caja de Centro de Usuario */}
-        <UserCenterFetchBox/>
+        <UserCenterSessionsBox/>
       </div>
     </UserCenterContextProvider>    
   );

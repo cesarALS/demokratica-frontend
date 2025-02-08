@@ -8,10 +8,16 @@ interface Filters {
     [key: string]: {options: string[], current: string}
 }
 
+export enum SessionHostTypes {
+  anfrition = 1,
+  invitado = 2,
+}
+
 interface UserCenterState {
     sessions: object[],
     filters: Filters,
     isLoading: boolean,
+    hostType: SessionHostTypes
 }
 
 const defaultUserCenterState: UserCenterState = {
@@ -30,13 +36,15 @@ const defaultUserCenterState: UserCenterState = {
         current: "5"
       }
     },
-    isLoading: true
+    isLoading: true,
+    hostType: 1,
 }
 
 type UserCenterAction =
   | { type: "filter"; payload: { property: string; value: string } }
   | { type: "getSessions"; payload: object[] }
-  | { type: "loaded"; payload: undefined };
+  | { type: "loaded"; payload: undefined }
+  | { type: "setHostType"; payload: SessionHostTypes};
 
 interface UserCenterContextProps {
     state: UserCenterState;
@@ -75,7 +83,7 @@ export const UserCenterContextProvider = ({ children }: {children: React.ReactNo
       state: UserCenterState, 
       action: {
         type: string;
-        payload: { property: string; value: string } | object[] | undefined;
+        payload: { property: string; value: string } | object[] | undefined | SessionHostTypes;
       }
     ) {
       switch (action.type) {
@@ -108,6 +116,12 @@ export const UserCenterContextProvider = ({ children }: {children: React.ReactNo
               ...state,
               isLoading: false
           };      
+        
+        case "setHostType":
+          return {
+            ...state,
+            hostType: action.payload as SessionHostTypes,
+          };
               
         default:
           return state;

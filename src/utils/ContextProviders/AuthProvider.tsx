@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 import Cookies from "js-cookie";
 import { DemokraticaUser } from "@/types/auth";
 import { changeUsername, deleteAccount, getUser } from "../apiUtils/apiAuthUtils";
-import LoadingScreen from "@/templates/3.templates/0.LoadingScreen";
+import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen";
 
 interface AuthContextType {
     user: DemokraticaUser | null;

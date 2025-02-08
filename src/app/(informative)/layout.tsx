@@ -13,7 +13,7 @@ export default function InformativeLayout({
       <Header />
 
       {/* Contenido principal que ocupa el resto del vh, que tiene el background fijo y que tiene un overflow que permite scrollear el contenido hacía abajo*/}
-      <div className="flex h-[91.667vh] w-full flex-initial flex-col items-center overflow-y-auto bg-gradient-to-b from-SecBlue to-white">
+      <div className="flex h-[91.667vh] w-full flex-initial flex-col items-center overflow-y-auto bg-gradient-to-b from-SecBlue to-white scrollbar-thin scrollbar-track-SecBlue scrollbar-thumb-ThirdGray">
         {/* Contenido de la página */}
         <main className="flex min-h-[91.667vh] w-full flex-shrink-0 grow items-start">
           {children}

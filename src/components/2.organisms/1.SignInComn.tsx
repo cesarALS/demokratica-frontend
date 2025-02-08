@@ -12,6 +12,7 @@ import * as Yup from "yup";
 import { createUser } from "@/utils/apiUtils/apiAuthUtils";
 import { useRouter } from "next/navigation"
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
+import demokraticaRoutes from "@/utils/routeUtils";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Correo inválido").required("Se requiere correo"),
@@ -50,7 +51,7 @@ export default function SignInComn() {
           
           if (response.status === 201 && response.data?.jwtToken && response.data?.user) {
             handleLogin(response.data.jwtToken, response.data.user);
-            router.push("/");
+            router.push(demokraticaRoutes.centroUsuario.link);
           } else if (response.status === 409){
             alert("Correo ya asociado a otra cuenta");
           } else {

@@ -24,7 +24,7 @@ const LoginRegisterLayout = ({
   }, [user, router]);  
 
   return (
-    <main className="flex flex-1 flex-col overflow-y-auto w-full">
+    <main className="flex flex-1 flex-col overflow-y-auto w-full to-white scrollbar-thin scrollbar-track-SecBlue scrollbar-thumb-ThirdGray">
       {children}
       <Footer />
     </main>

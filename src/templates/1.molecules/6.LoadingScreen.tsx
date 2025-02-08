@@ -7,8 +7,8 @@
 
 import FullLogo from "@/templates/0.atoms/1.FullLogo";
 import { motion } from "framer-motion";
-import IconLogo from "../0.atoms/2.IconLogo";
-import TitleLogo from "../0.atoms/0.TitleLogo";
+import IconLogo from "@/templates/0.atoms/2.IconLogo";
+import TitleLogo from "@/templates/0.atoms/0.TitleLogo";
 
 interface LoadingScreenProps {
     fixed?: boolean
@@ -28,10 +28,10 @@ const LoadingScreen = ({
     logo = "Full"
 }   : LoadingScreenProps) => {
     
-    const fixedStyles = "fixed top-0 left-0 w-screen h-screen"    
+    const fixedStyles = "fixed top-0 left-0 w-screen h-screen";
     
     return (
-        <div className="relative w-full h-full overflow-hidden">
+        <div className="relative w-full h-full overflow-hidden bg-white">
             <motion.div
                 initial={{ scale: 1, opacity: 1 }}
                 animate={{ scale: [1, scale, 1], opacity: [0.8, 1, 0.8] }}

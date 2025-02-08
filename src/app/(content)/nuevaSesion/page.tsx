@@ -4,7 +4,7 @@ import EditableTitle from "@/components/0.atoms/3.EditableTitle";
 import { sessionConfig } from "@/types/sessionConfig";
 import ParticipantsBox from "@/components/3.templates/2.ParticipantsBox";
 import LeftSettingsNewSession from "@/components/3.templates/3.LeftSettingsNewSession";
-import FormDecision from "@/components/1.molecules/9.FormDecision";
+import FormDecision from "@/components/1.molecules/13.NewSessionFormDecision";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
   
 export default function NuevaSesion() {

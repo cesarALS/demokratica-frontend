@@ -1,3 +1,5 @@
+"use client";
+
 import EditableTitle from "@/components/0.atoms/3.EditableTitle";
 import ContentCard from "@/templates/2.organisms/2.ContentCard";
 import ParticipantsBox from "@/components/3.templates/2.ParticipantsBox";

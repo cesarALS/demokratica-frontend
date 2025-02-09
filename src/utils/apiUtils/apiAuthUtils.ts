@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { DemokraticaUser } from "@/types/auth"
-import { backendAddress, generalFetch } from "./apiUtils"
+import { backendAddress, generalFetch, identity } from "./apiUtils"
 
 const authApis = {
     createUser: '/unase',
@@ -16,18 +16,10 @@ interface ApiReturns {
   error?: string,
 }
 
-interface ApiUser {  
-  user: DemokraticaUser | null,
-  jwtToken?: string
-}
-
 interface ApiUserReturns extends ApiReturns {  
-  data?: ApiUser
-}
-  
-interface changeUsernameReturns extends ApiReturns {
   data?: {
-    jwtToken: string
+    user?: DemokraticaUser | null,
+    jwtToken?: string
   }
 }
  
@@ -86,7 +78,7 @@ async function getUser(jwtToken: string){
 
 }
   
-async function deleteAccount(email: string, password: string, jwtToken: string) {
+async function deleteAccount(email: string, password: string, jwtToken: string){
   
   const url = `${backendAddress}${authApis.deleteAccount}/${email}`
   const headers = {
@@ -96,15 +88,13 @@ async function deleteAccount(email: string, password: string, jwtToken: string) 
 
   const body = {
     password: password
-  }  
-
-  const data = () => {}
+  }
   
-  return generalFetch(url, "DELETE", data, body, headers);
+  return generalFetch(url, "DELETE", identity, body, headers);
 
 }
   
-async function changeUsername(email: string, jwtToken: string, newUsername: string): Promise<changeUsernameReturns> {
+async function changeUsername(email: string, jwtToken: string, newUsername: string) {
   
   const url = `${backendAddress}${authApis.changeUsername}/${email}`
   const headers = {

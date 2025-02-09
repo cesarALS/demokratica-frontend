@@ -1,12 +1,10 @@
-// Este es el layout para las páginas de registrarse y loguearse
-// Probablemente el header de esta sección sea diferente, o incluso puede no haber header
-
 "use client"
 
 import Footer from "@/components/2.organisms/4.Footer";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import MessageBox from "@/templates/0.atoms/12.MessageBox";
 
 const LoginRegisterLayout = ({
   children,
@@ -15,19 +13,29 @@ const LoginRegisterLayout = ({
 }>) => {
 
   const router = useRouter();
-  const {user} = useAuthContext(); 
+  const { user } = useAuthContext();
+  const hasRun = useRef(false); // Se usa para rastrear si ya se ejecutó
 
-  useEffect(() => {    
-    if (user) {
-      router.push("/"); 
+  useEffect(() => {
+    if (!hasRun.current) {
+      hasRun.current = true;
+      if (user) {
+        router.push("/");
+      }
     }
-  }, [user, router]);  
+  }, [router, user]);
 
   return (
-    <main className="flex flex-1 flex-col overflow-y-auto w-full to-white scrollbar-thin scrollbar-track-SecBlue scrollbar-thumb-ThirdGray">
-      {children}
-      <Footer />
-    </main>
+    <>
+      {/* Contenido principal que ocupa el resto del vh, que tiene el background fijo y que tiene un overflow que permite scrollear el contenido hacía abajo*/}
+      <div className="flex w-full h-screen flex-initial flex-col items-center overflow-y-auto bg-gradient-to-b from-SecBlue to-white scrollbar-thin scrollbar-track-transparent scrollbar-thumb-PrimBlue">
+        <main className={`flex min-h-screen w-full flex-shrink-0 grow items-start`}>
+          {children}      
+        </main>
+        <Footer />
+      </div>
+      <MessageBox/>
+    </>
   );
 };
 

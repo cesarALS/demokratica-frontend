@@ -3,12 +3,13 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import Cookies from "js-cookie";
 import { DemokraticaUser } from "@/types/auth";
-import { changeUsername, deleteAccount, getUser } from "../apiUtils/apiAuthUtils";
+import { changeUsername, createUser, deleteAccount, getUser, login } from "../apiUtils/apiAuthUtils";
 import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen";
 
 interface AuthContextType {
     user: DemokraticaUser | null;
-    handleLogin: (jwtToken: string, user: DemokraticaUser) => void;
+    handleLogin: (email: string, password: string) => Promise<number>;
+    handleUserCreation: (email: string, username: string, password: string) => Promise<number>
     handleLogout: () => void;
     handleUsernameChange: (newUsername: string) => Promise<boolean>;
     handleAccountDeletion: (ps: string) => Promise<boolean>;
@@ -56,10 +57,23 @@ export function AuthProvider({ children }: {children: React.ReactNode}){
     }, [])
 
     // Función exportable para hacer Login
-    const handleLogin = (jwtToken: string, user: DemokraticaUser) => {
-        Cookies.set(TOKEN_COOKIE, jwtToken, { expires: 7 });
-        setUser(user);
-    };
+    const handleLogin = async (email: string, password: string) => {
+        const res = await login(email, password);
+        if (res.status === 200 && res.data?.jwtToken && res.data.user) {            
+            Cookies.set(TOKEN_COOKIE, res.data.jwtToken, { expires: 7 });
+            setUser(res.data.user);
+        }
+        return res.status;    
+    }
+
+    const handleUserCreation = async (email: string, username: string, password: string) => {
+        const res = await createUser(email, username, password);
+        if (res.status === 201 && res.data?.jwtToken && res.data?.user) {
+            Cookies.set(TOKEN_COOKIE, res.data.jwtToken, { expires: 7 });
+            setUser(res.data.user);
+        }
+        return res.status;
+    }
     
     // Función exportable para hacer logout
     const handleLogout = () => {
@@ -68,58 +82,44 @@ export function AuthProvider({ children }: {children: React.ReactNode}){
     };    
 
     const handleUsernameChange = async (newUsername: string) => {
-        async function sendNewUsername() {
-            
-            let success = false;
-            
-            // Falta manejar el error acá
-            if(user){                
-                const cookie = Cookies.get(TOKEN_COOKIE)
 
-                if(cookie){
-                    const res = await changeUsername(user.email, cookie, newUsername);
-                    if(res.status === 200) {                    
-                        if (res.data){
-                            user.username = newUsername;                        
-                            Cookies.set(TOKEN_COOKIE, res.data.jwtToken, {expires: 7})
-                            success = true;
-                        }                    
-                    }
-                } 
+        let success = false;
+        
+        if(user){                
+            const cookie = Cookies.get(TOKEN_COOKIE)
+            if(cookie){
+                const res = await changeUsername(user.email, cookie, newUsername);
+                if(res.status === 200) {                    
+                    if (res.data){
+                        user.username = newUsername;                        
+                        Cookies.set(TOKEN_COOKIE, res.data.jwtToken, {expires: 7})
+                        success = true;
+                    }                    
+                }
             } 
-            
-            return success;
-
-        }
-
-        return await sendNewUsername();        
+        } 
+        
+        return success;    
     };
 
     
-    const handleAccountDeletion = async (ps: string) => {
-        async function deleteAcc(){
-            
-            let success = false;
-            
-            if(user){                
-                const cookie = Cookies.get(TOKEN_COOKIE)
-                if(cookie){
-                    const res = await deleteAccount(user.email, ps, cookie);
-                    console.log(res.status)
-                    if(res.status === 200) success = true;
-                }
+    const handleAccountDeletion = async (ps: string) => {                    
+        let success = false;
+        
+        if(user){                
+            const cookie = Cookies.get(TOKEN_COOKIE)
+            if(cookie){
+                const res = await deleteAccount(user.email, ps, cookie);                
+                if(res.status === 200) success = true;
             }
-
-            return success;
         }
-
-        return await deleteAcc();        
+        return success;                
     }
     
     if(loading) return <LoadingScreen/>
 
     return (
-        <AuthContext.Provider value={{user, handleLogin, handleLogout, handleUsernameChange, handleAccountDeletion, getCookie}}>
+        <AuthContext.Provider value={{user, handleLogin, handleUserCreation, handleLogout, handleUsernameChange, handleAccountDeletion, getCookie}}>
             {children}
         </AuthContext.Provider>
     );

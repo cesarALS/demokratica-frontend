@@ -30,9 +30,8 @@ export async function generalFetch<T>(
   let params = {}
   try {
     params = await res.json();
-  } catch (error) {
-    console.log("No JSON body or error parsing:", error);
-  }
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  } catch (err) {}
 
   const returnData = transformData(params);
   return { status: res.status, data: returnData };

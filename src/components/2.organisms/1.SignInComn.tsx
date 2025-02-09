@@ -9,10 +9,10 @@ import React from "react";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-import { createUser } from "@/utils/apiUtils/apiAuthUtils";
 import { useRouter } from "next/navigation"
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import demokraticaRoutes from "@/utils/routeUtils";
+import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Correo inválido").required("Se requiere correo"),
@@ -32,7 +32,8 @@ export default function SignInComn() {
   const closeModal = () => {setModalOpen(false)};
   
   const router = useRouter();
-  const {handleLogin} = useAuthContext();
+  const {handleUserCreation} = useAuthContext();
+  const {setMessage} = useMessageContext();
 
   return (
     
@@ -47,17 +48,30 @@ export default function SignInComn() {
         }}
         validationSchema={validationSchema}
         onSubmit={async (values) => {        
-          const response = await createUser(values.email, values.username, values.password);
+          const responseStatus = await handleUserCreation(values.email, values.username, values.password);
           
-          if (response.status === 201 && response.data?.jwtToken && response.data?.user) {
-            handleLogin(response.data.jwtToken, response.data.user);
-            router.push(demokraticaRoutes.centroUsuario.link);
-          } else if (response.status === 409){
-            alert("Correo ya asociado a otra cuenta");
-          } else {
-             alert("Error en el servidor");
-             console.log(response.error)
+          let message = "";
+          let news = 3;        
+          
+          switch(responseStatus){
+            case 201:            
+              message = `Bienvenido a Demokratica, ${values.username}`;  
+              news = 1;            
+              break;
+            case 409:
+              message = "Correo de usuario ya asociado a otra cuenta";
+              break;
+            default:
+              message = "Error en el servidor";
           }
+          
+          setMessage({
+            message: message,
+            news: news,
+            time: 6000,
+          });
+  
+          if(responseStatus === 201) router.push(demokraticaRoutes.centroUsuario.link);   
           
         }}
       >

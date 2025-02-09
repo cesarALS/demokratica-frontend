@@ -2,7 +2,7 @@
 
 "use client"
 
-import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import { createContext, Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from "react";
 
 enum News {
     good = 1,
@@ -33,28 +33,25 @@ export function useMessageContext(){
 export const MessageProvider = ({ children }: {children: React.ReactNode}) => {
     
     const [message, setMessage] = useState<Message|undefined>(undefined);
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
-        let timer: NodeJS.Timeout; // Store the timer ID
+        if (message) {            
+            
+            // Cancela cualquier timeout anterior antes de crear uno nuevo
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
-        if (message) {
-            timer = setTimeout(() => {
+            timeoutRef.current = setTimeout(() => {
                 setMessage(undefined);
             }, message.time);
         }
 
-        return () => {  // Cleanup function to clear the timer
-            clearTimeout(timer);
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
         };
-    }, [message]); // Add message as a dependency
-    
-    /*
-    const colors = {
-        good: 'bg-green',
-        neutral: 'bg-AccentBlue',
-        bad: 'bg-red'
-    }
-    */
+    }, [message]);
     
     return (
         <MessageContext.Provider value={{setMessage, message}}>

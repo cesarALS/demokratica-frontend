@@ -76,7 +76,7 @@ export const UserCenterContextProvider = ({ children }: {children: React.ReactNo
     }, [getCookie]);
 
     useEffect(() => {    
-      console.log(state)
+      // console.log(state)
     }, [state]);   
     
     function userCenterReducer(

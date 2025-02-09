@@ -35,11 +35,11 @@ export default function RootLayout({
       lang="es"      
       className={`${sourceSans3.variable} font-sourcesans3`}
     > 
-      <body> 
+      <body className="flex flex-col min-h-screen"> 
         <Suspense fallback={ <Loading />}>
           <AuthProvider>
             <MessageProvider>           
-              {children}                       
+              {children}
             </MessageProvider>
           </AuthProvider>
         </Suspense> 

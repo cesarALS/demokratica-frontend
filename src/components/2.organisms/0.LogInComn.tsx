@@ -8,10 +8,10 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import LoginRegFormInput from "@/templates/1.molecules/0.LoginRegFormInput";
 
-import { login } from "@/utils/apiUtils/apiAuthUtils";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import demokraticaRoutes from "@/utils/routeUtils";
+import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Correo inválido").required("Se requiere correo"),
@@ -22,6 +22,7 @@ export default function LogInComn() {
   
   const router = useRouter();
   const {handleLogin} = useAuthContext();
+  const {setMessage} = useMessageContext();
   
   return (
     <Formik
@@ -29,18 +30,35 @@ export default function LogInComn() {
         email: "",
         password: "",
       }}
+      
       validationSchema={validationSchema}
+
       onSubmit={async (values) => {
-        const response = await login(values.email, values.password);
-        if (response.status === 200 && response.data?.jwtToken && response.data.user) {
-          handleLogin(response.data.jwtToken, response.data.user);
-          router.push(demokraticaRoutes.centroUsuario.link);
+        const responseStatus = await handleLogin(values.email, values.password);        
+        
+        let message = "";
+        let news = 3;        
+        
+        switch(responseStatus){
+          case 200:            
+            message = "Bienvenido de vuelta";  
+            news = 1;            
+            break;
+          case 403:
+            message = "Credenciales no válidas";
+            break;
+          default:
+            message = "Error en el servidor";
         }
-        else if (response.status === 403){
-          alert("Credenciales no válidas")
-        } else {
-          alert("Error en el servidor")
-        }
+        
+        setMessage({
+          message: message,
+          news: news,
+          time: 3000
+        });
+
+        if(responseStatus === 200) router.push(demokraticaRoutes.centroUsuario.link);        
+        
       }}
     >
       {({ handleSubmit }) => (

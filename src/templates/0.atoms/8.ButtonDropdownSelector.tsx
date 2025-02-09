@@ -22,7 +22,7 @@ export default function ButtonDropdownSelector({
   checklistItems,
   initialSelectedItem = 0,
   property,
-  stateToParent
+  stateToParent,
 }: ButtonDropdownSelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(initialSelectedItem);
@@ -65,7 +65,7 @@ export default function ButtonDropdownSelector({
       <button
         ref={dropdownButtonRef}
         onClick={() => setIsOpen(!isOpen)}
-        className={`${buttonClassName} flex w-full items-center justify-center bg-SecBlue py-2 hover:bg-PrimBlue`}
+        className={`${buttonClassName} flex w-full items-center justify-center gap-x-4 bg-SecBlue py-2 hover:bg-PrimBlue`}
       >
         <span className="text-lg font-extrabold text-white">
           {checklistItems[selectedItem]}
@@ -90,7 +90,9 @@ export default function ButtonDropdownSelector({
             <li
               key={index}
               className="flex items-center gap-2 p-2 text-PrimBlack hover:bg-SecGray hover:text-black"
-              onClick={() => {handleSelection(index, item)}}
+              onClick={() => {
+                handleSelection(index, item);
+              }}
             >
               {item}
             </li>

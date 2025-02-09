@@ -8,7 +8,7 @@ export default function ParticipantsFilter() {
   const invitationStateFilter = ["Aceptado", "Pendiente", "Rechazado"];
 
   return (
-    <div className="flex-no-wrap flex w-full items-center justify-between">
+    <div className="flex-no-wrap flex w-full items-center justify-center">
       <ButtonDropdownChecklist
         buttonClassName="border-y-2 border-AccentBlue border-l-2 rounded-tl-2xl"
         listClassName="border-x-2 border-PrimBlack border-b-2 rounded-b-2xl"
@@ -17,7 +17,7 @@ export default function ParticipantsFilter() {
         <FontAwesomeIcon icon={faUserTie} className="size-6 text-white" />
       </ButtonDropdownChecklist>
       {/* separator */}
-      <div className="h-full border-r-2 border-AccentBlue bg-AccentBlue"></div>
+      <div className="h-full border-r-2 border-AccentBlue"></div>
       <ButtonDropdownChecklist
         buttonClassName="border-y-2 border-AccentBlue border-r-2 rounded-tr-2xl"
         listClassName="border-x-2 border-PrimBlack border-b-2 rounded-b-2xl"

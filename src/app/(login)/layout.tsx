@@ -23,7 +23,7 @@ const LoginRegisterLayout = ({
         router.push("/");
       }
     }
-  }, [router, user]);
+  }, [user, router]);
 
   return (
     <>

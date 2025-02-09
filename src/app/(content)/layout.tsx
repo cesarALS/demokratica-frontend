@@ -5,7 +5,7 @@ import Footer from "@/components/2.organisms/4.Footer";
 import MessageBox from "@/templates/0.atoms/12.MessageBox";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 export default function AfterLogInContent({
   children,
@@ -13,16 +13,12 @@ export default function AfterLogInContent({
   
   const router = useRouter();
   const { user } = useAuthContext();
-  const hasRun = useRef(false); // Se usa para rastrear si ya se ejecutó
 
   useEffect(() => {
-    if (!hasRun.current) {
-      hasRun.current = true;
-      if (user) {
-        router.push("/");
-      }
-    }
-  }, [router, user]);
+     if (!user) {
+       router.push("/");
+     }
+  }, [user, router]);
   
   return (
     <>

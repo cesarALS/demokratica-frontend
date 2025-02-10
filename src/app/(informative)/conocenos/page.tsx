@@ -23,12 +23,12 @@ const Who = () => {
       <div className="grid grid-cols-1 justify-items-center items-center gap-10 pt-10 pb-10 bg-gradient-to-b from-SecBlue to-white">
         <VisionMisionField
           title="Visión"
-          content="Teniendo en cuenta las dificultades que sufren las organizaciones y los grupos sociales en general al llegar a un consenso, usando nuestro innovador enfoque respecto al consenso y a los procesos que llevan al mismo, Demokratica espera convertirse en una empresa de nicho en todo aquel sector que tenga la necesidad de realizar reuniones constantemente de más de 10 personas, facilitando la toma de sus decisiones y acuerdos."
+          content="Para 2028, Demokratica aspira a ser la plataforma líder en la toma de decisiones grupales, integrando soluciones que permitan alcanzar consensos de manera efectiva, registrar acuerdos y fomentar la participación activa de todos los miembros del grupo."
           imgURL="/img/imgVision.jpg"
         />
         <VisionMisionField
           title="Misión"
-          content="Demokratica ofrece servicios innovadores que facilitan la toma de decisiones dentro de todo tipo de grupos."
+          content="Demokratica integra soluciones que permiten a grupos de cualquier tamaño y ámbito alcanzar consensos, registrar acuerdos de forma clara y fomentar la participación activa de todos sus miembros."
           imgURL="/img/imgMision.jpg"
         />
         <ValoresEquipoContainer title="Nuestros valores" type="valores">

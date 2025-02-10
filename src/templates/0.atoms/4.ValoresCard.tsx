@@ -26,9 +26,9 @@ export function ValoresCard() {
     },
     {
       icono: <TbClockHeart className={iconStyle} />,
-      valor: "Eficiencia",
+      valor: "Efectividad",
       description:
-        "Facilitamos procesos ágiles y prácticos, optimizando el tiempo en decisiones grupales.",
+        "Nos aseguramos de que cada decisión tomada en la plataforma genere resultados concretos y alineados con los objetivos del grupo.",
     },
     {
       icono: <TbChecklist className={iconStyle} />,

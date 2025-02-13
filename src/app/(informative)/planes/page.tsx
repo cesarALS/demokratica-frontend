@@ -8,7 +8,7 @@ const Precios = () => {
         <div className="flex flex-col h-full w-full bg-gradient-to-b from-SecBlue to-white">
             {/*Contenedor título*/}
             <div className="flex flex-col justify-items-center items-center mt-10 xl:mt-16 xl:mb-14">
-                <h1 className="text-center text-2xl italic font-extrabold">Elige tu sesión, nos adaptamos a tus necesidades</h1>
+                <h1 className="text-center text-2xl italic font-extrabold">Elige tu plan, nos adaptamos a tus necesidades</h1>
             </div>
             {/*Contenedor de precios*/}
             <PreciosContainer>

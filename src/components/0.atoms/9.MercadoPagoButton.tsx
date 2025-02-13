@@ -42,10 +42,10 @@ const CheckoutButton = ({ planId }: { planId: string }) => {
   return (
     <button
       onClick={handlePayment}
-      className={`rounded px-4 py-2 ${
-        planId === "free"
-          ? "bg-green-500 hover:bg-green-700"
-          : "bg-blue-500 hover:bg-blue-700"
+      className={`text-white rounded-lg p-2 mt-auto font-bold ${
+        planId === "Gratuito"
+          ? "bg-blue-500 hover:bg-blue-700"
+          : "bg-AccentCreamCan hover:bg-PrimCreamCan"
       }`}
     >
       {planId === "Gratuito" ? "Iniciar sesión" : "Suscribirse"}

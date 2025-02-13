@@ -48,7 +48,7 @@ export function PreciosCard() {
             <hr className="border-t-2 border-gray-300 "/>
             <ul className="list-disc flex flex-col gap-1 ml-5 text-md mb-7">
                 <li>Invita hasta {plan.contenido[0]} participantes.</li>
-                <li>Realiza hasta {plan.contenido[1]} actividades.</li>
+                <li>Utiliza actividades disponibles hasta {plan.contenido[1]} veces.</li>
             </ul>
             {/* <button className="bg-AccentCreamCan hover:bg-PrimCreamCan text-white rounded-lg p-2 mt-auto">
                 {plan.textoBoton}

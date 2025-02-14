@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faFloppyDisk } from "@fortawesome/free-regular-svg-icons";
 
+// Este componente se usa en varias partes de la aplicación para mostrar un título editable
+
 // La idea de este componente es que solo sea editable cuando se tenga permiso para hacerlo
 interface EditableTitleProps {
   title: string;

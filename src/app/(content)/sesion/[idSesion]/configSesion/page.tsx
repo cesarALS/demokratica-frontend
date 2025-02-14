@@ -1,10 +1,10 @@
 import PageContentContainer from "@/templates/2.organisms/1.PageContentContainer";
-import ContentCard from "@/templates/2.organisms/2.ContentCard";
+import ConfigNewSession from "@/components/4.pages/0.ConfigSession";
 
 export default function configSesion() {
   return (
     <PageContentContainer>
-      <ContentCard>Wenas</ContentCard>
+      <ConfigNewSession />
     </PageContentContainer>
   );
 }

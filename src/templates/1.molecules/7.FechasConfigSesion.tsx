@@ -1,5 +1,7 @@
 import DatePickerComponent from "@/templates/0.atoms/13.DatePickerComponent";
 
+// Este componente se usa en varias partes
+
 export default function FechasConfigSesion() {
   // Fecha de ejemplo
   const initialDate = new Date();

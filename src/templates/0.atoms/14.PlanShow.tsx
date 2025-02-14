@@ -1,3 +1,5 @@
+// Este componente se usa en varias partes
+
 interface PlanShowProps {
   plan?: number;
 }

@@ -5,7 +5,7 @@ const UserCenterSessionTypeSelectors = () => {
     return (
         <div className="h-[6vh] w-[90%] flex items-center justify-center ">
             <UserCenterSessionTypeSelector />
-            <UserCenterSessionTypeSelector numButton={2} />
+            <UserCenterSessionTypeSelector anfitrion={false} />
         </div>
     )
 }

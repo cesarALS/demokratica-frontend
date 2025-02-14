@@ -17,6 +17,7 @@ const demokraticaRoutes = {
   centroUsuario: {name: "Centro de Usuario", link: "/centroUsuario"},
   cuenta: {name: "Gestión de cuenta", link: "/cuenta"},
   nuevaSesion: {name: "Crear Sesiones", link: "/nuevaSesion"},
+  sesion: {name: "Sesión", link:"/sesion"}
 };
 
 export default demokraticaRoutes;

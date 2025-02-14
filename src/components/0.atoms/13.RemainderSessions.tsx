@@ -32,9 +32,9 @@ export default function RemainderSessions({
   }
 
   return (
-    <div className="flex items-center justify-between gap-x-2 text-xl">
-      <label>Actividades restantes:</label>
-      <label className={planStyle}>{remainder}</label>
+    <div className="flex flex-col items-start justify-between gap-y-4 text-xl">
+      <div>Actividades restantes:</div>
+      <div className={planStyle}>{remainder}</div>
     </div>
   );
 }

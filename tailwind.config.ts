@@ -27,9 +27,10 @@ export default {
         SecGray: "#cecfd2",
         ThirdGray: "#ebecf0",
         PrimCreamCan: "#f2ca50",
-        SecCreamCan: "#f2dfa2",
+        SecCreamCan: "#f7d87c",
         AccentCreamCan: "#f2b600",
         PrimCasablanca: "#f2ac33",
+        SecCasablanca: "#f7bf5e",
       },
       // La propiedad del tamaño de los bordes
       borderWidth: {
@@ -41,7 +42,5 @@ export default {
       },
     },
   },
-  plugins: [
-    require("tailwind-scrollbar")({ nocompatible: true})
-  ],
+  plugins: [require("tailwind-scrollbar")({ nocompatible: true })],
 } satisfies Config;

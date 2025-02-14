@@ -6,7 +6,7 @@ const CentroUsuario = () => {
   
   return (    
     <UserCenterContextProvider>
-      <div className="flex flex-col items-center justify-center w-full pt-4 gap-8">
+      <div className="flex flex-col items-center justify-center w-full pt-4 pb-10 gap-8">
         {/* Botón de Nueva Sesión*/ }
         <UserCenterNewSessionButton/>
         {/* Caja de Centro de Usuario */}

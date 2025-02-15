@@ -4,9 +4,9 @@ import { DemokraticaUser } from "@/types/auth"
 import { backendAddress, generalFetch, identity } from "./apiUtils"
 
 const authApis = {
-    createUser: '/unase',
-    login: '/ingrese',
-    getUser: '/token-info',
+    createUser: '/auth/signup',
+    login: '/auth/login',
+    getUser: '/auth/JWT-info',
     deleteAccount: '/users',
     changeUsername: '/users'
 }
@@ -96,7 +96,7 @@ async function deleteAccount(email: string, password: string, jwtToken: string){
   
 async function changeUsername(email: string, jwtToken: string, newUsername: string) {
   
-  const url = `${backendAddress}${authApis.changeUsername}/${email}`
+  const url = `${backendAddress}${authApis.changeUsername}/${email}/username`
   const headers = {
     "Authorization": `Bearer ${jwtToken}`,
     "Content-Type": "application/json"

@@ -49,7 +49,7 @@ export default function TidemanActivity({
   }
   return (
     <div className="flex flex-col gap-y-4 rounded-md border border-black bg-ThirdGray p-4">
-      <ActivityHeader tags={tags} />
+      <ActivityHeader tags={tags} rol = "admin"/>
       {contenido}
     </div>
   );

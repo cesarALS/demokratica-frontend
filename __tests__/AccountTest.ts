@@ -7,8 +7,13 @@ import {deleteAccount, createUser, getUser, changeUsername } from "../src/utils/
     NO SON PRUEBAS UNITARIAS porque no se está usando una BD imitada (mock)
     sino que se está usando la real.
     
-    Si el sistema pasa las pruebas significa que las APIs del frontend están
-    bien hechas y funcionales
+    Si el sistema pasa las pruebas significa que tanto las APIs del backend como
+    las del frontend están bien hechas y funcionales y se conectan perfectamente
+    Estas pruebas testean los encargados de endpoints:
+    -Registro
+    -Solicitar leer información cifrada en el JWT
+    -Actualizar nombre de usuario
+    -Borrar cuenta
 */
 
 let jwtToken: string = ""

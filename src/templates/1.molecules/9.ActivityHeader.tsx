@@ -4,14 +4,18 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 interface ActivityHeaderProps {
   tags: string[];
+  givenDate?: string;
 }
 
-export default function ActivityHeader({ tags }: ActivityHeaderProps) {
+export default function ActivityHeader({
+  tags,
+  givenDate,
+}: ActivityHeaderProps) {
   return (
     <div className="flex flex-col gap-y-2">
       <div className="flex w-full items-center justify-between">
         {/* Fecha publicación actividad*/}
-        <DateTime className="text-sm" />
+        <DateTime className="text-sm" date={givenDate} />
         {/* Boton de borrar publicación */}
         <button className="flex items-center justify-center rounded-xl border-2 border-AccentBlue bg-SecBlue p-2 hover:bg-PrimBlue">
           <FontAwesomeIcon className="size-6 text-white" icon={faTrash} />

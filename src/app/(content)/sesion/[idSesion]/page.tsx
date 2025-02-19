@@ -7,6 +7,7 @@ import ActivityHeader from "@/templates/1.molecules/9.ActivityHeader";
 import MarkdownShower from "@/templates/0.atoms/18.MarkdownShower";
 import SelectableOptions from "@/templates/1.molecules/11.SelectableOptions";
 import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
+import TidemanActivity from "@/templates/2.organisms/5.TidemanActivity";
 
 export default function Sesion() {
   // Inside the publication
@@ -25,7 +26,7 @@ export default function Sesion() {
       {/* TODO: Aqui debe ir un componente que procese la lista de actividades y las renderice según su tipo */}
       <TextPublication tags={tags} />
       <ContentCard>
-        <ActivityHeader tags={tags} />
+        <ActivityHeader tags={tags} rol="admin"/>
         <MarkdownShower markdown={"Wenas, soy una pregunta"} />
         <SelectableOptions
           options={["Wenas", "adios", "uff, nais", "otra mas", "y otra"]}
@@ -34,6 +35,9 @@ export default function Sesion() {
           buttonText="Enviar"
           className="bg-PrimCreamCan hover:bg-SecCreamCan sm:max-w-[50%] sm:self-center"
         />
+      </ContentCard>
+      <ContentCard>
+        <TidemanActivity mode="participar" tags = {tags} pregunta = "usuario"></TidemanActivity>
       </ContentCard>
     </PageContentContainer>
   );

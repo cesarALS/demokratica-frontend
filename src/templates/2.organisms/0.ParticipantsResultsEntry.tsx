@@ -16,7 +16,7 @@ export default function ParticipantsResultsEntry({
   invitationState,
 }: userEntry) {
   return (
-    <div className="itesm-center flex w-full justify-between rounded-lg border-2 border-SecBlack bg-white p-2 text-xs text-PrimBlack">
+    <div className="flex w-full items-center justify-between rounded-lg border-2 border-SecBlack bg-white p-2 text-xs text-PrimBlack">
       {/* Info about the user */}
       <div className="flex items-center gap-x-2">
         <input type="checkbox" className="size-4" />

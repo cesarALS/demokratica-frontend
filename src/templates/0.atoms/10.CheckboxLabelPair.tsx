@@ -12,7 +12,7 @@ export default function CheckboxLabelPair({
       <input type="checkbox" className="h-4 w-4" id={id}></input>
       <label
         htmlFor={id}
-        className="font-semibold text-PrimBlack hover:text-black"
+        className="text-sm font-semibold text-PrimBlack hover:text-black"
       >
         {labelText}
       </label>

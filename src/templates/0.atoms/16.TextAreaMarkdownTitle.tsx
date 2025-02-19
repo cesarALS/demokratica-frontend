@@ -1,10 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeSanitize from "rehype-sanitize";
-import rehypeRaw from "rehype-raw";
+import MarkdownShower from "./18.MarkdownShower";
 
 interface TextAreaMarkdownTitle {
   title: string;
@@ -28,16 +25,7 @@ export default function TextAreaMarkdownTitle({
       ></textarea>
       {/* Vista previa */}
       <div className="text-lg">Vista previa:</div>
-      <div className="w-full rounded-lg border-2 border-PrimGray bg-ThirdGray p-4">
-        <div className="prose prose-li:marker:text-PrimBlack max-w-none">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw, rehypeSanitize]}
-          >
-            {markdown}
-          </ReactMarkdown>
-        </div>
-      </div>
+      <MarkdownShower markdown={markdown} />
     </div>
   );
 }

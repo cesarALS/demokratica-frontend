@@ -17,7 +17,7 @@ export default function SessionTitleControls() {
   return (
     <>
       {/* Titulo de la sesión */}
-      <ContentCard>
+      <ContentCard className="sm:max-w-[50%]">
         {/* Titulo y settings de la sesión */}
         <div className="flex items-center justify-between gap-x-2">
           <label className="text-2xl">Titulo de la sesión</label>

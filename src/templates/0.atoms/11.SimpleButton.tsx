@@ -12,6 +12,7 @@ export default function SimpleButton({
   
   return (
     <button
+      onClick={onClick}
       className={`rounded-lg border border-2 border-black px-4 py-1 ${className}`}
       onClick={onClick}
     >

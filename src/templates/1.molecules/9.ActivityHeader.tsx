@@ -1,27 +1,55 @@
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import DateTime from "@/templates/0.atoms/17.DateTime";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faRightLeft } from "@fortawesome/free-solid-svg-icons";
 
 interface ActivityHeaderProps {
   tags: string[];
+  givenDate?: string;
+  rol: string;
 }
 
-export default function ActivityHeader({ tags }: ActivityHeaderProps) {
+export default function ActivityHeader({
+  tags,
+  givenDate,
+  rol
+}: ActivityHeaderProps) {
   return (
-    <div className="flex w-full flex-row gap-y-4 justify-between">
-      <div className="flex max-w-[80%] flex-wrap items-start justify-start gap-2">
-        {tags.map((tag, index) => (
-          <span
-            key={index}
-            className="flex max-w-full flex-none flex-wrap items-center justify-center gap-2 break-words break-all rounded-md bg-PrimBlue px-2 py-2 text-base font-semibold italic text-white"
-          >
-            {tag}
-          </span>
-        ))}
+    <div className="flex flex-col gap-y-2">
+      <div className="flex w-full items-center justify-between">
+        {/* Fecha publicación actividad*/}
+        <DateTime className="text-sm" date={givenDate} />
+        {/* Boton de borrar publicación */}
+        {rol === "admin" ? (
+          <div className="flex items-center gap-x-2">
+            <button className="flex items-center justify-center rounded-xl border-2 border-AccentBlue bg-SecBlue p-1 hover:bg-PrimBlue">
+              <FontAwesomeIcon
+                className="size-8 text-white"
+                icon={faRightLeft}
+              />
+            </button>
+            <button className="flex items-center justify-center rounded-xl border-2 border-AccentBlue bg-SecBlue p-1 hover:bg-PrimBlue">
+              <FontAwesomeIcon className="size-8 text-white" icon={faTrash} />
+            </button>
+          </div>
+        ) : (
+          <button className="flex items-center justify-center rounded-xl border-2 border-AccentBlue bg-SecBlue p-1 hover:bg-PrimBlue">
+            <FontAwesomeIcon className="size-8 text-white" icon={faRightLeft} />
+          </button>
+        )}
       </div>
-      <div>
-        <button className="flex items-center justify-center rounded-xl border-2 border-AccentBlue bg-SecBlue p-1 hover:bg-PrimBlue">
-          <FontAwesomeIcon className="size-8 text-white" icon={faTrash} />
-        </button>
+      {/* Tags de la actividad */}
+      <div className="flex w-full justify-between">
+        <div className="flex gap-x-1 overflow-x-auto">
+          {tags.map((tag, index) => (
+            <span
+              key={index}
+              className="flex h-auto flex-none items-center justify-center gap-1 break-words rounded-md bg-PrimBlue px-2 py-1 text-sm font-semibold italic text-white"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );

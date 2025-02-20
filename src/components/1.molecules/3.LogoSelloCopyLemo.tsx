@@ -11,9 +11,9 @@ export default function LogoSelloCopyLemo({
 }: LogoSelloCopyLemoProps) {
   return (
     <div
-      className={`flex flex-col items-center justify-center gap-y-2 bg-SecGray p-1 rounded-lg border-2 border-black text-PrimBlack font-bold italic ${classNameGeneral}`}
+      className={`flex flex-col items-center justify-center gap-y-2 rounded-lg border-2 border-black bg-SecGray p-1 font-bold italic text-PrimBlack ${classNameGeneral}`}
     >
-      <div>La cooperación es la cuna del progreso</div>
+      <div className="text-center">La cooperación es la cuna del progreso</div>
       <br />
       {/* Logo demokratica full */}
       <FullLogo

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ConfigCommonVotation from "./12.ConfigCommonVotation";
+import ConfigTextPublication from "./13.ConfigTextPublication";
 
 export default function TypeActivityConfig() {
   const tiposVotacion = [
@@ -29,7 +30,8 @@ export default function TypeActivityConfig() {
       configComponent = <div></div>;
       break;
     case tiposVotacion[4].toLowerCase():
-      configComponent = <div></div>;
+      // Config para texto
+      configComponent = <ConfigTextPublication />;
       break;
     default:
       configComponent = <div></div>;

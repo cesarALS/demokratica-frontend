@@ -25,7 +25,6 @@ const CentroUsuario = () => {
       return response.data;
     },
     enabled: !!getCookie(),
-    staleTime: 1000 * 60, //1 minuto
   });
   
 

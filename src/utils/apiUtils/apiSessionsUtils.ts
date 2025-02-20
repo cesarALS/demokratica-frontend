@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { SessionToSend } from "@/types/sessions";
 import { backendAddress, generalFetch, identity } from "./apiUtils"
 
@@ -28,7 +30,11 @@ async function createSession(jwtToken: string | undefined, session: SessionToSen
     "Content-Type": "application/json"  
   };
 
-  return await generalFetch(url, "POST", identity, session, headers);
+  const resParams = (resParams: any) => {
+    return {id: resParams.id as number}
+  }
+
+  return await generalFetch(url, "POST", resParams, session, headers);
 }
 
 export { getSessions, createSession };

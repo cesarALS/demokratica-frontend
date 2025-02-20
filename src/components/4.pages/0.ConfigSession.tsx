@@ -50,7 +50,7 @@ export default function ConfigSession() {
     })
 
     // TODO: La api de creación de sesión debe devolver el id de la sesión creada
-    if(result.status === 201) router.push(`${demokraticaRoutes.sesion.link}/1000`) 
+    if(result.status === 201) router.push(`${demokraticaRoutes.sesion.link}/${result.id}`) 
 
   }
       

@@ -16,14 +16,22 @@ type CreatableSession =  typeof emptySession;
 interface SessionState extends CreatableSession {
     setField: <K extends keyof SessionState>(field: K, value: SessionState[K]) => void;
     resetForm: () => void;
-    sendSessionToCreate: (getToken: () =>string|undefined) => Promise<{status: number|null, mssg: string}>
+    sendSessionToCreate: (getToken: () =>string|undefined) => Promise<{
+        status: number|null, 
+        mssg: string,
+        id: number | null
+    }>
 }
 
 export const useSessionStore = create<SessionState>((set, get) => ({    
     ...structuredClone(emptySession),
     setField: (field, value) => set ((state) => ({...state, [field]: value})),    
     resetForm: () => set(structuredClone(emptySession)),
-    sendSessionToCreate: async (getToken: () => string|undefined): Promise<{status: number|null, mssg: string}> => {
+    sendSessionToCreate: async (getToken: () => string|undefined): Promise<{
+        status: number|null, 
+        mssg: string,
+        id: number | null
+    }> => {
         
         // Convertimos los tags en el formato de objetos
         const { tags } = get();
@@ -31,11 +39,11 @@ export const useSessionStore = create<SessionState>((set, get) => ({
 
         const { title, description, startDate, endDate, invitations } = get();
 
-        if (!title || !description || !startDate || !endDate) return {status: null, mssg:"Todos los campos son obligatorios."};
+        if (!title || !description || !startDate || !endDate) return {status: null, mssg:"Todos los campos son obligatorios.", id:null};
         
         // Comprobamos temas de fechas
-        if (endDate <= startDate) return ({status: null, mssg: "La fecha de fin debe ser posterior a la de inicio"});
-        if (endDate <= new Date()) return ({status: null, mssg: "La fecha de finalización debe ser posterior a la actual"});
+        if (endDate <= startDate) return ({status: null, mssg: "La fecha de fin debe ser posterior a la de inicio", id: null});
+        if (endDate <= new Date()) return ({status: null, mssg: "La fecha de finalización debe ser posterior a la actual", id: null});
         
         
         const sessionToSend: SessionToSend = {
@@ -51,7 +59,7 @@ export const useSessionStore = create<SessionState>((set, get) => ({
         
         let message = "Error del servidor. Intenta de nuevo más tarde";
         if (response.status === 201) message = "¡Sesión Creada con Éxito";
-        return {status: response.status, mssg: message};        
+        return {status: response.status, mssg: message, id: response.data ? response.data.id : null};        
         
     }, 
 }));

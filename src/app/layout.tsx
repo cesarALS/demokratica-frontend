@@ -11,6 +11,7 @@ import { AuthProvider } from "@/utils/ContextProviders/AuthProvider";
 import { Suspense } from "react";
 import Loading from "./loading";
 import { MessageProvider } from "@/utils/ContextProviders/MessageProvider";
+import AppQueryProvider from "@/utils/ContextProviders/AppQueryProvider";
 
 // Fuentes para la App. Las importamos de Google fonts, haciendo uso de next/font para optimizaciones
 
@@ -37,11 +38,13 @@ export default function RootLayout({
     > 
       <body className="flex flex-col min-h-screen"> 
         <Suspense fallback={ <Loading />}>
-          <AuthProvider>
-            <MessageProvider>           
-              {children}
-            </MessageProvider>
-          </AuthProvider>
+          <AppQueryProvider>
+            <AuthProvider>
+              <MessageProvider>           
+                {children}
+              </MessageProvider>
+            </AuthProvider>
+          </AppQueryProvider>
         </Suspense> 
       </body>
     </html>       

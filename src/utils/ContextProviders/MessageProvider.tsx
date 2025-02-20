@@ -26,7 +26,7 @@ const MessageContext = createContext<MessageContextProps|undefined>(undefined);
 // Hook que deben importar los componentes
 export function useMessageContext(){
     const context = useContext(MessageContext);
-    if (!context) throw new Error("useAuth debe usarse dentro de un AuthProvider");
+    if (!context) throw new Error("useMessageContext debe usarse dentro de un MessageProvider");
     return context;
 }
 

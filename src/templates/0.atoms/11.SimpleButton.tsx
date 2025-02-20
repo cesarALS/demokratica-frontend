@@ -7,12 +7,14 @@ interface SimpleButtonProps {
 export default function SimpleButton({
   buttonText,
   className,
-  onClick,
+  onClick = ()=>{}
 }: SimpleButtonProps) {
+  
   return (
     <button
       onClick={onClick}
       className={`rounded-lg border border-2 border-black px-4 py-1 ${className}`}
+      onClick={onClick}
     >
       {buttonText}
     </button>

@@ -1,20 +1,34 @@
+import { SessionToSend } from "@/types/sessions";
 import { backendAddress, generalFetch, identity } from "./apiUtils"
 
 const sessionApis = {
-    getSessions: "/sessions"
+    getSessions: "/sessions",
+    createSession: "/sessions",
 }
 
 async function getSessions(jwtToken: string | undefined) {
+  if (!jwtToken) return { status: 500, data: null, error: "No autenticado" };
 
-    if (!jwtToken) return {status: 500, error: "No autenticado"};
-    
-    const url = `${backendAddress}${sessionApis.getSessions}`;
-    const headers = {
-      "Authorization": `Bearer ${jwtToken}`
-    };
+  const url = `${backendAddress}${sessionApis.getSessions}`;
+  const headers = { "Authorization": `Bearer ${jwtToken}` };
 
-    return generalFetch(url, "GET", identity, undefined, headers);
+  const response = await generalFetch(url, "GET", identity, undefined, headers);
+  
+  return { ...response, data: response.data ?? [] }; // Siempre devuelve `[]` en vez de `undefined`
+}
 
-};
 
-export { getSessions };
+async function createSession(jwtToken: string | undefined, session: SessionToSend) {
+  
+  if (!jwtToken) return { status: 500, data: null, error: "No autenticado" };
+
+  const url = `${backendAddress}${sessionApis.getSessions}`;
+  const headers = { 
+    "Authorization": `Bearer ${jwtToken}`,
+    "Content-Type": "application/json"  
+  };
+
+  return await generalFetch(url, "POST", identity, session, headers);
+}
+
+export { getSessions, createSession };

@@ -6,11 +6,13 @@ import { faRightLeft } from "@fortawesome/free-solid-svg-icons";
 interface ActivityHeaderProps {
   tags: string[];
   givenDate?: string;
+  rol: string;
 }
 
 export default function ActivityHeader({
   tags,
   givenDate,
+  rol
 }: ActivityHeaderProps) {
   return (
     <div className="flex flex-col gap-y-2">

@@ -1,3 +1,5 @@
+"use client"
+
 interface SimpleButtonProps {
   buttonText: string;
   className: string;

@@ -2,7 +2,7 @@ import ContentCard from "@/templates/2.organisms/2.ContentCard";
 import GridTwoColsRow from "@/templates/2.organisms/3.GridTwoColsRow";
 import LeftSettingsNewActivity from "@/components/3.templates/5.LeftSettingsNewActivity";
 import TypeActivityConfig from "../2.organisms/11.TypeActivityConfig";
-import AccountFormDecision from "../1.molecules/13.NewSessionFormDecision";
+import TwoButtonFormDecision from "@/templates/1.molecules/13.TwoButtonFormDecision";
 
 export default function ConfigActivity() {
   return (
@@ -16,7 +16,7 @@ export default function ConfigActivity() {
         {/* Especificas al tipo de actividad */}
         <TypeActivityConfig />
       </GridTwoColsRow>
-      <AccountFormDecision />
+      <TwoButtonFormDecision/>
     </ContentCard>
   );
 }

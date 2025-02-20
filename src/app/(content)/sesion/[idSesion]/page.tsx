@@ -27,6 +27,7 @@ export default function Sesion() {
         options={["Wenas", "adios", "uff, naiss", "otra mas", "y otra"]}
         date={new Date().toISOString()}
       />
+      <TidemanActivity mode="participar" tags = {tags} pregunta = "usuario"></TidemanActivity>
     </PageContentContainer>
   );
 }

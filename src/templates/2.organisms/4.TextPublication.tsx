@@ -17,7 +17,7 @@ export default function TextPublication({
 
   return (
     <ContentCard>
-      <ActivityHeader tags={tags} />
+      <ActivityHeader tags={tags} rol="admin" />
       <MarkdownShower markdown={markdown} />
     </ContentCard>
   );

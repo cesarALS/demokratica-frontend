@@ -55,7 +55,7 @@ export default function CommonVotationActivity({
 
   return (
     <ContentCard>
-      <ActivityHeader tags={tags} givenDate={date} />
+      <ActivityHeader tags={tags} givenDate={date} rol="admin" />
       <MarkdownShower markdown={markdownQuestion} />
       {mode === "participation" && (
         <>

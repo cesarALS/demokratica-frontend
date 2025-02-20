@@ -2,6 +2,7 @@ import PageContentContainer from "@/templates/2.organisms/1.PageContentContainer
 import SessionTitleControls from "@/components/1.molecules/17.SessionTitleControls";
 import TextPublication from "@/templates/2.organisms/4.TextPublication";
 import CommonVotationActivity from "@/templates/3.templates/0.CommonVotationActivity";
+import TidemanActivity from "@/templates/2.organisms/5.TidemanActivity";
 
 export default function Sesion() {
   // Inside the publication
@@ -26,6 +27,7 @@ export default function Sesion() {
         options={["Wenas", "adios", "uff, naiss", "otra mas", "y otra"]}
         date={new Date().toISOString()}
       />
+      <TidemanActivity mode="participar" tags = {tags} pregunta = "usuario"></TidemanActivity>
     </PageContentContainer>
   );
 }

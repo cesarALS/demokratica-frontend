@@ -5,15 +5,18 @@ import { faRightLeft } from "@fortawesome/free-solid-svg-icons";
 
 interface ActivityHeaderProps {
   tags: string[];
-  rol: string;
+  givenDate?: string;
 }
 
-export default function ActivityHeader({ tags, rol }: ActivityHeaderProps) {
+export default function ActivityHeader({
+  tags,
+  givenDate,
+}: ActivityHeaderProps) {
   return (
     <div className="flex flex-col gap-y-2">
       <div className="flex w-full items-center justify-between">
         {/* Fecha publicación actividad*/}
-        <DateTime className="text-sm" />
+        <DateTime className="text-sm" date={givenDate} />
         {/* Boton de borrar publicación */}
         {rol === "admin" ? (
           <div className="flex items-center gap-x-2">

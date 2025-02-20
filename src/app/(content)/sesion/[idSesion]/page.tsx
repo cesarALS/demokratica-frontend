@@ -1,12 +1,7 @@
 import PageContentContainer from "@/templates/2.organisms/1.PageContentContainer";
 import SessionTitleControls from "@/components/1.molecules/17.SessionTitleControls";
 import TextPublication from "@/templates/2.organisms/4.TextPublication";
-
-import ContentCard from "@/templates/2.organisms/2.ContentCard";
-import ActivityHeader from "@/templates/1.molecules/9.ActivityHeader";
-import MarkdownShower from "@/templates/0.atoms/18.MarkdownShower";
-import SelectableOptions from "@/templates/1.molecules/11.SelectableOptions";
-import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
+import CommonVotationActivity from "@/templates/3.templates/0.CommonVotationActivity";
 import TidemanActivity from "@/templates/2.organisms/5.TidemanActivity";
 
 export default function Sesion() {
@@ -24,21 +19,14 @@ export default function Sesion() {
       {/* Controles y Titulo de la sesión */}
       <SessionTitleControls />
       {/* TODO: Aqui debe ir un componente que procese la lista de actividades y las renderice según su tipo */}
+      {/* Publicación de texto de prueba, esto no puede quedar aquí */}
       <TextPublication tags={tags} />
-      <ContentCard>
-        <ActivityHeader tags={tags} rol="admin"/>
-        <MarkdownShower markdown={"Wenas, soy una pregunta"} />
-        <SelectableOptions
-          options={["Wenas", "adios", "uff, nais", "otra mas", "y otra"]}
-        />
-        <SimpleButton
-          buttonText="Enviar"
-          className="bg-PrimCreamCan hover:bg-SecCreamCan sm:max-w-[50%] sm:self-center"
-        />
-      </ContentCard>
-      <ContentCard>
-        <TidemanActivity mode="participar" tags = {tags} pregunta = "usuario"></TidemanActivity>
-      </ContentCard>
+      <CommonVotationActivity
+        tags={tags}
+        markdownQuestion="Wenas, soy una pregunta"
+        options={["Wenas", "adios", "uff, naiss", "otra mas", "y otra"]}
+        date={new Date().toISOString()}
+      />
     </PageContentContainer>
   );
 }

@@ -7,7 +7,7 @@ type Activity = {
   startTime: string;
   endTime: string;
   tags: { text: string }[];
-  pollOptions?: { id: number; description: string; voters: any[] }[];
+  pollOptions?: { id: number; description: string; voters: string[] }[];
   type: string;
 };
 

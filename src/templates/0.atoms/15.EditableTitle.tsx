@@ -48,6 +48,11 @@ export default function EditableTitle({
           type="text"
           value={currentTitle}
           onChange={(e) => setCurrentTitle(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              toggleEditing();
+            }
+          }}
           className="w-full rounded-lg border text-2xl focus:outline-none focus:ring-1 focus:ring-PrimBlack"
         />
       ) : (

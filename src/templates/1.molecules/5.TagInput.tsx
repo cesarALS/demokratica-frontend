@@ -1,9 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 
-export default function TagInput() {
+interface TagInputProps {
+  setValue?: (tags: string[]) => void
+}
+
+export default function TagInput(
+  {setValue = ([])=>{}}: TagInputProps
+) {
   const [tags, setTags] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
 
@@ -24,6 +30,10 @@ export default function TagInput() {
       addTag();
     }
   };
+
+  useEffect(()=>{
+    setValue(tags);
+  }, [tags]);
 
   return (
     <div className="flex flex-col gap-y-4">

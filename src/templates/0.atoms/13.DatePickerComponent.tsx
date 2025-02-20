@@ -1,26 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // import { format } from "date-fns"; {To get the date into a specific format}
 
 interface DatePickerComponentProps {
   initialDate: Date;
+  setValue: (date: Date) => void;
 }
 
 export default function DatePickerComponent({
   initialDate,
+  setValue = () => {}
 }: DatePickerComponentProps) {
   const [selectedTime, setSelectedTime] = useState(initialDate);
 
   const onChangeHandler = (date: Date | null): void => {
-    if (date) {
-      setSelectedTime(date);
-    } else {
-      setSelectedTime(initialDate);
-    }
+    if(date) setSelectedTime(date);          
+    else setSelectedTime(initialDate);        
   };
+
+  useEffect(() => {
+    setValue(selectedTime);
+  }, [selectedTime]);
 
   return (
     <DatePicker

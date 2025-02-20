@@ -40,4 +40,3 @@ export async function generalFetch<T>(
 // No hace ninguna transformación a los datos de regreso de la API. 
 // Se puede importar cuando otra función acepte la estructura de datos exacta que da la API
 export function identity(res: [] | object){return res}  
-

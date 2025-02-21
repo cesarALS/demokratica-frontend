@@ -2,13 +2,15 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import cloud, { Word } from "d3-cloud";
+import * as d3 from "d3";
+import { scaleLinear } from "d3-scale";
 
 interface WordData {
   text: string;
   value: number;
 }
 
-const words: WordData[] = [
+const wordsTest: WordData[] = [
   { text: "React", value: 80 },
   { text: "Next.js", value: 70 },
   { text: "TypeScript", value: 60 },
@@ -20,12 +22,19 @@ const words: WordData[] = [
   { text: "Innovation", value: 10 },
 ];
 
-export default function WordCloud() {
+interface WordCloudProps {
+  words?: WordData[];
+}
+
+export default function WordCloud({ words }: WordCloudProps) {
   const [wordData, setWordData] = useState<
     { text: string; x: number; y: number; size: number }[]
   >([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 80, height: 80 });
+
+  // Default words
+  if (!words) words = wordsTest;
 
   // Resize handler
   useEffect(() => {
@@ -44,12 +53,16 @@ export default function WordCloud() {
 
   // Generate word cloud layout
   useEffect(() => {
+    const fontSizeScale = scaleLinear()
+      .domain([d3.min(words, (d) => d.value)!, d3.max(words, (d) => d.value)!])
+      .range([10, size.width / 6]); // Adjust the range as needed
+
     const layout = cloud()
       .size([size.width, size.height])
       .words(words.map((d) => ({ text: d.text, size: d.value }) as Word))
-      .padding(5)
+      .padding(3)
       .rotate(0) // No rotation
-      .fontSize((d) => d.size ?? 10)
+      .fontSize((d) => fontSizeScale(d.size ?? 10))
       .on("end", (output) =>
         setWordData(
           output.map((d) => ({
@@ -62,12 +75,12 @@ export default function WordCloud() {
       );
 
     layout.start();
-  }, [size]);
+  }, [size, words]);
 
   return (
     <div
       ref={containerRef}
-      className="flex h-[300px] w-full items-center justify-center sm:h-[400px] md:h-[500px]"
+      className="flex h-[300px] w-full items-center justify-center sm:h-[200px] md:h-[300px] lg:h-[460px]"
     >
       <svg width={size.width} height={size.height}>
         {wordData.map((d, i) => (

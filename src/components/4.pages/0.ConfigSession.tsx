@@ -13,6 +13,8 @@ import { useRouter } from "next/navigation";
 import demokraticaRoutes from "@/utils/routeUtils";
 import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
+import { useQueryClient } from "@tanstack/react-query";
+import { queryKeys } from "@/utils/reactQueryUtils";
 
 // TODO: Esta pagina sirve para las configuraciones de sesión en general, no solo los de una nueva sesión, la idea es que tome la info dependiendo de en donde la llamen y además entregue la info también dependiendo de donde la llamen.
 
@@ -32,6 +34,7 @@ export default function ConfigSession() {
   }, [SessionStore])
 
   const router = useRouter();
+  const queryClient = useQueryClient();
   const MessageContext = useMessageContext();
   const { getCookie } = useAuthContext();
 
@@ -50,7 +53,13 @@ export default function ConfigSession() {
     })
 
     // TODO: La api de creación de sesión debe devolver el id de la sesión creada
-    if(result.status === 201) router.push(`${demokraticaRoutes.sesion.link}/${result.id}`) 
+    if(result.status === 201) {
+      // Borrar caché            
+      queryClient.removeQueries({ queryKey: [queryKeys.sessions] });
+      queryClient.invalidateQueries({ queryKey: [queryKeys.sessions] });
+      // Cargar el muro de sesiones
+      router.push(`${demokraticaRoutes.sesion.link}/${result.id}`);
+    }
 
   }
       

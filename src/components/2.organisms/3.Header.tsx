@@ -117,13 +117,13 @@ export default function Header() {
                       href={demokraticaRoutes.cuenta.link}
                       className="flex w-full items-center justify-end p-2 rounded-t-xl text-ls bg-ThirdGray hover:bg-SecGray hover:cursor"                                             
                     >
-                      Gestionar Cuenta
+                      Gestionar tu cuenta
                     </Link>                     
                     <Link 
                       href={demokraticaRoutes.centroUsuario.link}
                       className="flex w-full items-center justify-end p-2 text-ls bg-ThirdGray hover:bg-SecGray hover:cursor"                                             
                     >
-                      Mirar Sesiones
+                      Ir al menú de usuario
                     </Link>                                                            
                     <button                        
                       onClick={handleLogout}

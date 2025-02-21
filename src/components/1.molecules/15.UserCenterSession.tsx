@@ -4,18 +4,19 @@ import _ from "lodash";
 import UserCenterSessionInfo from "../0.atoms/12.UserCenterSessionInfo";
 
 interface UserCenterProps {
-    id: number
+    id: number;
+    titleRef: (el: HTMLDivElement | null) => void;
+    maxTitleHeight: string;
 }
 
-const UserCenterSession = (props: UserCenterProps) => {
-    
-    const {id} = props;
+const UserCenterSession = ({ id, titleRef, maxTitleHeight }: UserCenterProps) => {
+        
     const SessionStore = useUserCenterStore();
     const session = _.find(SessionStore.sessions, {id: id});
     
     return (        
         <div className="flex flex-col items-center justify-start bg-white w-full min-h-full rounded-md">
-            <UserCenterSessionTitle session={session}/>                
+            <UserCenterSessionTitle session={session} titleRef={titleRef} maxTitleHeight={maxTitleHeight}/>                
             <UserCenterSessionInfo session={session}/>
         </div>        
     )

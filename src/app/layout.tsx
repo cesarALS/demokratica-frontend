@@ -43,7 +43,7 @@ export default function RootLayout({
               <MessageProvider>           
                 {children}
               </MessageProvider>
-            </AuthProvider>
+            </AuthProvider>            
           </AppQueryProvider>
         </Suspense> 
       </body>

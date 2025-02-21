@@ -1,7 +1,7 @@
 import ParticipantsResultsInteractions from "./6.ParticipantsResultsInteractions";
 import ParticipantsResultsSelector from "@/components/1.molecules/8.ParticipantsResultsSelector";
 import ParticipantsResultsBox from "@/components/2.organisms/7.ParticipantsResultsBox";
-import ParticipantsResultsNavBar from "@/components/2.organisms/8.ParticipantsResultsNavBar";
+import PaginationNavBar from "@/templates/0.atoms/19.PaginationNavBar";
 
 export default function ParticipantsResults() {
   return (
@@ -13,7 +13,7 @@ export default function ParticipantsResults() {
       {/* UsersResultsBox */}
       <ParticipantsResultsBox />
       {/* ResultsNavBar */}
-      <ParticipantsResultsNavBar />
+      <PaginationNavBar panelClassname="bg-ThirdGray border-2 border-t-0 border-PrimBlack"/>
     </div>
   );
 }

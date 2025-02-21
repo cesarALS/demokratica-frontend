@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getSessions } from "@/utils/apiUtils/apiSessionsUtils";
 import { Session } from "@/types/sessions";
+import { queryKeys } from "@/utils/reactQueryUtils";
 
 const CentroUsuario = () => {    
   
@@ -16,7 +17,7 @@ const CentroUsuario = () => {
 
   // React Query para obtener sesiones con cache
   const { data: sessions = [], isLoading } = useQuery({
-    queryKey: ["sessions"],
+    queryKey: [queryKeys.sessions],
     queryFn: async () => {
       const response = await getSessions(getCookie());
       if (response.error) {
@@ -25,6 +26,7 @@ const CentroUsuario = () => {
       return response.data;
     },
     enabled: !!getCookie(),
+    staleTime: 1000 * 60 * 5, // Cacheo de la información por 5 minutos
   });
   
 

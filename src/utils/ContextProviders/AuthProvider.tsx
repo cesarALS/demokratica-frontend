@@ -5,6 +5,9 @@ import Cookies from "js-cookie";
 import { DemokraticaUser } from "@/types/auth";
 import { changeUsername, createUser, deleteAccount, getUser, login } from "../apiUtils/apiAuthUtils";
 import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen";
+import { useQueryClient } from "@tanstack/react-query";
+import demokraticaRoutes from "../routeUtils";
+import { useRouter } from "next/navigation";
 
 interface AuthContextType {
     user: DemokraticaUser | null;
@@ -29,6 +32,8 @@ export function useAuthContext(){
 export function AuthProvider({ children }: {children: React.ReactNode}){
     const [user, setUser] = useState<DemokraticaUser | null >(null);    
     const [loading, setLoading] = useState(true); // Estado de carga
+    const queryClient = useQueryClient();
+    const router = useRouter();
     
     const getCookie = () => {
         return Cookies.get(TOKEN_COOKIE);
@@ -76,9 +81,14 @@ export function AuthProvider({ children }: {children: React.ReactNode}){
     }
     
     // Función exportable para hacer logout
-    const handleLogout = () => {
-        Cookies.remove(TOKEN_COOKIE);
-        setUser(null);
+    const handleLogout = () => {                
+        // Se remueve el caché guardado por React Query        
+        router.push(demokraticaRoutes.login.link);
+        
+        setTimeout(() => queryClient.clear(), 0); // El timeout de 0 ms asegura que la redirección ocurra primero
+        
+        Cookies.remove(TOKEN_COOKIE);                
+        setUser(null);        
     };    
 
     const handleUsernameChange = async (newUsername: string) => {

@@ -76,8 +76,8 @@ export default function ActivitiesLoader() {
         const isOngoing =
           new Date(activity.startTime) <= new Date() &&
           new Date() <= new Date(activity.endTime);
-        const mode = isOngoing ? "participacion" : "resultados";
-
+        const mode = !isOngoing /*|| activity.hasVoted*/ ? "results" : "participation";
+         
         switch (activity.type) {
           case "common":
             return (
@@ -90,6 +90,7 @@ export default function ActivitiesLoader() {
                   []
                 }
                 date={activity.startTime}
+                initialMode = {mode}
               />
             );
 
@@ -114,6 +115,7 @@ export default function ActivitiesLoader() {
                   []
                 }
                 date={activity.startTime}
+                initialMode={mode}
               />
             );
         }

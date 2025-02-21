@@ -74,7 +74,7 @@ export default function CommonVotationActivity({
             {results.map(({ name, color }, index) => (
               <div
                 key={index}
-                className={`flex w-full items-center gap-x-2 rounded-lg border-2 border-SecBlack bg-white p-2 font-semibold text-PrimBlack`}
+                className="flex w-full items-center gap-x-2 rounded-lg border-2 border-SecBlack bg-white p-2 font-semibold text-PrimBlack"
               >
                 <div
                   style={{ backgroundColor: color }}

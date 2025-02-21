@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import CommonVotationActivity from "@/templates/3.templates/0.CommonVotationActivity";
-import TidemanActivity from "@/templates/2.organisms/5.TidemanActivity";
+import TidemanActivity from "@/templates/3.templates/1.TidemanActivity";
 import { getSessions } from "@/utils/apiUtils/apiActivitiesUtils";
 import { useSessionActivitiesStore } from "@/utils/ContextProviders/SessionActivitiesStore";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
@@ -41,33 +41,36 @@ export default function ActivitiesLoader() {
     if (!isLoading && fetchedActivities) {
       setActivities(fetchedActivities as Activity[]);
     }
-  }, [fetchedActivities, isLoading]);
+  }, [fetchedActivities, isLoading, setActivities]);
 
   if (isLoading)
     return (
       <div className="border-2 border-black">
-      <LoadingScreen
-        fixed={false}
-        text={"Cargando sesiones"}
-        showText={false}
-        scale={1.2}
-        logo={"Title"}
-      />
+        <LoadingScreen
+          fixed={false}
+          text={"Cargando sesiones"}
+          showText={false}
+          scale={1.2}
+          logo={"Title"}
+        />
       </div>
     );
-    if (!activities.length) {
-        return (
-          <div className="flex flex-col items-center justify-center min-h-[50vh] text-center">
-            <FontAwesomeIcon icon={faBoxOpen} className="text-black text-6xl" />
-            <p className="mt-4 text-black text-lg">
-              No hay actividades en esta sesión.
-            </p>
-            <Link href={newActivityPath} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition" >
-              Agregar actividad
-            </Link>
-          </div>
-        );
-      }
+  if (!activities.length) {
+    return (
+      <div className="flex min-h-[50vh] flex-col items-center justify-center text-center">
+        <FontAwesomeIcon icon={faBoxOpen} className="text-6xl text-black" />
+        <p className="mt-4 text-lg text-black">
+          No hay actividades en esta sesión.
+        </p>
+        <Link
+          href={newActivityPath}
+          className="mt-4 rounded-lg bg-PrimBlue px-4 py-2 text-white shadow transition hover:bg-AccentBlue"
+        >
+          Agregar actividad
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -79,6 +82,7 @@ export default function ActivitiesLoader() {
         const mode = isOngoing ? "participacion" : "resultados";
 
         switch (activity.type) {
+          // TODO: Aquí falta el caso de texto
           case "common":
             return (
               <CommonVotationActivity

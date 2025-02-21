@@ -33,10 +33,12 @@ export default function WordCloudActivity({
   return (
     <ContentCard>
       <ActivityHeader tags={tags} givenDate={date} rol="admin" />
-      <GridTwoColsRow>
-        <MarkdownShower markdown={markdownQuestion} />
+      <GridTwoColsRow className="gap-x-4 gap-y-4">
+        <div className="flex items-center justify-center">
+          <MarkdownShower markdown={markdownQuestion} />
+        </div>
         {mode === "participation" && (
-          <SectionContainer>
+          <SectionContainer className="flex items-center">
             <input
               type="text"
               className="flex w-full items-center gap-x-2 rounded-lg border-2 border-SecBlack bg-white p-2 font-semibold text-black"

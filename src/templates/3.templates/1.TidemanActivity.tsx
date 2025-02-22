@@ -46,10 +46,10 @@ export default function TidemanActivity({
         {mode === "participation" && (
           <OrganizableOptions optionsList={currOptions} />
         )}
-        <SectionContainer className="flex flex-col gap-y-2">
-          <div className="text-xl">Resultados:</div>
-          {mode === "results" &&
-            currOptions.map(({ entry, value }, index) => (
+        {mode === "results" && (
+          <SectionContainer className="flex flex-col gap-y-2">
+            <div className="text-xl">Resultados:</div>
+            {currOptions.map(({ entry, value }, index) => (
               <div
                 key={index}
                 className="flex w-full items-center gap-x-2 rounded-lg border-2 border-SecBlack bg-white px-3 py-2 font-semibold text-PrimBlack"
@@ -60,7 +60,8 @@ export default function TidemanActivity({
                 </div>
               </div>
             ))}
-        </SectionContainer>
+          </SectionContainer>
+        )}
       </GridTwoColsRow>
       {mode === "participation" && (
         <SimpleButton

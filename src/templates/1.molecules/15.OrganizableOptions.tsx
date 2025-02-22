@@ -55,6 +55,7 @@ export default function OrganizableOptions({
             placeholder={(index + 1).toString()}
             inputClassName="w-8 text-center border-none rounded-lg hover:bg-PrimBlue hover:text-white hover:placeholder-white"
             handleValueChange={handleValueChange}
+            listItemClassName="hover:bg-PrimBlue hover:text-white"
           />
           <div>{entry}</div>
         </div>

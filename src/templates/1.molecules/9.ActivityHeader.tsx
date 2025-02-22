@@ -12,7 +12,7 @@ interface ActivityHeaderProps {
 export default function ActivityHeader({
   tags,
   givenDate,
-  rol
+  rol,
 }: ActivityHeaderProps) {
   return (
     <div className="flex flex-col gap-y-2">
@@ -22,14 +22,8 @@ export default function ActivityHeader({
         {/* Boton de borrar publicación */}
         {rol === "admin" ? (
           <div className="flex items-center gap-x-2">
-            <button className="flex items-center justify-center rounded-xl border-2 border-AccentBlue bg-SecBlue p-1 hover:bg-PrimBlue">
-              <FontAwesomeIcon
-                className="size-8 text-white"
-                icon={faRightLeft}
-              />
-            </button>
-            <button className="flex items-center justify-center rounded-xl border-2 border-AccentBlue bg-SecBlue p-1 hover:bg-PrimBlue">
-              <FontAwesomeIcon className="size-8 text-white" icon={faTrash} />
+            <button className="flex items-center justify-center rounded-xl border-2 border-AccentBlue bg-SecBlue p-2 hover:bg-PrimBlue">
+              <FontAwesomeIcon className="size-6 text-white" icon={faTrash} />
             </button>
           </div>
         ) : (

@@ -55,6 +55,7 @@ export default function SelectDropdown({
       handleValueChange(lastValue, inputValue);
       setLastValue(inputValue);
       if (passAndRestartValue) {
+        setLastValue(options[initialSelectedItem]);
         setValue(options[initialSelectedItem]);
       }
     }
@@ -68,6 +69,7 @@ export default function SelectDropdown({
       handleValueChange(lastValue, selectedOption);
       setLastValue(selectedOption);
       if (passAndRestartValue) {
+        setLastValue(options[initialSelectedItem]);
         setValue(options[initialSelectedItem]);
       }
     }

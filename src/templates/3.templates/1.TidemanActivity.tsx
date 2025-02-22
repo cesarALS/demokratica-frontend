@@ -1,62 +1,74 @@
-import SimpleButton from "../0.atoms/11.SimpleButton";
+"use client";
+
+import { useState } from "react";
+import ContentCard from "../2.organisms/2.ContentCard";
+import MarkdownShower from "../0.atoms/18.MarkdownShower";
 import ActivityHeader from "../1.molecules/9.ActivityHeader";
-import GridTwoColsRow from "@/templates/2.organisms/3.GridTwoColsRow";
+import GridTwoColsRow from "../2.organisms/3.GridTwoColsRow";
+import OrganizableOptions from "../1.molecules/15.OrganizableOptions";
+import SimpleButton from "../0.atoms/11.SimpleButton";
+
+import { OrganizableEntry } from "@/types/activities";
+import SectionContainer from "../1.molecules/10.SectionContainer";
+
 interface TidemanActivityProps {
-  mode: string;
+  date: string;
   tags: string[];
-  pregunta: string;
+  markdownQuestion: string;
 }
 
 export default function TidemanActivity({
-  mode,
+  date,
   tags,
-  pregunta,
+  markdownQuestion,
 }: TidemanActivityProps) {
-  let contenido;
+  const [mode, setMode] = useState("participation");
+  const currOptions: OrganizableEntry[] = [
+    { entry: "Option 1", value: 1 },
+    { entry: "Option 2", value: 2 },
+    { entry: "Option 3", value: 3 },
+    { entry: "Option 4", value: 4 },
+    { entry: "Option 5", value: 5 },
+  ];
 
-  if (mode === "resultados") {
-    contenido = (
-      <>
-        <GridTwoColsRow>
-          <div className="flex items-center justify-center rounded-md border border-black bg-white p-4 text-center text-2xl">
-            {pregunta}
-          </div>
-          <div className="rounded-md border border-black bg-white p-4 text-center text-xl">
-            Recuadro para mostrar los resultadosRecuadro para mostrar los
-            resultadosRecuadro para mostrar los resultadosRecuadro para mostrar
-            los resultadosRecuadro para mostrar los resultadosRecuadro para
-            mostrar los resultados
-          </div>
-        </GridTwoColsRow>
-      </>
-    );
-  } else if (mode === "participar") {
-    contenido = (
-      <>
-        <GridTwoColsRow>
-          <div className="flex items-center justify-center rounded-md border border-black bg-white p-4 text-center text-2xl">
-            {pregunta}
-          </div>
-          <div className="rounded-md border border-black bg-white p-4 text-center text-xl">
-            Recuadro para participarRecuadro para participarRecuadro para
-            participarRecuadro para participarRecuadro para participarRecuadro
-            para participarRecuadro para participarRecuadro para
-            participarRecuadro para participar
-          </div>
-        </GridTwoColsRow>
-        <div className="flex items-center justify-center gap-x-4 py-2 text-xl">
-          <SimpleButton
-            buttonText="Enviar"
-            className="bg-PrimCreamCan hover:bg-SecCreamCan"
-          />
-        </div>
-      </>
-    );
+  function handleSendResults() {
+    // TODO: Send the results to the server
+    // TODO: Get results in a viable format
+    // TODO: Los resultados solo deberían ser visibles al finalizar la actividad
+    setMode("results");
   }
+
   return (
-    <div className="flex flex-col gap-y-4 rounded-md border border-black bg-ThirdGray p-4">
-      <ActivityHeader tags={tags} rol="admin" />
-      {contenido}
-    </div>
+    <ContentCard>
+      <ActivityHeader tags={tags} givenDate={date} rol="admin" />
+      <GridTwoColsRow>
+        <MarkdownShower markdown={markdownQuestion} />
+        {mode === "participation" && (
+          <OrganizableOptions optionsList={currOptions} />
+        )}
+        <SectionContainer className="flex flex-col gap-y-2">
+          <div className="text-xl">Resultados:</div>
+          {mode === "results" &&
+            currOptions.map(({ entry, value }, index) => (
+              <div
+                key={index}
+                className="flex w-full items-center gap-x-2 rounded-lg border-2 border-SecBlack bg-white px-3 py-2 font-semibold text-PrimBlack"
+              >
+                <div>
+                  <span className="text-black">{value.toString() + ". "}</span>
+                  {entry}
+                </div>
+              </div>
+            ))}
+        </SectionContainer>
+      </GridTwoColsRow>
+      {mode === "participation" && (
+        <SimpleButton
+          onClick={handleSendResults}
+          buttonText="Enviar"
+          className="w-[40%] self-center bg-PrimCreamCan hover:bg-SecCreamCan"
+        />
+      )}
+    </ContentCard>
   );
 }

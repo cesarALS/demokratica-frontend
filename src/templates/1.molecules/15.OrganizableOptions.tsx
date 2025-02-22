@@ -20,8 +20,6 @@ export default function OrganizableOptions({
 
   // Reorder the options each time the user changes the value of an option
   function handleValueChange(lastValue: string, currValue: string) {
-    console.log("lastValue", lastValue);
-    console.log("value", currValue);
     // If the value hasn't changed, do nothing
     if (lastValue === currValue) return;
     // If the value is an empty string, do nothing
@@ -55,6 +53,7 @@ export default function OrganizableOptions({
             placeholder={(index + 1).toString()}
             inputClassName="w-8 text-center border-none rounded-lg hover:bg-PrimBlue hover:text-white hover:placeholder-white"
             handleValueChange={handleValueChange}
+            listItemClassName="hover:bg-PrimBlue hover:text-white"
           />
           <div>{entry}</div>
         </div>

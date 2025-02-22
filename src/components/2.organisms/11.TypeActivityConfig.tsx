@@ -3,6 +3,9 @@
 import { useState } from "react";
 import ConfigCommonVotation from "./12.ConfigCommonVotation";
 import ConfigTextPublication from "./13.ConfigTextPublication";
+import ConfigTidemanVotation from "./15.ConfigTidemanVotation";
+import ConfigWordCloud from "./16.ConfigWordCloud";
+import ConfigPokerPlanning from "./17.ConfigPokerPlanning";
 
 export default function TypeActivityConfig() {
   const tiposVotacion = [
@@ -20,14 +23,13 @@ export default function TypeActivityConfig() {
       configComponent = <ConfigCommonVotation />;
       break;
     case tiposVotacion[1].toLowerCase():
-      // Por ahora tienen la misma config
-      configComponent = <ConfigCommonVotation />;
+      configComponent = <ConfigTidemanVotation />;
       break;
     case tiposVotacion[2].toLowerCase():
-      configComponent = <div></div>;
+      configComponent = <ConfigWordCloud />;
       break;
     case tiposVotacion[3].toLowerCase():
-      configComponent = <div></div>;
+      configComponent = <ConfigPokerPlanning />;
       break;
     case tiposVotacion[4].toLowerCase():
       // Config para texto

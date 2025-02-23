@@ -1,8 +1,10 @@
 import SessionTitleControls from "@/components/1.molecules/17.SessionTitleControls";
 import PageContentContainer from "@/templates/2.organisms/1.PageContentContainer";
 import CommonVotationActivity from "@/templates/3.templates/0.CommonVotationActivity";
+import TidemanActivity from "@/templates/3.templates/1.TidemanActivity";
 import TextPublication from "@/templates/3.templates/2.TextPublication";
 import WordCloudActivity from "@/templates/3.templates/3.WordCloudActivity";
+import PlanningPokerActivity from "@/templates/3.templates/4.PlanningPokerActivity";
 
 export default function compDev() {
   const tags = ["tag1", "tag2", "tag3"];
@@ -24,6 +26,18 @@ export default function compDev() {
         tags={tags}
         markdownQuestion={markdownQuestion}
         date={date}
+      />
+      <PlanningPokerActivity
+        tags={tags}
+        markdownQuestion={markdownQuestion}
+        date={date}
+        scaleType={0}
+      />
+      <TidemanActivity
+        tags={tags}
+        markdownQuestion={markdownQuestion}
+        date={date}
+        initialMode="participacion"
       />
     </PageContentContainer>
   );

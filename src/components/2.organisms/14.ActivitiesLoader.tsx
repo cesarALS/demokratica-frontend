@@ -100,10 +100,11 @@ export default function ActivitiesLoader() {
           case "tideman":
             return (
               <TidemanActivity
+                date={activity.startTime}
                 key={activity.id}
-                mode={mode}
+                initialMode={mode}
                 tags={tags}
-                pregunta={activity.title}
+                markdownQuestion={activity.title}
               />
             );
 

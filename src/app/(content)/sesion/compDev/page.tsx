@@ -37,6 +37,7 @@ export default function compDev() {
         tags={tags}
         markdownQuestion={markdownQuestion}
         date={date}
+        initialMode="participacion"
       />
     </PageContentContainer>
   );

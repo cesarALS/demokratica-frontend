@@ -15,14 +15,16 @@ interface TidemanActivityProps {
   date: string;
   tags: string[];
   markdownQuestion: string;
+  initialMode: string,
 }
 
 export default function TidemanActivity({
   date,
   tags,
   markdownQuestion,
+  initialMode
 }: TidemanActivityProps) {
-  const [mode, setMode] = useState("participation");
+  const [mode, setMode] = useState(initialMode);
   const currOptions: OrganizableEntry[] = [
     { entry: "Option 1", value: 1 },
     { entry: "Option 2", value: 2 },

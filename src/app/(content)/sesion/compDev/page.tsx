@@ -21,6 +21,7 @@ export default function compDev() {
         markdownQuestion={markdownQuestion}
         options={options}
         date={date}
+        initialMode="participacion"
       />
       <WordCloudActivity
         tags={tags}

@@ -15,6 +15,7 @@ interface CommonVotationActivityProps {
   markdownQuestion: string;
   options: string[];
   date: string;
+  initialMode: string;
 }
 
 export default function CommonVotationActivity({
@@ -22,8 +23,9 @@ export default function CommonVotationActivity({
   markdownQuestion,
   options,
   date,
+  initialMode
 }: CommonVotationActivityProps) {
-  const [mode, setMode] = useState("participation");
+  const [mode, setMode] = useState(initialMode);
 
   // Function to generate a unique color for each slice
   function generateColor(index: number, total: number) {

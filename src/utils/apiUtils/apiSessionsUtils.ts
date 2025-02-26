@@ -6,6 +6,7 @@ import { backendAddress, generalFetch, identity } from "./apiUtils"
 const sessionApis = {
     getSessions: "/sessions",
     createSession: "/sessions",
+    getUserlist: "/users"
 }
 
 async function getSessions(jwtToken: string | undefined) {
@@ -14,8 +15,7 @@ async function getSessions(jwtToken: string | undefined) {
   const url = `${backendAddress}${sessionApis.getSessions}`;
   const headers = { "Authorization": `Bearer ${jwtToken}` };
 
-  const response = await generalFetch(url, "GET", identity, undefined, headers);
-  
+  const response = await generalFetch(url, "GET", identity, undefined, headers);  
   return { ...response, data: response.data ?? [] }; // Siempre devuelve `[]` en vez de `undefined`
 }
 
@@ -37,4 +37,19 @@ async function createSession(jwtToken: string | undefined, session: SessionToSen
   return await generalFetch(url, "POST", resParams, session, headers);
 }
 
-export { getSessions, createSession };
+async function getUserList(jwtToken: string){
+
+  if (!jwtToken) return { status: 500, data: null, error: "No autenticado" };
+
+  const url = `${backendAddress}${sessionApis.getUserlist}`
+
+  const headers = {
+    "Authorization": `Bearer ${jwtToken}`,    
+  }
+
+  const response = await generalFetch(url, "GET", identity, undefined, headers);
+  return { ...response, data: response.data ?? [] };
+
+}
+
+export { getSessions, createSession, getUserList };

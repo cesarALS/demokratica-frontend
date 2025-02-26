@@ -27,16 +27,11 @@ const validationSchema = Yup.object({
 export default function SignInComn() {
   
   const [isModalOpen, setModalOpen] = useState(false);
-
-  const openModal = () => {setModalOpen(true)};
-  const closeModal = () => {setModalOpen(false)};
-  
   const router = useRouter();
   const {handleUserCreation} = useAuthContext();
   const {setMessage} = useMessageContext();
 
-  return (
-    
+  return (    
     <>
       <Formik
         initialValues={{
@@ -103,7 +98,7 @@ export default function SignInComn() {
                   {`Acepto `}  
                   <span
                     className="underline cursor-pointer text-AccentBlue hover:text-black "
-                    onClick={openModal}
+                    onClick={() => setModalOpen(true)}
                   >
                     Términos y Condiciones
                   </span>
@@ -126,7 +121,7 @@ export default function SignInComn() {
           </Form>
         )}
       </Formik>
-      {isModalOpen && <UseTerms closeModalAction={closeModal}/>}
+      {isModalOpen && <UseTerms closeModal={() => setModalOpen(false)}/>}
     </>  
   );
 }

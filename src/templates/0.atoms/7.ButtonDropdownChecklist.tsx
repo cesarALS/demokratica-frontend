@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 
 interface ButtonDropdownChecklistProps {
   children?: ReactNode;
+  divClassName?: string;
   buttonClassName?: string;
   listClassName?: string;
   checklistItems?: string[];
@@ -15,6 +16,7 @@ interface ButtonDropdownChecklistProps {
 
 export default function ButtonDropdownChecklist({
   children,
+  divClassName,
   buttonClassName,
   listClassName,
   checklistItems,
@@ -48,7 +50,7 @@ export default function ButtonDropdownChecklist({
   }, []);
 
   return (
-    <div className="relative flex w-full flex-col items-center justify-center">
+    <div className={`relative flex w-full flex-col items-center justify-center ${divClassName}`}>
       {/* boton activador */}
       <button
         ref={dropdownButtonRef}

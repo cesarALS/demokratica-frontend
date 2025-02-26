@@ -35,7 +35,7 @@ const CentroUsuario = () => {
     if (isLoading || !sessions) return;
     setSessions(sessions as Session[]);
     applyFilters();
-  }, [sessions, applyFilters]);
+  }, [sessions, applyFilters, isLoading, setSessions]);
   
   return (        
     <div className="flex flex-col items-center justify-center w-full pt-4 pb-10 gap-8">

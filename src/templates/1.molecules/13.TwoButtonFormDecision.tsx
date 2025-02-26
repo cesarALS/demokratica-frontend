@@ -28,12 +28,12 @@ export default function TwoButtonFormDecision({
     <div className="flex items-center justify-center gap-x-4 py-2 text-xl">      
       <SimpleButton
         buttonText={firstButtonText}
-        className={`${firstButtonClassname} hover:bg-SecCasablanca bg-PrimCasablanca`}
+        className={`${firstButtonClassname} bg-PrimCasablanca`}
         onClick={firstButtonFunction}
       />
       <SimpleButton
         buttonText={secondButtonText}
-        className={`${secondButtonClassname} bg-PrimCreamCan hover:bg-SecCreamCan`}
+        className={`${secondButtonClassname} bg-PrimCreamCan`}
         onClick={secondButtonFunction}
       />
     </div>

@@ -3,10 +3,7 @@
 import { create } from "zustand";
 import { Session } from "../../types/sessions";
 import _ from "lodash";
-
-interface Filters {
-  [key: string]: { options: string[]; current: string };
-}
+import { Filters } from "@/types/filters";
 
 interface UserCenterState {
   sessions: Session[];
@@ -75,7 +72,6 @@ export const useUserCenterStore = create<UserCenterState>((set, get) => ({
       _.includes(_.deburr(_.toLower(obj.description)), searchTerm)
     );
     
-
     setCurrentPage(1);
     set({ currentSessions: filteredSessions });
   },
@@ -91,7 +87,7 @@ export const useUserCenterStore = create<UserCenterState>((set, get) => ({
         ...state.filters,
         [property]: { ...state.filters[property], current: value },
       },
-    }));
+    }));    
     get().applyFilters();
   },
 

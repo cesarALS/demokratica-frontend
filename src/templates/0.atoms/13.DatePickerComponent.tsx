@@ -23,7 +23,7 @@ export default function DatePickerComponent({
 
   useEffect(() => {
     setValue(selectedTime);
-  }, [selectedTime]);
+  }, [selectedTime, setValue]);
 
   return (
     <DatePicker

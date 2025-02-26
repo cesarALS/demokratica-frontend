@@ -8,21 +8,26 @@ import { motion } from "framer-motion";
 
 interface ButtonDropdownSelectorProps {
   children?: ReactNode;
+  divClassName?: string;
   buttonClassName?: string;
   listClassName?: string;
   checklistItems?: string[];
   initialSelectedItem?: number;
-  property: string;
-  stateToParent: (property: string, value: string) => void;
+  showSelectedItem?: boolean;
+  property?: string;
+  stateToParent?: (value: string, property?: string) => void;
 }
 
 export default function ButtonDropdownSelector({
+  children,
+  divClassName,
   buttonClassName,
   listClassName,
   checklistItems,
   initialSelectedItem = 0,
-  property,
-  stateToParent,
+  showSelectedItem = true,
+  property = "",
+  stateToParent = ()=>{},
 }: ButtonDropdownSelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(initialSelectedItem);
@@ -36,7 +41,7 @@ export default function ButtonDropdownSelector({
   const handleSelection = (index: number, item: string) => {
     setSelectedItem(index);
     setIsOpen(false);
-    stateToParent(property, item); // Pasar el estado al padre
+    stateToParent(item, property); // Pasar el estado al padre
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -60,16 +65,19 @@ export default function ButtonDropdownSelector({
   }, []);
 
   return (
-    <div className="relative flex w-full flex-col items-center justify-center">
+    <div className={`relative flex w-full flex-col items-center justify-center ${divClassName}`}>
       {/* boton activador */}
       <button
         ref={dropdownButtonRef}
         onClick={() => setIsOpen(!isOpen)}
         className={`${buttonClassName} flex w-full items-center justify-center gap-x-4 bg-SecBlue py-2 hover:bg-PrimBlue`}
       >
-        <span className="text-lg font-extrabold text-white">
-          {checklistItems[selectedItem]}
-        </span>
+        {children}
+        {showSelectedItem && (
+          <span className="text-lg font-extrabold text-white">
+            {checklistItems[selectedItem]}
+          </span>
+        )}        
         {isOpen ? (
           <FontAwesomeIcon icon={faChevronUp} className="size-6 text-white" />
         ) : (
@@ -89,7 +97,7 @@ export default function ButtonDropdownSelector({
           {checklistItems.map((item, index) => (
             <li
               key={index}
-              className="flex items-center gap-2 p-2 text-PrimBlack hover:bg-SecGray hover:text-black"
+              className="flex items-center gap-2 p-2 text-PrimBlack hover:bg-SecGray hover:text-black hover:cursor-pointer"
               onClick={() => {
                 handleSelection(index, item);
               }}

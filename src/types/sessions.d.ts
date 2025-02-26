@@ -1,4 +1,4 @@
-type roles = "ADMIN" | "INVITADO" | "DUEÑO" | "EDITOR"
+type roles = "DUEÑO" | "ADMIN" | "EDITOR" | "PARTICIPANTE"
 
 export interface Session {
     id: number,
@@ -20,9 +20,22 @@ export interface SessionToSend {
     tags: Tag[]
 }
 
+// Es un miembro que sirve para cuando se filtran todos los miembros de la app
+export interface DemokraticaListMember {
+    username: string,
+    email: string
+}
+
 interface Invitation {
-    invitedUserEmail: string,
+    invitedUserEmail: string,    
     role: roles
+}
+
+interface CreateSessionInvitation {
+    email: string,
+    role: roles,
+    username: string,    
+    thicked: boolean
 }
 
 interface Tag {

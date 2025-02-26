@@ -17,7 +17,11 @@ const UserCenterDropdownsBox = () => {
                         listClassName="border-x-2 border-PrimBlack border-b-2 rounded-b-2xl"                        
                         checklistItems={values.options}
                         property={key}
-                        stateToParent={SessionsStore.setFilter}
+                        stateToParent={(value: string, property: string|undefined) => {
+                            if(property !== undefined){
+                                SessionsStore.setFilter(property, value);
+                            }                            
+                        }}
                         />
                     </div>
                     )

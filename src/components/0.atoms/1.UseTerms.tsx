@@ -1,73 +1,63 @@
 import ReactMarkdown from "react-markdown"
 import { useEffect, useState } from "react";
 import { linkStyles } from "@/utils/tailwindUtils";
+import GenericModal from "@/templates/1.molecules/16.GenericModal";
+import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
 
 interface UseTermsProps {
-    closeModalAction: () => void;
+    closeModal: () => void;
 }
 
-const UseTerms = ({ closeModalAction }: UseTermsProps) => {
+const UseTerms = ({ closeModal }: UseTermsProps) => {
     
     const [markdownFile, setMarkdownFile] = useState<string>("");
-
     useEffect(() => {
         // Lee el archivo Markdown desde la carpeta public
         fetch("/UseTerms.md")
             .then((res) => res.text())
             .then((data) => setMarkdownFile(data));
-        
-        // Bloquear el scroll del fondo
-        document.body.style.overflow = "hidden";
-
-        // Limpiar el bloqueo cuando el modal se cierre
-        return () => {
-            document.body.style.overflow = "auto";
-        };
     }, []);
 
     return (
-        <div className="fixed inset-0 bg-SecGray bg-opacity-50 flex items-center justify-center z-50">
-            {/* Div para pointer-events-none, que anula los eventos del fondo */}
-            <div className="w-[50%] h-[65vh] bg-white rounded-2xl p-4 pointer-events-none"> 
-                <div className="flex flex-col items-center justify-center gap-4 w-full h-full pointer-events-auto">
-                    {markdownFile ? (
-                        <>
-                            <div className="overflow-y-auto p-2"> {/* Aseguramos scroll en el área de Markdown */}
-                                <ReactMarkdown 
-                                    className="prose flex flex-col gap-4 pr-3 text-justify"
-                                    components={{
-                                        h1: ({ children, ...props}) => (                                      
-                                            <h1 className="text-center font-bold text-xl" {...props}>
-                                                {children}
-                                            </h1>
-                                        ),
-                                        h2: ({ children, ...props}) => (                                       
-                                            <h2 className="text-left font-semibold text-lg" {...props}>
-                                                {children}
-                                            </h2>                                        
-                                        ),
-                                        a: ({ children, ...props}) => (                                       
-                                            <a className={`${linkStyles()}`} {...props}>
-                                                {children}
-                                            </a>                                                  
-                                        ),
-                                    }}>
-                                    {markdownFile}
-                                </ReactMarkdown>                            
-                            </div>
-                            <button
-                                className={`flex items-center justify-center bg-PrimCreamCan px-2 py-1 rounded-md border-2 border-black hover:scale-110`}
-                                onClick={closeModalAction}
-                            >
-                                Entendido
-                            </button>
-                        </>
-                    ) : (
-                        <></>
-                    )}
+        <GenericModal
+            className="flex flex-col items-center w-[80%] md:w-[40%] h-[65vh] rounded-2xl p-4 border-2 border-AccentBlue"               
+        >                                
+            {markdownFile ? (
+                <div className="w-full h-full flex flex-col items-center gap-4">
+                    <div className="overflow-y-auto p-2 w-full scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-PrimBlue scrollbar-track-transparent"> {/*Aseguramos scroll en el área de Markdown */}
+                        <ReactMarkdown 
+                            className="flex flex-col pr-3 gap-3 text-justify w-full "
+                            components={{
+                                h1: ({ children, ...props}) => (                                      
+                                    <h1 className="text-center font-bold text-xl" {...props}>
+                                        {children}
+                                    </h1>
+                                ),
+                                h2: ({ children, ...props}) => (                                       
+                                    <h2 className="text-left font-semibold text-lg" {...props}>
+                                        {children}
+                                    </h2>                                        
+                                ),
+                                a: ({ children, ...props}) => (                                       
+                                    <a className={`${linkStyles()}`} {...props}>
+                                        {children}
+                                    </a>                                                  
+                                ),
+                            }}>
+                            {markdownFile}
+                        </ReactMarkdown>                            
+                    </div>
+                    <SimpleButton
+                        buttonText="Entendido"
+                        className="bg-PrimCreamCan hover:bg-AccentCreamCan"
+                        onClick={closeModal}
+                    >
+                    </SimpleButton>
                 </div>
-            </div>
-        </div>
+            ) : (
+                <></>
+            )}
+        </GenericModal>
     );
 };
 

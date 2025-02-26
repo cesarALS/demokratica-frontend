@@ -13,8 +13,8 @@ import { useRouter } from "next/navigation";
 import demokraticaRoutes from "@/utils/routeUtils";
 import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
-import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "@/utils/reactQueryUtils";
+import { useQueryClient } from "@tanstack/react-query";
 
 // TODO: Esta pagina sirve para las configuraciones de sesión en general, no solo los de una nueva sesión, la idea es que tome la info dependiendo de en donde la llamen y además entregue la info también dependiendo de donde la llamen.
 
@@ -24,19 +24,20 @@ import { queryKeys } from "@/utils/reactQueryUtils";
 export default function ConfigSession() {  
   
   const SessionStore = useSessionStore();
+  const queryClient = useQueryClient();
+  const MessageContext = useMessageContext();
+  const { getCookie } = useAuthContext();
+
   const handleTitleChange = (title: string) => SessionStore.setField("title", title);
 
   useEffect(() => {
-    const {title, description, startDate, endDate, invitations, tags} = SessionStore;
-    const logs = {title, description, startDate, endDate, invitations, tags};
+    const {title, description, startDate, endDate, invitations, tags, filters, currentPage} = SessionStore;
+    const logs = {title, description, startDate, endDate, invitations, tags, filters, currentPage };
     console.log(logs);
 
   }, [SessionStore])
 
-  const router = useRouter();
-  const queryClient = useQueryClient();
-  const MessageContext = useMessageContext();
-  const { getCookie } = useAuthContext();
+  const router = useRouter();    
 
   const cancelCreation = () => {router.push(demokraticaRoutes.centroUsuario.link)}
   const proceedWithCreation = async () => {

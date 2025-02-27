@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Footer from "@/components/2.organisms/4.Footer";
 import { useRouter } from "next/navigation";
@@ -11,7 +11,6 @@ const LoginRegisterLayout = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-
   const router = useRouter();
   const { user } = useAuthContext();
   const hasRun = useRef(false); // Se usa para rastrear si ya se ejecutó
@@ -28,13 +27,13 @@ const LoginRegisterLayout = ({
   return (
     <>
       {/* Contenido principal que ocupa el resto del vh, que tiene el background fijo y que tiene un overflow que permite scrollear el contenido hacía abajo*/}
-      <div className="flex w-full h-screen flex-initial flex-col items-center overflow-y-auto bg-gradient-to-b from-SecBlue to-white scrollbar-thin scrollbar-track-transparent scrollbar-thumb-PrimBlue">
-        <main className={`flex min-h-screen w-full flex-shrink-0 grow items-start`}>
-          {children}      
-        </main>
+      <div className="flex w-full flex-col items-center overflow-y-auto bg-gradient-to-b from-SecBlue to-white scrollbar-thin scrollbar-track-transparent scrollbar-thumb-PrimBlue">
+        {/* Contenido de la página */}
+        <main className="flex w-full flex-col">{children}</main>
+        {/* Footer al final de la página o contenido */}
         <Footer />
       </div>
-      <MessageBox/>
+      <MessageBox />
     </>
   );
 };

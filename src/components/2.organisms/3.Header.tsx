@@ -52,9 +52,9 @@ export default function Header() {
 
   return (
     // Header con todo y la navbar mobile
-    <header className="z-50 h-[calc(1/12*100vh)] bg-SecBlue">
+    <header className="z-50 h-[calc(1/12*100vh)] bg-SecBlue landscape:max-[951px]:h-[calc(2/12*100vh)]">
       {/* Header sin la navbar mobile */}
-      <div className="flex grid h-[calc(1/12*100vh)] w-full grid-cols-3 items-center px-4 py-2 sm:grid-cols-6 md:grid-cols-12">
+      <div className="flex grid h-full w-full grid-cols-[auto_50%_auto] items-center px-4 py-2 sm:grid-cols-6 md:grid-cols-12">
         {/* Mobile Menu Button */}
         <div className="sm:hidden">
           <button
@@ -76,7 +76,7 @@ export default function Header() {
         />
 
         {/* Nav Links Desktop*/}
-        <nav className="hidden justify-between sm:col-span-2 sm:col-start-4 sm:flex md:col-span-4 md:col-start-8 md:col-start-9">
+        <nav className="hidden justify-between sm:col-span-2 sm:col-start-4 sm:flex md:col-span-5 md:col-start-7 md:col-start-9 md:justify-around">
           {headerItems.map((item, index) => (
             <Link
               href={item.link}

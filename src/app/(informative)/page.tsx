@@ -7,9 +7,9 @@ export default function Home() {
     <>
       {/* Contenedor gradiente parte inicial homepage */}
       {/* 11/12*100 = 91.667, es el height restante del viewport quitando el header y teniendo en cuenta las proporciones */}
-      <div className="flex h-[91.667vh] w-full flex-1 flex-initial flex-col items-center bg-gradient-to-b from-SecBlue to-white px-20 pb-16 pt-10">
+      <div className="flex h-[91.667vh] w-full flex-1 flex-initial flex-col items-center bg-gradient-to-b from-SecBlue to-white px-20 pb-16 pt-10 landscape:py-0">
         {/* Contenedor para centrar todo */}
-        <div className="grid h-full justify-between sm:grid-cols-2 sm:items-center sm:py-[20%] lg:w-[60%] lg:justify-center lg:py-[2.5%] lg:pb-20">
+        <div className="grid h-full justify-between sm:grid-cols-2 sm:items-center sm:py-[20%] lg:w-[60%] lg:justify-center lg:py-[2.5%] lg:pb-20 landscape:max-lg:h-[78%] landscape:max-lg:py-0">
           {/* Frase grande */}
           <div className="text-3xl font-semibold italic">
             Las decisiones

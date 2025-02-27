@@ -4,15 +4,15 @@ import demokraticaRoutes from "@/utils/routeUtils";
 
 export default function LogInBox() {
   return (
-    <div className="flex flex-col bg-ThirdGray rounded-lg pt-4 px-6 pb-6 mt-4 mb-52">
+    <div className="mb-20 mt-4 flex flex-col rounded-lg bg-ThirdGray px-6 pb-4 pt-4">
       {/* Titulo formulario */}
-      <h1 className="font-semimbold text-lg my-2"> Ingresa: </h1>
+      <h1 className="font-semimbold my-2 text-lg"> Ingresa: </h1>
       {/* Contenedor parte izquierda, derecha y separador */}
-      <div className="flex flex-col sm:flex-row items-center justify-between">
+      <div className="flex flex-col items-center justify-between sm:flex-row">
         {/* Parte izquierda formulario login */}
         <LogInComn />
         {/* Separador */}
-        <div className="border-2 border-SecGray w-40 my-6 rounded-lg sm:h-40 sm:w-0 "></div>
+        <div className="my-6 w-40 rounded-lg border-2 border-SecGray sm:h-40 sm:w-0"></div>
         {/* Parte derecha formulario login */}
         <Oauth
           title="O ingresa con Google:"

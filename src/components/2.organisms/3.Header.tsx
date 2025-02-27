@@ -52,7 +52,7 @@ export default function Header() {
 
   return (
     // Header con todo y la navbar mobile
-    <header className="z-50 h-[calc(1/12*100vh)] bg-SecBlue landscape:max-[951px]:h-[calc(2/12*100vh)]">
+    <header className="z-50 h-[calc(1/12*100vh)] bg-SecBlue landscape:max-[830px]:h-[70px]">
       {/* Header sin la navbar mobile */}
       <div className="flex grid h-full w-full grid-cols-[auto_50%_auto] items-center px-4 py-2 sm:grid-cols-6 md:grid-cols-12">
         {/* Mobile Menu Button */}

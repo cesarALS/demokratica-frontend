@@ -76,7 +76,7 @@ export default function Header() {
         />
 
         {/* Nav Links Desktop*/}
-        <nav className="hidden justify-between sm:col-span-2 sm:col-start-4 sm:flex md:col-span-5 md:col-start-7 md:col-start-9 md:justify-around">
+        <nav className="hidden justify-between sm:col-span-2 sm:col-start-4 sm:flex md:col-span-5 md:col-start-7 md:justify-around">
           {headerItems.map((item, index) => (
             <Link
               href={item.link}

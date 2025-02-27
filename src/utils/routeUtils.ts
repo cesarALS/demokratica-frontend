@@ -4,7 +4,10 @@
 
 const demokraticaRoutes = {
   // Informativos
-  ayuda: { name: "Ayuda", link: "/ayuda" },
+  ayuda: {
+    name: "Ayuda",
+    link: "https://demokratica.gitbook.io/demokratica-docs/",
+  },
   conocenos: { name: "Conócenos", link: "/conocenos" },
   planes: { name: "Planes", link: "/planes" },
   // Registro
@@ -14,10 +17,10 @@ const demokraticaRoutes = {
   cookies: { name: "Cookies", link: "/cookies" },
   userTerms: { name: "Términos de uso", link: "/terminos-de-uso" },
   //Contenido
-  centroUsuario: {name: "Centro de Usuario", link: "/centroUsuario"},
-  cuenta: {name: "Gestión de cuenta", link: "/cuenta"},
-  nuevaSesion: {name: "Crear Sesiones", link: "/nuevaSesion"},
-  sesion: {name: "Sesión", link:"/sesion"}
+  centroUsuario: { name: "Centro de Usuario", link: "/centroUsuario" },
+  cuenta: { name: "Gestión de cuenta", link: "/cuenta" },
+  nuevaSesion: { name: "Crear Sesiones", link: "/nuevaSesion" },
+  sesion: { name: "Sesión", link: "/sesion" },
 };
 
 export default demokraticaRoutes;

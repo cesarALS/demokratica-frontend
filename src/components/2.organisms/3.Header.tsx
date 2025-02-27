@@ -10,13 +10,13 @@ import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);    
+  const [isOpen, setIsOpen] = useState(false);
 
-  const [ isOpenAccountInfo, setOpenAccountInfo ] = useState(false);
-  const { user, handleLogout } = useAuthContext(); 
-  
+  const [isOpenAccountInfo, setOpenAccountInfo] = useState(false);
+  const { user, handleLogout } = useAuthContext();
+
   const dropdownRef = useRef<HTMLElement>(null);
-  const dropdownButtonRef = useRef<HTMLButtonElement>(null);  
+  const dropdownButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -37,7 +37,7 @@ export default function Header() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);    
+  }, []);
 
   interface headerItem {
     name: string;
@@ -60,7 +60,7 @@ export default function Header() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="flex flex-none items-center justify-center rounded-md border-2 border-black bg-PrimBlue p-1 hover:scale-110"
-            ref = {dropdownButtonRef}
+            ref={dropdownButtonRef}
           >
             <FontAwesomeIcon
               icon={faBars}
@@ -76,7 +76,7 @@ export default function Header() {
         />
 
         {/* Nav Links Desktop*/}
-        <nav className="hidden justify-between sm:col-span-2 sm:col-start-4 sm:flex md:col-span-3 md:col-start-9">
+        <nav className="hidden justify-between sm:col-span-2 sm:col-start-4 sm:flex md:col-span-4 md:col-start-8 md:col-start-9">
           {headerItems.map((item, index) => (
             <Link
               href={item.link}
@@ -89,49 +89,53 @@ export default function Header() {
         </nav>
 
         {/* Botón de ingreso o de usuario */}
-
         <div className="justify-self-end">
           {user ? (
             <div className="relative flex h-full w-full items-center justify-center">
               <button
                 type="button"
                 className="2xl:border-3 flex justify-center rounded-md border-2 border-black bg-PrimCreamCan text-sm hover:scale-110 lg:px-2 lg:text-base xl:px-2 xl:text-lg 2xl:px-2 2xl:text-xl"
-                onClick={() => { setOpenAccountInfo(!isOpenAccountInfo) }}
+                onClick={() => {
+                  setOpenAccountInfo(!isOpenAccountInfo);
+                }}
                 ref={dropdownButtonRef}
               >
-                <UserCircleIcon className="flex h-8 w-9 lg:w-8 justify-center text-black" />
+                <UserCircleIcon className="flex h-8 w-9 justify-center text-black lg:w-8" />
               </button>
               {isOpenAccountInfo && (
                 <motion.nav
                   initial={false}
-                  animate={{ height: isOpenAccountInfo ? "auto" : 0, opacity: isOpenAccountInfo ? 1 : 0 }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}                    
-                  className="absolute top-full right-0 flex flex-col min-w-[60vw] md:min-w-[25vw] text-black bg-PrimGray mt-2 p-2 rounded-2xl border-2 border-black"
-                  ref = {dropdownRef}
+                  animate={{
+                    height: isOpenAccountInfo ? "auto" : 0,
+                    opacity: isOpenAccountInfo ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                  className="absolute right-0 top-full mt-2 flex min-w-[60vw] flex-col rounded-2xl border-2 border-black bg-PrimGray p-2 text-black md:min-w-[25vw]"
+                  ref={dropdownRef}
                 >
-                  <div className="flex w-full text-end bg-PrimGray w-fullrounded-xl">
-                    <p className="w-full p-2 text-ls font-bold">{`Hola, ${user.username}`}</p>
+                  <div className="w-fullrounded-xl flex w-full bg-PrimGray text-end">
+                    <p className="text-ls w-full p-2 font-bold">{`Hola, ${user.username}`}</p>
                   </div>
-                  <div className="rounded-xl">                    
-                    <Link 
+                  <div className="rounded-xl">
+                    <Link
                       href={demokraticaRoutes.cuenta.link}
-                      className="flex w-full items-center justify-end p-2 rounded-t-xl text-ls bg-ThirdGray hover:bg-SecGray hover:cursor"                                             
+                      className="text-ls hover:cursor flex w-full items-center justify-end rounded-t-xl bg-ThirdGray p-2 hover:bg-SecGray"
                     >
                       Gestionar tu cuenta
-                    </Link>                     
-                    <Link 
+                    </Link>
+                    <Link
                       href={demokraticaRoutes.centroUsuario.link}
-                      className="flex w-full items-center justify-end p-2 text-ls bg-ThirdGray hover:bg-SecGray hover:cursor"                                             
+                      className="text-ls hover:cursor flex w-full items-center justify-end bg-ThirdGray p-2 hover:bg-SecGray"
                     >
                       Ir al menú de usuario
-                    </Link>                                                            
-                    <button                        
+                    </Link>
+                    <button
                       onClick={handleLogout}
-                      className="flex w-full items-center justify-end p-2 rounded-b-xl text-ls bg-ThirdGray hover:bg-SecGray hover:cursor"
+                      className="text-ls hover:cursor flex w-full items-center justify-end rounded-b-xl bg-ThirdGray p-2 hover:bg-SecGray"
                     >
                       Cerrar Sesión
                     </button>
-                  </div>                              
+                  </div>
                 </motion.nav>
               )}
             </div>
@@ -151,7 +155,7 @@ export default function Header() {
       <motion.nav
         initial={false}
         animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}        
+        transition={{ duration: 0.3, ease: "easeInOut" }}
         className="border-1s overflow-hidden border-b border-black bg-SecBlue sm:hidden"
         ref={dropdownRef}
       >

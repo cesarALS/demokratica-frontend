@@ -7,12 +7,9 @@ export default function Home() {
     <>
       {/* Contenedor gradiente parte inicial homepage */}
       {/* 11/12*100 = 91.667, es el height restante del viewport quitando el header y teniendo en cuenta las proporciones */}
-      <div
-        className="flex flex-1 flex-col flex-initial
-       pt-10 pb-16 w-full h-[91.667vh] bg-gradient-to-b from-SecBlue to-white px-20 items-center"
-      >
+      <div className="flex h-[91.667vh] w-full flex-1 flex-initial flex-col items-center bg-gradient-to-b from-SecBlue to-white px-20 pb-16 pt-10 landscape:py-0">
         {/* Contenedor para centrar todo */}
-        <div className="h-full justify-between grid sm:grid-cols-2 sm:items-center lg:w-[60%] lg:justify-center lg:pb-20">
+        <div className="grid h-full justify-between sm:grid-cols-2 sm:items-center sm:py-[20%] lg:w-[60%] lg:justify-center lg:py-[2.5%] lg:pb-20 landscape:max-lg:h-[78%] landscape:max-lg:py-0">
           {/* Frase grande */}
           <div className="text-3xl font-semibold italic">
             Las decisiones
@@ -23,10 +20,13 @@ export default function Home() {
             <span className="text-AccentBlue">progreso</span>
           </div>
           {/* Asset Central */}
-          <AssetCentrHmpg classNameGeneral="w-full" />
+          <div className="row-span-2 flex w-full items-center justify-center">
+            <AssetCentrHmpg classNameGeneral="w-full" />
+          </div>
           {/* Frase de seguimiento */}
-          <div className="text-2xl font-semibold italic self-end sm:self-start">
-            ¿Deseas <span className="text-AccentCreamCan">facilitar</span> <br />
+          <div className="self-end text-2xl font-semibold italic sm:self-center">
+            ¿Deseas <span className="text-AccentCreamCan">facilitar</span>{" "}
+            <br />
             las tuyas?
           </div>
         </div>

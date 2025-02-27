@@ -13,11 +13,8 @@ export function VisionMisionField({
   content,
   imgURL,
 }: VisionMisionFieldProps) {
-  const fieldStyle: string =
-    "flex flex-col items-center justify-around bg-white gap-6 rounded-3xl p-6 text-lg w-full flex-col gap-y-6";
-
   return (
-    <div className={fieldStyle}>
+    <div className="flex w-full flex-col items-center justify-around gap-6 gap-y-6 rounded-3xl bg-white p-6 text-lg">
       <div className="flex flex-row gap-x-1 text-2xl">
         <span className="font-bold">Nuestra</span>
         <span className="font-bold text-AccentBlue">{title}</span>
@@ -28,7 +25,7 @@ export function VisionMisionField({
         </div>
 
         <div
-          className={`flex items-center justify-center rounded-3xl bg-ThirdGray p-5 ${title === "Visión" ? "" : "order-first"}`}
+          className={`flex items-center justify-center rounded-3xl bg-ThirdGray p-5 ${title === "Visión" ? "" : "sm:order-first"}`}
         >
           <Image
             src={imgURL}

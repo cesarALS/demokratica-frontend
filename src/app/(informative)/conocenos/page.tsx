@@ -24,7 +24,7 @@ export default function Conocenos() {
       <PageContentContainer>
         <VisionMisionField
           title="Visión"
-          content="Para 2028, Demokratica aspira a ser la plataforma líder en la toma de decisiones grupales, integrando soluciones que permitan alcanzar consensos de manera efectiva, registrar acuerdos y fomentar la participación activa de todos los miembros del grupo."
+          content="Para 2028, Demokratica aspira a ser la plataforma líder en la toma de decisiones grupales, integrando soluciones que permiten alcanzar consensos de manera efectiva, registrar acuerdos y fomentar la participación activa de todos los miembros del grupo."
           imgURL="/img/imgVision.jpg"
         />
         <VisionMisionField

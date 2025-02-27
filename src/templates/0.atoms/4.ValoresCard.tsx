@@ -41,18 +41,25 @@ export function ValoresCard() {
   return valoresData.map((valor, index) => {
     return (
       <div
-        className="flex w-full flex-col items-center gap-5 rounded-3xl bg-PrimBlue p-4 text-lg"
+        className="flex w-full flex-col items-center gap-6 rounded-3xl bg-ThirdGray p-4 text-lg"
         key={index}
       >
-        <div className="mt-5 w-32 rounded-full bg-PrimCreamCan p-5">
-          {valor.icono}
+        <div className="grid h-full w-full grid-cols-1 grid-rows-2 gap-2 xl:grid-cols-2 xl:grid-rows-1">
+          <div className="flex w-full flex-col items-center justify-center gap-6 rounded-3xl p-4 text-lg">
+            <div className="w-32 rounded-full bg-PrimBlue p-4">
+              {valor.icono}
+            </div>
+
+            <h1 className="text-2xl font-extrabold text-black">
+              {valor.valor}
+            </h1>
+          </div>
+
+          <div className="flex w-full items-center rounded-2xl border-2 border-black bg-white p-5 text-start text-lg">
+            {valor.description}
+          </div>
+          <div className="flex flex-grow items-center justify-center"></div>
         </div>
-
-        <h1 className="text-xl font-extrabold text-white">{valor.valor}</h1>
-
-        <p className="w-full rounded-2xl bg-white p-5 text-center text-base">
-          {valor.description}
-        </p>
       </div>
     );
   });

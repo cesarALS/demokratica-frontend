@@ -13,62 +13,96 @@ export function EquipoCard() {
   const valoresData: EquipoDataTypes[] = [
     {
       foto: (
-        <Image src="/img/fotoAndres.PNG" alt="Foto1" height={300} width={300} className={fotoStyle}/>
+        <Image
+          src="/img/fotoAndres.PNG"
+          alt="Foto1"
+          height={300}
+          width={300}
+          className={fotoStyle}
+          layout="responsive"
+        />
       ),
       nombres: "Andrés Felipe",
       apellidos: "Rojas Aguilar",
-      rol: ["Desarrollador"],
+      rol: ["Backend Dev & DB Architect"],
     },
     {
       foto: (
-        <Image src="/img/fotoCesar.jpg" alt="Foto1" height={300} width={300} className={fotoStyle} />
+        <Image
+          src="/img/fotoCesar.jpg"
+          alt="Foto1"
+          height={300}
+          width={300}
+          className={fotoStyle}
+          layout="responsive"
+        />
       ),
       nombres: "César Arthuro",
       apellidos: "Lemos Silva",
-      rol: ["Desarrollador"],
+      rol: ["Fullstack Dev & DevOps"],
     },
     {
       foto: (
-        <Image src="/img/fotoDavid.PNG" alt="Foto1" height={300} width={300} className={fotoStyle}/>
+        <Image
+          src="/img/fotoDavid.PNG"
+          alt="Foto1"
+          height={300}
+          width={300}
+          className={fotoStyle}
+          layout="responsive"
+        />
       ),
       nombres: "David Felipe",
       apellidos: "Marín Rosas",
-      rol: ["Desarrollador","Product Owner"],
+      rol: ["UX/UI, Product Owner & Frontend Dev"],
     },
     {
       foto: (
-        <Image src="/img/fotoJulian.PNG" alt="Foto1" height={300} width={300} className={fotoStyle}/>
+        <Image
+          src="/img/fotoJulian.PNG"
+          alt="Foto1"
+          height={300}
+          width={300}
+          className={fotoStyle}
+          layout="responsive"
+        />
       ),
       nombres: "Julián David",
       apellidos: "Huertas Domínguez",
-      rol: ["Desarrollador"],
+      rol: ["Frontend Dev"],
     },
   ];
 
   return valoresData.map((valor, index) => {
     return (
       <div
-        className="flex flex-col items-center w-full bg-SecBlue gap-5 rounded-3xl p-4 text-lg "
+        className="flex w-full flex-col items-center gap-5 rounded-3xl bg-ThirdGray p-6 text-lg"
         key={index}
       >
-        <div className="w-full rounded-full mt-5 max-w-[175px] justify-items-center">
-          {valor.foto}
-        </div>
-        {/*  bg-white p-1 w-full rounded-2xl*/ }
-        <div className="flex flex-col items-center text-white font-extrabold text-lg bg-AccentBlue  p-1 w-full rounded-2xl">
-        <h1 className="">{valor.nombres}</h1>
-        <h1 className="">{valor.apellidos}</h1>
-        </div>
-        
+        <div className="grid h-full w-full grid-cols-1 grid-rows-[1fr,2fr] gap-2 xl:grid-cols-2 xl:grid-rows-1">
+          <div className="flex flex-col items-center justify-center gap-4">
+            <div className="flex w-full flex-col items-center text-2xl font-semibold text-black">
+              <div className="flex items-center justify-center text-center">
+                {valor.nombres}
+              </div>
+              <div className="flex items-center justify-center text-center">
+                {valor.apellidos}
+              </div>
+            </div>
 
-        <p className="text-center text-lg font-bold  text-black bg-ThirdGray p-1 w-full rounded-2xl">
-          {valor.rol.map((role, idx) => (
-            <span key={idx}>
-              {role}
-              {idx < valor.rol.length - 1 && <br />}
-            </span>
-          ))}
-        </p>
+            <div className="flex w-[70%] items-center justify-center gap-2 text-center text-sm text-black">
+              {valor.rol.map((role, idx) => (
+                <span key={idx}>
+                  {role}
+                  {idx < valor.rol.length - 1 && <br />}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="flex w-full items-center justify-center">
+            {valor.foto}
+          </div>
+        </div>
       </div>
     );
   });

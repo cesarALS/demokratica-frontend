@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { highlightWord } from "@/utils/highlightWord";
+import GridTwoColsRow from "../2.organisms/3.GridTwoColsRow";
+
 interface VisionMisionFieldProps {
   title: string;
   content: string;
@@ -12,30 +14,32 @@ export function VisionMisionField({
   imgURL,
 }: VisionMisionFieldProps) {
   const fieldStyle: string =
-  /* w-[80%] xl:w-[65%] 2xl:w-[55%] */
-    "flex items-center justify-around bg-white gap-5 rounded-3xl p-6 text-lg w-full max-w-[390px] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[780px] xl:max-w-[950px] flex-col" +
-    (title === "Visión" ? " lg:flex-row" : " lg:flex-row-reverse");
+    "flex flex-col items-center justify-around bg-white gap-6 rounded-3xl p-6 text-lg w-full flex-col gap-y-6";
 
   return (
     <div className={fieldStyle}>
-      <div className="justify-items-center lg:max-w-[50%]">
-        <span className="flex flex-row text-2xl mb-3">
-          <span className="font-bold">Nuestra</span>
-          <span className="text-AccentBlue font-bold ml-1">{title}</span>
-        </span>
-
-        <span>{highlightWord(content, "Demokratica")}</span>
+      <div className="flex flex-row gap-x-1 text-2xl">
+        <span className="font-bold">Nuestra</span>
+        <span className="font-bold text-AccentBlue">{title}</span>
       </div>
+      <GridTwoColsRow>
+        <div className="flex items-center">
+          <span>{highlightWord(content, "Demokratica")}</span>
+        </div>
 
-      <div className="rounded-3xl bg-ThirdGray p-5">
-        <Image
-          src={imgURL}
-          alt="ImagenReferencia"
-          height={300}
-          width={300}
-          className="rounded-3xl w-auto h-auto"
-        />
-      </div>
+        <div
+          className={`flex items-center justify-center rounded-3xl bg-ThirdGray p-5 ${title === "Visión" ? "" : "order-first"}`}
+        >
+          <Image
+            src={imgURL}
+            alt="ImagenReferencia"
+            height={300}
+            width={300}
+            layout="responsive"
+            className="h-auto w-auto rounded-3xl"
+          />
+        </div>
+      </GridTwoColsRow>
     </div>
   );
 }

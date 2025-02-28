@@ -1,7 +1,7 @@
 // No sé qué tan importante sea que esto esté acá o en environment variables.
 // Otro detalle: eventualemnte, el dominio del back y del front será el mismo
-// Y otro detalle: si de pronto el backend está corriendo en local, esta dirección habría que cambiarla por la dirección donde está corriendo el back en local
 export const backendAddress = "https://demokraticabackend.onrender.com/api";
+// export const backendAddress = "http://localhost:8080/api";
 
 // Lo ideal es que todas las llamadas a la api usen esta generalizada función.
 export async function generalFetch<T>(

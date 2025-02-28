@@ -35,10 +35,14 @@ export function PreciosCard() {
       textoBoton: "Empieza ya",
     },
   ];
-  return data.map((plan,index) => {
+  return (
+    data.map((plan,index) => {
     const formattedPrice = new Intl.NumberFormat("es-CO").format(plan.precio);
     return (
-        <div key={index} className="flex flex-col bg-white rounded-lg p-4 gap-6 w-64 border-solid border-1.5 border-black">
+        <div 
+          key={index} 
+          className="flex flex-col bg-white rounded-lg p-4 gap-6 w-64 border-solid border-1.5 border-black"
+        >
             <h1 className="">{plan.nombrePlan}</h1>
             <div className="flex flex-row items-end italic">
                 <h1 className="text-3xl">${formattedPrice}</h1>
@@ -50,14 +54,11 @@ export function PreciosCard() {
                 <li>Invita hasta {plan.contenido[0]} participantes.</li>
                 <li>Utiliza actividades disponibles hasta {plan.contenido[1]} veces.</li>
             </ul>
-            {/* <button className="bg-AccentCreamCan hover:bg-PrimCreamCan text-white rounded-lg p-2 mt-auto">
-                {plan.textoBoton}
-            </button> */}
             <CheckoutButton planId={plan.nombrePlan} />
 
         </div> 
     )
-  });
+  }));
 }
 
 export default PreciosCard;

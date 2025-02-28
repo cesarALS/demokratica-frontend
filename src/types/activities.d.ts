@@ -1,9 +1,9 @@
-export type ActivityType = "VOTACION_COMUN" | "TIDEMAN" | "OTRO_TIPO"; // Agrega más tipos si es necesario
+export type ActivityType = "POLL" | "TIDEMAN" | "OTRO_TIPO"; // Agrega más tipos si es necesario
 
-export interface PollOption {
-  id: number;
-  description: string;
-  voters: string[]; // Suponiendo que almacena IDs o emails de los votantes
+export interface PollResult {
+  id?: number; // Puede ser null en el JSON, lo hacemos opcional
+  description: string; // Puede ser null en el JSON
+  numVotes: number;
 }
 
 export interface Activity {
@@ -13,8 +13,15 @@ export interface Activity {
   startTime: string;
   endTime: string;
   tags: Tag[];
-  pollOptions?: PollOption[]; // Opcional, ya que algunas actividades podrían no tener opciones de votación
   type: ActivityType; // Indica qué tipo de actividad es
+  activityStatus: "FINISHED" | "ONGOING"; // Nuevo campo basado en el JSON
+  alreadyParticipated: boolean; // Nuevo campo basado en el JSON
+  pollResults?: PollResult[]; // Actualizado para reflejar el JSON
+}
+
+export interface SessionInfo {
+  sessionId: number;
+  userRole: "DUEÑO" | "PARTICIPANTE" | "INVITADO"; // Adaptado al JSON
 }
 
 export type OrganizableEntry = {

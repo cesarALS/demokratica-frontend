@@ -14,16 +14,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBoxOpen } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
+interface SessionData {
+  sessionId: number;
+  userRole: string;
+  pollDTOs: Activity[];
+}
+
 export default function ActivitiesLoader() {
   const pathname = usePathname();
   const newActivityPath = pathname + "/nuevaActividad";
-  const { setActivities, activities } = useSessionActivitiesStore();
+  const { setActivities, activities , setUserRole} = useSessionActivitiesStore();
   const { getCookie } = useAuthContext();
 
   const idSesion = pathname.split("/").pop(); // Obtiene el último segmento de la URL
 
   // Obtener actividades usando React Query con cache
-  const { data: fetchedActivities = [], isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["activities", idSesion],
     queryFn: async () => {
       const response = await getSessions(getCookie(), idSesion);
@@ -35,13 +41,14 @@ export default function ActivitiesLoader() {
     enabled: !!idSesion && !!getCookie(),
     staleTime: 1000 * 60, // Cache por 1 min
   });
-
+  const sessionData = data as SessionData;
   // Actualiza Zustand cuando cambien los datos
   useEffect(() => {
-    if (!isLoading && fetchedActivities) {
-      setActivities(fetchedActivities as Activity[]);
+    if (!isLoading && data) {
+      setUserRole(sessionData.userRole); // Guardar userRole en Zustand
+      setActivities(sessionData.pollDTOs); // Guardar actividades
     }
-  }, [fetchedActivities, isLoading, setActivities]);
+  }, [data, sessionData, isLoading, setActivities, setUserRole]);
 
   if (isLoading)
     return (
@@ -90,7 +97,7 @@ export default function ActivitiesLoader() {
                 tags={tags}
                 markdownQuestion={activity.title}
                 options={
-                  activity.pollOptions?.map((option) => option.description) ||
+                  activity.pollResults?.map((option) => option.description) ||
                   []
                 }
                 date={activity.startTime}
@@ -116,12 +123,12 @@ export default function ActivitiesLoader() {
                 tags={tags}
                 markdownQuestion={activity.title}
                 options={
-                  activity.pollOptions?.map((option) => option.description) ||
+                  activity.pollResults?.map((option) => option.description ?? "") ||
                   []
                 }
                 date={activity.startTime}
-                initialMode={mode}
-              />
+                initialMode = {mode}
+            />
             );
         }
       })}

@@ -1,42 +1,51 @@
 "use client";
-import { useState } from "react";
+import { proceedToPaymentInterface } from "@/utils/apiUtils/apiMercadoPagoUtils";
+import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
+import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
+import demokraticaRoutes from "@/utils/routeUtils";
+import { useRouter } from "next/navigation";
+
+interface PaymentReponse {
+  url: string
+}
 
 const CheckoutButton = ({ planId }: { planId: string }) => {
-  const [loading, setLoading] = useState(false);
+  
+  const { user, getCookie } = useAuthContext();
+  const { setMessage } = useMessageContext();
+  const router = useRouter();  
 
   const handlePayment = async () => {
-    if (planId === "Gratuito") {
-      // Redirigir manualmente a la pantalla de inicio de sesión
-      window.location.href = "/ingresa";
+    if (planId === "Gratuito") {     
+      if (!user)router.push(demokraticaRoutes.login.link);
+      else router.push(demokraticaRoutes.nuevaSesion.link);
       return;
-    }
-    setLoading(true);
-    console.log(loading) //Usando loading, mientras nos ayudamos de alternativas
-    try {
-      const response = await fetch(
-        "https://demokraticabackend.onrender.com/api/payments/create",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ planId }), // Enviar el plan seleccionado
-        },
-      );
+    };    
 
-      if (!response.ok) {
-        console.log(response);
-        throw new Error("Error al procesar el pago");
-      }
-
-      const { url } = await response.json();
-
-      // Abrir la pasarela de pago en una ventana emergente
-      window.open(url, "_blank", "width=1000,height=600");
-    } catch (error) {
-      console.error(error);
-      alert("Hubo un problema al iniciar el pago.");
-    } finally {
-      setLoading(false);
-    }
+    if(!user){
+      router.push(demokraticaRoutes.login.link);
+      setMessage({
+        message: "Debes loguearte para acceder a esta opción",
+        news: 2,
+        time: 5000
+      })
+    }     
+  
+    const res = await proceedToPaymentInterface(planId, getCookie() as string);
+    
+    let data = undefined;
+    if(res.status === 200 && res.data) data = res.data as PaymentReponse;
+    
+    const url = data?.url; 
+    if (!url){
+      setMessage({
+        message: "No se pudo abrir la pasarela de pagos. Intenta de nuevo más tarde",
+        news: 3,
+        time: 5000
+      });
+    }   
+    else window.open(url, "_blank", "width=1000,height=600");
+    
   };
 
   return (

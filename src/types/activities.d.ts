@@ -14,7 +14,7 @@ export interface Activity {
   endTime: string;
   tags: Tag[];
   type: ActivityType; // Indica qué tipo de actividad es
-  activityStatus: "FINISHED" | "ONGOING"; // Nuevo campo basado en el JSON
+  activityStatus: "FINISHED" | "ONGOING" | "NOT_STARTED"; // Nuevo campo basado en el JSON
   alreadyParticipated: boolean; // Nuevo campo basado en el JSON
   pollResults?: PollResult[]; // Actualizado para reflejar el JSON
 }

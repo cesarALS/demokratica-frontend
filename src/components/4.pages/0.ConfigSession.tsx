@@ -67,7 +67,12 @@ export default function ConfigSession() {
   return (
     <>
       {/* Ingresar titulo */}
-      <EditableTitle title={"Ingresa tu titulo"} onChange={handleTitleChange} />
+      <EditableTitle 
+        title={""} 
+        onChange={handleTitleChange} 
+        placeholder="Ingresa tu título"
+        className="sm:max-w-[50%] border-2 border-black justify-between gap-x-4 py-2 bg-white"
+      />
       {/* Configuraciones */}
       <ContentCard>
         {/* Grid para acomodar todo en responsive */}

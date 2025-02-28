@@ -8,7 +8,8 @@ const authApis = {
     login: '/auth/login',
     getUser: '/auth/JWT-info',
     deleteAccount: '/users',
-    changeUsername: '/users'
+    changeUsername: '/users',
+    changePassword: '/users'
 }
   
 interface ApiReturns {
@@ -114,6 +115,21 @@ async function changeUsername(email: string, jwtToken: string, newUsername: stri
   
   return generalFetch(url, "PUT", data, body, headers);
 
+};
+
+async function changePassword(currentPassword: string, newPassword: string, email: string, jwtToken: string){
+  const url = `${backendAddress}${authApis.changePassword}/${email}/password`
+  const headers = {
+    "Authorization": `Bearer ${jwtToken}`,
+    "Content-Type": "application/json"
+  };
+
+  const body = {
+    currentPassword: currentPassword,
+    newPassword: newPassword, 
+  };
+
+  return generalFetch(url, "PUT", identity, body, headers);
 }
 
-export { createUser, login, getUser, deleteAccount, changeUsername };
+export { createUser, login, getUser, deleteAccount, changeUsername, changePassword };

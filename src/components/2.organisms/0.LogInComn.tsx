@@ -6,12 +6,12 @@ import { linkStyles } from "@/utils/tailwindUtils";
 import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import LoginRegFormInput from "@/templates/1.molecules/0.LoginRegFormInput";
 
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import demokraticaRoutes from "@/utils/routeUtils";
 import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
+import FormikTypeInput from "@/templates/1.molecules/0.FormikTypeInput";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Correo inválido").required("Se requiere correo"),
@@ -23,6 +23,11 @@ export default function LogInComn() {
   const router = useRouter();
   const {handleLogin} = useAuthContext();
   const {setMessage} = useMessageContext();
+
+  const inputs = [
+    {name:"email", label:"Correo:", type:"email", placeholder:"Tu correo"},
+    {name:"password", label:"Contraseña:", type:"password", placeholder:"Tu contraseña"}
+  ];
   
   return (
     <Formik
@@ -64,8 +69,18 @@ export default function LogInComn() {
       {({ handleSubmit }) => (
         <Form className="flex w-full sm:w-[45%] flex-col justify-start self-start gap-y-4" onSubmit={handleSubmit}>      
 
-          <LoginRegFormInput name="email" label="Correo:" type="email" placeholder="Tu correo"/>
-          <LoginRegFormInput name="password" label="Contraseña:" type="password" placeholder="Tu contraseña"/>
+          {inputs.map(input => (
+            <FormikTypeInput 
+              key={input.name}
+              name={input.name}
+              label={input.label}
+              type={input.type}
+              placeholder={input.placeholder}
+              divClassName="gap-1"
+              fieldLabelClassName="text-sm"
+              fieldTextClassName="text-sm"
+            />
+          ))}
 
           {/* Recuérdame y olvidaste tu contraseña */}
           <div className="flex items-center justify-between text-xs text-PrimBlack">

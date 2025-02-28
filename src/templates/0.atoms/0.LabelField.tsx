@@ -6,22 +6,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 interface LabelFieldProps {
-  field: FieldInputProps<string>;
+  field?: FieldInputProps<string>;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;   
   label: string;
   type: string;
   placeholder: string;
   id: string;
-  name: string;
+  name: string;  
+  divClassName?:string;
+  fieldClassName?: string;
+  fieldLabelClassName?: string;
+  fieldTextClassName?: string;
   showEye?: boolean;
 }
 
 export default function LabelField({
   field,
+  onChange,
   label,
   type,
   placeholder,
   id,
   name,
+  divClassName,
+  fieldClassName,
+  fieldLabelClassName,
+  fieldTextClassName,
   showEye = false,
 }: LabelFieldProps) {
   const [showPassword, setShowPassword] = useState(false);
@@ -39,21 +49,22 @@ export default function LabelField({
       : type;
 
   return (
-    <>
+    <div className={`flex flex-col ${divClassName}`}>
       <div>
-        <label htmlFor="password" className="text-sm">
+        <label htmlFor={id} className={`${fieldLabelClassName}`}>
           {label}
         </label>
       </div>
 
-      <div className="flex-1 bg-SecGray flex items-center">
+      <div className={`${fieldClassName} bg-SecGray flex items-center`}>
         <input
           {...field}
-          className="flex-auto w-[80%] flex-row bg-SecGray p-1 text-PrimBlack text-sm"
+          className={`flex-auto flex-row bg-SecGray p-1 text-PrimBlack ${fieldTextClassName}`}
           type={inputType}
           id={id}
           name={name}
           placeholder={placeholder}
+          onChange={field?.onChange ?? onChange}
         />
 
         {/* Boton de mostrar contraseña con icono de ojo */}
@@ -61,7 +72,7 @@ export default function LabelField({
           <button
             type="button"
             onClick={toggleShowPassword}
-            className="flex-1 items-center h-full items-center justify-center w-[20%] "
+            className="flex-1 flex items-center justify-end px-1 w-[20%] h-full"
           >
             {showPassword ? (
               <FontAwesomeIcon icon={faEye} className="w-4 text-PrimBlack" />
@@ -74,6 +85,6 @@ export default function LabelField({
           </button>
         )}
       </div>
-    </>
+    </div>
   );
 }

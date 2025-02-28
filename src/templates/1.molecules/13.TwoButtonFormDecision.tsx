@@ -8,6 +8,7 @@
 import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
 
 interface TwoButtonFormDecisionProps {
+  divClassName?: string,
   firstButtonText?: string,
   firstButtonFunction?: ()=>void,
   firstButtonClassname?: string,
@@ -17,6 +18,7 @@ interface TwoButtonFormDecisionProps {
 }
 
 export default function TwoButtonFormDecision({
+  divClassName = "",
   firstButtonText = "Cancelar",
   firstButtonFunction = () => {},
   firstButtonClassname = "",
@@ -25,7 +27,7 @@ export default function TwoButtonFormDecision({
   secondButtonClassname = ""
 }: TwoButtonFormDecisionProps) {
   return (
-    <div className="flex items-center justify-center gap-x-4 py-2 text-xl">      
+    <div className={`flex items-center justify-center gap-x-4 py-2 text-xl ${divClassName}`}>      
       <SimpleButton
         buttonText={firstButtonText}
         className={`${firstButtonClassname} bg-PrimCasablanca`}

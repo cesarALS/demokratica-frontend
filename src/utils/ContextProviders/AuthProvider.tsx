@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import Cookies from "js-cookie";
 import { DemokraticaUser } from "@/types/auth";
-import { changeUsername, createUser, deleteAccount, getUser, login } from "../apiUtils/apiAuthUtils";
+import { changePassword, changeUsername, createUser, deleteAccount, getUser, login } from "../apiUtils/apiAuthUtils";
 import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen";
 import { useQueryClient } from "@tanstack/react-query";
 import demokraticaRoutes from "../routeUtils";
@@ -16,6 +16,7 @@ interface AuthContextType {
     handleLogout: () => void;
     handleUsernameChange: (newUsername: string) => Promise<boolean>;
     handleAccountDeletion: (ps: string) => Promise<boolean>;
+    handlePasswordChange: (currentPassword: string, newPassword: string) => Promise<{status: number, problem: string|null}>;
     getCookie: () => string | undefined;
 }
 
@@ -120,16 +121,51 @@ export function AuthProvider({ children }: {children: React.ReactNode}){
             const cookie = Cookies.get(TOKEN_COOKIE)
             if(cookie){
                 const res = await deleteAccount(user.email, ps, cookie);                
-                if(res.status === 200) success = true;
+                if(res.status === 204) {
+                    success = true;                    
+                    setUser(null);
+                    Cookies.remove(TOKEN_COOKIE);
+                    setTimeout(() => queryClient.clear(), 0);
+                }
             }
         }
         return success;                
-    }
-    
+    };
+
+    const handlePasswordChange = async (currentPassword: string, newPassword: string) => {
+        let status = 500;
+        let problem = null;
+
+        if(user){
+            const cookie = Cookies.get(TOKEN_COOKIE);
+            if(cookie){
+                const res = await changePassword(
+                    currentPassword,
+                    newPassword,
+                    user.email,
+                    cookie
+                );                
+                status = res.status;
+                if (res.error) problem = res.error
+            };        
+        }
+        return {status: status, problem: problem}        
+    };
+     
     if(loading) return <LoadingScreen/>
 
     return (
-        <AuthContext.Provider value={{user, handleLogin, handleUserCreation, handleLogout, handleUsernameChange, handleAccountDeletion, getCookie}}>
+        <AuthContext.Provider value={{
+            user, 
+            handleLogin, 
+            handleUserCreation, 
+            handleLogout, 
+            handleUsernameChange, 
+            handleAccountDeletion, 
+            handlePasswordChange,
+            getCookie
+        }}
+        >
             {children}
         </AuthContext.Provider>
     );

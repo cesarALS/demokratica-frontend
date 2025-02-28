@@ -1,7 +1,5 @@
 "use client";
 
-import LoginRegFormInput from "@/templates/1.molecules/0.LoginRegFormInput";
-
 import UseTerms from "../0.atoms/1.UseTerms";
 import { useState } from "react";
 
@@ -13,11 +11,16 @@ import { useRouter } from "next/navigation"
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import demokraticaRoutes from "@/utils/routeUtils";
 import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
+import FormikTypeInput from "@/templates/1.molecules/0.FormikTypeInput";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Correo inválido").required("Se requiere correo"),
   username: Yup.string().required("Debes establecer un nombre de usuario"),
-  password: Yup.string().required("Se requiere contraseña"),
+  password: Yup.string()
+    .required("Se requiere contraseña")
+    .min(8, "Debe tener al menos 8 caracteres")
+    .matches(/[A-Z]/, "Debe contener al menos una mayúscula")
+    .matches(/[!@#$%^&*(),.?":{}|<>]/, "Debe contener al menos un carácter especial"),
   confirmPassword: Yup.string()
     .required("Se requiere confirmar la contraseña")
     .oneOf([Yup.ref("password")], "Las contraseñas no coinciden"),
@@ -30,6 +33,13 @@ export default function SignInComn() {
   const router = useRouter();
   const {handleUserCreation} = useAuthContext();
   const {setMessage} = useMessageContext();
+
+  const inputs = [
+    {name:"email", label:"Correo:", type:"email", placeholder:"Tu correo"},
+    {name:"username", label:"Nombre de usuario:", type:"text", placeholder:"Tu nombre de usuario"},
+    {name:"password", label:"Contraseña:", type:"password", placeholder:"Tu contraseña"},
+    {name:"confirmPassword", label:"Confirmar contraseña:", type:"password", placeholder:"Confirma tu contraseña"},
+  ]
 
   return (    
     <>
@@ -75,10 +85,18 @@ export default function SignInComn() {
             className="flex w-full sm:w-[45%] flex-col justify-start self-start gap-y-4"
             onSubmit={handleSubmit}
           >
-            <LoginRegFormInput name={"email"} label={"Correo:"} type="email" placeholder="Tu correo"/>
-            <LoginRegFormInput name={"username"} label={"Nombre de usuario:"} type="text" placeholder="Tu nombre de usuario"/>
-            <LoginRegFormInput name={"password"} label={"Contraseña:"} type="password" placeholder="Tu contraseña"/>
-            <LoginRegFormInput name={"confirmPassword"} label={"Confirmar contraseña:"} type="password" placeholder="Confirma tu contraseña"/>
+            {inputs.map(input => (
+              <FormikTypeInput
+                key={input.name}
+                name = {input.name}
+                label = {input.label}
+                type = {input.type}
+                placeholder = {input.placeholder}
+                divClassName="gap-1"
+                fieldTextClassName="text-sm"
+                fieldLabelClassName="text-sm"
+              />
+            ))}
 
             {/* Tratamiento de datos */}
             <div className="flex flex-col gap-y-1">

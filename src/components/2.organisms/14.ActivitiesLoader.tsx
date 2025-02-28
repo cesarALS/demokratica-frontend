@@ -83,21 +83,31 @@ export default function ActivitiesLoader() {
     <>
       {activities.map((activity) => {
         const tags = activity.tags.map((tag) => tag.text);
-        const isOngoing =
-          new Date(activity.startTime) <= new Date() &&
-          new Date() <= new Date(activity.endTime);
-        const mode = !isOngoing /*|| activity.hasVoted*/ ? "results" : "participation";
+        
+        let mode = "participation";
+        if(activity.activityStatus === "NOT_STARTED"){
+          mode = "starting"
+        }else if(activity.activityStatus === "FINISHED"){
+          mode = "results"
+        }else if(activity.activityStatus === "ONGOING"){
+          if(activity.alreadyParticipated){
+            mode = "results"
+          }else{
+            mode = "participation"
+          }
+        }
+
          
         switch (activity.type) {
           // TODO: Aquí falta el caso de texto
-          case "common":
+          case "POLL":
             return (
               <CommonVotationActivity
                 key={activity.id}
                 tags={tags}
                 markdownQuestion={activity.title}
                 options={
-                  activity.pollResults?.map((option) => option.description) ||
+                  activity.pollResults?.map((option) => option.description ?? "") ||
                   []
                 }
                 date={activity.startTime}
@@ -105,7 +115,7 @@ export default function ActivitiesLoader() {
               />
             );
 
-          case "tideman":
+          case "TIDEMAN":
             return (
               <TidemanActivity
                 date={activity.startTime}

@@ -21,14 +21,14 @@ type Activity = {
 
 type SessionActivitiesStore = {
   activities: Activity[];
-  userRole: string | null;
+  userRole: string;
   setActivities: (activities: Activity[]) => void;
   setUserRole: (role: string) => void;
 };
 
 export const useSessionActivitiesStore = create<SessionActivitiesStore>((set) => ({
   activities: [],
-  userRole: null,
+  userRole: "PARTICIPANTE",
   setActivities: (activities) => set({ activities }),
   setUserRole: (role) => set({ userRole: role }),
 }));

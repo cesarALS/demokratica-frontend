@@ -1,7 +1,6 @@
 import DateTime from "@/templates/0.atoms/17.DateTime";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faRightLeft } from "@fortawesome/free-solid-svg-icons";
 
 interface ActivityHeaderProps {
   tags: string[];
@@ -20,17 +19,13 @@ export default function ActivityHeader({
         {/* Fecha publicación actividad*/}
         <DateTime className="text-sm" date={givenDate} />
         {/* Boton de borrar publicación */}
-        {rol === "admin" ? (
+        {rol === "DUEÑO" ? (
           <div className="flex items-center gap-x-2">
             <button className="flex items-center justify-center rounded-xl border-2 border-AccentBlue bg-SecBlue p-2 hover:bg-PrimBlue">
               <FontAwesomeIcon className="size-6 text-white" icon={faTrash} />
-            </button>
+            </button>            
           </div>
-        ) : (
-          <button className="flex items-center justify-center rounded-xl border-2 border-AccentBlue bg-SecBlue p-1 hover:bg-PrimBlue">
-            <FontAwesomeIcon className="size-8 text-white" icon={faRightLeft} />
-          </button>
-        )}
+        ) :<></>}
       </div>
       {/* Tags de la actividad */}
       <div className="flex w-full justify-between">

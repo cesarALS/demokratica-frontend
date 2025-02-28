@@ -9,6 +9,7 @@ import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
 import PieChartResults from "../1.molecules/12.PieChart";
 import SectionContainer from "../1.molecules/10.SectionContainer";
 import GridTwoColsRow from "../2.organisms/3.GridTwoColsRow";
+import { useSessionActivitiesStore } from "@/utils/ContextProviders/SessionActivitiesStore";
 
 interface CommonVotationActivityProps {
   tags: string[];
@@ -26,7 +27,7 @@ export default function CommonVotationActivity({
   initialMode
 }: CommonVotationActivityProps) {
   const [mode, setMode] = useState(initialMode);
-
+  const userRole = useSessionActivitiesStore((state) => state.userRole);
   // Function to generate a unique color for each slice
   function generateColor(index: number, total: number) {
     const hue = (index * (360 / total)) % 360; // Distributes colors evenly
@@ -57,7 +58,7 @@ export default function CommonVotationActivity({
 
   return (
     <ContentCard>
-      <ActivityHeader tags={tags} givenDate={date} rol="admin" />
+      <ActivityHeader tags={tags} givenDate={date} rol={userRole} />
       <MarkdownShower markdown={markdownQuestion} />
       {mode === "participation" && (
         <>

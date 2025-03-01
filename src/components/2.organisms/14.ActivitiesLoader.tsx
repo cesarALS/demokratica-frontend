@@ -40,6 +40,8 @@ export default function ActivitiesLoader() {
     },
     enabled: !!idSesion && !!getCookie(),
     staleTime: 1000 * 60, // Cache por 1 min
+    refetchInterval: 1000 * 30, // Refetch cada 30 segundos
+    refetchOnWindowFocus: false,
   });
   const sessionData = data as SessionData;
   // Actualiza Zustand cuando cambien los datos

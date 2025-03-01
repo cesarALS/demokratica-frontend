@@ -104,10 +104,11 @@ export default function ActivitiesLoader() {
             return (
               <CommonVotationActivity
                 key={activity.id}
+                activityId={activity.id}
                 tags={tags}
                 markdownQuestion={activity.title}
                 options={
-                  activity.pollResults?.map((option) => option.description ?? "") ||
+                  activity.pollResults?.filter((result) => result.id !== null && result.description !== null).map((option) => option.description) ||
                   []
                 }
                 date={activity.startTime}
@@ -130,6 +131,7 @@ export default function ActivitiesLoader() {
             return (
               <CommonVotationActivity
                 key={activity.id}
+                activityId={activity.id}
                 tags={tags}
                 markdownQuestion={activity.title}
                 options={

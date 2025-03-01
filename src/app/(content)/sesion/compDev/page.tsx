@@ -17,6 +17,7 @@ export default function compDev() {
       <SessionTitleControls />
       <TextPublication tags={tags} />
       <CommonVotationActivity
+        activityId={1}
         tags={tags}
         markdownQuestion={markdownQuestion}
         options={options}

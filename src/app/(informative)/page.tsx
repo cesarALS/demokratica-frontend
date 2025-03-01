@@ -8,9 +8,29 @@ import {
   faFolderOpen,
 } from "@fortawesome/free-solid-svg-icons";
 import ExplicativeCard from "@/templates/1.molecules/17.ExplicativeCard";
+import CarouselDescriptor from "@/templates/3.templates/5.CarouselDescriptor";
+import { Slide } from "@/templates/3.templates/5.CarouselDescriptor";
 
 export default function Home() {
   // A react fragment, cause we don't need a wrapping element
+
+  const slides: Slide[] = [
+    {
+      image: "/img/fotoAndres.PNG",
+      title: "Slide 1",
+      description: "First slide description",
+    },
+    {
+      image: "/img/fotoCesar.jpg",
+      title: "Slide 2",
+      description: "Second slide description",
+    },
+    {
+      image: "/img/fotoDavid.PNG",
+      title: "Slide 3",
+      description: "Third slide description",
+    },
+  ];
 
   return (
     <div className="flex h-full w-full flex-col">
@@ -89,6 +109,7 @@ export default function Home() {
       </div>
       {/* Finalmente un carrusel con screenshots y descripciones de las actividades */}
       <div className="flex flex-col gap-8 bg-gradient-to-b from-white to-PrimGray px-10 pb-10">
+        {/* Titulo del carrusel */}
         <div className="flex h-60 w-full flex-col items-center justify-center text-5xl font-bold">
           <div className="flex w-full flex-col gap-y-2">
             <div className="self-start">¿Quieres</div>
@@ -96,6 +117,8 @@ export default function Home() {
             <div className="self-end">vistazo?</div>
           </div>
         </div>
+        {/* Carrusel */}
+        <CarouselDescriptor slides={slides} />
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ export default function ExplicativeCard({
   description,
 }: ExplicativeCardProps) {
   return (
-    <div className="flex flex-col gap-y-4 border border-ThirdGray px-6 py-8 shadow-lg">
+    <div className="flex max-w-xs flex-col gap-y-4 border border-ThirdGray px-6 py-8 shadow-lg">
       <FontAwesomeIcon icon={icon} className="size-12 text-AccentBlue" />
       <div className="text-lg font-bold">{title}</div>
       <div>

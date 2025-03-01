@@ -16,19 +16,22 @@ export default function Home() {
 
   const slides: Slide[] = [
     {
-      image: "/img/fotoAndres.PNG",
-      title: "Slide 1",
-      description: "First slide description",
+      image: "/img/Expresate.png",
+      title: "Expresate libremente",
+      description:
+        "Usando todo el potencial del markdown de github para tus publicaciones.",
     },
     {
-      image: "/img/fotoCesar.jpg",
-      title: "Slide 2",
-      description: "Second slide description",
+      image: "/img/SesionesConfigurables.png",
+      title: "Sesiones configurables",
+      description:
+        "Que se adaptan a tu entorno y a las necesidades que este te plantea.",
     },
     {
-      image: "/img/fotoDavid.PNG",
-      title: "Slide 3",
-      description: "Third slide description",
+      image: "/img/TiposDeVotacion.png",
+      title: "Tipos de votación",
+      description:
+        "Votación común, planning poker, wordcloud y votación de Tideman, todas en un solo lugar.",
     },
   ];
 
@@ -62,7 +65,7 @@ export default function Home() {
       </div>
       {/* Container de fondo transparente donde se expone lo que hace demokratica */}
       <div className="flex h-[91.667vh] w-full flex-col gap-y-6 bg-transparent bg-gradient-to-b from-SecBlue to-white px-10 pb-10 text-black">
-        <div className="text-lg">En:</div>
+        <div className="text-5xl font-bold">En:</div>
         <FullLogo classNameGeneral="w-full" baseFill="black" />
         <p className="text-lg">
           Dentro de una misma plataforma te ofrecemos la posibilidad de integrar

@@ -48,9 +48,10 @@ export default function Carousel({ slides }: CarouselProps) {
               alt={slide.title}
               width={200}
               height={200}
-              className="h-64 w-full object-cover"
+              className="h-64 w-full object-contain"
+              layout="responsive"
             />
-            <div className="flex w-full flex-col justify-center bg-SecBlack p-4 pb-8 text-white">
+            <div className="flex w-full flex-col justify-center gap-y-2 bg-SecBlack p-4 pb-8 text-white">
               <h3 className="text-xl font-semibold">{slide.title}</h3>
               <p>{slide.description}</p>
             </div>

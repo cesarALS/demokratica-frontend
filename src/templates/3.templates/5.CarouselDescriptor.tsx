@@ -32,11 +32,11 @@ export default function Carousel({ slides }: CarouselProps) {
       <style jsx global>{`
         .swiper-button-next,
         .swiper-button-prev {
-          color: #1988ff !important;
+          color: black !important;
         }
 
         .swiper-pagination-bullet-active {
-          background-color: #1988ff !important;
+          background-color: black !important;
         }
       `}</style>
 
@@ -51,7 +51,7 @@ export default function Carousel({ slides }: CarouselProps) {
               className="h-64 w-full object-contain"
               layout="responsive"
             />
-            <div className="flex w-full flex-col justify-center gap-y-2 bg-SecBlack p-4 pb-8 text-white">
+            <div className="flex w-full flex-col justify-center gap-y-2 bg-SecBlack p-10 text-white">
               <h3 className="text-xl font-semibold">{slide.title}</h3>
               <p>{slide.description}</p>
             </div>

@@ -5,6 +5,11 @@ export interface PollResult {
   description: string; // Puede ser null en el JSON
   numVotes: number;
 }
+export interface SessionData{
+  sessionId: string;
+  userRole: string;
+  pollDTOs: Activity[];
+}
 
 type Activity = {
   id: number;
@@ -13,22 +18,36 @@ type Activity = {
   startTime: string;
   endTime: string;
   tags: { text: string }[];
-  pollResults?: PollResult[]; // Cambiado de pollOptions a pollResults
+  pollResults?: PollResult[]; 
   type: string;
   activityStatus: string; // Agregar el estado de la actividad
   alreadyParticipated: boolean; // Agregar si el usuario ya participó
 };
 
 type SessionActivitiesStore = {
+  sessionId: string;
   activities: Activity[];
   userRole: string;
+  commonVotationSelectedOptions: Record<number, number>;
+  setSessionId: (sessionId: string) => void;
   setActivities: (activities: Activity[]) => void;
   setUserRole: (role: string) => void;
+  setCommonVotationSelectedOption: (activityId: number, option: number) => void;
 };
 
 export const useSessionActivitiesStore = create<SessionActivitiesStore>((set) => ({
+  sessionId: "0",
   activities: [],
   userRole: "PARTICIPANTE",
-  setActivities: (activities) => set({ activities }),
-  setUserRole: (role) => set({ userRole: role }),
+  commonVotationSelectedOptions: {},
+  setSessionId: (sessionId: string) => set({ sessionId }),
+  setActivities: (activities: Activity[]) => set({ activities }),
+  setUserRole: (role: string) => set({ userRole: role }),
+  setCommonVotationSelectedOption: (activityId: number, option: number) =>
+    set((state) => ({
+      commonVotationSelectedOptions: {
+        ...state.commonVotationSelectedOptions,
+        [activityId]: option,
+      },
+    })),
 }));

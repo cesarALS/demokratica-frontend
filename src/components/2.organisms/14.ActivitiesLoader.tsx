@@ -5,25 +5,19 @@ import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import CommonVotationActivity from "@/templates/3.templates/0.CommonVotationActivity";
 import TidemanActivity from "@/templates/3.templates/1.TidemanActivity";
-import { getSessions } from "@/utils/apiUtils/apiActivitiesUtils";
-import { useSessionActivitiesStore } from "@/utils/ContextProviders/SessionActivitiesStore";
+import { getActivities } from "@/utils/apiUtils/apiActivitiesUtils";
+import { SessionData, useSessionActivitiesStore } from "@/utils/ContextProviders/SessionActivitiesStore";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
-import { Activity } from "@/types/activities";
 import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBoxOpen } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
-interface SessionData {
-  sessionId: number;
-  userRole: string;
-  pollDTOs: Activity[];
-}
 
 export default function ActivitiesLoader() {
   const pathname = usePathname();
   const newActivityPath = pathname + "/nuevaActividad";
-  const { setActivities, activities , setUserRole} = useSessionActivitiesStore();
+  const { setActivities, activities , setUserRole, setSessionId } = useSessionActivitiesStore();
   const { getCookie } = useAuthContext();
 
   const idSesion = pathname.split("/").pop(); // Obtiene el último segmento de la URL
@@ -32,7 +26,7 @@ export default function ActivitiesLoader() {
   const { data, isLoading } = useQuery({
     queryKey: ["activities", idSesion],
     queryFn: async () => {
-      const response = await getSessions(getCookie(), idSesion);
+      const response = await getActivities(getCookie(), idSesion);
       if (response.status === 200) {
         return response.data;
       }
@@ -47,6 +41,7 @@ export default function ActivitiesLoader() {
   // Actualiza Zustand cuando cambien los datos
   useEffect(() => {
     if (!isLoading && data) {
+      setSessionId(sessionData.sessionId); // Guardar sessionId en Zustand
       setUserRole(sessionData.userRole); // Guardar userRole en Zustand
       setActivities(sessionData.pollDTOs); // Guardar actividades
     }
@@ -110,7 +105,7 @@ export default function ActivitiesLoader() {
                 tags={tags}
                 markdownQuestion={activity.title}
                 options={
-                  activity.pollResults?.filter((result) => result.id !== null && result.description !== null).map((option) => option.description) ||
+                  activity.pollResults?.filter((result) => result.id !== null && result.description !== null) ||
                   []
                 }
                 date={activity.startTime}
@@ -137,7 +132,7 @@ export default function ActivitiesLoader() {
                 tags={tags}
                 markdownQuestion={activity.title}
                 options={
-                  activity.pollResults?.map((option) => option.description ?? "") ||
+                  activity.pollResults?.filter((result) => result.id !== null && result.description !== null) ||
                   []
                 }
                 date={activity.startTime}

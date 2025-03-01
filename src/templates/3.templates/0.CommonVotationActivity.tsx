@@ -9,36 +9,52 @@ import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
 import PieChartResults from "../1.molecules/12.PieChart";
 import SectionContainer from "../1.molecules/10.SectionContainer";
 import GridTwoColsRow from "../2.organisms/3.GridTwoColsRow";
-import { useSessionActivitiesStore } from "@/utils/ContextProviders/SessionActivitiesStore";
+import {
+  SessionData,
+  useSessionActivitiesStore,
+} from "@/utils/ContextProviders/SessionActivitiesStore";
+import { PollResult } from "@/types/activities";
+import { sendCommonVotationVote } from "@/utils/apiUtils/apiActivitiesUtils";
+import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
+import { getActivities } from "@/utils/apiUtils/apiActivitiesUtils";
 
 interface CommonVotationActivityProps {
   activityId: number;
   tags: string[];
   markdownQuestion: string;
-  options: string[];
+  options: PollResult[];
   date: string;
   initialMode: string;
 }
 
-export default function CommonVotationActivity({  
+export default function CommonVotationActivity({
   activityId,
-  tags,  
+  tags,
   markdownQuestion,
   options,
   date,
-  initialMode
+  initialMode,
 }: CommonVotationActivityProps) {
   const [mode, setMode] = useState(initialMode);
   const userRole = useSessionActivitiesStore((state) => state.userRole);
   const pollResults = useSessionActivitiesStore(
-    (state) => state.activities.find((act) => act.id === activityId)?.pollResults
+    (state) =>
+      state.activities.find((act) => act.id === activityId)?.pollResults,
   );
-
-  const results = pollResults?.filter((result) => result.id !== null && result.description !== null).map((option) => ({
-    name: option.description,
-    votes: option.numVotes,
-    color: "",
-  })) || [];
+  const { getCookie } = useAuthContext();
+  const selectedOption = useSessionActivitiesStore(
+    (state) => state.commonVotationSelectedOptions[activityId],
+  );
+  const results =
+    pollResults
+      ?.filter((result) => result.id !== null && result.description !== null)
+      .map((option) => ({
+        id: option.id,
+        name: option.description,
+        votes: option.numVotes,
+        color: "",
+      })) || [];
+  const { setActivities, sessionId } = useSessionActivitiesStore();
 
   // Function to generate a unique color for each slice
   function generateColor(index: number, total: number) {
@@ -46,12 +62,22 @@ export default function CommonVotationActivity({
     return `hsl(${hue}, 70%, 50%)`; // Adjust saturation and lightness as needed
   }
 
-  function handleSendResults() {
-    setMode("results");
-    // TODO: Send results to server
-    // TODO: Get results in a viable format
-    // TODO: Render results
-    // TODO: También debería haber un botón para actualizar los resultados
+  async function handleSendResults() {
+    try {
+      // Envía el voto
+      await sendCommonVotationVote(getCookie(), activityId, selectedOption);
+        
+      setMode("results");
+      //Hace de nuevo el fetch para actualizar los resultados en el estado global   
+      const response = await getActivities(getCookie(), sessionId);           
+
+      if(response.status == 200){
+        const sessionData = response.data as SessionData;        
+        setActivities(sessionData.pollDTOs); // Guardar actividades
+      }    
+    } catch (error) {
+      console.error("Error sending vote:", error);
+    }
   }
 
   // Resultados de prueba
@@ -75,7 +101,7 @@ export default function CommonVotationActivity({
       <MarkdownShower markdown={markdownQuestion} />
       {mode === "participation" && (
         <>
-          <SelectableOptions options={options} />
+          <SelectableOptions options={options} activityId={activityId} />
           <SimpleButton
             onClick={handleSendResults}
             buttonText="Enviar"
@@ -96,7 +122,9 @@ export default function CommonVotationActivity({
                   style={{ backgroundColor: color }}
                   className="size-4 rounded-full"
                 ></div>
-                <div>Votos {name} : {votes}</div>
+                <div>
+                  Votos {name} : {votes}
+                </div>
               </div>
             ))}
           </SectionContainer>

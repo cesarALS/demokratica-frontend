@@ -12,6 +12,7 @@ import GridTwoColsRow from "../2.organisms/3.GridTwoColsRow";
 import { useSessionActivitiesStore } from "@/utils/ContextProviders/SessionActivitiesStore";
 
 interface CommonVotationActivityProps {
+  activityId: number;
   tags: string[];
   markdownQuestion: string;
   options: string[];
@@ -19,8 +20,9 @@ interface CommonVotationActivityProps {
   initialMode: string;
 }
 
-export default function CommonVotationActivity({
-  tags,
+export default function CommonVotationActivity({  
+  activityId,
+  tags,  
   markdownQuestion,
   options,
   date,
@@ -28,6 +30,16 @@ export default function CommonVotationActivity({
 }: CommonVotationActivityProps) {
   const [mode, setMode] = useState(initialMode);
   const userRole = useSessionActivitiesStore((state) => state.userRole);
+  const pollResults = useSessionActivitiesStore(
+    (state) => state.activities.find((act) => act.id === activityId)?.pollResults
+  );
+
+  const results = pollResults?.filter((result) => result.id !== null && result.description !== null).map((option) => ({
+    name: option.description,
+    votes: option.numVotes,
+    color: "",
+  })) || [];
+
   // Function to generate a unique color for each slice
   function generateColor(index: number, total: number) {
     const hue = (index * (360 / total)) % 360; // Distributes colors evenly
@@ -43,7 +55,7 @@ export default function CommonVotationActivity({
   }
 
   // Resultados de prueba
-  const results = [
+  /*const results = [
     { name: "Wenas", votes: 10, color: "" },
     { name: "adios", votes: 10, color: "" },
     { name: "uff, naiss", votes: 10, color: "" },
@@ -51,6 +63,7 @@ export default function CommonVotationActivity({
     { name: "y otra", votes: 10, color: "" },
     { name: "no han votado", votes: 10, color: "" },
   ];
+  */
   // Assign a color to each slice
   results.forEach((entry, index) => {
     entry.color = generateColor(index, results.length);
@@ -74,7 +87,7 @@ export default function CommonVotationActivity({
         <GridTwoColsRow>
           <PieChartResults data={results} />
           <SectionContainer className="flex flex-col gap-y-2">
-            {results.map(({ name, color }, index) => (
+            {results.map(({ name, votes, color }, index) => (
               <div
                 key={index}
                 className="flex w-full items-center gap-x-2 rounded-lg border-2 border-SecBlack bg-white p-2 font-semibold text-PrimBlack"
@@ -83,7 +96,7 @@ export default function CommonVotationActivity({
                   style={{ backgroundColor: color }}
                   className="size-4 rounded-full"
                 ></div>
-                <div>{name}</div>
+                <div>Votos {name} : {votes}</div>
               </div>
             ))}
           </SectionContainer>

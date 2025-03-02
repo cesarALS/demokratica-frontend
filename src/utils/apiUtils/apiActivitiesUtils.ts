@@ -1,4 +1,5 @@
 
+import { pollOption, tag } from "../ContextProviders/CreateActivityStore";
 import { backendAddress, generalFetch, identity } from "./apiUtils";
 
 const activitiesApis = {
@@ -39,4 +40,36 @@ async function sendCommonVotationVote(
   }
 }
 
-export { getActivities, sendCommonVotationVote };
+async function createCommonVotation(
+  jwtToken: string | undefined,
+  sessionId: number,
+  title: string,
+  description:string,
+  startTime:Date,
+  endTime:Date,
+  tags: tag[],
+  pollOptions: pollOption[],  
+): Promise<{ status: number; data?: object | [] | undefined; error?: string }> {
+  if (!jwtToken) return { status: 500, data: undefined, error: "No autenticado" };
+  
+  const url = `${backendAddress}/sessions/${sessionId}/polls`;
+  const headers = {"Content-Type": "application/json", Authorization: `Bearer ${jwtToken}` }; 
+  const body = {
+    title,
+    description,
+    startTime,
+    endTime,
+    tags,
+    pollOptions
+  }
+
+  try {
+    const res = await generalFetch(url, "POST", identity, body, headers);
+    return res;
+  } catch (error) {
+    console.error("Error in sendCommonVotationVote:", error);
+    return { status: 500, data: undefined};
+  }
+}
+
+export { getActivities, sendCommonVotationVote, createCommonVotation };

@@ -1,11 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 
-export default function OptionsInput() {
+interface OptionsInputProps {
+  setValue?: (pollOptions: string[]) => void;
+}
+
+export default function OptionsInput({setValue = () => {}}: OptionsInputProps) {
   const [options, setOptions] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
+
+  useEffect(() => {
+    setValue(options);
+  }, [options]);
 
   const addOption = () => {
     const trimmedInputValue = inputValue.trim();

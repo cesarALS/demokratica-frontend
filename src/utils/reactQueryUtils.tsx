@@ -2,5 +2,6 @@
 
 export const queryKeys = {
     sessions: "sessions",
-    userList: "userList"
+    userList: "userList",
+    activities: "activities",
 }

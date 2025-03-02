@@ -1,19 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MarkdownShower from "./18.MarkdownShower";
 
 interface TextAreaMarkdownTitle {
   title: string;
   placeholder: string;
+  setValue?: (value: string) => void;
 }
 
 export default function TextAreaMarkdownTitle({
   title,
   placeholder,
+  setValue = () => {},
 }: TextAreaMarkdownTitle) {
   const [markdown, setMarkdown] = useState("");
 
+  useEffect(() => {
+    // Send the markdown to the parent component
+    if (setValue) {
+      setValue(markdown);
+    }
+  }, [markdown]);
   return (
     <div className="flex flex-col items-start justify-start gap-y-4 text-xl">
       {title}

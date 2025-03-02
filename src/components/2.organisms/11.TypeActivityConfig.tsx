@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import ConfigCommonVotation from "./12.ConfigCommonVotation";
 import ConfigTextPublication from "./13.ConfigTextPublication";
 import ConfigTidemanVotation from "./15.ConfigTidemanVotation";
 import ConfigWordCloud from "./16.ConfigWordCloud";
 import ConfigPokerPlanning from "./17.ConfigPokerPlanning";
+import { useGeneralCreateActivityStore } from "@/utils/ContextProviders/CreateActivityStore";
 
 export default function TypeActivityConfig() {
   const tiposVotacion = [
@@ -16,6 +17,7 @@ export default function TypeActivityConfig() {
     "Texto",
   ];
   const [type, setType] = useState(tiposVotacion[0].toLowerCase());
+  const { setActivityType } = useGeneralCreateActivityStore();
   let configComponent;
 
   switch (type) {
@@ -39,7 +41,10 @@ export default function TypeActivityConfig() {
       configComponent = <div></div>;
       break;
   }
-
+  const handleSelection = (e:ChangeEvent<HTMLSelectElement>) => {
+    setType(e.target.value);
+    setActivityType(e.target.value);
+  }
   return (
     <div className="flex flex-col gap-y-6">
       {/* TODO: Dependiendo del tipo de actividad */}
@@ -50,7 +55,7 @@ export default function TypeActivityConfig() {
             className="min-w-32 rounded-lg border bg-ThirdGray px-2 py-1 text-center text-lg focus:outline-none focus:ring-1 focus:ring-PrimBlack"
             id="ActivityType"
             name="ActivityType"
-            onChange={(e) => setType(e.target.value)}
+            onChange={handleSelection}
           >
             {tiposVotacion.map((tipo) => (
               <option key={tipo} value={tipo.toLowerCase()}>

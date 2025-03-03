@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import demokraticaRoutes from "@/utils/routeUtils";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
+import { faHome, faSignOutAlt, faGear, faBullhorn } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,6 +50,13 @@ export default function Header() {
     demokraticaRoutes.conocenos,
     demokraticaRoutes.planes,
   ];
+
+  const userAccountInfoItems = [
+    {type: "link", ref: demokraticaRoutes.cuenta.link, text:"Gestionar Cuenta", icon:faGear},
+    {type: "link", ref: demokraticaRoutes.centroUsuario.link, text:"Menú de Usuario", icon:faHome},
+    {type: "link", ref: demokraticaRoutes.nuevaSesion.link, text:"Crear Sesión", icon:faBullhorn},
+    {type: "button", onClick: handleLogout, text: "Cerrar Sesión", icon:faSignOutAlt}
+  ] 
 
   return (
     // Header con todo y la navbar mobile
@@ -97,44 +105,47 @@ export default function Header() {
                 className="2xl:border-3 flex justify-center rounded-md border-2 border-black bg-PrimCreamCan text-sm hover:scale-110 lg:px-2 lg:text-base xl:px-2 xl:text-lg 2xl:px-2 2xl:text-xl"
                 onClick={() => {
                   setOpenAccountInfo(!isOpenAccountInfo);
-                }}
+                }}                
                 ref={dropdownButtonRef}
               >
                 <UserCircleIcon className="flex h-8 w-9 justify-center text-black lg:w-8" />
               </button>
               {isOpenAccountInfo && (
-                <motion.nav
-                  initial={false}
+                <motion.nav                  
+                  initial={{ height: 0, opacity: 0 }}
                   animate={{
                     height: isOpenAccountInfo ? "auto" : 0,
                     opacity: isOpenAccountInfo ? 1 : 0,
                   }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
-                  className="absolute right-0 top-full mt-2 flex min-w-[60vw] flex-col rounded-2xl border-2 border-black bg-PrimGray p-2 text-black md:min-w-[25vw]"
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="absolute right-0 top-full mt-2 flex min-w-[60vw] flex-col rounded-2xl border-2 border-black bg-PrimGray p-2 text-black md:min-w-[15vw] text-left"
                   ref={dropdownRef}
                 >
-                  <div className="w-fullrounded-xl flex w-full bg-PrimGray text-end">
+                  <div className="w-full rounded-xl flex w-full bg-PrimGray text-center">
                     <p className="text-ls w-full p-2 font-bold">{`Hola, ${user.username}`}</p>
                   </div>
-                  <div className="rounded-xl">
-                    <Link
-                      href={demokraticaRoutes.cuenta.link}
-                      className="text-ls hover:cursor flex w-full items-center justify-end rounded-t-xl bg-ThirdGray p-2 hover:bg-SecGray"
-                    >
-                      Gestionar tu cuenta
-                    </Link>
-                    <Link
-                      href={demokraticaRoutes.centroUsuario.link}
-                      className="text-ls hover:cursor flex w-full items-center justify-end bg-ThirdGray p-2 hover:bg-SecGray"
-                    >
-                      Ir al menú de usuario
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="text-ls hover:cursor flex w-full items-center justify-end rounded-b-xl bg-ThirdGray p-2 hover:bg-SecGray"
-                    >
-                      Cerrar Sesión
-                    </button>
+                  <div className="rounded-xl overflow-hidden p-1">
+                    {userAccountInfoItems.map(item => (                      
+                      item.type === "link" ? (
+                        <Link
+                          key={item.text}
+                          href={item.ref? item.ref : "/"}
+                          className="text-ls hover:cursor flex w-full items-center bg-ThirdGray p-2 px-4 gap-4 hover:bg-SecGray first:rounded-t-xl last:rounded-b-xl"
+                        >
+                          <FontAwesomeIcon icon={item.icon}/>
+                          {item.text}
+                        </Link>
+                      ) : (
+                        <button
+                          key={item.text}  
+                          onClick= {item.onClick}
+                          className="text-ls hover:cursor flex w-full items-center bg-ThirdGray p-2 px-4 gap-4 hover:bg-SecGray first:rounded-t-xl last:rounded-b-xl"
+                        >
+                          <FontAwesomeIcon icon={item.icon}/>
+                          {item.text}
+                        </button>
+                      )
+                    ))}
                   </div>
                 </motion.nav>
               )}

@@ -13,7 +13,7 @@ export default function Footer() {
   ];
 
   const importantLinksUser: siteMapItem[] = [
-    demokraticaRoutes.cookies,
+    // demokraticaRoutes.cookies,
     demokraticaRoutes.userTerms,
   ];
 

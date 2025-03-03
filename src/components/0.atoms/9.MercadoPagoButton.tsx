@@ -29,22 +29,22 @@ const CheckoutButton = ({ planId }: { planId: string }) => {
         news: 2,
         time: 5000
       })
+    } else {
+      const res = await proceedToPaymentInterface(planId, getCookie() as string);
+    
+      let data = undefined;
+      if(res.status === 200 && res.data) data = res.data as PaymentReponse;
+      
+      const url = data?.url; 
+      if (!url){
+        setMessage({
+          message: "No se pudo abrir la pasarela de pagos. Intenta de nuevo más tarde",
+          news: 3,
+          time: 5000
+        });
+      }   
+      else window.open(url, "_blank", "width=1000,height=600");
     }     
-  
-    const res = await proceedToPaymentInterface(planId, getCookie() as string);
-    
-    let data = undefined;
-    if(res.status === 200 && res.data) data = res.data as PaymentReponse;
-    
-    const url = data?.url; 
-    if (!url){
-      setMessage({
-        message: "No se pudo abrir la pasarela de pagos. Intenta de nuevo más tarde",
-        news: 3,
-        time: 5000
-      });
-    }   
-    else window.open(url, "_blank", "width=1000,height=600");
     
   };
 

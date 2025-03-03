@@ -13,9 +13,9 @@ const demokraticaRoutes = {
   // Registro
   login: { name: "Ingresa", link: "/ingresa" },
   register: { name: "Únete", link: "/unete" },
-  // TODO Importantes para el usuario
+  // TODO Importante para el usuario
   cookies: { name: "Cookies", link: "/cookies" },
-  userTerms: { name: "Términos de uso", link: "/terminos-de-uso" },
+  userTerms: { name: "Términos de uso", link: "/terminosDeUso" },
   //Contenido
   centroUsuario: { name: "Centro de Usuario", link: "/centroUsuario" },
   cuenta: { name: "Gestión de cuenta", link: "/cuenta" },

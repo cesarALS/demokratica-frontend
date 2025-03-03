@@ -49,13 +49,13 @@ export default function ActivitiesLoader() {
 
   if (isLoading)
     return (
-      <div className="border-2 border-black">
+      <div className="border-2 border-black rounded-lg h-[15vh]">
         <LoadingScreen
           fixed={false}
           text={"Cargando sesiones"}
           showText={false}
           scale={1.2}
-          logo={"Title"}
+          logo={"Title"}          
         />
       </div>
     );

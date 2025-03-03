@@ -6,6 +6,7 @@ import MessageBox from "@/templates/0.atoms/12.MessageBox";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import FixedMenuButton from "@/templates/0.atoms/22.FixedMenuButton";
 
 export default function AfterLogInContent({
   children,
@@ -34,6 +35,7 @@ export default function AfterLogInContent({
         {/* Footer al final de la página o contenido */}
         <Footer />
       </div>
+      {user && <FixedMenuButton/>}
       <MessageBox/>
     </>
   );

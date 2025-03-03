@@ -116,6 +116,7 @@ export default function ActivitiesLoader() {
           case "TIDEMAN":
             return (
               <TidemanActivity
+                activityId={activity.id}
                 date={activity.startTime}
                 key={activity.id}
                 initialMode={mode}

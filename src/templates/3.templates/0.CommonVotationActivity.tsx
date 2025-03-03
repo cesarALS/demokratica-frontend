@@ -97,7 +97,7 @@ export default function CommonVotationActivity({
 
   return (
     <ContentCard>
-      <ActivityHeader tags={tags} givenDate={date} rol={userRole} />
+      <ActivityHeader activityId = {activityId} tags={tags} givenDate={date} rol={userRole} activityType = "POLL"/>
       <MarkdownShower markdown={markdownQuestion} />
       {mode === "participation" && (
         <>
@@ -123,7 +123,7 @@ export default function CommonVotationActivity({
                   className="size-4 rounded-full"
                 ></div>
                 <div>
-                  Votos {name} : {votes}
+                  {name} : {votes}
                 </div>
               </div>
             ))}

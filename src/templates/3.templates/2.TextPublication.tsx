@@ -3,11 +3,13 @@ import ActivityHeader from "@/templates/1.molecules/9.ActivityHeader";
 import MarkdownShower from "@/templates/0.atoms/18.MarkdownShower";
 
 interface TextPublicationProps {
+  activityId: number;
   tags: string[];
   markdown?: string;
 }
 
 export default function TextPublication({
+  activityId,
   tags,
   markdown,
 }: TextPublicationProps) {
@@ -17,7 +19,7 @@ export default function TextPublication({
 
   return (
     <ContentCard>
-      <ActivityHeader tags={tags} rol="admin" />
+      <ActivityHeader tags={tags} rol="admin" activityId={activityId} activityType="TEXT"/>
       <MarkdownShower markdown={markdown} />
     </ContentCard>
   );

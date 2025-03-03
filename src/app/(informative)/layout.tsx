@@ -3,12 +3,17 @@
 import Header from "@/components/2.organisms/3.Header";
 import Footer from "@/components/2.organisms/4.Footer";
 import MessageBox from "@/templates/0.atoms/12.MessageBox";
+import FixedMenuButton from "@/templates/0.atoms/22.FixedMenuButton";
+import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 
 export default function InformativeLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
+  const { user } = useAuthContext();
+
   return (
     <>
       {/* Header siempre visible en la parte superior */}
@@ -24,6 +29,7 @@ export default function InformativeLayout({
         <Footer />
       </div>
       <MessageBox />
+      {user && <FixedMenuButton/>}
     </>
   );
 }

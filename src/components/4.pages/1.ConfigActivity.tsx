@@ -10,7 +10,7 @@ import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import { useRouter } from "next/navigation";
 import demokraticaRoutes from "@/utils/routeUtils";
 import { usePathname } from "next/navigation";
-import { createCommonVotation } from "@/utils/apiUtils/apiActivitiesUtils";
+import { createCommonVotation, createWordCloud } from "@/utils/apiUtils/apiActivitiesUtils";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "@/utils/reactQueryUtils";
 
@@ -23,23 +23,36 @@ export default function ConfigActivity() {
   const CreatePollStore = useCreatePollStore();
   const { getCookie } = useAuthContext();  
 
+  const handleRedirect = () => {
+    //Borra caché
+    queryClient.removeQueries({ queryKey: [queryKeys.activities] });
+    queryClient.invalidateQueries({ queryKey: [queryKeys.activities] });
+    // Cargar la nueva 
+    router.push(`${demokraticaRoutes.sesion.link}/${idSesion}`);
+  }
+
   const cancelCreation = () => {router.push(demokraticaRoutes.sesion.link + `/${idSesion}`)} 
   const proceedWithCreation = async () => {
+    const question = GeneralActivityStore.question;
+    const startDate = GeneralActivityStore.startTime;
+    const endDate = GeneralActivityStore.endTime;
+    const tags = GeneralActivityStore.tags;
+    console.log(GeneralActivityStore.activityType);
     switch (GeneralActivityStore.activityType) {
-      case "común":
-        const question = GeneralActivityStore.question;
-        const startDate = GeneralActivityStore.startTime;
-        const endDate = GeneralActivityStore.endTime;
-        const tags = GeneralActivityStore.tags;
+      case "votación común":        
         const options = CreatePollStore.pollOptions;
-        const result = await createCommonVotation(getCookie(), idSesion, question, startDate, endDate, tags, options);    
-        if(result.status === 201) {  
-          //Borra caché
-          queryClient.removeQueries({ queryKey: [queryKeys.activities] });
-          queryClient.invalidateQueries({ queryKey: [queryKeys.activities] });
-          // Cargar la nueva 
-          router.push(`${demokraticaRoutes.sesion.link}/${idSesion}`);
-        }      
+        const resultCV = await createCommonVotation(getCookie(), idSesion, question, startDate, endDate, tags, options);    
+        if(resultCV.status === 201) {  
+          handleRedirect();       
+        }
+        break;
+      case "wordcloud":
+        const resultWC = await createWordCloud(getCookie(), idSesion, question, startDate, endDate, tags);    
+        GeneralActivityStore.activityType = "votación común";
+        if(resultWC.status === 201) {  
+          handleRedirect();       
+        }
+        break;
     }
   }
 

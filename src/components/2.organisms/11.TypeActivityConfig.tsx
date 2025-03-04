@@ -37,6 +37,7 @@ export default function TypeActivityConfig() {
   }
   const handleSelection = (e:ChangeEvent<HTMLSelectElement>) => {
     setType(e.target.value);
+    console.log(e.target.value);
     setActivityType(e.target.value);
   }
   return (

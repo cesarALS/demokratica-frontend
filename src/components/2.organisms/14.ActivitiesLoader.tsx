@@ -101,7 +101,7 @@ export default function ActivitiesLoader() {
               results = activity.results as PollResult[];
               return (
                 <CommonVotationActivity
-                  key={activity.id}
+                  key={"CV"+activity.id}
                   activityId={activity.id}
                   tags={tags}
                   markdownQuestion={activity.question}
@@ -115,7 +115,7 @@ export default function ActivitiesLoader() {
             case "WORD_CLOUD":
               return (
                 <WordCloudActivity
-                  key={activity.id}
+                  key={"WC"+activity.id}
                   activityId={activity.id}
                   tags={tags}
                   markdownQuestion={activity.question}

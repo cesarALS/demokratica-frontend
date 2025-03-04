@@ -27,13 +27,12 @@ export default function ConfigActivity() {
   const proceedWithCreation = async () => {
     switch (GeneralActivityStore.activityType) {
       case "común":
-        const title = CreatePollStore.title;    
-        const description = GeneralActivityStore.description;
+        const question = GeneralActivityStore.question;
         const startDate = GeneralActivityStore.startTime;
         const endDate = GeneralActivityStore.endTime;
         const tags = GeneralActivityStore.tags;
         const options = CreatePollStore.pollOptions;
-        const result = await createCommonVotation(getCookie(), idSesion, title, description, startDate, endDate, tags, options);    
+        const result = await createCommonVotation(getCookie(), idSesion, question, startDate, endDate, tags, options);    
         if(result.status === 201) {  
           //Borra caché
           queryClient.removeQueries({ queryKey: [queryKeys.activities] });

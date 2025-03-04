@@ -12,7 +12,7 @@ import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen";
 import Link from "next/link";
 import TextAreaMarkdownTitle from "@/templates/0.atoms/16.TextAreaMarkdownTitle";
 import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
-
+import WordCloudActivity from "@/templates/3.templates/3.WordCloudActivity";
 
 export default function ActivitiesLoader() {
   const pathname = usePathname();
@@ -27,7 +27,7 @@ export default function ActivitiesLoader() {
     queryKey: ["activities", idSesion],
     queryFn: async () => {
       const response = await getActivities(getCookie(), idSesion);
-      if (response.status === 200) {
+      if (response.status === 200) {        
         return response.data;
       }
       throw new Error(response.error || "Error al obtener actividades");
@@ -43,7 +43,7 @@ export default function ActivitiesLoader() {
     if (!isLoading && data) {
       setSessionId(sessionData.sessionId); // Guardar sessionId en Zustand
       setUserRole(sessionData.userRole); // Guardar userRole en Zustand
-      setActivities(sessionData?.pollDTOs || []); // Guardar actividades
+      setActivities(sessionData.activities); // Guardar actividades
     }
   }, [data, sessionData, isLoading, setActivities, setUserRole]);
 
@@ -96,54 +96,61 @@ export default function ActivitiesLoader() {
               mode = "participation"
             }
           }
-  
-           
-          switch (activity.type) {
-            // TODO: Aquí falta el caso de texto
-            case "POLL":
-              return (
-                <CommonVotationActivity
-                  key={activity.id}
-                  activityId={activity.id}
-                  tags={tags}
-                  markdownQuestion={activity.title}
-                  options={
-                    activity.pollResults?.filter((result) => result.id !== null && result.description !== null) ||
-                    []
-                  }
-                  date={activity.startTime}
-                  initialMode = {mode}
-                />
-              );
-  
-            case "TIDEMAN":
-              return (
-                <TidemanActivity
-                  date={activity.startTime}
-                  key={activity.id}
-                  initialMode={mode}
-                  tags={tags}
-                  markdownQuestion={activity.title}
-                />
-              );
-  
-            default:
-              return (
-                <CommonVotationActivity
-                  key={activity.id}
-                  activityId={activity.id}
-                  tags={tags}
-                  markdownQuestion={activity.title}
-                  options={
-                    activity.pollResults?.filter((result) => result.id !== null && result.description !== null) ||
-                    []
-                  }
-                  date={activity.startTime}
-                  initialMode = {mode}
+        }         
+        switch (activity.type) {
+          // TODO: Aquí falta el caso de texto
+          case "POLL":
+            return (
+              <CommonVotationActivity
+                key={activity.id}
+                activityId={activity.id}
+                tags={tags}
+                markdownQuestion={activity.question}
+                options={
+                  activity.results?.filter((result) => result.id !== null && result.description !== null) ||
+                  []
+                }
+                date={activity.startTime}
+                initialMode = {mode}
               />
-              );
-          }
-          })
+            );
+          case "WORD_CLOUD":
+            return (
+              <WordCloudActivity
+                key={activity.id}
+                activityId={activity.id}
+                tags={tags}
+                markdownQuestion={activity.question}
+                date={activity.startTime}
+              />
+            );
+          case "TIDEMAN":
+            return (
+              <TidemanActivity
+                activityId={activity.id}
+                date={activity.startTime}
+                key={activity.id}
+                initialMode={mode}
+                tags={tags}
+                markdownQuestion={activity.question}
+              />
+            );
+
+          default:
+            return (
+              <CommonVotationActivity
+                key={activity.id}
+                activityId={activity.id}
+                tags={tags}
+                markdownQuestion={activity.question}
+                options={
+                  activity.results?.filter((result) => result.id !== null && result.description !== null) ||
+                  []
+                }
+                date={activity.startTime}
+                initialMode = {mode}
+            />
+            );
         }
       </div>
     );

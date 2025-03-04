@@ -1,9 +1,10 @@
 import TextAreaTitle from "@/templates/0.atoms/16.TextAreaMarkdownTitle";
 import OptionsInput from "@/templates/1.molecules/8.OptionsInput";
-import { useCreatePollStore } from "@/utils/ContextProviders/CreateActivityStore";
+import { useCreatePollStore, useGeneralCreateActivityStore } from "@/utils/ContextProviders/CreateActivityStore";
 
 export default function ConfigCommonVotation() {
-  const { setTitle, setPollOptions } = useCreatePollStore()
+  const { setPollOptions } = useCreatePollStore()
+  const { setQuestion } = useGeneralCreateActivityStore()
 
   const setOptions = (options: string[]) => {
     setPollOptions(options.map((option) => ({ description: option })));
@@ -15,8 +16,8 @@ export default function ConfigCommonVotation() {
       <TextAreaTitle
         title="Pregunta:"
         placeholder="Ingresa tu pregunta en formato markdown"
-        setValue={setTitle}
         className="gap-y-4"
+        setValue={setQuestion}
       />
       {/* Opciones de respuesta */}
       <OptionsInput setValue={setOptions}/>

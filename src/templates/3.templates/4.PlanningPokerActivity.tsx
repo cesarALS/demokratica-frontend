@@ -12,6 +12,7 @@ import IndicatorRightResultPlanningPoker from "../../components/1.molecules/19.I
 import PlanningPokerResultEntry from "../2.organisms/4.PlanningPokerResultEntry";
 
 interface PlanningPokerActivityProps {
+  activityId: number;
   tags: string[];
   markdownQuestion: string;
   date: string;
@@ -19,6 +20,7 @@ interface PlanningPokerActivityProps {
 }
 
 export default function PlanningPokerActivity({
+  activityId,
   tags,
   markdownQuestion,
   date,
@@ -39,7 +41,7 @@ export default function PlanningPokerActivity({
 
   return (
     <ContentCard>
-      <ActivityHeader tags={tags} givenDate={date} rol="admin" />
+      <ActivityHeader tags={tags} givenDate={date} rol="admin" activityId={activityId} activityType="POKER"/>
       <GridTwoColsRow className="grid-rows-[auto_1fr] gap-x-4 gap-y-4">
         <MarkdownShower markdown={markdownQuestion} />
         {mode === "participation" && (

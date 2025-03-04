@@ -12,13 +12,15 @@ import { OrganizableEntry } from "@/types/activities";
 import SectionContainer from "../1.molecules/10.SectionContainer";
 
 interface TidemanActivityProps {
+  activityId: number;
   date: string;
   tags: string[];
   markdownQuestion: string;
-  initialMode: string,
+  initialMode: string,  
 }
 
 export default function TidemanActivity({
+  activityId,
   date,
   tags,
   markdownQuestion,
@@ -42,7 +44,7 @@ export default function TidemanActivity({
 
   return (
     <ContentCard>
-      <ActivityHeader tags={tags} givenDate={date} rol="admin" />
+      <ActivityHeader tags={tags} givenDate={date} rol="admin" activityId={activityId} activityType="TIDEMAN"/>
       <GridTwoColsRow>
         <MarkdownShower markdown={markdownQuestion} />
         {mode === "participation" && (

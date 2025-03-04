@@ -8,19 +8,23 @@ import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
 import SectionContainer from "@/templates/1.molecules/10.SectionContainer";
 import WordCloudComponent from "@/templates/1.molecules/14.WordCloud";
 import GridTwoColsRow from "../2.organisms/3.GridTwoColsRow";
+import { useSessionActivitiesStore } from "@/utils/ContextProviders/SessionActivitiesStore";
 
 interface WordCloudActivityProps {
+  activityId: number;
   tags: string[];
   markdownQuestion: string;
   date: string;
 }
 
 export default function WordCloudActivity({
+  activityId,
   tags,
   markdownQuestion,
   date,
 }: WordCloudActivityProps) {
   const [mode, setMode] = useState("participation");
+  const userRole = useSessionActivitiesStore((state) => state.userRole);
 
   function handleSendResults() {
     setMode("results");
@@ -32,7 +36,7 @@ export default function WordCloudActivity({
 
   return (
     <ContentCard>
-      <ActivityHeader tags={tags} givenDate={date} rol="admin" />
+      <ActivityHeader tags={tags} givenDate={date} rol={userRole} activityId={activityId} activityType="WORD"/>
       <GridTwoColsRow className="gap-x-4 gap-y-4">
         <div className="flex items-center justify-center">
           <MarkdownShower markdown={markdownQuestion} />

@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import CommonVotationActivity from "@/templates/3.templates/0.CommonVotationActivity";
 import TidemanActivity from "@/templates/3.templates/1.TidemanActivity";
 import { getActivities } from "@/utils/apiUtils/apiActivitiesUtils";
-import { SessionData, useSessionActivitiesStore } from "@/utils/ContextProviders/SessionActivitiesStore";
+import { PollResult, SessionData, useSessionActivitiesStore } from "@/utils/ContextProviders/SessionActivitiesStore";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen";
 import Link from "next/link";
@@ -28,6 +28,7 @@ export default function ActivitiesLoader() {
     queryFn: async () => {
       const response = await getActivities(getCookie(), idSesion);
       if (response.status === 200) {        
+        console.log(response.data)
         return response.data;
       }
       throw new Error(response.error || "Error al obtener actividades");
@@ -38,6 +39,8 @@ export default function ActivitiesLoader() {
     refetchOnWindowFocus: false,
   });
   const sessionData = data as SessionData;
+
+  
   // Actualiza Zustand cuando cambien los datos
   useEffect(() => {
     if (!isLoading && data) {
@@ -76,23 +79,26 @@ export default function ActivitiesLoader() {
           />
         </div>               
         {activities.map((activity) => {
-          const tags = activity.tags.map((tag) => tag.text);
-          
+          const tags = activity.tags.map((tag) => tag.text);               
+
           let mode = "participation";
-          if (activity.activityStatus === "NOT_STARTED") {
+          if (activity.status === "NOT_STARTED") {
             mode = "starting";
-          } else if (activity.activityStatus === "FINISHED") {
+          } else if (activity.status === "FINISHED") {
             mode = "results";
-          } else if (activity.activityStatus === "ONGOING") {
+          } else if (activity.status === "ONGOING") {
             if (activity.alreadyParticipated) {
               mode = "results";
             } else {
               mode = "participation";
             }
           }
-    
+          
+          let results = []
+
           switch (activity.type) {
             case "POLL":
+              results = activity.results as PollResult[];
               return (
                 <CommonVotationActivity
                   key={activity.id}
@@ -100,12 +106,12 @@ export default function ActivitiesLoader() {
                   tags={tags}
                   markdownQuestion={activity.question}
                   options={
-                    activity.results?.filter((result) => result.id !== null && result.description !== null) || []
+                    results?.filter((result) => result.id !== null && result.description !== null) || []
                   }
                   date={activity.startTime}
                   initialMode={mode}
                 />
-              );
+              );              
             case "WORD_CLOUD":
               return (
                 <WordCloudActivity
@@ -128,6 +134,7 @@ export default function ActivitiesLoader() {
                 />
               );
             default:
+              results = activity.results as PollResult[];
               return (
                 <CommonVotationActivity
                   key={activity.id}
@@ -135,7 +142,7 @@ export default function ActivitiesLoader() {
                   tags={tags}
                   markdownQuestion={activity.question}
                   options={
-                    activity.results?.filter((result) => result.id !== null && result.description !== null) || []
+                    results?.filter((result) => result.id !== null && result.description !== null) || []
                   }
                   date={activity.startTime}
                   initialMode={mode}

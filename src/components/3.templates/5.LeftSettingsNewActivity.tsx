@@ -23,7 +23,7 @@ export default function LeftSettingsNewActivity() {
       {/* Información del plan actual */}
       <PlanShow plan={0} />
       {/* Actividades restantes en esta sesión */}
-      <RemainderSessions plan={0} remainder={0} />
+      <RemainderSessions plan={0} remainder={10} />
       {/* Fechas */}
       <FechasConfigSesion setValue = {datesChange}/>
       {/* Tags */}

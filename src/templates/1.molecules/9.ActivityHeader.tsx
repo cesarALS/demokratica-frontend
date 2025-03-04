@@ -25,7 +25,6 @@ export default function ActivityHeader({
 
   const { getCookie } = useAuthContext();
   async function handleActivityDeletion(){
-
     try{
       // Actualiza el estado global eliminando la actividad seleccionada
       setActivities(activities.filter(activity => activity.id !== activityId));
@@ -38,7 +37,7 @@ export default function ActivityHeader({
 
       if(response.status == 200){
         const sessionData = response.data as SessionData;        
-        setActivities(sessionData.pollDTOs); // Guardar actividades
+        setActivities(sessionData.activities); // Guardar actividades
       }  
     }catch(error){
       console.error("Error in deleteActivity:", error);

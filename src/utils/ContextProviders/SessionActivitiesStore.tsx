@@ -1,5 +1,25 @@
 import { create } from "zustand";
 
+interface BaseActivity {
+  id: number;
+  question: string;
+  creationTime: Date;
+  startTime: string;
+  endTime: string;
+  tags: { text: string }[];
+  type: string;
+  status: string;
+  alreadyParticipated: boolean;
+}
+
+interface CommonVotationActivity extends BaseActivity {
+  results?: PollResult[];
+}
+
+interface WordCloudActivity extends BaseActivity {
+  results?: string[];
+}
+
 export interface PollResult {
   id?: number; // Puede ser null en el JSON, lo hacemos opcional
   description: string; // Puede ser null en el JSON
@@ -11,17 +31,7 @@ export interface SessionData{
   activities: Activity[];
 }
 
-type Activity = {
-  id: number;
-  question: string;
-  startTime: string;
-  endTime: string;
-  tags: { text: string }[];
-  results?: PollResult[]; 
-  type: string;
-  activityStatus: string; // Agregar el estado de la actividad
-  alreadyParticipated: boolean; // Agregar si el usuario ya participó
-};
+type Activity = CommonVotationActivity | WordCloudActivity;
 
 type SessionActivitiesStore = {
   sessionId: string;

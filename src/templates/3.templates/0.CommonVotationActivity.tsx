@@ -27,6 +27,8 @@ interface CommonVotationActivityProps {
   initialMode: string;
 }
 
+
+
 export default function CommonVotationActivity({
   activityId,
   tags,
@@ -45,15 +47,18 @@ export default function CommonVotationActivity({
   const selectedOption = useSessionActivitiesStore(
     (state) => state.commonVotationSelectedOptions[activityId],
   );
+
+  const resultsType = pollResults as PollResult[];
+
   const results =
-    pollResults
+    resultsType
       ?.filter((result) => result.id !== null && result.description !== null)
       .map((option) => ({
         id: option.id,
         name: option.description,
         votes: option.numVotes,
         color: "",
-      })) || [];
+      }))  || [];
   const { setActivities, sessionId } = useSessionActivitiesStore();
 
   // Function to generate a unique color for each slice

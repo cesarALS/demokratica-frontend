@@ -9,11 +9,10 @@ import { getActivities } from "@/utils/apiUtils/apiActivitiesUtils";
 import { SessionData, useSessionActivitiesStore } from "@/utils/ContextProviders/SessionActivitiesStore";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBoxOpen } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import TextAreaMarkdownTitle from "@/templates/0.atoms/16.TextAreaMarkdownTitle";
+import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
 import WordCloudActivity from "@/templates/3.templates/3.WordCloudActivity";
-
 
 export default function ActivitiesLoader() {
   const pathname = usePathname();
@@ -50,52 +49,54 @@ export default function ActivitiesLoader() {
 
   if (isLoading)
     return (
-      <div className="border-2 border-black rounded-lg h-[15vh]">
+      <div className="border-2 border-black rounded-lg h-[60vh]">
         <LoadingScreen
           fixed={false}
           text={"Cargando sesiones"}
           showText={false}
-          scale={1.2}
-          logo={"Title"}          
+          scale={1.4}
+          logo={"Icon"}          
         />
       </div>
-    );  
-  if (!activities.length) {
+    );
+  
     return (
-      <div className="flex min-h-[50vh] flex-col items-center justify-center text-center">
-        <FontAwesomeIcon icon={faBoxOpen} className="text-6xl text-black" />
-        <p className="mt-4 text-lg text-black">
-          No hay actividades en esta sesión.
-        </p>
+      <div className="w-full flex flex-col gap-6 items-center">                   
+        <div className="flex flex-col items-center min-h-[25vh] gap-6 w-full bg-white p-6 rounded-xl border-2 border-black">
+          <TextAreaMarkdownTitle 
+            title="Haz una publicación"
+            placeholder="Ingresa tu publicación" 
+            className="w-full"    
+            flex="flex flex-col lg:flex-row items-start justify-start lg:gap-x-8 "   
+          />
+          <SimpleButton
+            buttonText="Publicar"
+            onClick={() => {}}
+            className="flex justify-center bg-PrimCasablanca w-[15vh] hover:bg-SecCasablanca px-1"
+          />
+        </div> 
         <Link
           href={newActivityPath}
-          className="mt-4 rounded-lg bg-PrimBlue px-4 py-2 text-white shadow transition hover:bg-AccentBlue"
+          className="flex justify-center rounded-lg bg-AccentBlue px-4 py-2 text-white shadow transition hover:bg-PrimBlue w-[20vh] px-2"
         >
           Agregar actividad
-        </Link>
-      </div>
-    );
-  }
-
-  return (
-    <>
-      {activities.map((activity) => {
-        const tags = activity.tags.map((tag) => tag.text);
-        
-        let mode = "participation";
-        if(activity.activityStatus === "NOT_STARTED"){
-          mode = "starting"
-        }else if(activity.activityStatus === "FINISHED"){
-          mode = "results"
-        }else if(activity.activityStatus === "ONGOING"){
-          if(activity.alreadyParticipated){
+        </Link>                 
+        {activities.map((activity) => {
+          const tags = activity.tags.map((tag) => tag.text);
+          
+          let mode = "participation";
+          if(activity.activityStatus === "NOT_STARTED"){
+            mode = "starting"
+          }else if(activity.activityStatus === "FINISHED"){
             mode = "results"
-          }else{
-            mode = "participation"
+          }else if(activity.activityStatus === "ONGOING"){
+            if(activity.alreadyParticipated){
+              mode = "results"
+            }else{
+              mode = "participation"
+            }
           }
-        }
-
-         
+        }         
         switch (activity.type) {
           // TODO: Aquí falta el caso de texto
           case "POLL":
@@ -151,7 +152,7 @@ export default function ActivitiesLoader() {
             />
             );
         }
-      })}
-    </>
-  );
+      </div>
+    );
+  
 }

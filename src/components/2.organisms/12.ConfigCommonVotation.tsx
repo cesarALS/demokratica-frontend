@@ -16,6 +16,7 @@ export default function ConfigCommonVotation() {
       <TextAreaTitle
         title="Pregunta:"
         placeholder="Ingresa tu pregunta en formato markdown"
+        className="gap-y-4"
         setValue={setQuestion}
       />
       {/* Opciones de respuesta */}

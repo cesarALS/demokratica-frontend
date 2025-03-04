@@ -106,7 +106,7 @@ export default function ParticipantsSearch() {
                 buttonText="Añadir"
                 className="bg-PrimCreamCan hover:bg-SecCreamCan text-black"
                 onClick={() => {
-                  SessionStore.addInvitation(member.username, member.email, "EDITOR");
+                  SessionStore.addInvitation(member.username, member.email, "PARTICIPANTE");
                   setFilteredMemberList((prevList) =>
                     prevList.filter((invite) => invite.email !== member.email)
                   );

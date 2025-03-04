@@ -55,7 +55,7 @@ export default function Header() {
     {type: "link", ref: demokraticaRoutes.cuenta.link, text:"Gestionar Cuenta", icon:faGear},
     {type: "link", ref: demokraticaRoutes.centroUsuario.link, text:"Menú de Usuario", icon:faHome},
     {type: "link", ref: demokraticaRoutes.nuevaSesion.link, text:"Crear Sesión", icon:faBullhorn},
-    {type: "button", onClick: handleLogout, text: "Cerrar Sesión", icon:faSignOutAlt}
+    {type: "button", onClick: handleLogout, text: "Salir", icon:faSignOutAlt}
   ] 
 
   return (
@@ -130,6 +130,7 @@ export default function Header() {
                         <Link
                           key={item.text}
                           href={item.ref? item.ref : "/"}
+                          onClick={() => setOpenAccountInfo(false)}
                           className="text-ls hover:cursor flex w-full items-center bg-ThirdGray p-2 px-4 gap-4 hover:bg-SecGray first:rounded-t-xl last:rounded-b-xl"
                         >
                           <FontAwesomeIcon icon={item.icon}/>
@@ -138,7 +139,10 @@ export default function Header() {
                       ) : (
                         <button
                           key={item.text}  
-                          onClick= {item.onClick}
+                          onClick= {() => {
+                            if (item.onClick) item.onClick();
+                            setOpenAccountInfo(false);
+                          }}
                           className="text-ls hover:cursor flex w-full items-center bg-ThirdGray p-2 px-4 gap-4 hover:bg-SecGray first:rounded-t-xl last:rounded-b-xl"
                         >
                           <FontAwesomeIcon icon={item.icon}/>

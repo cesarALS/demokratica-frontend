@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 interface AuthContextType {
     user: DemokraticaUser | null;
-    handleLogin: (email: string, password: string) => Promise<number>;
+    handleLogin: (email: string, password: string, rememberMe?: boolean) => Promise<number>;
     handleUserCreation: (email: string, username: string, password: string) => Promise<number>
     handleLogout: () => void;
     handleUsernameChange: (newUsername: string) => Promise<boolean>;
@@ -62,10 +62,11 @@ export function AuthProvider({ children }: {children: React.ReactNode}){
     }, [])
 
     // Función exportable para hacer Login
-    const handleLogin = async (email: string, password: string) => {
+    const handleLogin = async (email: string, password: string, rememberMe?: boolean) => {
         const res = await login(email, password);
         if (res.status === 200 && res.data?.jwtToken && res.data.user) {            
-            Cookies.set(TOKEN_COOKIE, res.data.jwtToken, { expires: 7 });
+            if (rememberMe && rememberMe === true) Cookies.set(TOKEN_COOKIE, res.data.jwtToken, { expires: 7 });
+            else Cookies.set(TOKEN_COOKIE, res.data.jwtToken);
             setUser(res.data.user);
         }
         return res.status;    

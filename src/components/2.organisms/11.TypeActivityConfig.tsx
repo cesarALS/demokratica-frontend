@@ -12,7 +12,7 @@ export default function TypeActivityConfig() {
     "Votación Común",
     "Tideman",
     "WordCloud",
-    "Poker Planning",
+    "Planning Poker",
   ];
   const [type, setType] = useState(tiposVotacion[0].toLowerCase());
   const { setActivityType } = useGeneralCreateActivityStore();

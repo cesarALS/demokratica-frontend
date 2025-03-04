@@ -38,10 +38,12 @@ type SessionActivitiesStore = {
   activities: Activity[];
   userRole: string;
   commonVotationSelectedOptions: Record<number, number>;
+  wordCloudWord: string;
   setSessionId: (sessionId: string) => void;
   setActivities: (activities: Activity[]) => void;
   setUserRole: (role: string) => void;
   setCommonVotationSelectedOption: (activityId: number, option: number) => void;
+  setWordCloudWord: (word: string) => void;
 };
 
 export const useSessionActivitiesStore = create<SessionActivitiesStore>((set) => ({
@@ -49,6 +51,8 @@ export const useSessionActivitiesStore = create<SessionActivitiesStore>((set) =>
   activities: [],
   userRole: "PARTICIPANTE",
   commonVotationSelectedOptions: {},
+  wordCloudWord: "",
+  
   setSessionId: (sessionId: string) => set({ sessionId }),
   setActivities: (activities: Activity[]) => set({ activities }),
   setUserRole: (role: string) => set({ userRole: role }),
@@ -59,4 +63,5 @@ export const useSessionActivitiesStore = create<SessionActivitiesStore>((set) =>
         [activityId]: option,
       },
     })),
+  setWordCloudWord: (word: string) => set({ wordCloudWord: word }),
 }));

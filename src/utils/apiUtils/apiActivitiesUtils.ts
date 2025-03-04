@@ -1,17 +1,13 @@
 import { pollOption, tag } from "../ContextProviders/CreateActivityStore";
 import { backendAddress, generalFetch, identity } from "./apiUtils";
 
-const activitiesApis = {
-  getActivities: "/sessions/",
-};
-
 async function getActivities(
   jwtToken: string | undefined,
   sesionID: string | string[] | undefined,
 ) {
   if (!jwtToken) return { status: 500, data: null, error: "No autenticado" };
 
-  const url = `${backendAddress}${activitiesApis.getActivities + sesionID}`;
+  const url = `${backendAddress}/sessions/${sesionID}/activities`;
   const headers = { Authorization: `Bearer ${jwtToken}` };
 
   const response = await generalFetch(url, "GET", identity, undefined, headers);
@@ -82,6 +78,38 @@ async function createCommonVotation(
   }
 }
 
+async function createWordCloud(
+  jwtToken: string | undefined,
+  sessionId: number,
+  question: string,
+  startTime: Date,
+  endTime: Date,
+  tags: tag[],  
+): Promise<{ status: number; data?: object | [] | undefined; error?: string }> {
+  if (!jwtToken)
+    return { status: 500, data: undefined, error: "No autenticado" };
+
+  const url = `${backendAddress}/sessions/${sessionId}/wordclouds`;
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${jwtToken}`,
+  };
+  const body = {
+    question,
+    startTime,
+    endTime,
+    tags,    
+  };
+
+  try {
+    const res = await generalFetch(url, "POST", identity, body, headers);
+    return res;
+  } catch (error) {
+    console.error("Error in createWordCloud:", error);
+    return { status: 500, data: undefined };
+  }
+}
+
 async function deleteActivity(
   jwtToken: string | undefined,
   activityId: number,
@@ -113,4 +141,4 @@ async function deleteActivity(
   }
 }
 
-export { getActivities, sendCommonVotationVote, createCommonVotation, deleteActivity };
+export { getActivities, sendCommonVotationVote, createCommonVotation, deleteActivity, createWordCloud };

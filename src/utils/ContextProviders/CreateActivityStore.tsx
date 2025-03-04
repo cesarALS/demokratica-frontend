@@ -30,7 +30,7 @@ export type CreatePollActivity ={
 
 export const useGeneralCreateActivityStore = create<GeneralCreateActivity>((set) => ({
     sessionId: 0,
-    activityType: "común",
+    activityType: "votación común",
     question: "",
     startTime: new Date(),
     endTime: new Date(),

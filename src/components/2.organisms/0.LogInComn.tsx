@@ -3,7 +3,7 @@
 import { linkStyles } from "@/utils/tailwindUtils";
 
 import React, { useState } from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
 import { useRouter } from "next/navigation";
@@ -39,12 +39,14 @@ export default function LogInComn() {
         initialValues={{
           email: "",
           password: "",
+          rememberMe: true,
         }}
         
         validationSchema={validationSchema}
 
         onSubmit={async (values) => {
-          const responseStatus = await handleLogin(values.email, values.password);        
+          console.log(values);
+          const responseStatus = await handleLogin(values.email, values.password, values.rememberMe);        
           
           let message = "";
           let news = 3;        
@@ -89,13 +91,19 @@ export default function LogInComn() {
 
             {/* Recuérdame y olvidaste tu contraseña */}
             <div className="flex items-center justify-between text-xs text-PrimBlack">
-              <div>
-                <input className="bg-SecGray" type="checkbox" id="rememberMe" />
+              <div className="flex flex-row items-center">
+                <Field
+                  className="bg-SecGray" 
+                  type="checkbox" 
+                  name="rememberMe" //Conexión con Formik
+                  id="rememberMe" 
+                />
                 <label htmlFor="rememberMe" className="pl-1 hover:text-black">
                   Recuérdame
                 </label>
               </div>
               <button 
+                type="button"
                 className={`${linkStyles()}`}
                 onClick={() => {openForgotPasswordModal(true)}}  
               >

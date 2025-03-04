@@ -20,13 +20,13 @@ export default function DialogoWIP({ isOpen, onClose, duration = 2500 }: Dialogo
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0">
+    <div className="fixed inset-0 flex items-start justify-center lg:justify-start pt-10 lg:pl-10">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.5 }}
-        className="absolute top-10 left-10 bg-white p-6 rounded-2xl shadow-lg w-80 text-center relative"
+        className="bg-white p-6 rounded-2xl shadow-lg w-80 text-center relative"
       >
         <h2 className="text-xl font-bold text-gray-800">Estamos trabajando en ello</h2>
         <p className="text-gray-600 mt-2">Esta función estará disponible pronto.</p>

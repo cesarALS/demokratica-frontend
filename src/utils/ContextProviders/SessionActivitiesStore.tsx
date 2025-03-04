@@ -8,17 +8,16 @@ export interface PollResult {
 export interface SessionData{
   sessionId: string;
   userRole: string;
-  pollDTOs: Activity[];
+  activities: Activity[];
 }
 
 type Activity = {
   id: number;
-  title: string;
-  description: string;
+  question: string;
   startTime: string;
   endTime: string;
   tags: { text: string }[];
-  pollResults?: PollResult[]; 
+  results?: PollResult[]; 
   type: string;
   activityStatus: string; // Agregar el estado de la actividad
   alreadyParticipated: boolean; // Agregar si el usuario ya participó

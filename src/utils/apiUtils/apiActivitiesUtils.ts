@@ -51,8 +51,7 @@ async function sendCommonVotationVote(
 async function createCommonVotation(
   jwtToken: string | undefined,
   sessionId: number,
-  title: string,
-  description: string,
+  question: string,
   startTime: Date,
   endTime: Date,
   tags: tag[],
@@ -67,8 +66,7 @@ async function createCommonVotation(
     Authorization: `Bearer ${jwtToken}`,
   };
   const body = {
-    title,
-    description,
+    question,
     startTime,
     endTime,
     tags,
@@ -96,7 +94,7 @@ async function deleteActivity(
     case "POLL":
       url += `/polls/${activityId}`;
       break;
-    case "WORDCLOUD":
+    case "WORD":
       url += `/wordclouds/${activityId}`;
       break;
     default:

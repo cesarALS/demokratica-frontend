@@ -12,6 +12,7 @@ import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBoxOpen } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import WordCloudActivity from "@/templates/3.templates/3.WordCloudActivity";
 
 
 export default function ActivitiesLoader() {
@@ -27,7 +28,7 @@ export default function ActivitiesLoader() {
     queryKey: ["activities", idSesion],
     queryFn: async () => {
       const response = await getActivities(getCookie(), idSesion);
-      if (response.status === 200) {
+      if (response.status === 200) {        
         return response.data;
       }
       throw new Error(response.error || "Error al obtener actividades");
@@ -43,7 +44,7 @@ export default function ActivitiesLoader() {
     if (!isLoading && data) {
       setSessionId(sessionData.sessionId); // Guardar sessionId en Zustand
       setUserRole(sessionData.userRole); // Guardar userRole en Zustand
-      setActivities(sessionData.pollDTOs); // Guardar actividades
+      setActivities(sessionData.activities); // Guardar actividades
     }
   }, [data, sessionData, isLoading, setActivities, setUserRole]);
 
@@ -58,7 +59,7 @@ export default function ActivitiesLoader() {
           logo={"Title"}          
         />
       </div>
-    );
+    );  
   if (!activities.length) {
     return (
       <div className="flex min-h-[50vh] flex-col items-center justify-center text-center">
@@ -103,16 +104,25 @@ export default function ActivitiesLoader() {
                 key={activity.id}
                 activityId={activity.id}
                 tags={tags}
-                markdownQuestion={activity.title}
+                markdownQuestion={activity.question}
                 options={
-                  activity.pollResults?.filter((result) => result.id !== null && result.description !== null) ||
+                  activity.results?.filter((result) => result.id !== null && result.description !== null) ||
                   []
                 }
                 date={activity.startTime}
                 initialMode = {mode}
               />
             );
-
+          case "WORD_CLOUD":
+            return (
+              <WordCloudActivity
+                key={activity.id}
+                activityId={activity.id}
+                tags={tags}
+                markdownQuestion={activity.question}
+                date={activity.startTime}
+              />
+            );
           case "TIDEMAN":
             return (
               <TidemanActivity
@@ -121,7 +131,7 @@ export default function ActivitiesLoader() {
                 key={activity.id}
                 initialMode={mode}
                 tags={tags}
-                markdownQuestion={activity.title}
+                markdownQuestion={activity.question}
               />
             );
 
@@ -131,9 +141,9 @@ export default function ActivitiesLoader() {
                 key={activity.id}
                 activityId={activity.id}
                 tags={tags}
-                markdownQuestion={activity.title}
+                markdownQuestion={activity.question}
                 options={
-                  activity.pollResults?.filter((result) => result.id !== null && result.description !== null) ||
+                  activity.results?.filter((result) => result.id !== null && result.description !== null) ||
                   []
                 }
                 date={activity.startTime}

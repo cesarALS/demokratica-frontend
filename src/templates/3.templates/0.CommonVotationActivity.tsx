@@ -39,7 +39,7 @@ export default function CommonVotationActivity({
   const userRole = useSessionActivitiesStore((state) => state.userRole);
   const pollResults = useSessionActivitiesStore(
     (state) =>
-      state.activities.find((act) => act.id === activityId)?.pollResults,
+      state.activities.find((act) => act.id === activityId)?.results,
   );
   const { getCookie } = useAuthContext();
   const selectedOption = useSessionActivitiesStore(
@@ -73,7 +73,7 @@ export default function CommonVotationActivity({
 
       if(response.status == 200){
         const sessionData = response.data as SessionData;        
-        setActivities(sessionData.pollDTOs); // Guardar actividades
+        setActivities(sessionData.activities); // Guardar actividades
       }    
     } catch (error) {
       console.error("Error sending vote:", error);
@@ -99,6 +99,12 @@ export default function CommonVotationActivity({
     <ContentCard>
       <ActivityHeader activityId = {activityId} tags={tags} givenDate={date} rol={userRole} activityType = "POLL"/>
       <MarkdownShower markdown={markdownQuestion} />
+      {mode === "starting" && (
+        <>
+          <SelectableOptions options={options} activityId={activityId} />
+          <span className="text-center"> Esperando a comenzar actividad...</span>
+        </>
+      )}
       {mode === "participation" && (
         <>
           <SelectableOptions options={options} activityId={activityId} />

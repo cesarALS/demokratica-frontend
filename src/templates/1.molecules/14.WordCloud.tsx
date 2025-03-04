@@ -5,7 +5,7 @@ import cloud, { Word } from "d3-cloud";
 import * as d3 from "d3";
 import { scaleLinear } from "d3-scale";
 
-interface WordData {
+export interface WordData {
   text: string;
   value: number;
 }

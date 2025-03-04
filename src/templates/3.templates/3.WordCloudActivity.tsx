@@ -6,7 +6,7 @@ import ActivityHeader from "@/templates/1.molecules/9.ActivityHeader";
 import ContentCard from "@/templates/2.organisms/2.ContentCard";
 import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
 import SectionContainer from "@/templates/1.molecules/10.SectionContainer";
-import WordCloudComponent from "@/templates/1.molecules/14.WordCloud";
+import WordCloudComponent, { WordData } from "@/templates/1.molecules/14.WordCloud";
 import GridTwoColsRow from "../2.organisms/3.GridTwoColsRow";
 import { SessionData, useSessionActivitiesStore } from "@/utils/ContextProviders/SessionActivitiesStore";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
@@ -17,6 +17,24 @@ interface WordCloudActivityProps {
   tags: string[];
   markdownQuestion: string;
   date: string;
+  initialMode: string;
+}
+
+function generateWordData(words: string[]): WordData[] {
+  const wordCount: { [key: string]: number } = {};
+
+  words.forEach((word) => {
+    if (wordCount[word]) {
+      wordCount[word]++;
+    } else {
+      wordCount[word] = 1;
+    }
+  });
+
+  return Object.keys(wordCount).map((word) => ({
+    text: word,
+    value: wordCount[word],
+  }));
 }
 
 export default function WordCloudActivity({
@@ -24,12 +42,21 @@ export default function WordCloudActivity({
   tags,
   markdownQuestion,
   date,
+  initialMode
 }: WordCloudActivityProps) {
-  const [mode, setMode] = useState("participation");
+  const [mode, setMode] = useState(initialMode);
   const userRole = useSessionActivitiesStore((state) => state.userRole);
   const { wordCloudWord, setWordCloudWord } = useSessionActivitiesStore();
   const { getCookie } = useAuthContext();
   const { sessionId, setActivities } = useSessionActivitiesStore();
+  const words = useSessionActivitiesStore(
+    (state) =>
+      state.activities.find((act) => act.id === activityId)?.results,
+  );
+
+  const wordsTyped = words as string[];
+  const wordData = generateWordData(wordsTyped);
+
   async function handleSendResults() {    
     try {
       // Envía el voto
@@ -65,7 +92,7 @@ export default function WordCloudActivity({
             ></input>
           </SectionContainer>
         )}
-        {mode === "results" && <WordCloudComponent />}
+        {mode === "results" && <WordCloudComponent words={wordData}/>}
       </GridTwoColsRow>
       {mode === "participation" && (
         <SimpleButton

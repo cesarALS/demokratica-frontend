@@ -9,10 +9,10 @@ import { useGeneralCreateActivityStore } from "@/utils/ContextProviders/CreateAc
 
 export default function TypeActivityConfig() {
   const tiposVotacion = [
-    "Votación Común",
-    "Tideman",
+    "Votación Común",    
     "WordCloud",
-    "Planning Poker",
+    // "Tideman",
+    // "Planning Poker",
   ];
   const [type, setType] = useState(tiposVotacion[0].toLowerCase());
   const { setActivityType } = useGeneralCreateActivityStore();
@@ -22,11 +22,11 @@ export default function TypeActivityConfig() {
     case tiposVotacion[0].toLowerCase():
       configComponent = <ConfigCommonVotation />;
       break;
-    case tiposVotacion[1].toLowerCase():
-      configComponent = <ConfigTidemanVotation />;
+    case tiposVotacion[1].toLowerCase():      
+      configComponent = <ConfigWordCloud />;
       break;
     case tiposVotacion[2].toLowerCase():
-      configComponent = <ConfigWordCloud />;
+      configComponent = <ConfigTidemanVotation />;
       break;
     case tiposVotacion[3].toLowerCase():
       configComponent = <ConfigPokerPlanning />;

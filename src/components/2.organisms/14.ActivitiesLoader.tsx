@@ -120,6 +120,7 @@ export default function ActivitiesLoader() {
                   tags={tags}
                   markdownQuestion={activity.question}
                   date={activity.startTime}
+                  initialMode={mode}
                 />
               );
             case "TIDEMAN":

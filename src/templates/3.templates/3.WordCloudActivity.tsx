@@ -8,7 +8,9 @@ import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
 import SectionContainer from "@/templates/1.molecules/10.SectionContainer";
 import WordCloudComponent from "@/templates/1.molecules/14.WordCloud";
 import GridTwoColsRow from "../2.organisms/3.GridTwoColsRow";
-import { useSessionActivitiesStore } from "@/utils/ContextProviders/SessionActivitiesStore";
+import { SessionData, useSessionActivitiesStore } from "@/utils/ContextProviders/SessionActivitiesStore";
+import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
+import { getActivities, sendWordCloudWord } from "@/utils/apiUtils/apiActivitiesUtils";
 
 interface WordCloudActivityProps {
   activityId: number;
@@ -25,13 +27,25 @@ export default function WordCloudActivity({
 }: WordCloudActivityProps) {
   const [mode, setMode] = useState("participation");
   const userRole = useSessionActivitiesStore((state) => state.userRole);
+  const { wordCloudWord, setWordCloudWord } = useSessionActivitiesStore();
+  const { getCookie } = useAuthContext();
+  const { sessionId, setActivities } = useSessionActivitiesStore();
+  async function handleSendResults() {    
+    try {
+      // Envía el voto
+      await sendWordCloudWord(getCookie(), activityId, wordCloudWord);
+        
+      setMode("results");
+      //Hace de nuevo el fetch para actualizar los resultados en el estado global   
+      const response = await getActivities(getCookie(), sessionId);           
 
-  function handleSendResults() {
-    setMode("results");
-    // TODO: Send results to server
-    // TODO: Get results in a viable format
-    // TODO: Render results
-    // TODO: También debería haber un botón para actualizar los resultados
+      if(response.status == 200){
+        const sessionData = response.data as SessionData;        
+        setActivities(sessionData.activities); // Guardar actividades
+      }    
+    } catch (error) {
+      console.error("Error sending vote:", error);
+    }
   }
 
   return (
@@ -47,6 +61,7 @@ export default function WordCloudActivity({
               type="text"
               className="flex w-full items-center gap-x-2 rounded-lg border-2 border-SecBlack bg-white p-2 font-semibold text-black"
               placeholder="Agrega tu palabra"
+              onChange={(e) => setWordCloudWord(e.target.value)}
             ></input>
           </SectionContainer>
         )}

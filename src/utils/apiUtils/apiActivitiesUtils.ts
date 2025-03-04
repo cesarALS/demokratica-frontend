@@ -44,6 +44,35 @@ async function sendCommonVotationVote(
   }
 }
 
+async function sendWordCloudWord(
+  jwtToken: string | undefined,
+  activityId: number,
+  word:string,  
+): Promise<{ status: number; data?: object | [] | undefined; error?: string }> {
+  if (!jwtToken)
+    return { status: 500, data: undefined, error: "No autenticado" };
+
+  const url = `${backendAddress}/wordclouds/${activityId}`;
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${jwtToken}`,
+  };
+
+  try {
+    const res = await generalFetch(
+      url,
+      "POST",
+      identity,
+      { word: word },
+      headers,
+    );
+    return res;
+  } catch (error) {
+    console.error("Error in sendWordCloudWord:", error);
+    return { status: 500, data: undefined };
+  }
+}
+
 async function createCommonVotation(
   jwtToken: string | undefined,
   sessionId: number,
@@ -141,4 +170,4 @@ async function deleteActivity(
   }
 }
 
-export { getActivities, sendCommonVotationVote, createCommonVotation, deleteActivity, createWordCloud };
+export { getActivities, sendCommonVotationVote, createCommonVotation, deleteActivity, createWordCloud, sendWordCloudWord};

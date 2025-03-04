@@ -16,6 +16,7 @@ export default function ConfigCommonVotation() {
         title="Pregunta:"
         placeholder="Ingresa tu pregunta en formato markdown"
         setValue={setTitle}
+        className="gap-y-4"
       />
       {/* Opciones de respuesta */}
       <OptionsInput setValue={setOptions}/>

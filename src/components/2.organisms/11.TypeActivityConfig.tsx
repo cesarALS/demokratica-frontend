@@ -2,7 +2,6 @@
 
 import { ChangeEvent, useState } from "react";
 import ConfigCommonVotation from "./12.ConfigCommonVotation";
-import ConfigTextPublication from "./13.ConfigTextPublication";
 import ConfigTidemanVotation from "./15.ConfigTidemanVotation";
 import ConfigWordCloud from "./16.ConfigWordCloud";
 import ConfigPokerPlanning from "./17.ConfigPokerPlanning";
@@ -10,11 +9,10 @@ import { useGeneralCreateActivityStore } from "@/utils/ContextProviders/CreateAc
 
 export default function TypeActivityConfig() {
   const tiposVotacion = [
-    "Común",
+    "Votación Común",
     "Tideman",
     "WordCloud",
     "Poker Planning",
-    "Texto",
   ];
   const [type, setType] = useState(tiposVotacion[0].toLowerCase());
   const { setActivityType } = useGeneralCreateActivityStore();
@@ -32,10 +30,6 @@ export default function TypeActivityConfig() {
       break;
     case tiposVotacion[3].toLowerCase():
       configComponent = <ConfigPokerPlanning />;
-      break;
-    case tiposVotacion[4].toLowerCase():
-      // Config para texto
-      configComponent = <ConfigTextPublication />;
       break;
     default:
       configComponent = <div></div>;

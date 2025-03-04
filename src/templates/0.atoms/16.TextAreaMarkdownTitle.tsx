@@ -8,7 +8,8 @@ interface TextAreaMarkdownTitle {
   placeholder: string;
   className?: string;
   flex?: string;
-  setValue?: (value: string) => void;
+  setValue?: (value: string) => void;  
+  resetTrigger?: boolean;
 }
 
 export default function TextAreaMarkdownTitle({
@@ -17,10 +18,17 @@ export default function TextAreaMarkdownTitle({
   className,
   flex ="flex flex-col",
   setValue = () => {},  
+  resetTrigger,
 }: TextAreaMarkdownTitle) {
   const [markdown, setMarkdown] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null); // Referencia al textarea
 
+  useEffect(() => {
+    if (resetTrigger !== undefined) {
+      setMarkdown(""); // 🔹 Borra el textarea cuando resetTrigger cambia
+    }
+  }, [resetTrigger]);
+  
   useEffect(() => {
     // Send the markdown to the parent component
     if (setValue) {

@@ -20,7 +20,7 @@ export default function TextPublication({
   return (
     <ContentCard>
       <ActivityHeader tags={tags} rol="admin" activityId={activityId} activityType="TEXT"/>
-      <MarkdownShower markdown={markdown} />
+      <MarkdownShower markdown={markdown} className="max-h-[45vh]" />
     </ContentCard>
   );
 }

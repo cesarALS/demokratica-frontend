@@ -10,20 +10,20 @@ import { PollResult, SessionData, useSessionActivitiesStore } from "@/utils/Cont
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen";
 import Link from "next/link";
-import TextAreaMarkdownTitle from "@/templates/0.atoms/16.TextAreaMarkdownTitle";
-import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
 import WordCloudActivity from "@/templates/3.templates/3.WordCloudActivity";
+import PostText from "./18.PostText";
+import TextPublication from "@/templates/3.templates/2.TextPublication";
 
 export default function ActivitiesLoader() {
   const pathname = usePathname();
   const newActivityPath = pathname + "/nuevaActividad";
-  const { setActivities, activities , setUserRole, setSessionId } = useSessionActivitiesStore();
+  const { setActivities, activities , setUserRole, setSessionId, userRole } = useSessionActivitiesStore();
   const { getCookie } = useAuthContext();
 
   const idSesion = pathname.split("/").pop(); // Obtiene el último segmento de la URL
 
   // Obtener actividades usando React Query con cache
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["activities", idSesion],
     queryFn: async () => {
       const response = await getActivities(getCookie(), idSesion);
@@ -65,19 +65,7 @@ export default function ActivitiesLoader() {
   
     return (      
       <>
-        <div className="flex flex-col items-center min-h-[25vh] gap-6 w-full bg-white p-6 rounded-xl border-2 border-black">
-          <TextAreaMarkdownTitle 
-            title="Haz una publicación"
-            placeholder="Ingresa tu publicación" 
-            className="w-full"    
-            flex="flex flex-col lg:flex-row items-start justify-start lg:gap-x-8 "   
-          />
-          <SimpleButton
-            buttonText="Publicar"
-            onClick={() => {}}
-            className="flex justify-center bg-PrimCasablanca w-[15vh] hover:bg-SecCasablanca px-1"
-          />
-        </div>               
+        {userRole!=="PARTICIPANTE" && <PostText refetch={refetch}/>              }
         {activities.map((activity) => {
           const tags = activity.tags.map((tag) => tag.text);               
 
@@ -133,7 +121,17 @@ export default function ActivitiesLoader() {
                   date={activity.startTime}
                   initialMode={mode}
                 />
-              );
+              );  
+            case "TEXT":
+              if ("content" in activity) return (                
+                <TextPublication
+                  key={activity.id}
+                  activityId={activity.id}
+                  tags={[]}
+                  markdown={(activity.content)}
+                />
+              )
+              return null;              
             default:
               results = activity.results as PollResult[];
               return (

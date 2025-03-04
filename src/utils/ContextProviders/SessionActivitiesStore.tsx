@@ -20,6 +20,11 @@ interface WordCloudActivity extends BaseActivity {
   results?: string[];
 }
 
+interface PostingActivity extends BaseActivity {
+  results?: string[]; //Un pequeño truco
+  content: string;
+}
+
 export interface PollResult {
   id?: number; // Puede ser null en el JSON, lo hacemos opcional
   description: string; // Puede ser null en el JSON
@@ -31,7 +36,7 @@ export interface SessionData{
   activities: Activity[];
 }
 
-type Activity = CommonVotationActivity | WordCloudActivity;
+type Activity = CommonVotationActivity | WordCloudActivity | PostingActivity;
 
 type SessionActivitiesStore = {
   sessionId: string;

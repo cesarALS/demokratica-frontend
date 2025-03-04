@@ -170,4 +170,40 @@ async function deleteActivity(
   }
 }
 
-export { getActivities, sendCommonVotationVote, createCommonVotation, deleteActivity, createWordCloud, sendWordCloudWord};
+async function sendTextPosting(
+  sessionId: string, 
+  markdown: string, 
+  tags: [], 
+  jwtToken: string
+){
+  if (!jwtToken) return { status: 500, data: null, error: "No autenticado" };
+  const url = `${backendAddress}/sessions/${sessionId}/texts`;
+
+  const headers = { 
+    Authorization: `Bearer ${jwtToken}`,
+    "Content-Type": "application/json",
+  };
+
+  const body = {
+    content: markdown, 
+    tags: tags.map(tag => {
+      {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        text: tag
+      }
+    })
+  };
+
+  return await generalFetch(url, "POST", identity, body, headers);
+
+}
+
+export { 
+  getActivities, 
+  sendCommonVotationVote, 
+  createCommonVotation, 
+  deleteActivity, 
+  createWordCloud, 
+  sendWordCloudWord,
+  sendTextPosting
+};

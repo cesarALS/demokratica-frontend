@@ -60,8 +60,8 @@ export default function ActivitiesLoader() {
       </div>
     );
   
-    return (
-      <div className="w-full flex flex-col gap-6 items-center">                   
+    return (      
+      <>
         <div className="flex flex-col items-center min-h-[25vh] gap-6 w-full bg-white p-6 rounded-xl border-2 border-black">
           <TextAreaMarkdownTitle 
             title="Haz una publicación"
@@ -74,85 +74,83 @@ export default function ActivitiesLoader() {
             onClick={() => {}}
             className="flex justify-center bg-PrimCasablanca w-[15vh] hover:bg-SecCasablanca px-1"
           />
-        </div> 
+        </div>               
+        {activities.map((activity) => {
+          const tags = activity.tags.map((tag) => tag.text);
+          
+          let mode = "participation";
+          if (activity.activityStatus === "NOT_STARTED") {
+            mode = "starting";
+          } else if (activity.activityStatus === "FINISHED") {
+            mode = "results";
+          } else if (activity.activityStatus === "ONGOING") {
+            if (activity.alreadyParticipated) {
+              mode = "results";
+            } else {
+              mode = "participation";
+            }
+          }
+    
+          switch (activity.type) {
+            case "POLL":
+              return (
+                <CommonVotationActivity
+                  key={activity.id}
+                  activityId={activity.id}
+                  tags={tags}
+                  markdownQuestion={activity.question}
+                  options={
+                    activity.results?.filter((result) => result.id !== null && result.description !== null) || []
+                  }
+                  date={activity.startTime}
+                  initialMode={mode}
+                />
+              );
+            case "WORD_CLOUD":
+              return (
+                <WordCloudActivity
+                  key={activity.id}
+                  activityId={activity.id}
+                  tags={tags}
+                  markdownQuestion={activity.question}
+                  date={activity.startTime}
+                />
+              );
+            case "TIDEMAN":
+              return (
+                <TidemanActivity
+                  key={activity.id}
+                  activityId={activity.id}
+                  tags={tags}
+                  markdownQuestion={activity.question}
+                  date={activity.startTime}
+                  initialMode={mode}
+                />
+              );
+            default:
+              return (
+                <CommonVotationActivity
+                  key={activity.id}
+                  activityId={activity.id}
+                  tags={tags}
+                  markdownQuestion={activity.question}
+                  options={
+                    activity.results?.filter((result) => result.id !== null && result.description !== null) || []
+                  }
+                  date={activity.startTime}
+                  initialMode={mode}
+                />
+              );
+          }
+        })}        
         <Link
           href={newActivityPath}
           className="flex justify-center rounded-lg bg-AccentBlue px-4 py-2 text-white shadow transition hover:bg-PrimBlue w-[20vh] px-2"
         >
           Agregar actividad
-        </Link>                 
-        {activities.map((activity) => {
-          const tags = activity.tags.map((tag) => tag.text);
-          
-          let mode = "participation";
-          if(activity.activityStatus === "NOT_STARTED"){
-            mode = "starting"
-          }else if(activity.activityStatus === "FINISHED"){
-            mode = "results"
-          }else if(activity.activityStatus === "ONGOING"){
-            if(activity.alreadyParticipated){
-              mode = "results"
-            }else{
-              mode = "participation"
-            }
-          }
-        }         
-        switch (activity.type) {
-          // TODO: Aquí falta el caso de texto
-          case "POLL":
-            return (
-              <CommonVotationActivity
-                key={activity.id}
-                activityId={activity.id}
-                tags={tags}
-                markdownQuestion={activity.question}
-                options={
-                  activity.results?.filter((result) => result.id !== null && result.description !== null) ||
-                  []
-                }
-                date={activity.startTime}
-                initialMode = {mode}
-              />
-            );
-          case "WORD_CLOUD":
-            return (
-              <WordCloudActivity
-                key={activity.id}
-                activityId={activity.id}
-                tags={tags}
-                markdownQuestion={activity.question}
-                date={activity.startTime}
-              />
-            );
-          case "TIDEMAN":
-            return (
-              <TidemanActivity
-                activityId={activity.id}
-                date={activity.startTime}
-                key={activity.id}
-                initialMode={mode}
-                tags={tags}
-                markdownQuestion={activity.question}
-              />
-            );
-
-          default:
-            return (
-              <CommonVotationActivity
-                key={activity.id}
-                activityId={activity.id}
-                tags={tags}
-                markdownQuestion={activity.question}
-                options={
-                  activity.results?.filter((result) => result.id !== null && result.description !== null) ||
-                  []
-                }
-                date={activity.startTime}
-                initialMode = {mode}
-            />
-            );
-        }
-      </div>
+        </Link>
+      </>
     );
+    
   
 }

@@ -45,7 +45,7 @@ export default function LogInComn() {
         validationSchema={validationSchema}
 
         onSubmit={async (values) => {
-          console.log(values);
+          
           const responseStatus = await handleLogin(values.email, values.password, values.rememberMe);        
           
           let message = "";

@@ -27,7 +27,7 @@ const emptySession = {
     currentPage: 1 as number
 }
 
-type CreatableSession =  typeof emptySession;
+export type CreatableSession =  typeof emptySession;
 
 interface SessionState extends CreatableSession {
     setField: <K extends keyof SessionState>(field: K, value: SessionState[K]) => void;
@@ -126,7 +126,22 @@ export const useSessionStore = create<SessionState>((set, get) => ({
     setPage: (page: number) => {
         set(() => ({currentPage: page}));
     },
-    resetForm: () => set(structuredClone(emptySession)),
+    // resetForm: () => set(structuredClone(emptySession)),
+    resetForm: () => set(state => ({
+        ...state,
+        title: undefined,
+        description: undefined,
+        startDate: undefined,
+        endDate: undefined,
+        tags: [],
+        invitations: [],
+        allToggled: false,
+        filters: {
+            alphabeticOrder: { options: ["A-Z", "Z-A"], current: "A-Z" },
+            pageSize: { options: ["5", "10", "15", "20"], current: "5" },
+        },
+        currentPage: 1,
+    })),    
     sendSessionToCreate: async (getToken: () => string|undefined): Promise<{
         status: number|null, 
         mssg: string,

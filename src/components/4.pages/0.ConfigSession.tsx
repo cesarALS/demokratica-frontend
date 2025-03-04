@@ -7,14 +7,17 @@ import LeftSettingsNewSession from "@/components/3.templates/3.LeftSettingsNewSe
 import FormDecision from "@/templates/1.molecules/13.TwoButtonFormDecision";
 import GridTwoColsRow from "@/templates/2.organisms/3.GridTwoColsRow";
 
-import { useSessionStore } from "@/utils/ContextProviders/CreateSessionStore";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { CreatableSession, useSessionStore } from "@/utils/ContextProviders/CreateSessionStore";
+import { useEffect, useMemo } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import demokraticaRoutes from "@/utils/routeUtils";
 import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import { queryKeys } from "@/utils/reactQueryUtils";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getIndividualSession } from "@/utils/apiUtils/apiSessionsUtils";
+import { IndividualSessionGetType } from "@/types/sessions";
+import { Noto_Sans_Tamil_Supplement } from "next/font/google";
 
 // TODO: Esta pagina sirve para las configuraciones de sesión en general, no solo los de una nueva sesión, la idea es que tome la info dependiendo de en donde la llamen y además entregue la info también dependiendo de donde la llamen.
 
@@ -23,10 +26,100 @@ import { useQueryClient } from "@tanstack/react-query";
 
 export default function ConfigSession() {  
   
-  const SessionStore = useSessionStore();
+  const SessionStore = useSessionStore();  
   const queryClient = useQueryClient();
   const MessageContext = useMessageContext();
   const { getCookie } = useAuthContext();
+
+  const pathname = usePathname();
+
+  const { isCreatingSession, isEditingSession, sessionId } = useMemo(() => {
+    const creating = pathname.startsWith("/nuevaSesion");
+    const editing = pathname.includes("/configSesion");
+    const id = editing ? pathname.split("/")[2] : null;
+    console.log("Recalculando sessionId:", id);
+    return { isCreatingSession: creating, isEditingSession: editing, sessionId: id };
+  }, [pathname]);
+  
+
+//   const { isCreatingSession, isEditingSession, sessionId } = useMemo(() => {
+//   const creating = pathname.startsWith("/nuevaSesion");
+//   const editing = pathname.includes("/configSesion");
+//   const id = editing ? pathname.split("/")[2] : null;
+//   return { isCreatingSession: creating, isEditingSession: editing, sessionId: id };
+// }, [pathname]);
+
+
+  // let isCreatingSession: boolean = false;
+  // let isEditingSession: boolean = false;
+  // let sessionId: string | null = "";
+  
+  // useEffect(() => {
+  //   isCreatingSession = pathname.startsWith("/nuevaSesion");
+  //   isEditingSession = pathname.includes("/configSesion");
+  //   sessionId = isEditingSession? pathname.split("/")[2] : null;
+  // },)
+
+  // const isCreatingSession = pathname.startsWith("/nuevaSesion");
+  // const isEditingSession = pathname.includes("/configSesion");
+  // const sessionId = isEditingSession? pathname.split("/")[2] : null;
+
+  // const { data: sessionData } = useQuery({
+  //   queryKey: [queryKeys.individualSession, sessionId], 
+  //   queryFn: () => getIndividualSession(getCookie() as string, parseInt(sessionId as string)),
+  //   enabled: isEditingSession, // Solo se ejecuta en modo edición
+  // });
+
+  const { data: sessionData } = useQuery({
+    queryKey: [queryKeys.individualSession, sessionId], 
+    queryFn: () => {
+      if (!sessionId) {
+        console.warn("❌ sessionId es null, no se ejecuta la consulta");
+        return Promise.resolve(null); // Evita la ejecución de la API
+      }
+      return getIndividualSession(getCookie() as string, parseInt(sessionId));
+    },
+    enabled: isEditingSession && !!sessionId, // Solo si realmente hay un sessionId válido
+  });
+  
+
+  useEffect(() => {
+    if (sessionData?.data && typeof sessionData.data === "object" && !Array.isArray(sessionData.data)) {
+      const session = sessionData.data as IndividualSessionGetType;
+      
+      SessionStore.setField("title", session.title);
+      SessionStore.setField("description", session.description);
+      SessionStore.setField("startDate", session.startTime ? new Date(session.startTime) : undefined);
+      SessionStore.setField("endDate", session.endTime ? new Date(session.endTime) : undefined);
+      SessionStore.setField("tags", session.tags?.map(tag => tag.text) || []);
+      SessionStore.setField("invitations", session.participants?.map(invitation => ({
+        ...invitation,
+        thicked: false,
+      })) || []);
+      
+    }
+  }, [sessionData]);
+  
+  // useEffect(() => {
+  //   return () => {
+  //     if (!pathname.startsWith("/nuevaSesion") && !pathname.includes("/configSesion")) {
+  //       SessionStore.resetForm();
+  //     }
+  //   };
+  // }, [pathname]);
+
+  useEffect(() => {
+    return () => {
+      console.log("Saliendo de la vista, reseteando SessionStore...");
+      SessionStore.resetForm();
+    };
+  }, [pathname]);
+  
+  
+  
+  useEffect(() => {
+    console.log(isCreatingSession, isEditingSession);
+  }, []);
 
   const handleTitleChange = (title: string) => SessionStore.setField("title", title);
 

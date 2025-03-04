@@ -26,16 +26,32 @@ export interface DemokraticaListMember {
     email: string
 }
 
-interface Invitation {
-    invitedUserEmail: string,    
-    role: roles
-}
-
 interface CreateSessionInvitation {
     email: string,
     role: roles,
     username: string,    
     thicked: boolean
+}
+
+// El tipo que viene con la api de obtener la sesión individual
+export interface IndividualSessionGetType {
+    title: string,
+    description: string,
+    startTime: string,
+    endTime: string,
+    tags: Tag[],
+    participants: InvitationWithUsername[]
+}
+
+interface Invitation {
+    invitedUserEmail: string,    
+    role: roles
+}
+
+interface InvitationWithUsername {
+    email: string,
+    username: string,
+    role: roles
 }
 
 interface Tag {

@@ -1,6 +1,6 @@
 // No sé qué tan importante sea que esto esté acá o en environment variables.
 // Otro detalle: eventualemnte, el dominio del back y del front será el mismo
-export const backendAddress = "https://demokraticabackend.onrender.com/api";
+export const backendAddress = process.env.NEXT_PUBLIC_API_URL;
 // export const backendAddress = "http://localhost:8080/api";
 
 // Lo ideal es que todas las llamadas a la api usen esta generalizada función.

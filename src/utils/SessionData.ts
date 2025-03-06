@@ -4,10 +4,9 @@ import { useQuery } from "@tanstack/react-query";
 import { getIndividualSession } from "./apiUtils/apiSessionsUtils";
 import { queryKeys } from "./reactQueryUtils";
 import { useAuthContext } from "./ContextProviders/AuthProvider";
+import { IndividualSessionGetType } from "@/types/sessions";
 
 const useSessionData = (sessionId: string | null) => {    
-  
-    // if(!sessionId) return {sessionData: null, isPending: false}
   
     const { getCookie } = useAuthContext();
     
@@ -17,7 +16,15 @@ const useSessionData = (sessionId: string | null) => {
       enabled: !!sessionId, 
     });
   
-    return { sessionData, isPending };
+    /*
+    TODO: La función que llama a la api debería determinar el tipo ella misma, no deberíamos
+    hacerlo desde acá
+    */
+    return { 
+      sessionData: sessionData?.data as unknown as IndividualSessionGetType, 
+      status: sessionData?.status,
+      isPending 
+    };
   };
   
   export default useSessionData;

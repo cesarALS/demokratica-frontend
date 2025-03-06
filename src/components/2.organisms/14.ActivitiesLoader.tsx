@@ -35,12 +35,11 @@ export default function ActivitiesLoader() {
     },
     enabled: !!idSesion && !!getCookie(),
     staleTime: 1000 * 60, // Cache por 1 min
-    refetchInterval: 1000 * 30, // Refetch cada 30 segundos
+    refetchInterval: 1000 * 15, // Refetch cada 15 segundos
     refetchOnWindowFocus: false,
   });
   const sessionData = data as SessionData;
 
-  
   // Actualiza Zustand cuando cambien los datos
   useEffect(() => {
     if (!isLoading && data) {
@@ -65,7 +64,7 @@ export default function ActivitiesLoader() {
   
     return (      
       <>
-        {userRole!=="PARTICIPANTE" && <PostText refetch={refetch}/>              }
+        {userRole!=="PARTICIPANTE" && <PostText refetch={refetch}/> }
         {activities.map((activity) => {
           const tags = activity.tags.map((tag) => tag.text);               
 
@@ -151,7 +150,7 @@ export default function ActivitiesLoader() {
         })}        
         <Link
           href={newActivityPath}
-          className="flex justify-center rounded-lg bg-AccentBlue px-4 py-2 text-white shadow transition hover:bg-PrimBlue w-[20vh] px-2"
+          className="flex justify-center rounded-lg bg-AccentBlue px-4 py-2 text-white shadow transition hover:bg-PrimBlue w-[40vw] lg:w-[20vw] xl:w-[15vw] px-2"
         >
           Agregar actividad
         </Link>

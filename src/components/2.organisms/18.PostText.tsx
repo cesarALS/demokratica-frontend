@@ -4,7 +4,7 @@ import { sendTextPosting } from "@/utils/apiUtils/apiActivitiesUtils";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
 import { useSessionActivitiesStore } from "@/utils/ContextProviders/SessionActivitiesStore";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface PostTextProps {
     refetch: () => void;
@@ -17,7 +17,6 @@ const PostText = ({refetch}: PostTextProps) => {
     const { getCookie } = useAuthContext();
     const [text, setText] = useState("");
     const [resetTrigger, setResetTrigger] = useState(false); 
-
     
     const post = async () => {
         const res = await sendTextPosting(sessionId, text, [], getCookie() as string);
@@ -31,10 +30,6 @@ const PostText = ({refetch}: PostTextProps) => {
         }
     
     };
-
-    useEffect(() => {
-        console.log(text);
-    }, [text]);
     
     return (
         <div className="flex flex-col items-center min-h-[25vh] gap-6 w-full bg-white p-6 rounded-xl border-2 border-black">
@@ -49,7 +44,7 @@ const PostText = ({refetch}: PostTextProps) => {
           <SimpleButton
             buttonText="Publicar"
             onClick={post}
-            className="flex justify-center bg-PrimCasablanca w-[15vh] hover:bg-SecCasablanca px-1"
+            className="flex justify-center bg-PrimCasablanca w-[40vw] lg:w-[20vw] xl:w-[15vw] hover:bg-SecCasablanca px-1"
           />
         </div> 
     );

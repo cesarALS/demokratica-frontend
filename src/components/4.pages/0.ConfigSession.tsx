@@ -15,12 +15,11 @@ import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import { queryKeys } from "@/utils/reactQueryUtils";
 import { useQueryClient } from "@tanstack/react-query";
-import { IndividualSessionGetType } from "@/types/sessions";
 import useSessionData from "@/utils/SessionData";
 import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen";
 
 interface ConfigSessionProps {
-  sessionId: string | null
+  sessionId: string | null  
 }
 
 export default function ConfigSession({
@@ -38,11 +37,13 @@ export default function ConfigSession({
   const { sessionData } = useSessionData(sessionId);
   
   useEffect(() => {
-    if (!sessionData) SessionStore.resetForm();
-    
-    else if (sessionData?.data) {
+    if (!sessionData) {
+      SessionStore.resetForm();
+      SessionStore.setField("creatingSession", true);
+    }    
+    else if (sessionData) {
             
-      const session = sessionData.data as IndividualSessionGetType;
+      const session = sessionData;
   
       SessionStore.setField("creatingSession", false)
       SessionStore.setField("title", session.title);
@@ -98,6 +99,14 @@ export default function ConfigSession({
 
   };
 
+  const proceedWithModification = async() => {    
+    MessageContext.setMessage({
+      message: "No fue posible modificar la sesión",
+      news: 3,
+      time: 3000,
+    })
+  }
+
   if(isLoadingView) return <LoadingScreen/>
   else return (
     <>      
@@ -121,8 +130,10 @@ export default function ConfigSession({
         {/* FormDecisionNewSession */}
         <FormDecision 
           firstButtonFunction={cancelCreation}
-          secondButtonText="Crear"
-          secondButtonFunction={proceedWithCreation}
+          firstButtonClassname="bg-red-300 hover:bg-red-400"
+          secondButtonText={SessionStore.creatingSession? "Crear": "Modificar"}
+          secondButtonClassname="hover:bg-PrimCasablanca"
+          secondButtonFunction={SessionStore.creatingSession? proceedWithCreation : proceedWithModification}
         />
       </ContentCard>
     </>

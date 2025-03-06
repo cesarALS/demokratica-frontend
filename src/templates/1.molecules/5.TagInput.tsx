@@ -61,6 +61,7 @@ export default function TagInput(
             placeholder="Agrega tu tag"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
+            onBlur={addTag}
             onKeyDown={handleKeyDown}
           />
         </div>

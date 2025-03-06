@@ -2,7 +2,7 @@
 
 import { useSessionStore } from "@/utils/ContextProviders/CreateSessionStore";
 
-export default function ConfDescription() {
+export default function ConfDescription() {  
   
   const { description, setField } = useSessionStore();
   
@@ -12,7 +12,7 @@ export default function ConfDescription() {
       <textarea
         className="rounded-lg border-2 border-PrimGray bg-ThirdGray p-1 text-PrimBlack placeholder-PrimBlack focus:outline-none focus:ring-1 focus:ring-PrimBlack"
         placeholder="Ingresa tu descripción"
-        value={description}
+        value={(description === undefined)? "" : description}
         onChange={(e)=>{
           setField("description", e.target.value)
         }}

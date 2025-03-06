@@ -7,6 +7,7 @@ import _ from "lodash"
 export const roleStrings = [ "ADMIN", "EDITOR", "PARTICIPANTE"]
 
 const emptySession = {
+    creatingSession: true,
     title: undefined as string | undefined,
     description: undefined as string | undefined,
     startDate: undefined as Date | undefined,
@@ -125,8 +126,7 @@ export const useSessionStore = create<SessionState>((set, get) => ({
     },    
     setPage: (page: number) => {
         set(() => ({currentPage: page}));
-    },
-    // resetForm: () => set(structuredClone(emptySession)),
+    },    
     resetForm: () => set(state => ({
         ...state,
         title: undefined,

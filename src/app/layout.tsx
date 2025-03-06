@@ -12,6 +12,7 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import { MessageProvider } from "@/utils/ContextProviders/MessageProvider";
 import AppQueryProvider from "@/utils/ContextProviders/AppQueryProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // Fuentes para la App. Las importamos de Google fonts, haciendo uso de next/font para optimizaciones
 
@@ -42,6 +43,7 @@ export default function RootLayout({
             <AuthProvider>
               <MessageProvider>           
                 {children}
+                <ReactQueryDevtools initialIsOpen={false} />
               </MessageProvider>
             </AuthProvider>            
           </AppQueryProvider>

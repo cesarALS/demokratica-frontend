@@ -3,23 +3,32 @@
 import DatePickerComponent from "@/templates/0.atoms/13.DatePickerComponent";
 import { useEffect, useState } from "react";
 
-// Este componente se usa en varias partes
-
 interface FechasConfigSessionProps {
+  initialDateAsProp?: Date | null,
+  finalDateAsProp?: Date | null,
   setValue?: (dates: Date[]) => void
 }
 
-export default function FechasConfigSesion({setValue = ()=>{}} : FechasConfigSessionProps) {  
-
+export default function FechasConfigSesion({
+  initialDateAsProp,
+  finalDateAsProp,
+  setValue = ()=>{}
+} : FechasConfigSessionProps) {  
+    
   const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1)
+  tomorrow.setDate(tomorrow.getDate() + 1)      
+      
+  const [startDate, setFirstDate] = useState<Date>(initialDateAsProp? initialDateAsProp: new Date());
+  const [endDate, setLastDate]   = useState<Date>(finalDateAsProp? finalDateAsProp: tomorrow);
 
-  const [startDate, setFirstDate] = useState<Date>(new Date());
-  const [endDate, setLastDate]   = useState<Date>(tomorrow);
+  useEffect(() => {
+    if (initialDateAsProp) setFirstDate(initialDateAsProp);
+    if (finalDateAsProp) setLastDate(finalDateAsProp);
+  }, [initialDateAsProp, finalDateAsProp]);
 
   useEffect(() => {
     setValue([startDate, endDate])
-  }, [startDate, endDate, ])
+  }, [startDate, endDate])
 
   return (
     <div className="flex w-full flex-col items-start justify-start gap-y-4 text-lg">

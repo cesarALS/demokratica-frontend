@@ -4,7 +4,7 @@ import ConfigNewSession from "@/components/4.pages/0.ConfigSession";
 export default function NuevaSesion() {
   return (     
     <PageContentContainer>      
-      <ConfigNewSession />  
+      <ConfigNewSession sessionId={null}/>  
     </PageContentContainer>
   );
 }

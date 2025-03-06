@@ -8,23 +8,27 @@ import { useSessionStore } from "@/utils/ContextProviders/CreateSessionStore";
 
 export default function LeftSettingsNewSession() {
  
-  const { setField } = useSessionStore();
+  const { setField, startDate, endDate } = useSessionStore();
 
   const datesChange = (dates: Date[]) => {
     setField("startDate", dates[0]);
     setField("endDate", dates[1]);
-  }
+  };
 
   const tagsChange = (tags: string[]) => {
     setField("tags", tags);
-  }
+  };
   
   return (
     <div className="flex flex-col gap-y-6">
       {/* Plan actual */}
       <PlanShow plan={0} />
       {/* Fechas */}
-      <FechasConfigSesion setValue={datesChange}/>
+      <FechasConfigSesion 
+        setValue={datesChange}
+        initialDateAsProp={startDate} // Para que la SessionStore pueda setear el estado del hijo
+        finalDateAsProp={endDate}
+      />
       {/* Descripción */}
       <ConfDescription />
       {/* Tags */}

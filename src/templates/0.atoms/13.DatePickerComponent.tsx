@@ -20,10 +20,14 @@ export default function DatePickerComponent({
     if(date) setSelectedTime(date);          
     else setSelectedTime(initialDate);        
   };
-
+  
   useEffect(() => {
+    if (initialDate) setSelectedTime(initialDate);
+  }, [initialDate]);
+
+  useEffect(() => {    
     setValue(selectedTime);
-  }, [selectedTime, setValue]);
+  }, [selectedTime, setValue]); 
 
   return (
     <DatePicker

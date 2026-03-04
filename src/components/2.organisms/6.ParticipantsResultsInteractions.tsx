@@ -1,4 +1,4 @@
-import InteractionButton from "@/templates/0.atoms/9.InteractionButton";
+import InteractionButton from "@/templates/0.atoms/buttons/InteractionButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTable,

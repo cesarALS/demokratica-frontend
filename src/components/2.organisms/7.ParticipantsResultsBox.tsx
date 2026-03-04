@@ -1,4 +1,4 @@
-import TitleLogo from "@/templates/0.atoms/0.TitleLogo";
+import TitleLogo from "@/templates/0.atoms/logo/TitleLogo";
 import ParticipantsResultsEntry from "@/templates/2.organisms/0.ParticipantsResultsEntry";
 import { roles } from "@/types/sessions";
 import { useSessionStore } from "@/utils/ContextProviders/CreateSessionStore";

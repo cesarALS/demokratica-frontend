@@ -1,4 +1,4 @@
-import TitleLogo from "@/templates/0.atoms/0.TitleLogo";
+import TitleLogo from "@/templates/0.atoms/logo/TitleLogo";
 import Link from "next/link";
 
 interface LogoAlHomepageProps {

@@ -1,13 +1,15 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
-import ConfigCommonVotation from "./12.ConfigCommonVotation";
-import ConfigTidemanVotation from "./15.ConfigTidemanVotation";
-import ConfigWordCloud from "./16.ConfigWordCloud";
-import ConfigPokerPlanning from "./17.ConfigPokerPlanning";
+
+import ConfigCommonVoting from "@/components/1.molecules/activities/ConfigCommonVoting";
+import ConfigTidemanVotation from "@/components/1.molecules/activities/ConfigTidemanVoting";
+import ConfigWordCloud from "@/components/1.molecules/activities/ConfigWordCloud";
+import ConfigPokerPlanning from "@/components/1.molecules/activities/ConfigPokerPlanning";
+
 import { useGeneralCreateActivityStore } from "@/utils/ContextProviders/CreateActivityStore";
 
-export default function TypeActivityConfig() {
+export default function ConfigActivityType() {
   const tiposVotacion = [
     "Votación Común",    
     "WordCloud",
@@ -20,7 +22,7 @@ export default function TypeActivityConfig() {
 
   switch (type) {
     case tiposVotacion[0].toLowerCase():
-      configComponent = <ConfigCommonVotation />;
+      configComponent = <ConfigCommonVoting />;
       break;
     case tiposVotacion[1].toLowerCase():      
       configComponent = <ConfigWordCloud />;

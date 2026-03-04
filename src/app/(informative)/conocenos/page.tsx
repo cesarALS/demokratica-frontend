@@ -1,7 +1,7 @@
 import VisionMisionField from "@/templates/1.molecules/2.VisionMisionField";
 import ValoresEquipoContainer from "@/templates/1.molecules/3.ValoresEquipoContainer";
-import ValoresCard from "@/templates/0.atoms/4.ValoresCard";
-import EquipoCard from "@/templates/0.atoms/5.EquipoCard";
+import ValoresCard from "@/templates/0.atoms/informative/ValoresCard";
+import EquipoCard from "@/templates/0.atoms/informative/EquipoCard";
 import PageContentContainer from "@/templates/2.organisms/1.PageContentContainer";
 
 // Página de Quiénes Somos

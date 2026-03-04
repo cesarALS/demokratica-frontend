@@ -1,4 +1,4 @@
-import FullLogo from "@/templates/0.atoms/1.FullLogo";
+import FullLogo from "@/templates/0.atoms/logo/FullLogo";
 import Headache from "@/templates/0.atoms/21.HeadacheIcon";
 import {
   faMobileScreen,

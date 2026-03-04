@@ -1,6 +1,6 @@
 "use client";
 
-import ButtonDropdownSelector from "@/templates/0.atoms/8.ButtonDropdownSelector";
+import ButtonDropdownSelector from "@/templates/0.atoms/buttons/ButtonDropdownSelector";
 import { useSessionStore } from "@/utils/ContextProviders/CreateSessionStore";
 
 export default function ParticipantsView() {

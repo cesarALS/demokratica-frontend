@@ -2,7 +2,7 @@ import TextAreaTitle from "@/templates/0.atoms/16.TextAreaMarkdownTitle";
 import OptionsInput from "@/templates/1.molecules/8.OptionsInput";
 import { useCreatePollStore, useGeneralCreateActivityStore } from "@/utils/ContextProviders/CreateActivityStore";
 
-export default function ConfigCommonVotation() {
+export default function ConfigCommonVoting() {
   const { setPollOptions } = useCreatePollStore()
   const { setQuestion } = useGeneralCreateActivityStore()
 

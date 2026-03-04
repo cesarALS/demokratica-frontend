@@ -1,18 +1,21 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-import CommonVotationActivity from "@/templates/3.templates/0.CommonVotationActivity";
-import TidemanActivity from "@/templates/3.templates/1.TidemanActivity";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+
 import { getActivities } from "@/utils/apiUtils/apiActivitiesUtils";
 import { PollResult, SessionData, useSessionActivitiesStore } from "@/utils/ContextProviders/SessionActivitiesStore";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
+
+import CommonVotationActivity from "@/templates/3.templates/0.CommonVotationActivity";
+import TidemanActivity from "@/templates/3.templates/1.TidemanActivity";
 import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen";
-import Link from "next/link";
 import WordCloudActivity from "@/templates/3.templates/3.WordCloudActivity";
-import PostText from "./18.PostText";
 import TextPublication from "@/templates/3.templates/2.TextPublication";
+import PostText from "@/components/1.molecules/activities/PostText";
+
+import { useQuery } from "@tanstack/react-query";
 
 export default function ActivitiesLoader() {
   const pathname = usePathname();

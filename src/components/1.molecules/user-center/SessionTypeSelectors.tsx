@@ -1,11 +1,11 @@
-import UserCenterSessionTypeSelector from "../0.atoms/10.UserCenterSessionTypeSelector";
+import SessionTypeSelector from "@/components/0.atoms/user-center/SessionTypeSelector";
 
 const UserCenterSessionTypeSelectors = () => {
     
     return (
         <div className="h-[6vh] w-[90%] flex items-center justify-center ">
-            <UserCenterSessionTypeSelector />
-            <UserCenterSessionTypeSelector anfitrion={false} />
+            <SessionTypeSelector />
+            <SessionTypeSelector anfitrion={false} />
         </div>
     )
 }

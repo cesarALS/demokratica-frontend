@@ -1,4 +1,4 @@
-import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
+import SimpleButton from "@/templates/0.atoms/buttons/SimpleButton";
 import TextAreaMarkdownTitle from "@/templates/0.atoms/16.TextAreaMarkdownTitle";
 import { sendTextPosting } from "@/utils/apiUtils/apiActivitiesUtils";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";

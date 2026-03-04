@@ -1,5 +1,5 @@
-import LogInComn from "@/components/2.organisms/0.LogInComn";
-import Oauth from "../2.organisms/2.Oauth";
+import LogInComn from "@/components/2.organisms/login/LogInComn";
+import Oauth from "../2.organisms/login/Oauth";
 import demokraticaRoutes from "@/utils/routeUtils";
 
 export default function LogInBox() {

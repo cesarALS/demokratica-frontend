@@ -1,5 +1,5 @@
 
-import ButtonDropdownSelector from "@/templates/0.atoms/8.ButtonDropdownSelector";
+import ButtonDropdownSelector from "@/templates/0.atoms/buttons/ButtonDropdownSelector";
 import TwoButtonFormDecision from "@/templates/1.molecules/13.TwoButtonFormDecision";
 import GenericModal from "@/templates/1.molecules/16.GenericModal";
 import { roles } from "@/types/sessions";

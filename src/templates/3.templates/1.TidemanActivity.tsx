@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import ContentCard from "../2.organisms/2.ContentCard";
-import MarkdownShower from "../0.atoms/18.MarkdownShower";
+import MarkdownShower from "../0.atoms/general-assets/MarkdownDisplayer";
 import ActivityHeader from "../1.molecules/9.ActivityHeader";
 import GridTwoColsRow from "../2.organisms/3.GridTwoColsRow";
 import OrganizableOptions from "../1.molecules/15.OrganizableOptions";
-import SimpleButton from "../0.atoms/11.SimpleButton";
+import SimpleButton from "../0.atoms/buttons/SimpleButton";
 
 import { OrganizableEntry } from "@/types/activities";
 import SectionContainer from "../1.molecules/10.SectionContainer";

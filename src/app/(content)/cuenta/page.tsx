@@ -3,11 +3,11 @@
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 
-import MessageBox from "@/templates/0.atoms/12.MessageBox";
+import MessageBox from "@/templates/0.atoms/general-assets/MessageBox";
 import EditableTitle from "@/templates/0.atoms/15.EditableTitle";
 import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
-import DeleteAccountButton from "@/components/1.molecules/12.DeleteAccountButton";
-import ChangePasswordButton from "@/components/1.molecules/13.ChangeUsernameButton";
+import DeleteAccountButton from "@/components/1.molecules/account-mgmt/DeleteAccountButton";
+import ChangePasswordButton from "@/components/1.molecules/account-mgmt/ChangeUsernameButton";
 
 export default function Cuenta() {
     const {user, handleUsernameChange} = useAuthContext();

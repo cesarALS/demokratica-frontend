@@ -3,9 +3,9 @@
 import { useState } from "react";
 import ContentCard from "@/templates/2.organisms/2.ContentCard";
 import ActivityHeader from "@/templates/1.molecules/9.ActivityHeader";
-import MarkdownShower from "@/templates/0.atoms/18.MarkdownShower";
+import MarkdownShower from "@/templates/0.atoms/general-assets/MarkdownDisplayer";
 import SelectableOptions from "@/templates/1.molecules/11.SelectableOptions";
-import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
+import SimpleButton from "@/templates/0.atoms/buttons/SimpleButton";
 import PieChartResults from "../1.molecules/12.PieChart";
 import SectionContainer from "../1.molecules/10.SectionContainer";
 import GridTwoColsRow from "../2.organisms/3.GridTwoColsRow";

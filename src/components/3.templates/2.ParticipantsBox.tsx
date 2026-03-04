@@ -1,6 +1,6 @@
 "use client"
 
-import ParticipantsSearch from "../0.atoms/6.ParticipantsSearch";
+import ParticipantsSearch from "../0.atoms/session/ParticipantsSearch";
 import ParticipantsView from "@/components/1.molecules/7.ParticipantsView";
 import ParticipantsResults from "@/components/2.organisms/5.ParticipantsResults";
 

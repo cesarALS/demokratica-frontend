@@ -4,13 +4,13 @@ import demokraticaRoutes from "@/utils/routeUtils";
 import Link from "next/link";
 import { Session } from "@/types/sessions";
 
-interface UserCenterSessionTitleProps {
+interface SessionTitleProps {
     session: Session | undefined;
     titleRef: (el: HTMLDivElement | null) => void;
     maxTitleHeight: string;
 }
 
-const UserCenterSessionTitle = ({ session, titleRef, maxTitleHeight }: UserCenterSessionTitleProps) => {    
+const SessionTitle = ({ session, titleRef, maxTitleHeight }: SessionTitleProps) => {    
     
     return (
         <div ref={titleRef} style={{ minHeight: maxTitleHeight }} className="flex items-center justify-center bg-ThirdGray w-full rounded-t-md gap-2">
@@ -24,4 +24,4 @@ const UserCenterSessionTitle = ({ session, titleRef, maxTitleHeight }: UserCente
     );
 }
 
-export default UserCenterSessionTitle;
+export default SessionTitle;

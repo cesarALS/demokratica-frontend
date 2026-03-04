@@ -1,9 +1,7 @@
 import demokraticaRoutes from "@/utils/routeUtils";
 import NavBarFooter from "@/templates/1.molecules/1.NavBarFooter";
+import LogoSelloCopyLemo from "@/components/1.molecules/logo/LogoSelloCopyLemo";
 import { siteMapItem } from "@/types/siteMap";
-import FooterMadeBy from "@/components/1.molecules/4.FooterMadeBy";
-import LogoSelloCopyLemo from "@/components/1.molecules/3.LogoSelloCopyLemo";
-import FooterSeparator from "../0.atoms/2.FooterSeparator";
 
 export default function Footer() {
   const siteMapItems: siteMapItem[] = [
@@ -45,5 +43,47 @@ export default function Footer() {
       </div>
       <hr className="w-full border-SecBlack border-2 rounded-lg" />
     </footer>
+  );
+}
+
+// Componente auxiliar que introduce una pequeña separación en varios puntos del footer
+function FooterSeparator() {
+  return (
+    <>
+      <hr className="w-full border-SecBlack border-2 rounded-lg lg:hidden" />
+      <div className="h-30 border-SecBlack border-2 rounded-lg hidden lg:flex"></div>
+    </>
+  );
+}
+
+function FooterMadeBy() {
+  const madeBy: siteMapItem[] = [
+    {
+      name: "David Marín",
+      link: "https://www.linkedin.com/in/david-felipe-marin-rosas-5a567b197/",
+    },
+    {
+      name: "César Lemos",
+      link: "https://www.linkedin.com/in/césar-arthuro-lemos-b9990a150",
+    },
+    {
+      name: "Andrés Rojas",
+      link: "/",
+    },
+    {
+      name: "Julián Huertas",
+      link: "/",
+    },
+  ];
+
+  return (
+    <div className="flex flex-col items-center justify-center gap-y-2 text-lg">
+      <div className="text-PrimBlack font-bold italic">Hecho con 💪 por:</div>
+      <NavBarFooter
+        siteMapItems={madeBy}
+        classNameLink="text-PrimBlack font-bold italic hover:underline hover:text-black"
+        classNameUl="grid grid-cols-2"
+      />
+    </div>
   );
 }

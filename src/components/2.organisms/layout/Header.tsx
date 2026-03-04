@@ -1,14 +1,18 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import LogoTitleAlHomepage from "../1.molecules/2.LogoTitleAlHomepage";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import demokraticaRoutes from "@/utils/routeUtils";
-import { UserCircleIcon } from "@heroicons/react/24/solid";
-import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import { faHome, faSignOutAlt, faGear, faBullhorn } from "@fortawesome/free-solid-svg-icons";
+import { UserCircleIcon } from "@heroicons/react/24/solid";
+
+import { motion } from "framer-motion";
+
+import demokraticaRoutes from "@/utils/routeUtils";
+import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
+
+import LogoTitleAlHomepage from "@/components/1.molecules/logo/LogoTitleAlHomepage";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);

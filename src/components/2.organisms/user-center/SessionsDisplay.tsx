@@ -1,16 +1,19 @@
 "use client"
 
-import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen";
-import { useUserCenterStore } from "@/utils/ContextProviders/UserCenterStore";
-import UserCenterSessionTypeSelectors from "../1.molecules/14.UserCenterSessionTypeSelectors";
-import UserCenterSession from "../1.molecules/15.UserCenterSession";
-import TitleLogo from "@/templates/0.atoms/0.TitleLogo";
-import { useIsFetching } from "@tanstack/react-query";
-import _ from "lodash"
-import PaginationNavBar from "@/templates/0.atoms/19.PaginationNavBar";
 import { useLayoutEffect, useRef, useState } from "react";
 
-const UserCenterSessionsDisplay = () => {        
+import { useUserCenterStore } from "@/utils/ContextProviders/UserCenterStore";
+
+import SessionTypeSelectors from "@/components/1.molecules/user-center/SessionTypeSelectors";
+import Session from "@/components/1.molecules/user-center/Session";
+import TitleLogo from "@/templates/0.atoms/logo/TitleLogo";
+import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen";
+import PaginationNavBar from "@/templates/0.atoms/19.PaginationNavBar";
+
+import { useIsFetching } from "@tanstack/react-query";
+import _ from "lodash"
+
+const SessionsDisplay = () => {        
    
     const { currentSessions, filters, currentPage, setCurrentPage } = useUserCenterStore();
 
@@ -33,7 +36,7 @@ const UserCenterSessionsDisplay = () => {
 
     return (
         <div className="flex flex-col items-center w-full">
-            <UserCenterSessionTypeSelectors/>
+            <SessionTypeSelectors/>
             <div className="flex flex-col items-center justify-center w-full min-h-[20vh] bg-PrimBlue rounded-xl border-box p-4 md:py-8 lg:py-12">
                 {isLoading ? 
                     (
@@ -64,7 +67,7 @@ const UserCenterSessionsDisplay = () => {
                                             currentPage*parseInt(filters.paginationSize.current)
                                         )?.map((session, index) => {
                                             return (
-                                                <UserCenterSession
+                                                <Session
                                                     id = {session.id}
                                                     key = {session.id}
                                                     titleRef={el => titleRefs.current[index] = el}
@@ -92,5 +95,5 @@ const UserCenterSessionsDisplay = () => {
     );
 };
 
-export default UserCenterSessionsDisplay;
+export default SessionsDisplay;
 

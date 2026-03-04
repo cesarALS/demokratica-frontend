@@ -3,7 +3,7 @@
 import ContentCard from "@/templates/2.organisms/2.ContentCard";
 import GridTwoColsRow from "@/templates/2.organisms/3.GridTwoColsRow";
 import LeftSettingsNewActivity from "@/components/3.templates/5.LeftSettingsNewActivity";
-import TypeActivityConfig from "../2.organisms/11.TypeActivityConfig";
+import ConfigActivityType from "@/components/2.organisms/activities/ConfigActivityType";
 import TwoButtonFormDecision from "@/templates/1.molecules/13.TwoButtonFormDecision";
 import { useCreatePollStore, useGeneralCreateActivityStore } from "@/utils/ContextProviders/CreateActivityStore";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
@@ -65,7 +65,7 @@ export default function ConfigActivity() {
         <LeftSettingsNewActivity />
         {/* Configuraciones derecha */}
         {/* Especificas al tipo de actividad */}
-        <TypeActivityConfig />
+        <ConfigActivityType />
       </GridTwoColsRow>
       <TwoButtonFormDecision firstButtonFunction={cancelCreation} secondButtonFunction={proceedWithCreation}/>
     </ContentCard>

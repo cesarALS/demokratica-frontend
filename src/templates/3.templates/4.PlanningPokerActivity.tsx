@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import MarkdownShower from "@/templates/0.atoms/18.MarkdownShower";
+import MarkdownShower from "@/templates/0.atoms/general-assets/MarkdownDisplayer";
 import ActivityHeader from "@/templates/1.molecules/9.ActivityHeader";
 import ContentCard from "@/templates/2.organisms/2.ContentCard";
 import SectionContainer from "@/templates/1.molecules/10.SectionContainer";
-import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
+import SimpleButton from "@/templates/0.atoms/buttons/SimpleButton";
 import GridTwoColsRow from "../2.organisms/3.GridTwoColsRow";
 import InputPlanningPoker from "@/components/1.molecules/18.InputPlanningPoker";
 import IndicatorRightResultPlanningPoker from "../../components/1.molecules/19.IndicatorsRightResultPlanningPoker";

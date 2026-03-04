@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserTie } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import ButtonDropdownChecklist from "@/templates/0.atoms/7.ButtonDropdownChecklist";
+import ButtonDropdownChecklist from "@/templates/0.atoms/buttons/ButtonDropdownChecklist";
 
 export default function ParticipantsFilter() {
   const rolFilter = ["Dueño", "Admin", "Editor", "Participante"];

@@ -1,6 +1,6 @@
 import ContentCard from "@/templates/2.organisms/2.ContentCard";
 import ActivityHeader from "@/templates/1.molecules/9.ActivityHeader";
-import MarkdownShower from "@/templates/0.atoms/18.MarkdownShower";
+import MarkdownShower from "@/templates/0.atoms/general-assets/MarkdownDisplayer";
 
 interface TextPublicationProps {
   activityId: number;

@@ -1,6 +1,6 @@
 "use client"
 
-import UserCenterNewSessionButton from "@/components/0.atoms/7.UserCenterNewSessionButton";
+import NewSessionButton from "@/components/0.atoms/user-center/NewSessionButton";
 import UserCenterSessionsBox from "@/components/3.templates/4.UserCenterSessionsBox";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import { useUserCenterStore } from "@/utils/ContextProviders/UserCenterStore";
@@ -40,7 +40,7 @@ const CentroUsuario = () => {
   return (        
     <div className="flex flex-col items-center justify-center w-full pt-4 pb-10 gap-8">
       {/* Botón de Nueva Sesión*/ }
-      <UserCenterNewSessionButton/>
+      <NewSessionButton/>
       {/* Caja de Centro de Usuario */}
       <UserCenterSessionsBox/>
     </div> 

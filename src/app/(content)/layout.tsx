@@ -1,8 +1,8 @@
 "use client"
 
-import Header from "@/components/2.organisms/3.Header";
-import Footer from "@/components/2.organisms/4.Footer";
-import MessageBox from "@/templates/0.atoms/12.MessageBox";
+import Header from "@/components/2.organisms/layout/Header";
+import Footer from "@/components/2.organisms/layout/Footer";
+import MessageBox from "@/templates/0.atoms/general-assets/MessageBox";
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";

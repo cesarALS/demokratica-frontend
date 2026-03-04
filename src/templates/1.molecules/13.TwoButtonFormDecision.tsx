@@ -5,7 +5,7 @@
  * donde hay un botón de cancelar y un botón de aceptar
  */
 
-import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
+import SimpleButton from "@/templates/0.atoms/buttons/SimpleButton";
 
 interface TwoButtonFormDecisionProps {
   divClassName?: string,

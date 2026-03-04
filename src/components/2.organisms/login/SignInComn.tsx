@@ -1,6 +1,6 @@
 "use client";
 
-import UseTerms from "../0.atoms/1.UseTerms";
+import UseTerms from "../../0.atoms/UseTerms";
 import { useState } from "react";
 
 import React from "react";

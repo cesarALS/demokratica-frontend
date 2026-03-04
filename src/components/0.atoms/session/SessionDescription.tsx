@@ -2,7 +2,7 @@
 
 import { useSessionStore } from "@/utils/ContextProviders/CreateSessionStore";
 
-export default function ConfDescription() {  
+export default function SessionDescription() {  
   
   const { description, setField } = useSessionStore();
   

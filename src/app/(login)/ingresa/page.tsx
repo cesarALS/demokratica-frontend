@@ -1,4 +1,4 @@
-import LogoAlHomepage from "@/components/1.molecules/1.LogoFullAlHomepage";
+import LogoAlHomepage from "@/components/1.molecules/logo/LogoFullAlHomepage";
 import LogInBox from "@/components/3.templates/0.LogInBox";
 
 // Página de Loguearse

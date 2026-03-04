@@ -8,7 +8,7 @@ import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import { queryKeys } from "@/utils/reactQueryUtils";
 import { useQuery } from "@tanstack/react-query";
 import { useCallback, useEffect, useRef, useState } from "react";
-import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
+import SimpleButton from "@/templates/0.atoms/buttons/SimpleButton";
 import _ from "lodash";
 import { useSessionStore } from "@/utils/ContextProviders/CreateSessionStore";
 

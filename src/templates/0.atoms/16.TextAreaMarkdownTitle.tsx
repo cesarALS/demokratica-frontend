@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import MarkdownShower from "./18.MarkdownShower";
+import MarkdownShower from "./general-assets/MarkdownDisplayer";
 
 interface TextAreaMarkdownTitle {
   title: string;

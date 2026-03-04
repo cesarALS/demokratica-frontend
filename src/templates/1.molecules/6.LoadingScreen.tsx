@@ -5,10 +5,10 @@
 
 "use client"
 
-import FullLogo from "@/templates/0.atoms/1.FullLogo";
+import FullLogo from "@/templates/0.atoms/logo/FullLogo";
 import { motion } from "framer-motion";
-import IconLogo from "@/templates/0.atoms/2.IconLogo";
-import TitleLogo from "@/templates/0.atoms/0.TitleLogo";
+import IconLogo from "@/templates/0.atoms/logo/IconLogo";
+import TitleLogo from "@/templates/0.atoms/logo/TitleLogo";
 
 interface LoadingScreenProps {
     fixed?: boolean

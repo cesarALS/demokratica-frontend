@@ -2,7 +2,7 @@ import ReactMarkdown from "react-markdown"
 import { useEffect, useState } from "react";
 import { linkStyles } from "@/utils/tailwindUtils";
 import GenericModal from "@/templates/1.molecules/16.GenericModal";
-import SimpleButton from "@/templates/0.atoms/11.SimpleButton";
+import SimpleButton from "@/templates/0.atoms/buttons/SimpleButton";
 
 interface UseTermsProps {
     closeModal: () => void;

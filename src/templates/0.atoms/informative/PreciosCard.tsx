@@ -1,5 +1,5 @@
 import precios from "@/utils/priceUtils"
-import CheckoutButton from "@/components/0.atoms/9.MercadoPagoButton";
+import CheckoutButton from "@/components/0.atoms/payment-gateway/CheckoutButton";
 
 interface PreciosCardData {
   nombrePlan: string;

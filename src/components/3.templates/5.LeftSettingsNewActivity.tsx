@@ -1,7 +1,7 @@
 "use client"
 
 import PlanShow from "@/templates/0.atoms/14.PlanShow";
-import RemainderSessions from "@/components/0.atoms/13.RemainderSessions";
+import RemainderSessions from "@/components/0.atoms/RemainderSessions";
 import FechasConfigSesion from "@/templates/1.molecules/7.FechasConfigSesion";
 import TagInput from "@/templates/1.molecules/5.TagInput";
 import { useGeneralCreateActivityStore } from "@/utils/ContextProviders/CreateActivityStore";

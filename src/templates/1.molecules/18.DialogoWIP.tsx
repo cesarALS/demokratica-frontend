@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import IconLogo from "../0.atoms/2.IconLogo";
+import IconLogo from "../0.atoms/logo/IconLogo";
 
 interface DialogoWIPProps {
   isOpen: boolean;

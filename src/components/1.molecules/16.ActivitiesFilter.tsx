@@ -1,4 +1,4 @@
-import ButtonDropdownChecklist from "@/templates/0.atoms/7.ButtonDropdownChecklist";
+import ButtonDropdownChecklist from "@/templates/0.atoms/buttons/ButtonDropdownChecklist";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 

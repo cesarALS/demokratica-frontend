@@ -6,7 +6,7 @@ import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
-const UserCenterSessionInfo = (props : {session: Session | undefined}) => {
+const SessionInfo = (props : {session: Session | undefined}) => {
     
     const {session} = props;
     const [isOpen, open] = useState(false);
@@ -68,4 +68,4 @@ const UserCenterSessionInfo = (props : {session: Session | undefined}) => {
     );
 };
 
-export default UserCenterSessionInfo;
+export default SessionInfo;

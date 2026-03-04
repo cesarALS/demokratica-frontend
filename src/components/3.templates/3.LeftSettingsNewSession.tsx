@@ -2,7 +2,7 @@
 
 import PlanShow from "@/templates/0.atoms/14.PlanShow";
 import FechasConfigSesion from "@/templates/1.molecules/7.FechasConfigSesion";
-import ConfDescription from "@/components/0.atoms/5.ConfDescription";
+import SessionDescription from "@/components/0.atoms/session/SessionDescription";
 import TagInput from "@/templates/1.molecules/5.TagInput";
 import { useSessionStore } from "@/utils/ContextProviders/CreateSessionStore";
 
@@ -30,7 +30,7 @@ export default function LeftSettingsNewSession() {
         finalDateAsProp={endDate}
       />
       {/* Descripción */}
-      <ConfDescription />
+      <SessionDescription />
       {/* Tags */}
       <TagInput setValue={tagsChange}/>
     </div>

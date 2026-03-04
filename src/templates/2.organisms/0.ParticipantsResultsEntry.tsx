@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser, faCircle, faUserTie } from "@fortawesome/free-solid-svg-icons";
-import ButtonDropdownSelector from "../0.atoms/8.ButtonDropdownSelector";
+import ButtonDropdownSelector from "../0.atoms/buttons/ButtonDropdownSelector";
 
 interface userEntry {
   name: string;

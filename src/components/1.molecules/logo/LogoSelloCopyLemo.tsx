@@ -1,4 +1,4 @@
-import FullLogo from "@/templates/0.atoms/1.FullLogo";
+import FullLogo from "@/templates/0.atoms/logo/FullLogo";
 
 interface LogoSelloCopyLemoProps {
   classNameGeneral?: string;

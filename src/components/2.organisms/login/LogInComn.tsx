@@ -1,15 +1,14 @@
 "use client"
 
-import { linkStyles } from "@/utils/tailwindUtils";
-
 import React, { useState } from "react";
-import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
-
 import { useRouter } from "next/navigation";
+
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import demokraticaRoutes from "@/utils/routeUtils";
 import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
+import { loginSchema as validationSchema } from "@/utils/account/yupSchemas";
+import { linkStyles } from "@/utils/tailwindUtils";
+
 import FormikTypeInput from "@/templates/1.molecules/0.FormikTypeInput";
 import GenericModal from "@/templates/1.molecules/16.GenericModal";
 import TwoButtonFormDecision from "@/templates/1.molecules/13.TwoButtonFormDecision";
@@ -17,10 +16,7 @@ import LabelField from "@/templates/0.atoms/0.LabelField";
 
 import { News } from "@/types/message.d";
 
-const validationSchema = Yup.object({
-  email: Yup.string().email("Correo inválido").required("Se requiere correo"),
-  password: Yup.string().required("Se requiere contraseña"),
-});
+import { Formik, Form, Field } from "formik";
 
 export default function LogInComn() {
   

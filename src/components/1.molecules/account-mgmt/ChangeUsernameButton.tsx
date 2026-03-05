@@ -1,24 +1,16 @@
 "use client"
 
-import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import { useState } from "react";
+
+import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
+import { changeUsernameSchema as validationSchema } from "@/utils/account/yupSchemas";
+
 import GenericModal from "@/templates/1.molecules/16.GenericModal";
 import TwoButtonFormDecision from "@/templates/1.molecules/13.TwoButtonFormDecision";
-import { Form, Formik } from "formik";
-import * as Yup from "yup";
 import FormikTypeInput from "@/templates/1.molecules/0.FormikTypeInput";
 
-const validationSchema = Yup.object({
-    newPassword: Yup.string()
-        .required("Se requiere contraseña")
-        .min(8, "Debe tener al menos 8 caracteres")
-        .matches(/[A-Z]/, "Debe contener al menos una mayúscula")
-        .matches(/[!@#$%^&*(),.?":{}|<>]/, "Debe contener al menos un carácter especial"),    
-    confirmNewPassword: Yup.string()
-        .required("Se requiere confirmar la contraseña")
-        .oneOf([Yup.ref("newPassword")], "Las contraseñas no coinciden"),  
-});
+import { Form, Formik } from "formik";
 
 const ChangePasswordButton = () => {
     const { user, handlePasswordChange } = useAuthContext(); 

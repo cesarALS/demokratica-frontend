@@ -1,33 +1,20 @@
 "use client";
 
-import UseTerms from "../../0.atoms/UseTerms";
 import { useState } from "react";
-
 import React from "react";
-import { Formik, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-
 import { useRouter } from "next/navigation"
+
 import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
 import demokraticaRoutes from "@/utils/routeUtils";
+import { signupSchema as validationSchema } from "@/utils/account/yupSchemas";
 import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
+
+import UseTerms from "@/components/0.atoms/UseTerms";
 import FormikTypeInput from "@/templates/1.molecules/0.FormikTypeInput";
 
 import { News } from "@/types/message.d";
 
-const validationSchema = Yup.object({
-  email: Yup.string().email("Correo inválido").required("Se requiere correo"),
-  username: Yup.string().required("Debes establecer un nombre de usuario"),
-  password: Yup.string()
-    .required("Se requiere contraseña")
-    .min(8, "Debe tener al menos 8 caracteres")
-    .matches(/[A-Z]/, "Debe contener al menos una mayúscula")
-    .matches(/[!@#$%^&*(),.?":{}|<>]/, "Debe contener al menos un carácter especial"),
-  confirmPassword: Yup.string()
-    .required("Se requiere confirmar la contraseña")
-    .oneOf([Yup.ref("password")], "Las contraseñas no coinciden"),
-  termsAccepted: Yup.boolean().oneOf([true], "Debes aceptar los términos y condiciones"),
-});
+import { Formik, Form, ErrorMessage } from "formik";
 
 export default function SignInComn() {
   

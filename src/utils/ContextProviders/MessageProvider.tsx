@@ -1,4 +1,4 @@
-// Manejo de mensajes de error para el usuario
+// Mensajes / Notificaciones al usuario
 
 "use client"
 
@@ -26,7 +26,9 @@ const MessageContext = createContext<MessageContextProps|undefined>(undefined);
 // Hook que deben importar los componentes
 export function useMessageContext(){
     const context = useContext(MessageContext);
-    if (!context) throw new Error("useMessageContext debe usarse dentro de un MessageProvider");
+    if (!context) {
+        throw new Error("useMessageContext debe usarse dentro de un MessageProvider");
+    }
     return context;
 }
 

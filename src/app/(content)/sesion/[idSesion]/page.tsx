@@ -1,6 +1,6 @@
-import PageContentContainer from "@/templates/2.organisms/1.PageContentContainer";
-import SessionTitleControls from "@/components/1.molecules/17.SessionTitleControls";
-import ActivitiesLoader from "@/components/2.organisms/activities/ActivitiesLoader";
+import PageContentContainer from "@/components/layout/PageContentContainer";
+import SessionTitleControls from "@/features/activities/components/SessionTitleControls";
+import ActivitiesLoader from "@/features/activities/components/ActivitiesLoader";
 
 export default function Sesion() {
   return (

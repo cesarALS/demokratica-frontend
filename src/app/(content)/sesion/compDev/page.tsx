@@ -1,10 +1,10 @@
 "use client"
 
-import SessionTitleControls from "@/components/1.molecules/17.SessionTitleControls";
-import PageContentContainer from "@/templates/2.organisms/1.PageContentContainer";
-import TidemanActivity from "@/templates/3.templates/1.TidemanActivity";
-import TextPublication from "@/templates/3.templates/2.TextPublication";
-import PlanningPokerActivity from "@/templates/3.templates/4.PlanningPokerActivity";
+import SessionTitleControls from "@/features/activities/components/SessionTitleControls";
+import PageContentContainer from "@/components/layout/PageContentContainer";
+import TidemanActivity from "@/features/activities/components/tideman-voting/TidemanActivity";
+import TextPublication from "@/features/activities/components/text-post/TextPost";
+import PlanningPokerActivity from "@/features/activities/components/poker-planning/PlanningPokerActivity";
 
 export default function compDev() {
   const tags = ["tag1", "tag2", "tag3"];

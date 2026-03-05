@@ -1,5 +1,5 @@
 "use client"
-import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen"
+import LoadingScreen from "@/components/layout/LoadingScreen"
 
 export default function Loading() {
     return <LoadingScreen/>

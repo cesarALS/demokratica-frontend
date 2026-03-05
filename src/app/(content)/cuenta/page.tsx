@@ -1,15 +1,15 @@
 "use client"
 
 import { UserCircleIcon } from "@heroicons/react/24/solid";
-import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
+import { useAuthContext } from "@/features/auth/AuthProvider";
 
-import MessageBox from "@/templates/0.atoms/general-assets/MessageBox";
-import EditableTitle from "@/templates/0.atoms/15.EditableTitle";
-import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
-import DeleteAccountButton from "@/components/1.molecules/account-mgmt/DeleteAccountButton";
-import ChangePasswordButton from "@/components/1.molecules/account-mgmt/ChangeUsernameButton";
+import MessageBox from "@/features/messages/components/MessageBox";
+import EditableTitle from "@/components/inputs/EditableTitle";
+import { useMessageContext } from "@/features/messages/MessageProvider";
+import DeleteAccountButton from "@/features/auth/components/DeleteAccountButton";
+import ChangePasswordButton from "@/features/auth/components/ChangeUsernameButton";
 
-import { News } from "@/types/message.d";
+import { News } from "@/features/messages/message";
 
 export default function Cuenta() {
     const {user, handleUsernameChange} = useAuthContext();

@@ -1,5 +1,5 @@
-import FullLogo from "@/templates/0.atoms/logo/FullLogo";
-import Headache from "@/templates/0.atoms/21.HeadacheIcon";
+import FullLogo from "@/components/logo/basic-assets/FullLogo";
+import Headache from "@/components/display-info/HeadacheIcon";
 import {
   faMobileScreen,
   faMessage,
@@ -7,9 +7,9 @@ import {
   faMagnifyingGlass,
   faFolderOpen,
 } from "@fortawesome/free-solid-svg-icons";
-import ExplicativeCard from "@/templates/1.molecules/17.ExplicativeCard";
-import CarouselDescriptor from "@/templates/3.templates/5.CarouselDescriptor";
-import { Slide } from "@/templates/3.templates/5.CarouselDescriptor";
+import ExplicativeCard from "@/components/display-info/ExplicativeCard";
+import CarouselDescriptor from "@/components/display-info/CarouselDescriptor";
+import { Slide } from "@/components/display-info/CarouselDescriptor";
 
 export default function Home() {
   // A react fragment, cause we don't need a wrapping element

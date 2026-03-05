@@ -1,0 +1,135 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { DemokraticaUser } from "@/features/auth/auth"
+import { backendAddress, generalFetch, identity } from "@/utils/queries/api"
+
+const authApis = {
+    createUser: '/auth/signup',
+    login: '/auth/login',
+    getUser: '/auth/JWT-info',
+    deleteAccount: '/users',
+    changeUsername: '/users',
+    changePassword: '/users'
+}
+  
+interface ApiReturns {
+  status: number,
+  error?: string,
+}
+
+interface ApiUserReturns extends ApiReturns {  
+  data?: {
+    user?: DemokraticaUser | null,
+    jwtToken?: string
+  }
+}
+ 
+const userReturn = (resParams: any) => {
+  return {
+    user: {
+      username: resParams.username,
+      email: resParams.email,
+      plan: 0, //Esto se debe cambiar cuando se actualice la BD        
+    },
+    jwtToken: resParams.jwtToken || null,      
+  }  
+}
+  
+async function createUser(email: string, username: string, password: string): Promise<ApiUserReturns> {
+    
+  const url = `${backendAddress}${authApis.createUser}`
+    
+  const body = {
+    email: email,
+    username: username,
+    password: password
+  }
+
+  const headers = {
+    "Content-Type": "application/json"    
+  }
+
+  return generalFetch(url, "POST", userReturn, body, headers);
+
+}
+  
+async function login(email: string, password: string): Promise<ApiUserReturns> {
+    
+  const url = `${backendAddress}${authApis.login}`;
+  const body = {
+    email: email,
+    password: password
+  }
+  const headers = {
+    "Content-Type": "application/json"
+  }
+
+  return generalFetch(url, "POST", userReturn, body, headers);
+
+}
+  
+async function getUser(jwtToken: string){
+
+  const url = `${backendAddress}${authApis.getUser}`
+  const headers = {
+    "Authorization": `Bearer ${jwtToken}`
+  }
+  
+  return generalFetch(url, "GET", userReturn, undefined, headers);
+
+}
+  
+async function deleteAccount(email: string, password: string, jwtToken: string){
+  
+  const url = `${backendAddress}${authApis.deleteAccount}/${email}`
+  const headers = {
+    "Authorization": `Bearer ${jwtToken}`,
+    "Content-Type": "application/json"
+  }
+
+  const body = {
+    password: password
+  }
+  
+  return generalFetch(url, "DELETE", identity, body, headers);
+
+}
+  
+async function changeUsername(email: string, jwtToken: string, newUsername: string) {
+  
+  const url = `${backendAddress}${authApis.changeUsername}/${email}/username`
+  const headers = {
+    "Authorization": `Bearer ${jwtToken}`,
+    "Content-Type": "application/json"
+  }
+  
+  const body = {
+    newUsername: newUsername,
+  }
+
+  const data = (res: any) => {
+    return {
+      jwtToken: res.jwtToken
+    }
+  }
+  
+  return generalFetch(url, "PUT", data, body, headers);
+
+};
+
+async function changePassword(currentPassword: string, newPassword: string, email: string, jwtToken: string){
+  const url = `${backendAddress}${authApis.changePassword}/${email}/password`
+  const headers = {
+    "Authorization": `Bearer ${jwtToken}`,
+    "Content-Type": "application/json"
+  };
+
+  const body = {
+    currentPassword: currentPassword,
+    newPassword: newPassword, 
+  };
+
+  return generalFetch(url, "PUT", identity, body, headers);
+}
+
+export { createUser, login, getUser, deleteAccount, changeUsername, changePassword };

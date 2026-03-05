@@ -1,0 +1,79 @@
+"use client";
+
+import { useState } from "react";
+import ContentCard from "@/components/display-info/ContentCard";
+import MarkdownShower from "@/components/display-info/MarkdownDisplayer";
+import ActivityHeader from "@/features/activities/components/ActivityHeader";
+import GridTwoColsRow from "@/components/layout/GridTwoColsRow";
+import OrganizableOptions from "./OrganizableOptions";
+import SimpleButton from "@/components/buttons/SimpleButton";
+
+import { OrganizableEntry } from "@/features/activities/activities";
+import SectionContainer from "@/components/display-info/SectionContainer";
+
+interface TidemanActivityProps {
+  activityId: number;
+  date: string;
+  tags: string[];
+  markdownQuestion: string;
+  initialMode: string,  
+}
+
+export default function TidemanActivity({
+  activityId,
+  date,
+  tags,
+  markdownQuestion,
+  initialMode
+}: TidemanActivityProps) {
+  const [mode, setMode] = useState(initialMode);
+  const currOptions: OrganizableEntry[] = [
+    { entry: "Option 1", value: 1 },
+    { entry: "Option 2", value: 2 },
+    { entry: "Option 3", value: 3 },
+    { entry: "Option 4", value: 4 },
+    { entry: "Option 5", value: 5 },
+  ];
+
+  function handleSendResults() {
+    // TODO: Send the results to the server
+    // TODO: Get results in a viable format
+    // TODO: Los resultados solo deberían ser visibles al finalizar la actividad
+    setMode("results");
+  }
+
+  return (
+    <ContentCard>
+      <ActivityHeader tags={tags} givenDate={date} rol="admin" activityId={activityId} activityType="TIDEMAN"/>
+      <GridTwoColsRow>
+        <MarkdownShower markdown={markdownQuestion} />
+        {mode === "participation" && (
+          <OrganizableOptions optionsList={currOptions} />
+        )}
+        {mode === "results" && (
+          <SectionContainer className="flex flex-col gap-y-2">
+            <div className="text-xl">Resultados:</div>
+            {currOptions.map(({ entry, value }, index) => (
+              <div
+                key={index}
+                className="flex w-full items-center gap-x-2 rounded-lg border-2 border-SecBlack bg-white px-3 py-2 font-semibold text-PrimBlack"
+              >
+                <div>
+                  <span className="text-black">{value.toString() + ". "}</span>
+                  {entry}
+                </div>
+              </div>
+            ))}
+          </SectionContainer>
+        )}
+      </GridTwoColsRow>
+      {mode === "participation" && (
+        <SimpleButton
+          onClick={handleSendResults}
+          buttonText="Enviar"
+          className="w-[40%] self-center bg-PrimCreamCan hover:bg-SecCreamCan"
+        />
+      )}
+    </ContentCard>
+  );
+}

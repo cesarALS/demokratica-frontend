@@ -1,14 +1,18 @@
 "use client"
 
-import NewSessionButton from "@/components/0.atoms/user-center/NewSessionButton";
-import UserCenterSessionsBox from "@/components/3.templates/4.UserCenterSessionsBox";
-import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
-import { useUserCenterStore } from "@/utils/ContextProviders/UserCenterStore";
 import { useEffect } from "react";
+
+import NewSessionButton from "@/features/user-center/components/NewSessionButton";
+import UserCenterPannel from "@/features/user-center/components/UserCenterPannel";
+
+import { useAuthContext } from "@/features/auth/AuthProvider";
+import { useUserCenterStore } from "@/features/user-center/UserCenterStore";
+import { getSessions } from "@/features/session-pannel/apiCall";
+import { Session } from "@/features/session-pannel/sessions";
+
+import { queryKeys } from "@/utils/queries/reactQuery";
+
 import { useQuery } from "@tanstack/react-query";
-import { getSessions } from "@/utils/apiUtils/apiSessionsUtils";
-import { Session } from "@/types/sessions";
-import { queryKeys } from "@/utils/reactQueryUtils";
 
 const CentroUsuario = () => {    
   
@@ -42,7 +46,7 @@ const CentroUsuario = () => {
       {/* Botón de Nueva Sesión*/ }
       <NewSessionButton/>
       {/* Caja de Centro de Usuario */}
-      <UserCenterSessionsBox/>
+      <UserCenterPannel/>
     </div> 
   );
 }

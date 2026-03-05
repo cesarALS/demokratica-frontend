@@ -1,5 +1,5 @@
-import LogoAlHomepage from "@/components/1.molecules/logo/LogoFullAlHomepage";
-import SignInBox from "@/components/3.templates/1.SignInBox";
+import LogoAlHomepage from "@/components/logo/LogoFullAlHomepage";
+import SignInBox from "@/features/auth/components/SignInBox";
 
 // Página de Registrarse
 export default function SignIn() {

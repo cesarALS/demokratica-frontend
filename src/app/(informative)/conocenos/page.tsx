@@ -1,8 +1,8 @@
-import VisionMisionField from "@/templates/1.molecules/2.VisionMisionField";
-import ValoresEquipoContainer from "@/templates/1.molecules/3.ValoresEquipoContainer";
-import ValoresCard from "@/templates/0.atoms/informative/ValoresCard";
-import EquipoCard from "@/templates/0.atoms/informative/EquipoCard";
-import PageContentContainer from "@/templates/2.organisms/1.PageContentContainer";
+import VisionMisionField from "@/features/informative/components/VisionMisionField";
+import ValoresEquipoContainer from "@/features/informative/components/ValoresEquipoContainer";
+import ValoresCard from "@/features/informative/components/ValoresCard";
+import EquipoCard from "@/features/informative/components/EquipoCard";
+import PageContentContainer from "@/components/layout/PageContentContainer";
 
 // Página de Quiénes Somos
 

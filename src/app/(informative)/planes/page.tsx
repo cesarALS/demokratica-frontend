@@ -1,6 +1,6 @@
 // Página de precios
-import PreciosContainer from "@/templates/1.molecules/4.PreciosContainer";
-import PreciosCard from "@/templates/0.atoms/informative/PreciosCard";
+import PreciosContainer from "@/features/payment-gateway/components/PreciosContainer";
+import PreciosCard from "@/features/payment-gateway/components/PreciosCard";
 
 const Precios = () => {
     return (

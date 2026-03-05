@@ -1,1 +1,0 @@
-Por favor usar components para los componentes NO reutilizables, para los reutilizables por favor usar templates.

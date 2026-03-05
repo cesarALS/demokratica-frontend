@@ -7,11 +7,11 @@ import type { Metadata } from "next";
 import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 
-import { AuthProvider } from "@/utils/ContextProviders/AuthProvider";
+import { AuthProvider } from "@/features/auth/AuthProvider";
 import { Suspense } from "react";
 import Loading from "./loading";
-import { MessageProvider } from "@/utils/ContextProviders/MessageProvider";
-import AppQueryProvider from "@/utils/ContextProviders/AppQueryProvider";
+import { MessageProvider } from "@/features/messages/MessageProvider";
+import AppQueryProvider from "@/utils/queries/AppQueryProvider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // Fuentes para la App. Las importamos de Google fonts, haciendo uso de next/font para optimizaciones

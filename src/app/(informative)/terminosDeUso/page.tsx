@@ -1,7 +1,7 @@
 "use client"
 
-import PageContentContainer from "@/templates/2.organisms/1.PageContentContainer";
-import { linkStyles } from "@/utils/tailwindUtils";
+import PageContentContainer from "@/components/layout/PageContentContainer";
+import { linkStyles } from "@/utils/styles/tailwindUtils";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 

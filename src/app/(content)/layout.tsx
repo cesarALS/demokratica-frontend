@@ -1,12 +1,12 @@
 "use client"
 
-import Header from "@/components/2.organisms/layout/Header";
-import Footer from "@/components/2.organisms/layout/Footer";
-import MessageBox from "@/templates/0.atoms/general-assets/MessageBox";
-import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import MessageBox from "@/features/messages/components/MessageBox";
+import { useAuthContext } from "@/features/auth/AuthProvider";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import FixedMenuButton from "@/templates/0.atoms/22.FixedMenuButton";
+import FixedMenuButton from "@/components/buttons/FixedMenuButton";
 
 export default function AfterLogInContent({
   children,

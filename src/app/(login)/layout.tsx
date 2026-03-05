@@ -1,10 +1,10 @@
 "use client";
 
-import Footer from "@/components/2.organisms/layout/Footer";
+import Footer from "@/components/layout/Footer";
 import { useRouter } from "next/navigation";
-import { useAuthContext } from "@/utils/ContextProviders/AuthProvider";
+import { useAuthContext } from "@/features/auth/AuthProvider";
 import { useEffect, useRef } from "react";
-import MessageBox from "@/templates/0.atoms/general-assets/MessageBox";
+import MessageBox from "@/features/messages/components/MessageBox";
 
 const LoginRegisterLayout = ({
   children,

@@ -1,5 +1,5 @@
-import PageContentContainer from "@/templates/2.organisms/1.PageContentContainer";
-import ConfigNewActivity from "@/components/4.pages/1.ConfigActivity";
+import PageContentContainer from "@/components/layout/PageContentContainer";
+import ConfigNewActivity from "@/features/activities/components/ConfigActivity";
 
 export default function newActivity() {
   return (

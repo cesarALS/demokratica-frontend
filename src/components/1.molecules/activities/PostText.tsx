@@ -22,7 +22,7 @@ const PostText = ({refetch}: PostTextProps) => {
         const res = await sendTextPosting(sessionId, text, [], getCookie() as string);
         if (res.status !== 201 ) { setMessage ({
             message: "No se pudo publicar",
-            news: 3,
+            news: 'bad',
             time: 3000
         })} else {
             setResetTrigger((prev) => !prev);

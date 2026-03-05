@@ -15,9 +15,9 @@ const MessageBox = () => {
                     flex items-center justify-center 
                     bg-ThirdGray border-2 rounded-lg z-50 p-2`,
                     {
-                        "bg-[#56f577]": message.news === 1,  // Verde
-                        "bg-[#1988ff]": message.news === 2,  // AccentBlue
-                        "bg-[#f77777]": message.news === 3,  // Rojo
+                        "bg-[#56f577]": message.news === 'good',  // Verde
+                        "bg-[#1988ff]": message.news === 'neutral',  // AccentBlue
+                        "bg-[#f77777]": message.news === 'bad',  // Rojo
                     }
                 )}
                 >

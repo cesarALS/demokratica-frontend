@@ -73,7 +73,7 @@ const ChangePasswordButton = () => {
                 
                         setMessage({
                             message: message,
-                            news: res.status === 204 ? 1 : 3,
+                            news: res.status === 204 ? 'good' : 'bad',
                             time: 4000
                         })
                     }}                                    

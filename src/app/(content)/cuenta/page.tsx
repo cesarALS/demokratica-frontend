@@ -9,6 +9,8 @@ import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
 import DeleteAccountButton from "@/components/1.molecules/account-mgmt/DeleteAccountButton";
 import ChangePasswordButton from "@/components/1.molecules/account-mgmt/ChangeUsernameButton";
 
+import { News } from "@/types/message.d";
+
 export default function Cuenta() {
     const {user, handleUsernameChange} = useAuthContext();
     const { setMessage } = useMessageContext();
@@ -37,11 +39,11 @@ export default function Cuenta() {
                                     const success = await handleUsernameChange(newTitle);
             
                                     let message = "No se pudo cambiar el username";
-                                    let news = 3;
+                                    let news: News = 'bad';
                     
                                     if(success){
                                         message = `¡Cambio exitoso, ${newTitle}!`;
-                                        news = 1;
+                                        news = 'good';
                                     } 
                     
                                     setMessage({

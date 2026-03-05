@@ -15,6 +15,8 @@ import GenericModal from "@/templates/1.molecules/16.GenericModal";
 import TwoButtonFormDecision from "@/templates/1.molecules/13.TwoButtonFormDecision";
 import LabelField from "@/templates/0.atoms/0.LabelField";
 
+import { News } from "@/types/message.d";
+
 const validationSchema = Yup.object({
   email: Yup.string().email("Correo inválido").required("Se requiere correo"),
   password: Yup.string().required("Se requiere contraseña"),
@@ -49,12 +51,12 @@ export default function LogInComn() {
           const responseStatus = await handleLogin(values.email, values.password, values.rememberMe);        
           
           let message = "";
-          let news = 3;        
+          let news: News = 'bad';        
           
           switch(responseStatus){
             case 200:            
               message = "Bienvenido de vuelta";  
-              news = 1;            
+              news = 'good';            
               break;
             case 403:
               message = "Credenciales no válidas";

@@ -5,6 +5,8 @@ import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
 import demokraticaRoutes from "@/utils/routeUtils";
 import { useRouter } from "next/navigation";
 
+import { News } from "@/types/message.d";
+
 interface PaymentReponse {
   url: string
 }
@@ -26,7 +28,7 @@ const CheckoutButton = ({ planId }: { planId: string }) => {
       router.push(demokraticaRoutes.login.link);
       setMessage({
         message: "Debes loguearte para acceder a esta opción",
-        news: 2,
+        news: 'neutral' as News,
         time: 5000
       })
     } else {
@@ -39,7 +41,7 @@ const CheckoutButton = ({ planId }: { planId: string }) => {
       if (!url){
         setMessage({
           message: "No se pudo abrir la pasarela de pagos. Intenta de nuevo más tarde",
-          news: 3,
+          news: 'bad' as News,
           time: 5000
         });
       }   

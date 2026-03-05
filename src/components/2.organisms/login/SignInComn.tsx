@@ -13,6 +13,8 @@ import demokraticaRoutes from "@/utils/routeUtils";
 import { useMessageContext } from "@/utils/ContextProviders/MessageProvider";
 import FormikTypeInput from "@/templates/1.molecules/0.FormikTypeInput";
 
+import { News } from "@/types/message.d";
+
 const validationSchema = Yup.object({
   email: Yup.string().email("Correo inválido").required("Se requiere correo"),
   username: Yup.string().required("Debes establecer un nombre de usuario"),
@@ -56,12 +58,12 @@ export default function SignInComn() {
           const responseStatus = await handleUserCreation(values.email, values.username, values.password);
           
           let message = "";
-          let news = 3;        
+          let news: News = 'bad';        
           
           switch(responseStatus){
             case 201:            
               message = `Bienvenido a Demokratica, ${values.username}`;  
-              news = 1;            
+              news = 'good';            
               break;
             case 409:
               message = "Correo de usuario ya asociado a otra cuenta";

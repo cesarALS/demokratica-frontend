@@ -18,6 +18,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import useSessionData from "@/utils/SessionData";
 import LoadingScreen from "@/templates/1.molecules/6.LoadingScreen";
 
+import { News } from "@/types/message.d";
+
 interface ConfigSessionProps {
   sessionId: string | null  
 }
@@ -75,10 +77,10 @@ export default function ConfigSession({
   
   const proceedWithCreation = async () => {
     const result = await SessionStore.sendSessionToCreate(getCookie);        
-    let news = 2;
+    let news: News = 'bad';
     
-    if (result.status === 201) news = 1;
-    else if (result.status !== null) news = 3; // La solicitud está mal          
+    if (result.status === 201) news = 'good';
+    else if (result.status !== null) news = 'bad'; // La solicitud está mal          
 
     MessageContext.setMessage({
       message: result.mssg,
@@ -102,7 +104,7 @@ export default function ConfigSession({
   const proceedWithModification = async() => {    
     MessageContext.setMessage({
       message: "No fue posible modificar la sesión",
-      news: 3,
+      news: 'bad',
       time: 3000,
     })
   }

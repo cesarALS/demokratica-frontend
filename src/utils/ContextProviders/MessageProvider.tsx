@@ -3,12 +3,7 @@
 "use client"
 
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from "react";
-
-enum News {
-    good = 1,
-    neutral = 2,
-    bad = 3
-}
+import { News } from "@/types/message.d";
 
 export interface Message {
     message: string,

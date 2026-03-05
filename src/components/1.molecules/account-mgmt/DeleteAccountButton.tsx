@@ -7,6 +7,8 @@ import GenericModal from "@/templates/1.molecules/16.GenericModal";
 import TwoButtonFormDecision from "@/templates/1.molecules/13.TwoButtonFormDecision";
 import LabelField from "@/templates/0.atoms/0.LabelField";
 
+import { News } from "@/types/message.d";
+
 const DeleteAccountButton = () => {
     const { user, handleAccountDeletion } = useAuthContext(); 
     const { setMessage } = useMessageContext();
@@ -21,11 +23,11 @@ const DeleteAccountButton = () => {
         const success = await handleAccountDeletion(ps);
 
         let message = "No se pudo eliminar el usuario";
-        let news = 3;
+        let news: News = 'bad';
 
         if(success){
             message = "Usuario eliminado";
-            news = 2;
+            news = 'good';
         }
 
         setMessage({

@@ -10,11 +10,14 @@ const MessageBox = () => {
             {message?.message && ( 
                 <div 
                 className={clsx(
-                    "fixed top-20 md:top-10 left-1/2 transform -translate-x-1/2 w-[80vw] md:w-[40vw] lg:w-[20vw] h-[10vh] flex items-center justify-center bg-ThirdGray border-2 rounded-lg z-50 p-2",
+                    `fixed top-20 md:top-10 left-1/2 transform -translate-x-1/2 
+                    w-[80vw] md:w-[30vw] lg:w-[10vw] min-h-[5vh]
+                    flex items-center justify-center 
+                    bg-ThirdGray border-2 rounded-lg z-50 p-2`,
                     {
-                        "border-[#13852b]": message.news === 1,  // Verde
-                        "border-[#1988ff]": message.news === 2,  // AccentBlue
-                        "border-[#ef4444]": message.news === 3,  // Rojo
+                        "bg-[#56f577]": message.news === 1,  // Verde
+                        "bg-[#1988ff]": message.news === 2,  // AccentBlue
+                        "bg-[#f77777]": message.news === 3,  // Rojo
                     }
                 )}
                 >
